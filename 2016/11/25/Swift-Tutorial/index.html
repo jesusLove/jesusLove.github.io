@@ -1,0 +1,884 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Swift Tutorial," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言本文总结阅读《Swift Tutorial》的收获。内容比较基础。
+Swift Tutorial Part1: Expressions, Variables &amp;amp; Constants(表达式，变量&amp;amp;常量)Code Comments(注释)在Swift中注释与Objective-C注释相同：
+
+单行注释：//
+多行注释：/ XXX /
+
+Arithmetic Operations(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift Tutorial">
+<meta property="og:url" content="https://jesusLove.github.io/2016/11/25/Swift-Tutorial/index.html">
+<meta property="og:site_name" content="紫电清霜">
+<meta property="og:description" content="前言本文总结阅读《Swift Tutorial》的收获。内容比较基础。
+Swift Tutorial Part1: Expressions, Variables &amp;amp; Constants(表达式，变量&amp;amp;常量)Code Comments(注释)在Swift中注释与Objective-C注释相同：
+
+单行注释：//
+多行注释：/ XXX /
+
+Arithmetic Operations(">
+<meta property="og:updated_time" content="2016-12-18T08:56:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift Tutorial">
+<meta name="twitter:description" content="前言本文总结阅读《Swift Tutorial》的收获。内容比较基础。
+Swift Tutorial Part1: Expressions, Variables &amp;amp; Constants(表达式，变量&amp;amp;常量)Code Comments(注释)在Swift中注释与Objective-C注释相同：
+
+单行注释：//
+多行注释：/ XXX /
+
+Arithmetic Operations(">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://jesusLove.github.io/2016/11/25/Swift-Tutorial/"/>
+
+  <title> Swift Tutorial | 紫电清霜 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">紫电清霜</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Swift Tutorial
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-25T11:19:52+08:00" content="2016-11-25">
+              2016-11-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/25/Swift-Tutorial/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/25/Swift-Tutorial/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文总结阅读《Swift Tutorial》的收获。内容比较基础。</p>
+<h2 id="Swift-Tutorial-Part1-Expressions-Variables-amp-Constants-表达式，变量-amp-常量"><a href="#Swift-Tutorial-Part1-Expressions-Variables-amp-Constants-表达式，变量-amp-常量" class="headerlink" title="Swift Tutorial Part1: Expressions, Variables &amp; Constants(表达式，变量&amp;常量)"></a>Swift Tutorial Part1: Expressions, Variables &amp; Constants(表达式，变量&amp;常量)</h2><h3 id="Code-Comments-注释"><a href="#Code-Comments-注释" class="headerlink" title="Code Comments(注释)"></a>Code Comments(注释)</h3><p>在Swift中注释与Objective-C注释相同：</p>
+<ul>
+<li>单行注释：//</li>
+<li>多行注释：/<em> XXX </em>/</li>
+</ul>
+<h3 id="Arithmetic-Operations-算数操作"><a href="#Arithmetic-Operations-算数操作" class="headerlink" title="Arithmetic Operations(算数操作)"></a>Arithmetic Operations(算数操作)</h3><ul>
+<li>简单操作： + ， - ， * ， /</li>
+<li>注意小数：22 / 7 与 22.0 / 7.0 结果不同，前者结果为3，后者为3.142857。因为在Swift中，22 / 7 中使用的都是intergers, 因此Swift认为结果也是interger类型的。</li>
+<li>取模操作：% （取余数操作）</li>
+<li>移位操作：<code>shift left</code> 和 <code>shift right</code>对应操作 <code>&lt;&lt;</code> 和 <code>&gt;&gt;</code>。左移一位对应乘以2，右移一位对应除以2。</li>
+<li>操作优先级：同OC等其他语言。</li>
+<li>数学公式： sin, cos, sqrt, abs, min, max等</li>
+<li>Increment and Decrement: +=, -=, *=, /=。</li>
+</ul>
+<h3 id="Naming-Data"><a href="#Naming-Data" class="headerlink" title="Naming Data"></a>Naming Data</h3><ul>
+<li>Constants(常量)：使用<code>let</code>声明，初始化之后不能更改。</li>
+<li>Variables(变量)：使用<code>var</code>声明，初始化后可以更改。</li>
+<li>命名规范：<ol>
+<li>使用有意义的名字，见名知义。</li>
+<li>使用驼峰命名法。例如：<code>gradePointAverage</code></li>
+</ol>
+</li>
+</ul>
+<h2 id="Swift-Tutorial-Part2-Types-and-Operations-类型和操作"><a href="#Swift-Tutorial-Part2-Types-and-Operations-类型和操作" class="headerlink" title="Swift Tutorial Part2: Types and Operations(类型和操作)"></a>Swift Tutorial Part2: Types and Operations(类型和操作)</h2><h3 id="类型转化"><a href="#类型转化" class="headerlink" title="类型转化"></a>类型转化</h3><ul>
+<li><p>混合类型操作：在Swift中，不允许混合类型操作。例如</p>
+  <figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> hourlyRate: <span class="keyword">Double</span> = <span class="number">19.5</span></div><div class="line"><span class="keyword">let</span> hoursWorked: <span class="keyword">Int</span> = <span class="number">10</span></div><div class="line"><span class="keyword">let</span> totalCost: <span class="keyword">Double</span> = hourlyRate * hoursWorked</div><div class="line"></div><div class="line"><span class="keyword">let</span> totalCost: <span class="keyword">Double</span> = hourlyRate * <span class="keyword">Double</span>(hoursWorked)</div></pre></td></tr></table></figure>
+<p>  这段代码在编译器中会报错。因为，编译器不知道 <code>hourlyRate * hoursWorked</code>是应该将<code>Int</code>类型转为<code>Double</code>类型，还是将<code>Double</code>类型转为<code>Int</code>类型。</p>
+</li>
+<li><p>Type Inference（类型推断）<br>  在Swift中，常量和变量可以根据初始化的值，推断出类型。</p>
+  <figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> typeInferredInt: <span class="keyword">Int</span> = <span class="number">42</span></div><div class="line"><span class="comment">//等同于：</span></div><div class="line"><span class="keyword">let</span> typeInferredInt = <span class="number">42</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> actuallyDouble = <span class="number">3</span></div><div class="line"><span class="comment">//如果使actuallyDouble为Double类型的，可以</span></div><div class="line"><span class="keyword">let</span> actuallyDouble = <span class="keyword">Double</span>(<span class="number">3</span>)</div><div class="line"><span class="comment">//或者</span></div><div class="line"><span class="keyword">let</span> actuallyDouble: <span class="keyword">Double</span> = <span class="number">3</span></div><div class="line"><span class="comment">//或</span></div><div class="line"><span class="keyword">let</span> actuallyDouble = <span class="number">3</span> <span class="keyword">as</span> <span class="keyword">Double</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Strings"><a href="#Strings" class="headerlink" title="Strings"></a>Strings</h3><ul>
+<li>在计算机中字符串作为字符的集合形式存在。</li>
+<li>Unicode(同一字符编码):统一不同电脑编码方式，如果两台电脑编码不同，他们就无法交流。</li>
+<li>Swift中的Strings:Swift与其它编程语言相似，能够直接的操作字符和字符串，使用数据类型<code>Character</code>和<code>String</code>表示。</li>
+</ul>
+<ol>
+<li><p>Character: 可以存储单个字符。也可以说字符是长度为一的字符串</p>
+ <figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> characterA: <span class="attr">Character</span> = <span class="string">"a"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>String: </p>
+ <figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> <span class="attr">stringDoy</span> = <span class="string">"Dog"</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li><p>字符串操作</p>
+<ol>
+<li>连接：<code>var message = &quot;Hello&quot; + &quot;World&quot;</code></li>
+<li>插入：<code>let name = &quot;Owen&quot; let message = &quot;Hello my name is \(name)!&quot;</code>插入的可以是表达式，输出结果是计算结果。</li>
+</ol>
+</li>
+</ul>
+<h3 id="Tuples"><a href="#Tuples" class="headerlink" title="Tuples"></a>Tuples</h3><p>有时候数据是成对或三元组形式存在的，例如，二维坐标中点(x,y)或三维坐标(x, y, z)。在Swift中，我们可以使用一种简单的方式元祖表示这种形式。</p>
+<ul>
+<li><p>元祖成员可以是不同类型</p>
+  <figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let coordinates = (<span class="number">2</span>, <span class="number">4</span>) <span class="comment">//成员都是Int类型</span></div><div class="line"></div><div class="line">let coordinates = (<span class="number">2</span>, <span class="number">3.0</span>) <span class="comment">//成员（Int, Double）</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>如何访问元祖成员</p>
+</li>
+</ul>
+<pre><code><figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> <span class="attr">coordinates</span> = (<span class="number">2</span>, <span class="number">3</span>)</div><div class="line"><span class="keyword">let</span> <span class="attr">x</span> = coordinates.<span class="number">0</span></div><div class="line"><span class="keyword">let</span> <span class="attr">y</span> = coordinates.<span class="number">1</span></div><div class="line">//这种索引方式被称为零索引。使用这个方式会降低程序的可读性。</div><div class="line"><span class="keyword">let</span> <span class="attr">coordinatesNamed</span> = (x:<span class="number">2</span>, y: <span class="number">3</span>)</div><div class="line"></div><div class="line"><span class="keyword">let</span> <span class="attr">x</span> = coordinatesNamed.x</div><div class="line"><span class="keyword">let</span> <span class="attr">y</span> = coordinatesNamed.y</div></pre></td></tr></table></figure>
+</code></pre><h2 id="Swift-Totorial-Part3-Flow-Control"><a href="#Swift-Totorial-Part3-Flow-Control" class="headerlink" title="Swift Totorial Part3: Flow Control"></a>Swift Totorial Part3: Flow Control</h2><h3 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h3><ul>
+<li>本节学习控制流，除了之前看到的那些类型外，还会使用Booleans类型，它代表false和true值。</li>
+</ul>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> yes: <span class="attr">Bool</span> = <span class="literal">true</span></div><div class="line"><span class="keyword">let</span> no: <span class="attr">Bool</span> = <span class="literal">false</span></div><div class="line">//简写：</div><div class="line"><span class="keyword">let</span> <span class="attr">yes</span> = <span class="literal">true</span></div><div class="line"><span class="keyword">let</span> <span class="attr">no</span> = <span class="literal">false</span></div></pre></td></tr></table></figure>
+<ul>
+<li>Boolean Operators: 布尔值通常用于比较操作。</li>
+</ul>
+<pre><code><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let doesOneEqualTwo = (<span class="number">1</span> == <span class="number">2</span>) <span class="comment">//等于操作</span></div><div class="line">let doesOneNotEqualTwo = (<span class="number">1</span> != <span class="number">2</span>) <span class="comment">//不等操作</span></div><div class="line">let alsoTue = !(<span class="number">1</span> == <span class="number">2</span>) <span class="comment">//非操作</span></div></pre></td></tr></table></figure>
+</code></pre><ul>
+<li>Boolean Logic</li>
+</ul>
+<pre><code><figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> <span class="keyword">and</span> = <span class="keyword">true</span> &amp;&amp; ture <span class="comment">//与操作</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> <span class="keyword">or</span> = <span class="keyword">true</span> || <span class="keyword">false</span></div></pre></td></tr></table></figure>
+</code></pre><ul>
+<li>String Equality<br>  有时候我们需要比较字符串的是否相等</li>
+</ul>
+<pre><code><figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> <span class="attr">guess</span> = <span class="string">"Dog"</span></div><div class="line"><span class="keyword">let</span> <span class="attr">dogEqualCat</span> = <span class="attr">geuss</span> == <span class="string">"cat"</span></div><div class="line">//	显然结果是<span class="literal">false</span>, 除了比较字符串是否相等外，还可以比较字符串的大小。</div><div class="line"><span class="keyword">let</span> <span class="attr">order</span> = <span class="string">"cat"</span> &lt; <span class="string">"dog"</span></div></pre></td></tr></table></figure>
+
+
+比较字符串大小是根据字母顺序比较的。
+</code></pre><h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><ul>
+<li>if: 在Swift中，if操作与OC中有差别。首先，Swift中，if条件不需要写小括号。另外，if的条件可以是</li>
+</ul>
+<pre><code><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> <span class="keyword">let</span> name = sender.currentTitle &#123;</div><div class="line">	<span class="attr">...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><ul>
+<li>while: 也不需要小括号。</li>
+<li><p>Ranges: 范围操作</p>
+<ol>
+<li>Closed range: <code>let closedRange = 0...5</code></li>
+<li>half-open range: <code>let halfOpenRange = 0..&lt;5</code></li>
+</ol>
+</li>
+<li><p><strong>for</strong> </p>
+</li>
+<li>for格式</li>
+</ul>
+<pre><code><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let count = <span class="number">10</span></div><div class="line">let sum = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> <span class="selector-tag">i</span> <span class="keyword">in</span> <span class="number">1</span>..<span class="selector-class">.count</span> &#123;</div><div class="line">	sum += <span class="selector-tag">i</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><p>i的取值是1 到 count，如果是<code>1..&lt;count</code>,i的取值是1 到 count - 1。</p>
+<ul>
+<li>当只需要循环次数的时候可以写成</li>
+</ul>
+<pre><code><figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> count = <span class="number">10</span></div><div class="line"><span class="built_in">var</span> <span class="built_in">sum</span> = <span class="number">1</span></div><div class="line"><span class="built_in">var</span> lastSum = <span class="number">0</span></div><div class="line"> </div><div class="line"><span class="keyword">for</span> <span class="symbol">_</span> <span class="keyword">in</span> <span class="number">0</span>..&lt;count &#123;</div><div class="line">  <span class="built_in">let</span> temp = <span class="built_in">sum</span></div><div class="line">  <span class="built_in">sum</span> = <span class="built_in">sum</span> + lastSum</div><div class="line">  lastSum = temp</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><p>使用<code>_</code>代替具体的值，因为在循环中不会使用具体值。</p>
+<ul>
+<li><p>for 嵌套使用</p>
+<pre><code><figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">var</span> <span class="built_in">sum</span> = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> <span class="built_in">row</span> <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="number">8</span> &#123;</div><div class="line">  <span class="keyword">if</span> <span class="built_in">row</span> <span class="symbol">%</span> <span class="number">2</span> == <span class="number">0</span> &#123;</div><div class="line">    continue</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">for</span> column <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="number">8</span> &#123;</div><div class="line">    <span class="built_in">sum</span> += <span class="built_in">row</span> * column</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>Switch ：在Swift中，Switch在case分支结尾不要break。</p>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文总结<a href="https://www.raywenderlich.com/category/swift" target="_blank" rel="external">《Swift Tutorial》</a>三篇文章知识点，虽然内容都比较基本，但是这是学好Swift或者其他语言的基础。<br>另外：推荐网站：<a href="https://www.raywenderlich.com" target="_blank" rel="external">raywenderlich</a>网站上有很多干货，内容很经典。缺点是网站英文的。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift-Tutorial/" rel="tag">#Swift Tutorial</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/23/斯坦福iOS9公开课总结-一-what-is-in-iOS/" rel="next" title="斯坦福iOS9公开课总结（一）：What`s in iOS">
+                <i class="fa fa-chevron-left"></i> 斯坦福iOS9公开课总结（一）：What`s in iOS
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/25/斯坦福iOS9公开课总结（二）：what-is-MVC/" rel="prev" title="斯坦福iOS9公开课总结（二）：what is MVC">
+                斯坦福iOS9公开课总结（二）：what is MVC <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/11/25/Swift-Tutorial/"
+     data-title="Swift Tutorial"
+     data-content=""
+     data-url="https://jesusLove.github.io/2016/11/25/Swift-Tutorial/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/25/Swift-Tutorial/"
+           data-title="Swift Tutorial" data-url="https://jesusLove.github.io/2016/11/25/Swift-Tutorial/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/qq.jpg"
+               alt="Owenli" />
+          <p class="site-author-name" itemprop="name">Owenli</p>
+          <p class="site-description motion-element" itemprop="description">学习总结 思考领悟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift-Tutorial-Part1-Expressions-Variables-amp-Constants-表达式，变量-amp-常量"><span class="nav-number">2.</span> <span class="nav-text">Swift Tutorial Part1: Expressions, Variables & Constants(表达式，变量&常量)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Code-Comments-注释"><span class="nav-number">2.1.</span> <span class="nav-text">Code Comments(注释)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Arithmetic-Operations-算数操作"><span class="nav-number">2.2.</span> <span class="nav-text">Arithmetic Operations(算数操作)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Naming-Data"><span class="nav-number">2.3.</span> <span class="nav-text">Naming Data</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift-Tutorial-Part2-Types-and-Operations-类型和操作"><span class="nav-number">3.</span> <span class="nav-text">Swift Tutorial Part2: Types and Operations(类型和操作)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转化"><span class="nav-number">3.1.</span> <span class="nav-text">类型转化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Strings"><span class="nav-number">3.2.</span> <span class="nav-text">Strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tuples"><span class="nav-number">3.3.</span> <span class="nav-text">Tuples</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift-Totorial-Part3-Flow-Control"><span class="nav-number">4.</span> <span class="nav-text">Swift Totorial Part3: Flow Control</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Getting-Started"><span class="nav-number">4.1.</span> <span class="nav-text">Getting Started</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他操作"><span class="nav-number">4.2.</span> <span class="nav-text">其他操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Owenli</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jesusLove"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

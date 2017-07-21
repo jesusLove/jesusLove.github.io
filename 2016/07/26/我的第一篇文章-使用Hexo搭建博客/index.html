@@ -1,0 +1,795 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="runtime," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Objective-CObjective-C是一门动态语言。其实Objecitve-C扩展了C语言，加入了面向对象特性和消息传递机制。简单的说，这个扩展的核心是Runtime库，它是Objective-C面向对象的和动态机制的基石。Objective-C是动态的语言，意味着它不仅需要一个编译器，还需要一个运行时系统动态的创建类和对象、进行消息传递和转发。充分理解Runtime机制，可以帮助我们更好">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Objective-C Runtime:类和对象">
+<meta property="og:url" content="https://jesusLove.github.io/2016/07/26/我的第一篇文章-使用Hexo搭建博客/index.html">
+<meta property="og:site_name" content="紫电清霜">
+<meta property="og:description" content="Objective-CObjective-C是一门动态语言。其实Objecitve-C扩展了C语言，加入了面向对象特性和消息传递机制。简单的说，这个扩展的核心是Runtime库，它是Objective-C面向对象的和动态机制的基石。Objective-C是动态的语言，意味着它不仅需要一个编译器，还需要一个运行时系统动态的创建类和对象、进行消息传递和转发。充分理解Runtime机制，可以帮助我们更好">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-d3119de446997ccb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="og:updated_time" content="2016-07-31T02:54:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Objective-C Runtime:类和对象">
+<meta name="twitter:description" content="Objective-CObjective-C是一门动态语言。其实Objecitve-C扩展了C语言，加入了面向对象特性和消息传递机制。简单的说，这个扩展的核心是Runtime库，它是Objective-C面向对象的和动态机制的基石。Objective-C是动态的语言，意味着它不仅需要一个编译器，还需要一个运行时系统动态的创建类和对象、进行消息传递和转发。充分理解Runtime机制，可以帮助我们更好">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1363078-d3119de446997ccb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://jesusLove.github.io/2016/07/26/我的第一篇文章-使用Hexo搭建博客/"/>
+
+  <title> Objective-C Runtime:类和对象 | 紫电清霜 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">紫电清霜</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Objective-C Runtime:类和对象
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-26T14:28:04+08:00" content="2016-07-26">
+              2016-07-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/26/我的第一篇文章-使用Hexo搭建博客/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/26/我的第一篇文章-使用Hexo搭建博客/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Objective-C"><a href="#Objective-C" class="headerlink" title="Objective-C"></a>Objective-C</h2><p>Objective-C是一门动态语言。其实Objecitve-C扩展了C语言，加入了面向对象特性和消息传递机制。简单的说，这个扩展的核心是Runtime库，它是Objective-C面向对象的和动态机制的基石。Objective-C是动态的语言，意味着它不仅需要一个编译器，还需要一个运行时系统动态的创建类和对象、进行消息传递和转发。充分理解Runtime机制，可以帮助我们更好的学习Objective-C。下面一起学习Runtime：</p>
+<h2 id="类（Class）"><a href="#类（Class）" class="headerlink" title="类（Class）"></a>类（Class）</h2><p>在Objective-C中，类和对象都是结构体。从头文件objc/objc.h中，可以查看定义。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_class *Class;</div></pre></td></tr></table></figure>
+<p>查看objc/runtime.h中objc_class结构体的定义</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> objc_class &#123;</div><div class="line">  	Class isa  OBJC_ISA_AVAILABILITY;</div><div class="line"> 	<span class="meta">#<span class="meta-keyword">if</span> !__OBJC2__</span></div><div class="line">    Class super_class                                        OBJC2_UNAVAILABLE;<span class="comment">//父类</span></div><div class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *name                                         OBJC2_UNAVAILABLE;<span class="comment">//类名</span></div><div class="line">    <span class="keyword">long</span> version                                             OBJC2_UNAVAILABLE;<span class="comment">//</span></div><div class="line">    <span class="keyword">long</span> info                                                OBJC2_UNAVAILABLE;</div><div class="line">    <span class="keyword">long</span> instance_size                                       OBJC2_UNAVAILABLE;</div><div class="line">    <span class="keyword">struct</span> objc_ivar_list *ivars                             OBJC2_UNAVAILABLE;</div><div class="line">    <span class="keyword">struct</span> objc_method_list **methodLists                    OBJC2_UNAVAILABLE;</div><div class="line">    <span class="keyword">struct</span> objc_cache *cache                                 OBJC2_UNAVAILABLE;</div><div class="line">    <span class="keyword">struct</span> objc_protocol_list *protocols                     OBJC2_UNAVAILABLE;</div><div class="line">	<span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line">&#125; OBJC2_UNAVAILABLE;</div></pre></td></tr></table></figure>
+<p>其中<br>1.isa:指向metaClass（元类）的指针。<br>2.super_class：执行该类的父类，如果该类是根类（NSObject或NSProxy），则super_class为NULL。<br>3.version：记录类的版本信息。主要用于对象的序列化，可以通过它识别出不同定义版本中实例变量布局的改变。<br>4.cache:用于缓存常用的方法。当接收对象收到消息时，根据isa指针去查找相应的对象。实际上，这个对象中有很多方法，只有一少部分经常使用，很多方法不能使用或者根本用不上。这种情况下，如果每次接收到消息都去遍历methodLists,性能较差，所以使用cache保存经常使用的方法，在接收到消息后，首先查找cache，如果没有则查找methodLists，提高查找效率。</p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>在objc/objc.h中，对象的定义</p>
+<figure class="highlight thrift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">objc_object</span> </span>&#123;</div><div class="line">    Class isa  OBJC_ISA_AVAILABILITY;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">objc_object</span> *id;</span></div></pre></td></tr></table></figure>
+<p>objc_object是一个类的实例的结构体，其中只有一个指向其类的isa指针。当对象发送消息是，运行时库可以根据isa指针找到实例对象所属的类。运行时库会在类的methodLists和父类的methodLists中查找能响应的方法，找到后运行方法。</p>
+<p>另外，id是objc_object类型的指针。通过它可以实现类似C++的泛型。</p>
+<h2 id="元类-Meta-Class"><a href="#元类-Meta-Class" class="headerlink" title="元类(Meta Class)"></a>元类(Meta Class)</h2><p>所有类自身也是一个对象，所以我们可以向类发送消息（调用类方法）。例如，</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSArray *<span class="keyword">array</span> = [NSArray <span class="keyword">array</span>];</div></pre></td></tr></table></figure>
+<p>+array消息发送给NSArray类，因为NSArray也是对象，所以它也是objc_object结构体，包含isa指针指向其类。那么，isa指针指向哪里呢？为了调用+array方法，这个类的isa指针必须指向一个包含这些类方法的objc_object结构体。所以就引出了<strong>meta-class是一个类对象的类</strong>。<br>当向一个对象发送消息时，会在这个类的方法列表中查找方法；<br>当向一个类发送消息时，会在这个类的meta-class的方法列表中查找。meta-class 中存放着一个类所有的类方法。</p>
+<p>这时可能又发现了一个问题，既然一切皆是类，那么meta-class的isa指针指向哪里呢？在Objective-C设计者为了防止无限循环，所有的meta-class的isa指向基类的meta-class,基类的meta-class指向自身。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-d3119de446997ccb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="1413628797629491.png"></p>
+<p>上图，虚线是isa的指向，可以看出每个isa都不为空，所以无论什么类型的对象，我们都可以通过isa获取对象信息。实线是superclass指向，通过该它可以方便查找父类，如果是根类在superclass为空。</p>
+<h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//类名</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> * class_getName(<span class="keyword">Class</span> cls);</div><div class="line"></div><div class="line"><span class="comment">//父类</span></div><div class="line"><span class="keyword">Class</span> class_getSuperclass(<span class="keyword">Class</span> cls);</div><div class="line"></div><div class="line"><span class="comment">//判断是否为元类</span></div><div class="line">BOOL class_isMetaClass(<span class="keyword">Class</span> cls);</div><div class="line"></div><div class="line"><span class="comment">//实例大小</span></div><div class="line">size_t class_getInstanceSize(<span class="keyword">Class</span> cls);</div></pre></td></tr></table></figure>
+<p><strong> 成员变量（ivars）及属性 </strong></p>
+<p>在objc_class中，所有的成员变量、属性的信息是放在链表ivars中。ivars是数组，存放着指向每个元素的Ivar指针。以下方法是操作这个字段的。</p>
+<p>成员变量操作方法</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取类中指定名称实例成员变量的信息</span></div><div class="line"><span class="function">Ivar <span class="title">class_getInstanceVariable</span> <span class="params">( Class cls, <span class="keyword">const</span> <span class="keyword">char</span> *name )</span></span>;</div><div class="line"></div><div class="line"><span class="comment">// 获取类成员变量的信息</span></div><div class="line"><span class="function">Ivar <span class="title">class_getClassVariable</span> <span class="params">( Class cls, <span class="keyword">const</span> <span class="keyword">char</span> *name )</span></span>;</div><div class="line"></div><div class="line"><span class="comment">// 添加成员变量</span></div><div class="line"><span class="function">BOOL <span class="title">class_addIvar</span> <span class="params">( Class cls, <span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">size_t</span> size, <span class="keyword">uint8_t</span> alignment, <span class="keyword">const</span> <span class="keyword">char</span> *types )</span></span>;</div><div class="line"></div><div class="line"><span class="comment">// 获取整个成员变量列表</span></div><div class="line"><span class="function">Ivar * <span class="title">class_copyIvarList</span> <span class="params">( Class cls, <span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount )</span></span>;</div></pre></td></tr></table></figure>
+<p>注意：class_copyIvarList需要手动释放free();</p>
+<p>属性操作方法</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取指定的属性</span></div><div class="line"><span class="keyword">objc_property_t</span> class_getProperty ( Class cls, <span class="keyword">const</span> <span class="keyword">char</span> *name );</div><div class="line"></div><div class="line"><span class="comment">// 获取属性列表</span></div><div class="line"><span class="keyword">objc_property_t</span> * class_copyPropertyList ( Class cls, <span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount );</div><div class="line"></div><div class="line"><span class="comment">// 为类添加属性</span></div><div class="line"><span class="function">BOOL <span class="title">class_addProperty</span> <span class="params">( Class cls, <span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">const</span> <span class="keyword">objc_property_attribute_t</span> *attributes, <span class="keyword">unsigned</span> <span class="keyword">int</span> attributeCount )</span></span>;</div><div class="line"></div><div class="line"><span class="comment">// 替换类的属性</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">class_replaceProperty</span> <span class="params">( Class cls, <span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">const</span> <span class="keyword">objc_property_attribute_t</span> *attributes, <span class="keyword">unsigned</span> <span class="keyword">int</span> attributeCount )</span></span>;</div></pre></td></tr></table></figure>
+<p>方法（methodLists）</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 添加方法</span></div><div class="line">BOOL class_addMethod ( <span class="keyword">Class</span> cls, SEL name, IMP imp, <span class="keyword">const</span> char *types );</div><div class="line"></div><div class="line"><span class="comment">// 获取实例方法</span></div><div class="line"><span class="function"><span class="keyword">Method</span> <span class="title">class_getInstanceMethod</span> <span class="params">( <span class="keyword">Class</span> cls, SEL name )</span>;</span></div><div class="line"></div><div class="line"><span class="comment">// 获取类方法</span></div><div class="line"><span class="function"><span class="keyword">Method</span> <span class="title">class_getClassMethod</span> <span class="params">( <span class="keyword">Class</span> cls, SEL name )</span>;</span></div><div class="line"></div><div class="line"><span class="comment">// 获取所有方法的数组</span></div><div class="line"><span class="function"><span class="keyword">Method</span> * <span class="title">class_copyMethodList</span> <span class="params">( <span class="keyword">Class</span> cls, unsigned int *outCount )</span>;</span></div><div class="line"></div><div class="line"><span class="comment">// 替代方法的实现</span></div><div class="line">IMP class_replaceMethod ( <span class="keyword">Class</span> cls, SEL name, IMP imp, <span class="keyword">const</span> char *types );</div><div class="line"></div><div class="line"><span class="comment">// 返回方法的具体实现</span></div><div class="line">IMP class_getMethodImplementation ( <span class="keyword">Class</span> cls, SEL name );</div><div class="line">IMP class_getMethodImplementation_stret ( <span class="keyword">Class</span> cls, SEL name );</div><div class="line"></div><div class="line"><span class="comment">// 类实例是否响应指定的selector</span></div><div class="line">BOOL class_respondsToSelector ( <span class="keyword">Class</span> cls, SEL sel );</div></pre></td></tr></table></figure>
+<ul>
+<li><p>class_addMethod方法可以覆盖父类方法的实现，但是不会取代本类已存在的实现，如果存在同名的方法，则会返回NO。如果要修改本类中方法的实现，可以使用method_setImplementation。</p>
+</li>
+<li><p>class_getInstanceMethod,class_getClassMethod方法和class_copyMethodList不同，前者会搜索父类。</p>
+</li>
+<li><p>class_replaceMethod如果类中存在同名的，则会替换；如果不存在，会添加。</p>
+</li>
+<li><p>class_getMethodImplementation方法，该函数再向类实例发送消息是会调用，并返回一个指向方法实现的函数指针。这个函数会比method_getImplementation(class_getInstanceMethod(cls, name))更快。返回的函数指针是一个指向runtime内部的函数，而不一定是方法的实际实现。</p>
+</li>
+<li><p>class_respondsToSelector函数，通常使用NSObject类的respondsToSelector:或instancesRespondToSelector：方法来实现相同目的。</p>
+</li>
+</ul>
+<p>如果想看具体内容点<a href="https://developer.apple.com/reference/objectivec/1657527-objective_c_runtime?language=objc" target="_blank" rel="external">这里</a></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本文介绍了Runtime运行时中类和对象相关的数据结构，通过数据结构可以更好的理解底层面向对象的实现。另外，列举了一些常用的操作方法。</p>
+<h5 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h5><p>1.<a href="http://blog.ibireme.com/2013/11/25/objc-object/" target="_blank" rel="external">Objective-C 中的类和对象 - Garan no Dou</a></p>
+<p>2.<a href="http://www.cocoawithlove.com/2010/01/what-is-meta-class-in-objective-c.html" target="_blank" rel="external">What is a meta-class in Objective-C?</a></p>
+<p>3.<a href="https://developer.apple.com/reference/objectivec/1657527-objective_c_runtime?language=objc" target="_blank" rel="external">Objective-C Runtime - Apple</a></p>
+<p>4.<a href="http://southpeak.github.io/blog/2014/10/25/objective-c-runtime-yun-xing-shi-zhi-lei-yu-dui-xiang/" target="_blank" rel="external">Objective-C Runtime 运行时之一：类与对象</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/runtime/" rel="tag">#runtime</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/28/CALayer的那些坑！/" rel="prev" title="CALayer的那些坑!">
+                CALayer的那些坑! <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/07/26/我的第一篇文章-使用Hexo搭建博客/"
+     data-title="Objective-C Runtime:类和对象"
+     data-content=""
+     data-url="https://jesusLove.github.io/2016/07/26/我的第一篇文章-使用Hexo搭建博客/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/26/我的第一篇文章-使用Hexo搭建博客/"
+           data-title="Objective-C Runtime:类和对象" data-url="https://jesusLove.github.io/2016/07/26/我的第一篇文章-使用Hexo搭建博客/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/qq.jpg"
+               alt="Owenli" />
+          <p class="site-author-name" itemprop="name">Owenli</p>
+          <p class="site-description motion-element" itemprop="description">学习总结 思考领悟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Objective-C"><span class="nav-number">1.</span> <span class="nav-text">Objective-C</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类（Class）"><span class="nav-number">2.</span> <span class="nav-text">类（Class）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象"><span class="nav-number">3.</span> <span class="nav-text">对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元类-Meta-Class"><span class="nav-number">4.</span> <span class="nav-text">元类(Meta Class)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用操作"><span class="nav-number">5.</span> <span class="nav-text">常用操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">6.</span> <span class="nav-text">小结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参考资料："><span class="nav-number">6.0.0.1.</span> <span class="nav-text">参考资料：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Owenli</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jesusLove"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
