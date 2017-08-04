@@ -1,0 +1,808 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python3异常和类," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言本节学习Python的错误和异常，及类等相关知识。
+错误和异常Python中有两种错误： 语法错误和异常。
+语法错误，硬伤没办法。 在Python中内置了很多异常
+参考内置的异常
+异常处理try语句工作方式：
+
+首先，执行try子句。
+如果没有异常，except子句在try执行完成后被忽略。
+如果在try子句执行过程中发生了异常，那么该子句其余的部分被忽略。如果异常匹配于except关键字后面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3:错误和异常、类">
+<meta property="og:url" content="https://jesusLove.github.io/2017/08/04/Python3-错误和异常、类/index.html">
+<meta property="og:site_name" content="紫电清霜">
+<meta property="og:description" content="前言本节学习Python的错误和异常，及类等相关知识。
+错误和异常Python中有两种错误： 语法错误和异常。
+语法错误，硬伤没办法。 在Python中内置了很多异常
+参考内置的异常
+异常处理try语句工作方式：
+
+首先，执行try子句。
+如果没有异常，except子句在try执行完成后被忽略。
+如果在try子句执行过程中发生了异常，那么该子句其余的部分被忽略。如果异常匹配于except关键字后面">
+<meta property="og:updated_time" content="2017-08-04T01:30:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3:错误和异常、类">
+<meta name="twitter:description" content="前言本节学习Python的错误和异常，及类等相关知识。
+错误和异常Python中有两种错误： 语法错误和异常。
+语法错误，硬伤没办法。 在Python中内置了很多异常
+参考内置的异常
+异常处理try语句工作方式：
+
+首先，执行try子句。
+如果没有异常，except子句在try执行完成后被忽略。
+如果在try子句执行过程中发生了异常，那么该子句其余的部分被忽略。如果异常匹配于except关键字后面">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://jesusLove.github.io/2017/08/04/Python3-错误和异常、类/"/>
+
+  <title> Python3:错误和异常、类 | 紫电清霜 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">紫电清霜</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python3:错误和异常、类
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-08-04T09:29:09+08:00" content="2017-08-04">
+              2017-08-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python3/" itemprop="url" rel="index">
+                    <span itemprop="name">Python3</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/08/04/Python3-错误和异常、类/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/04/Python3-错误和异常、类/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本节学习Python的错误和异常，及类等相关知识。</p>
+<h1 id="错误和异常"><a href="#错误和异常" class="headerlink" title="错误和异常"></a>错误和异常</h1><p>Python中有两种错误： 语法错误和异常。</p>
+<p>语法错误，硬伤没办法。 在Python中内置了很多异常</p>
+<p>参考<a href="https://docs.python.org/3/library/exceptions.html#bltin-exceptions" target="_blank" rel="external">内置的异常</a></p>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p><code>try</code>语句工作方式：</p>
+<ul>
+<li>首先，执行<code>try</code>子句。</li>
+<li>如果没有异常，<code>except</code>子句在<code>try</code>执行完成后被忽略。</li>
+<li>如果在try子句执行过程中发生了异常，那么该子句其余的部分被忽略。如果异常匹配于except关键字后面指定的类型，就执行对应的<code>except</code>子句。然后继续执行<code>try</code>语句后的代码。</li>
+<li>如果发生了一个异常，在<code>except</code>子句中没有与之匹配的分支，它就会传递到上一级<code>try</code>语句中。如果最终仍找不到对应的处理语句，他就成为一个<code>未处理异常</code>，终止程序，显示提示信息。</li>
+</ul>
+<p>一个<code>try</code>语句可能包含多个<code>except</code>子句，分别指定处理不同的异常。</p>
+<p>一个<code>except</code>子句中可以括号中列出多个异常的名字。</p>
+<p><code>try...except...else</code>当<code>try</code>语句没有异常需要执行一些代码时，使用<code>else</code>。</p>
+<h2 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h2><p><code>raise</code>语句允许程序猿强制抛出一个指定的异常。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; raise NameError(<span class="string">"Hello"</span>)</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;<span class="class"><span class="keyword">module</span>&gt;</span></div><div class="line"><span class="symbol">NameError:</span> Hello</div></pre></td></tr></table></figure>
+<blockquote>
+<p>要抛出的异常由<code>raise</code>的唯一参数标识。它必需是一个异常实例或异常类。</p>
+</blockquote>
+<h2 id="清理行为"><a href="#清理行为" class="headerlink" title="清理行为"></a>清理行为</h2><p><code>try</code>语句还有一个可选的子句，目的在于定义在任何情况下都一定要执行的功能。</p>
+<p>实际应用中，使用<code>finally</code>子句释放外部资源（文件或网络链接），无论使用过程。</p>
+<p>预定义清理行为，例如：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">"myfile.txt"</span>) <span class="keyword">as</span> f:</div><div class="line">    <span class="keyword">for</span> <span class="built_in">line</span> <span class="keyword">in</span> f:</div><div class="line">        print(<span class="built_in">line</span>)</div></pre></td></tr></table></figure>
+<p>语句执行后，文件f总是被关闭，即使在处理文件中的数据时出错也一样。</p>
+<h1 id="类"><a href="#类" class="headerlink" title="类"></a>类</h1><p>Python 的类机制通过最小的新语法和语义在语言中实现了类。它是 C++ 或者 Modula-3 语言中类机制的混合</p>
+<h2 id="Python作用域和命名空间"><a href="#Python作用域和命名空间" class="headerlink" title="Python作用域和命名空间"></a>Python作用域和命名空间</h2><p><strong>命名空间</strong> ：从命名到对象的映射。命名空间的例子：内置命名集，模块中的全局命名，函数调用中的局部命名。</p>
+<blockquote>
+<p>不同命名空间中的命名是没有任何联系的。</p>
+</blockquote>
+<p><strong>作用域</strong> ：一个Python程序可以直接访问命名空间的正文区域。直接访问的意思是一个对名称的错误引用会尝试在命名空间中查找。尽管作用域是静态定义，在使用时他们都是动态的。</p>
+<p>查找顺序：</p>
+<p>局部作用域 -&gt; 非局部，非全局 -&gt; 全局作用域</p>
+<blockquote>
+<p>如果一个命名声明为全局的，那么对它的所有引用和赋值会直接搜索包含这个模块全局命名的作用域。如果要重新绑定最里层作用域之外的变量，可以使用 nonlocal 语句；如果不声明为 nonlocal，这些变量将是只读的（对这样的变量赋值会在最里面的作用域创建一个新的局部变量，外部具有相同命名的那个变量不会改变）。</p>
+<p>Python特别之处：<br>如果没有使用 global 语法，其赋值操作总是在最里层的作用域。赋值不会复制数据，只是将命名绑定到对象。删除也是如此：del x 只是从局部作用域的命名空间中删除命名 x 。事实上，所有引入新命名的操作都作用于局部作用域。特别是 import 语句和函数定义将模块名或函数绑定于局部作用域（可以使用 global 语句将变量引入到全局作用域）。</p>
+</blockquote>
+<p><code>global</code> 语句用以指明某个特定的变量为全局作用域，并重新绑定它。<code>nonlocal</code> 语句用以指明某个特定的变量为封闭作用域，并重新绑定它。</p>
+<h2 id="初识类"><a href="#初识类" class="headerlink" title="初识类"></a>初识类</h2><h3 id="类对象"><a href="#类对象" class="headerlink" title="类对象"></a>类对象</h3><p>类对象支持操作：属性引用和实例化。</p>
+<p>属性引用 使用和 Python 中所有的属性引用一样的标准语法：<code>obj.name</code>。类对象创建后，类命名空间中所有的命名都是有效属性名。</p>
+<p>类的实例化使用函数符号。只要将类对象看作是一个返回新的类实例的无参数函数即可。</p>
+<p>初始化方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">	self.data = []</div></pre></td></tr></table></figure>
+<p>类的实例化操作会自动调用这个方法。注意self是必须的。</p>
+<h3 id="实例对象"><a href="#实例对象" class="headerlink" title="实例对象"></a>实例对象</h3><p><strong>数据属性</strong> ： 不需要声明第一次使用时就会生成。</p>
+<p><strong>引用属性：方法</strong>： 方法是“属于”一个对象的函数。</p>
+<h3 id="方法对象"><a href="#方法对象" class="headerlink" title="方法对象"></a>方法对象</h3><p>方法的特别之处在于实例对象作为函数的第一个参数传个函数。例如：<code>x.f()</code>相当于My<code>Class.f(x)</code>。</p>
+<h3 id="类和实例变量"><a href="#类和实例变量" class="headerlink" title="类和实例变量"></a>类和实例变量</h3><p>实例变量用于对每一个实例都是唯一的数据；类变量用于类的所有实例共享的属性和方法。</p>
+<p>举个🌰</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>：</span></div><div class="line">	kind = <span class="string">"canine"</span>  <span class="comment"># 类变量</span></div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(<span class="keyword">self</span>, name)</span></span>:</div><div class="line">		<span class="keyword">self</span>.name = name <span class="comment"># 实例属性</span></div><div class="line">		</div><div class="line"><span class="meta">&gt;&gt;</span>&gt; d = Dog(<span class="string">'Fido'</span>)</div><div class="line"><span class="meta">&gt;&gt;</span>&gt; e = Dog(<span class="string">'Buddy'</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;</span>&gt;<span class="comment"># 共享类属性</span></div><div class="line"><span class="meta">&gt;&gt;</span>&gt; d.kind</div><div class="line"><span class="string">'canine'</span></div><div class="line"><span class="meta">&gt;&gt;</span>&gt; e.kind</div><div class="line"><span class="string">'canine'</span></div><div class="line"><span class="meta">&gt;&gt;</span>&gt; <span class="comment"># 不同的d、e</span></div><div class="line"><span class="meta">&gt;&gt;</span>&gt; d.name</div><div class="line"><span class="string">'Fido'</span></div><div class="line"><span class="meta">&gt;&gt;</span>&gt; e.name</div><div class="line"><span class="string">'Buddy'</span></div></pre></td></tr></table></figure>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>Python支持多继承。提供了两个用于继承的函数：</p>
+<ul>
+<li>函数<code>isinstance()</code>用于检查实例类型</li>
+<li>函数<code>issubclass()</code>用于检查类继承。</li>
+</ul>
+<h3 id="私有变量"><a href="#私有变量" class="headerlink" title="私有变量"></a>私有变量</h3><p>只能从对象内部访问的“私有”实例变量，在Python中不存在。使用下划线开头的命名来表示私有变量（例如<code>_spam</code>）。</p>
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p><code>for</code>循环底层实现: <code>for</code>语句在容器对象中调用<code>iter()</code>。该函数返回一个定义了<code>__next__()</code>方法的迭代器对象，它在容器中逐一访问元素。没有后续元素是抛出<code>StopIteration</code>异常，通知<code>for</code>结束循环。</p>
+<p>可以使用内建的<code>next()</code>函数调用<code>__next__()</code>方法。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; s = <span class="string">'123'</span></div><div class="line"><span class="meta">&gt;&gt;</span>&gt; i = iter(s)</div><div class="line"><span class="meta">&gt;&gt;</span>&gt; next(i)</div><div class="line"><span class="string">'1'</span></div><div class="line"><span class="meta">&gt;&gt;</span>&gt; next(i)</div><div class="line"><span class="string">'2'</span></div><div class="line"><span class="meta">&gt;&gt;</span>&gt; next(i)</div><div class="line"><span class="string">'3'</span></div><div class="line"><span class="meta">&gt;&gt;</span>&gt; next(i)</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;<span class="class"><span class="keyword">module</span>&gt;</span></div><div class="line">StopIteration</div></pre></td></tr></table></figure>
+<p>了解迭代器协议的后台机制后，可以为自己的类添加迭代器行为。只需定义一个<code>__iter__()</code>方法，使其返回一个带<code>__next__()</code>方法的对象。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Reverse</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, data)</span>:</span></div><div class="line">        self.data = data</div><div class="line">        self.index = len(data)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.index == <span class="number">0</span>:</div><div class="line">                <span class="keyword">raise</span> StopIteration</div><div class="line">        self.index = self.index - <span class="number">1</span></div><div class="line">        <span class="keyword">return</span> self.data[self.index]</div><div class="line"></div><div class="line"></div><div class="line">rev = Reverse(<span class="string">'spam'</span>)</div><div class="line">print(rev)</div><div class="line"><span class="keyword">for</span> char <span class="keyword">in</span> rev:</div><div class="line">        print(char)</div><div class="line"></div><div class="line"><span class="comment">## 输出</span></div><div class="line"><span class="string">'''</span></div><div class="line">&lt;__main__.Reverse object at 0x101484da0&gt;</div><div class="line">m</div><div class="line">a</div><div class="line">p</div><div class="line">s</div><div class="line">'''</div></pre></td></tr></table></figure>
+<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><p>Generator是创建迭代器的简单而强大的工具。返回是需要<code>yield</code>语句，每次<code>next()</code>被代用时，生成器回复它脱离的位置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse</span><span class="params">(data)</span>:</span></div><div class="line">    <span class="keyword">for</span> index <span class="keyword">in</span> range(len(data) - <span class="number">1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</div><div class="line">        <span class="keyword">yield</span> data[index]</div><div class="line"></div><div class="line"><span class="keyword">for</span> char <span class="keyword">in</span> reverse(<span class="string">'golf'</span>):</div><div class="line">    print(char)</div><div class="line"></div><div class="line"><span class="comment"># 输出</span></div><div class="line"><span class="string">'''</span></div><div class="line">f</div><div class="line">l</div><div class="line">o</div><div class="line">g</div><div class="line">'''</div></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="">官方文档</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python3异常和类/" rel="tag">#Python3异常和类</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/02/Python3基础知识：模块和输入输出/" rel="next" title="Python3基础知识：模块和输入输出">
+                <i class="fa fa-chevron-left"></i> Python3基础知识：模块和输入输出
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/08/04/Python3-错误和异常、类/"
+           data-title="Python3:错误和异常、类" data-url="https://jesusLove.github.io/2017/08/04/Python3-错误和异常、类/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/qq.jpg"
+               alt="Owenli" />
+          <p class="site-author-name" itemprop="name">Owenli</p>
+          <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误和异常"><span class="nav-number">2.</span> <span class="nav-text">错误和异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理"><span class="nav-number">2.1.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抛出异常"><span class="nav-number">2.2.</span> <span class="nav-text">抛出异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#清理行为"><span class="nav-number">2.3.</span> <span class="nav-text">清理行为</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类"><span class="nav-number">3.</span> <span class="nav-text">类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python作用域和命名空间"><span class="nav-number">3.1.</span> <span class="nav-text">Python作用域和命名空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初识类"><span class="nav-number">3.2.</span> <span class="nav-text">初识类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类对象"><span class="nav-number">3.2.1.</span> <span class="nav-text">类对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例对象"><span class="nav-number">3.2.2.</span> <span class="nav-text">实例对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法对象"><span class="nav-number">3.2.3.</span> <span class="nav-text">方法对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类和实例变量"><span class="nav-number">3.2.4.</span> <span class="nav-text">类和实例变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-number">3.3.</span> <span class="nav-text">继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#私有变量"><span class="nav-number">3.3.1.</span> <span class="nav-text">私有变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器"><span class="nav-number">3.4.</span> <span class="nav-text">迭代器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成器"><span class="nav-number">3.5.</span> <span class="nav-text">生成器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Owenli</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jesusLove"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
