@@ -1,0 +1,845 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python3进阶," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言接下来的文章学习Python的高级内容，这部分和之前相比有一定的难度，需要认真学习。加油吧，少年！
+两个魔法变量在Python中有两个变量参数容易困扰我们。它们是*args和**kwargs。接下来我们看看究竟是什么意思！
+*args*args和**kwargs主要用于函数定义。可以将不定数量的参数传递给函数。*args是用来发送一个非键值对的可变数量的参数列表给函数。
+举个🌰：
+1234">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3进阶：高级特性一">
+<meta property="og:url" content="https://jesusLove.github.io/2017/08/07/Python3进阶：高级特性一/index.html">
+<meta property="og:site_name" content="紫电清霜">
+<meta property="og:description" content="前言接下来的文章学习Python的高级内容，这部分和之前相比有一定的难度，需要认真学习。加油吧，少年！
+两个魔法变量在Python中有两个变量参数容易困扰我们。它们是*args和**kwargs。接下来我们看看究竟是什么意思！
+*args*args和**kwargs主要用于函数定义。可以将不定数量的参数传递给函数。*args是用来发送一个非键值对的可变数量的参数列表给函数。
+举个🌰：
+1234">
+<meta property="og:image" content="http://blog.techbridge.cc/img/kdchang/python-logo.png">
+<meta property="og:updated_time" content="2017-08-07T00:57:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3进阶：高级特性一">
+<meta name="twitter:description" content="前言接下来的文章学习Python的高级内容，这部分和之前相比有一定的难度，需要认真学习。加油吧，少年！
+两个魔法变量在Python中有两个变量参数容易困扰我们。它们是*args和**kwargs。接下来我们看看究竟是什么意思！
+*args*args和**kwargs主要用于函数定义。可以将不定数量的参数传递给函数。*args是用来发送一个非键值对的可变数量的参数列表给函数。
+举个🌰：
+1234">
+<meta name="twitter:image" content="http://blog.techbridge.cc/img/kdchang/python-logo.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://jesusLove.github.io/2017/08/07/Python3进阶：高级特性一/"/>
+
+  <title> Python3进阶：高级特性一 | 紫电清霜 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">紫电清霜</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python3进阶：高级特性一
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-08-07T08:45:28+08:00" content="2017-08-07">
+              2017-08-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python3/" itemprop="url" rel="index">
+                    <span itemprop="name">Python3</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/08/07/Python3进阶：高级特性一/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/07/Python3进阶：高级特性一/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://blog.techbridge.cc/img/kdchang/python-logo.png" alt="Python"></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>接下来的文章学习Python的高级内容，这部分和之前相比有一定的难度，需要认真学习。加油吧，少年！</p>
+<h1 id="两个魔法变量"><a href="#两个魔法变量" class="headerlink" title="两个魔法变量"></a>两个魔法变量</h1><p>在Python中有两个变量参数容易困扰我们。它们是<code>*args</code>和<code>**kwargs</code>。接下来我们看看究竟是什么意思！</p>
+<h2 id="args"><a href="#args" class="headerlink" title="*args"></a><code>*args</code></h2><p><code>*args</code>和<code>**kwargs</code>主要用于函数定义。可以将不定数量的参数传递给函数。<br><code>*args</code>是用来发送一个非键值对的可变数量的参数列表给函数。</p>
+<p>举个🌰：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_var_args</span><span class="params">(f_arg, *argv)</span>:</span></div><div class="line">    print(<span class="string">'first normal arg: '</span>, f_arg)</div><div class="line">    <span class="keyword">for</span> arg <span class="keyword">in</span> argv:</div><div class="line">        print(<span class="string">'anothor arg throgh * argv:'</span>, arg)</div><div class="line"></div><div class="line">test_var_args(<span class="string">'yasoob'</span>, <span class="string">'python'</span>, <span class="string">'eggs'</span>, <span class="string">'test'</span>)</div></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">first</span> <span class="keyword">normal</span> <span class="keyword">ar</span><span class="variable">g:</span>  yasoob</div><div class="line">anothor arg throgh * arg<span class="variable">v:</span> <span class="keyword">python</span></div><div class="line">anothor arg throgh * arg<span class="variable">v:</span> eggs</div><div class="line">anothor arg throgh * arg<span class="variable">v:</span> test</div></pre></td></tr></table></figure>
+<blockquote>
+<p>输出结果看出： <code>f_arg</code>只对应一项。</p>
+</blockquote>
+<h2 id="kwargs"><a href="#kwargs" class="headerlink" title="**kwargs"></a><code>**kwargs</code></h2><p><code>**kwargs</code>允许将不定长度的键值对，作为参数传递。</p>
+<p>🌰：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">greet_me</span><span class="params">(**kwargs)</span>:</span></div><div class="line">    <span class="keyword">for</span> key, value <span class="keyword">in</span> kwargs.items():</div><div class="line">        print(<span class="string">"&#123;0&#125; == &#123;1&#125;"</span>.format(key, value))</div><div class="line"></div><div class="line">greet_me(name = <span class="string">"yasoob"</span>, age = <span class="string">"12"</span>)</div></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">name</span> == yasoob</div><div class="line"><span class="attr">age</span> == <span class="number">12</span></div></pre></td></tr></table></figure>
+<h2 id="args和-kwargs使用"><a href="#args和-kwargs使用" class="headerlink" title="*args和**kwargs使用"></a><code>*args</code>和<code>**kwargs</code>使用</h2><p>使用它们调用函数，🌰：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_args_kwars</span><span class="params">(arg1, arg2, arg3)</span>:</span></div><div class="line">    print(<span class="string">'arg1'</span>, arg1)</div><div class="line">    print(<span class="string">'arg2'</span>, arg2)</div><div class="line">    print(<span class="string">'arg3'</span>, arg3)</div><div class="line"></div><div class="line"><span class="comment"># 使用*args</span></div><div class="line">args = (<span class="string">'two'</span>, <span class="number">3</span>, <span class="number">5</span>)</div><div class="line">test_args_kwars(*args)</div><div class="line"></div><div class="line"><span class="comment"># 使用**kwargs</span></div><div class="line">kwargs = &#123;<span class="string">'arg3'</span>: <span class="number">3</span>, <span class="string">'arg2'</span>: <span class="string">'two'</span>, <span class="string">'arg1'</span>: <span class="number">5</span>&#125;</div><div class="line">test_args_kwars(**kwargs)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>标准参数与<code>*args</code>、<code>**kwargs</code>在使用时的顺序。</p>
+<p><code>some_func(frags, *args, **kwargs)</code></p>
+</blockquote>
+<h1 id="调试（Debug）"><a href="#调试（Debug）" class="headerlink" title="调试（Debug）"></a>调试（Debug）</h1><p>调试在处理代码bug非常重要。</p>
+<h2 id="从命令行运行"><a href="#从命令行运行" class="headerlink" title="从命令行运行"></a>从命令行运行</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">python3</span> -<span class="keyword">m</span> pdb xxx.<span class="keyword">py</span></div></pre></td></tr></table></figure>
+<p>触发调试功能，第一行指令处停止。</p>
+<h2 id="从脚本内部运行"><a href="#从脚本内部运行" class="headerlink" title="从脚本内部运行"></a>从脚本内部运行</h2><p>设置断点，使用<code>pdb.set_trace()</code>方法实现。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pdb</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_bread</span><span class="params">()</span>:</span></div><div class="line">    pdb.set_trace()</div><div class="line">    <span class="keyword">return</span> <span class="string">"I dont have time"</span></div><div class="line"></div><div class="line">print(make_bread())</div></pre></td></tr></table></figure>
+<h2 id="命令列表"><a href="#命令列表" class="headerlink" title="命令列表"></a>命令列表</h2><ul>
+<li><code>c</code>: 继续执行</li>
+<li><code>w</code>: 显示当前正在执行的代码行的上下文信息</li>
+<li><code>a</code>: 打印当前函数的参数列表</li>
+<li><code>s</code>: 执行当前代码行，并停在第一个能停的地方（相当于单步进入）</li>
+<li><code>n</code>: 继续执行到当前函数的下一行，或者当前行直接返回（单步跳过）</li>
+</ul>
+<blockquote>
+<p><code>n</code> 和 <code>s</code> 区别： <code>s</code>单步进入会进入当前行调用函数内部并停在里面，而单步跳过会全速执行完当前行调用的函数，并停在当前函数的下一行。</p>
+</blockquote>
+<p>其他内容请参考<a href="">官方文档</a></p>
+<h1 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h1><p>前面在学习类时，简单学习了生成器。接下我们将深入学习生成器相关知识。学习生成器之前，我们需要了解迭代器和相关内容。</p>
+<p>迭代器是让程序可以迭代遍历一个容器的对象。分为三个部分：</p>
+<ul>
+<li>可迭代对象（iterable）</li>
+<li>迭代器（iterator）</li>
+<li>迭代（iteration）</li>
+</ul>
+<h2 id="可迭代对象（iterable）"><a href="#可迭代对象（iterable）" class="headerlink" title="可迭代对象（iterable）"></a>可迭代对象（iterable）</h2><p>Python中任意对象，只要它定义了可以返回一个迭代器的<code>__iter__</code>方法，或者定义了可以支持下索引的<code>__getitem__</code>方法，那么他就是一个可迭代对象。简单来说，就是提供了迭代器的对象。</p>
+<h2 id="迭代器（iterator）"><a href="#迭代器（iterator）" class="headerlink" title="迭代器（iterator）"></a>迭代器（iterator）</h2><p>对象只要实现<code>__next__</code>方法，它就是一个迭代器。</p>
+<h2 id="迭代（iteration）"><a href="#迭代（iteration）" class="headerlink" title="迭代（iteration）"></a>迭代（iteration）</h2><p>例如，循环遍历就是迭代。</p>
+<h2 id="生成器-1"><a href="#生成器-1" class="headerlink" title="生成器"></a>生成器</h2><p>生成器也是一种迭代器，但是只能对其迭代一次。因为它们并没有把所有的值存在内存中，而是运行时生成值。通过遍历来使用它。另外，它们并不返回值，而是<code>yield</code>一个值。</p>
+<p>举个🌰</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generator_function</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</div><div class="line">        <span class="keyword">yield</span> i</div><div class="line"></div><div class="line"><span class="keyword">for</span> item <span class="keyword">in</span> generator_function():</div><div class="line">    print(item)</div><div class="line"></div><div class="line"><span class="comment"># 输出 0 - 9</span></div></pre></td></tr></table></figure>
+<p>上面的只是例子。真正的运行场景是：不想在同一时间创建大量结果集分配到内存中，减少资源消耗。在Python3中生成器应用很广广泛。</p>
+<h1 id="高级函数"><a href="#高级函数" class="headerlink" title="高级函数"></a>高级函数</h1><p>Map， Fiter和Reduce三个函数为函数式编程提供便利。</p>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p><code>Map</code>将一个函数映射到一个输入列表的所有元素上。</p>
+<p>格式：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">map</span><span class="params">(函数， 列表)</span></span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>将列表中元素一个个传递给函数，并收集输出。在Python3中返回的是迭代器。<br>通常，使用匿名函数来配合<code>map</code>。</p>
+</blockquote>
+<p>例如: </p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">squared = list(<span class="name">map</span>(<span class="name">lambda</span> x: x ** <span class="number">2</span>, range(<span class="number">1</span>, <span class="number">10</span>)))</div></pre></td></tr></table></figure>
+<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><p>顾名思义，Filter过滤列表中的元素，并且返回一个所有符合要求的元素组成的列表。符合要求就是函数映射到该元素时返回值为True。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">number_list = <span class="built_in">range</span>(-<span class="number">5</span>, <span class="number">5</span>)</div><div class="line">less_than_zero = <span class="built_in">filter</span>(lambda <span class="keyword">x</span> : <span class="keyword">x</span> &lt; <span class="number">0</span>, number_list)</div><div class="line"><span class="keyword">print</span>(<span class="keyword">list</span>(less_than_zero))</div><div class="line"></div><div class="line"># Outpu<span class="variable">t:</span> [-<span class="number">5</span>, -<span class="number">4</span>, -<span class="number">3</span>, -<span class="number">2</span>, -<span class="number">1</span>]</div></pre></td></tr></table></figure>
+<h2 id="Reduce"><a href="#Reduce" class="headerlink" title="Reduce"></a>Reduce</h2><p>对一个列表进行一些计算并返回结果时， Reduce是非常有用的函数。</p>
+<p>例如：计算乘积</p>
+<figure class="highlight golo"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">from functools <span class="keyword">import</span> <span class="keyword">reduce</span></div><div class="line">product = <span class="keyword">reduce</span>((lambda x, y: x * y), [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</div><div class="line"><span class="keyword">print</span>(product)</div><div class="line"></div><div class="line"><span class="comment"># output: 24</span></div></pre></td></tr></table></figure>
+<h1 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h1><p>装饰器（Decorators）是Python的一个重要部分。他们是修改其他函数的功能的函数。</p>
+<p>学习装饰器之前，你应该知道<code>一切皆对象</code>、<code>函数定义函数</code>、<code>函数返回函数</code>、<code>将函数作为参数传递</code>。如果对上面内容不了解，那请补一下面向对象吧。</p>
+<h2 id="第一个装饰器"><a href="#第一个装饰器" class="headerlink" title="第一个装饰器"></a>第一个装饰器</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_new_decorator</span><span class="params">(a_func)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapTheFunction</span><span class="params">()</span>:</span></div><div class="line"></div><div class="line">        print(<span class="string">"before"</span>)</div><div class="line">        a_func() <span class="comment"># 注意有括号，别问我怎么知道的</span></div><div class="line">        print(<span class="string">"after"</span>)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> wrapTheFunction</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_function_requiring_decoration</span><span class="params">()</span>:</span></div><div class="line">    print(<span class="string">"dslafalsfdsa"</span>)</div><div class="line">    </div><div class="line">a_function_requiring_decoration()</div><div class="line"><span class="comment"># Output： dslafalsfdsa</span></div><div class="line"></div><div class="line">a_function_requiring_decoration = a_new_decorator(a_function_requiring_decoration)</div><div class="line"></div><div class="line"><span class="comment"># 获得返回函数</span></div><div class="line">a_function_requiring_decoration()</div><div class="line"><span class="comment"># Output：before</span></div><div class="line"><span class="comment"># 			dslafalsfdsa</span></div><div class="line"><span class="comment"># 			after</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>装饰器作用：封装了一个函数，用来修改函数行为</p>
+</blockquote>
+<p>上面的简短写法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@a_new_decorator</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_function_requiring_decoration</span><span class="params">()</span>:</span></div><div class="line">    print(<span class="string">"dslafalsfdsa"</span>)</div><div class="line">a_function_requiring_decoration()</div><div class="line"></div><div class="line"><span class="comment"># Output：before</span></div><div class="line"><span class="comment"># 			dslafalsfdsa</span></div><div class="line"><span class="comment"># 			after</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>上面的<code>@a_new_decorator</code>就相当于<code>a_function_requiring_decoration = a_new_decorator(a_function_requiring_decoration)</code>。</p>
+</blockquote>
+<p>👆是装饰器的基本工作原理。但是这样写存在一个问题。</p>
+<p>请看:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">print</span>(a_<span class="keyword">function</span>_requiring_decoration.__name__)</div><div class="line"><span class="comment"># Output : wrapTheFunction</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>我们希望的结果是，Output应该输出：<code>a_function_requiring_decoration</code>。Python提供了一个函数解决这个问题，就是<code>functools.wraps</code>。</p>
+</blockquote>
+<p>修改方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_new_decorator</span><span class="params">(a_func)</span>:</span></div><div class="line"><span class="meta">	@wraps(a_func)</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapTheFunction</span><span class="params">()</span>:</span></div><div class="line">        print(<span class="string">"before"</span>)</div><div class="line">        a_func() <span class="comment"># 注意有括号，别问我怎么知道的</span></div><div class="line">        print(<span class="string">"after"</span>)</div><div class="line">        </div><div class="line">    <span class="keyword">return</span> wrapTheFunction</div></pre></td></tr></table></figure>
+<blockquote>
+<p>在<code>wrapTheFunction</code>之前添加<code>@wraps()</code>。注意需要引包<code>from functools import wraps</code>。</p>
+</blockquote>
+<p>好了现在学会装饰器了，接下来练习一下吧！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">decorator_name</span><span class="params">(f)</span>:</span></div><div class="line"><span class="meta">    @wraps(f)</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decorated</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> can_run:</div><div class="line">                <span class="keyword">return</span> <span class="string">"Function will not run"</span></div><div class="line">        <span class="keyword">return</span> f(*args, **kwargs)</div><div class="line">    <span class="keyword">return</span> decorated</div><div class="line"></div><div class="line"><span class="meta">@decorator_name</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">"Function is running"</span></div><div class="line"></div><div class="line">can_run = <span class="keyword">True</span></div><div class="line">print(func())</div><div class="line"></div><div class="line">can_run = <span class="keyword">False</span></div><div class="line">print(func())</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># Output:</span></div><div class="line"><span class="comment">#   Function is running</span></div><div class="line"><span class="comment">#   Function will not run</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>@wraps接受一个函数来进行装饰，并加入了复制函数名称、注释文档、参数列表等等的功能。这可以让我们在装饰器里面访问在装饰之前的函数的属性</p>
+</blockquote>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p><strong>授权检验</strong></p>
+<p>装饰能有助于检查某个人是否被授权使用一个web应用的断点。它们被大量使用在Flask和Django框架中。</p>
+<p><strong>日志</strong></p>
+<p>日志是装饰器运行的另一个亮点。</p>
+<h2 id="带参数的装饰"><a href="#带参数的装饰" class="headerlink" title="带参数的装饰"></a>带参数的装饰</h2><p><code>@wraps</code>可以接收一个参数，就像普通的函数一样。我们也可以实现。</p>
+<p>例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</div><div class="line"></div><div class="line"><span class="comment"># 定义一个函数，返回装饰器</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">logit</span><span class="params">(logfile = <span class="string">'out.log'</span>)</span>:</span></div><div class="line">	<span class="comment"># 定义一个装饰器</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">logging_decorator</span><span class="params">(func)</span>:</span></div><div class="line">    	<span class="comment"># 使用wraps重新设置“__name__”</span></div><div class="line"><span class="meta">        @wraps(func)</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wraped_function</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">            log_string = func.__name__ + <span class="string">" was called"</span></div><div class="line">            print(log_string)</div><div class="line">            <span class="keyword">with</span> open(logfile, <span class="string">'a'</span>) <span class="keyword">as</span> opened_file:</div><div class="line">                opened_file.write(log_string + <span class="string">'\n'</span>)</div><div class="line">            <span class="keyword">return</span> func(*args, **kwargs)</div><div class="line">        <span class="keyword">return</span> wraped_function</div><div class="line">    <span class="keyword">return</span> logging_decorator</div><div class="line"></div><div class="line"><span class="meta">@logit()</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">myfunc1</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line">myfunc1()</div><div class="line"><span class="comment"># output : myfunc1 was called</span></div><div class="line"></div><div class="line"><span class="comment"># 设置文件名称</span></div><div class="line"><span class="meta">@logit(logfile = 'func2.log')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">myfunc2</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line">myfunc2()</div><div class="line"><span class="comment"># output : myfunc2 was called</span></div></pre></td></tr></table></figure>
+<h2 id="装饰器类"><a href="#装饰器类" class="headerlink" title="装饰器类"></a>装饰器类</h2><p>上面只是将装饰器写成函数的形式，接下来，以类的形式实现装饰器。</p>
+<p>下面还是以logit为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">logit</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, logfile = <span class="string">'classout.log'</span>)</span>:</span></div><div class="line">        self.logfile = logfile</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, func)</span>:</span></div><div class="line"><span class="meta">        @wraps(func)</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapped_function</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line"></div><div class="line">            log_string = func.__name__ + <span class="string">" was called"</span></div><div class="line">            print(log_string)</div><div class="line">            <span class="comment"># 打开并写入日志</span></div><div class="line">            <span class="keyword">with</span> open(self.logfile, <span class="string">'a'</span>) <span class="keyword">as</span> opened_file:</div><div class="line">                <span class="comment"># 将日志保存到指定文件</span></div><div class="line">                opened_file.write(log_string + <span class="string">'\n'</span>)</div><div class="line">            <span class="comment"># 发送一个通知</span></div><div class="line">            self.notify()</div><div class="line">            <span class="keyword">return</span> func(*args, **kwargs)</div><div class="line">        <span class="keyword">return</span> wrapped_function</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">notify</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># 只打印日志，不做别的</span></div><div class="line">        <span class="keyword">pass</span></div></pre></td></tr></table></figure>
+<p>调用方法和函数形式相同。</p>
+<p>因为是装饰器类，所以具有类的特性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">email_logit</span><span class="params">(logit)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, email=<span class="string">"jesus_lqq@163.com"</span>, *args, **kwargs)</span>:</span></div><div class="line">        self.email = email</div><div class="line">        super(logit, self).__init__(*args, *kwargs)</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">notify</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># 发送一封Email到self.email</span></div><div class="line">        <span class="keyword">pass</span></div></pre></td></tr></table></figure>
+<p><code>@email_logit</code>和<code>@logit</code>产生同样的效果，只是前者会发送email。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>以上内容学习了<code>*args</code>和<code>**kwargs</code>作用和区别，高阶函数，Debug调试，生成器和装饰器的原理和应用。学会不是目的，应用才是王道。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="">官方文档</a></li>
+<li><a href="">Python进阶</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python3进阶/" rel="tag">#Python3进阶</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/04/Python3标准库简介/" rel="next" title="Python3标准库简介">
+                <i class="fa fa-chevron-left"></i> Python3标准库简介
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/08/07/Python3进阶：高级特性一/"
+           data-title="Python3进阶：高级特性一" data-url="https://jesusLove.github.io/2017/08/07/Python3进阶：高级特性一/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/qq.jpg"
+               alt="Owenli" />
+          <p class="site-author-name" itemprop="name">Owenli</p>
+          <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#两个魔法变量"><span class="nav-number">2.</span> <span class="nav-text">两个魔法变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#args"><span class="nav-number">2.1.</span> <span class="nav-text">*args</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kwargs"><span class="nav-number">2.2.</span> <span class="nav-text">**kwargs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#args和-kwargs使用"><span class="nav-number">2.3.</span> <span class="nav-text">*args和**kwargs使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调试（Debug）"><span class="nav-number">3.</span> <span class="nav-text">调试（Debug）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#从命令行运行"><span class="nav-number">3.1.</span> <span class="nav-text">从命令行运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从脚本内部运行"><span class="nav-number">3.2.</span> <span class="nav-text">从脚本内部运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令列表"><span class="nav-number">3.3.</span> <span class="nav-text">命令列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成器"><span class="nav-number">4.</span> <span class="nav-text">生成器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#可迭代对象（iterable）"><span class="nav-number">4.1.</span> <span class="nav-text">可迭代对象（iterable）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器（iterator）"><span class="nav-number">4.2.</span> <span class="nav-text">迭代器（iterator）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代（iteration）"><span class="nav-number">4.3.</span> <span class="nav-text">迭代（iteration）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成器-1"><span class="nav-number">4.4.</span> <span class="nav-text">生成器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级函数"><span class="nav-number">5.</span> <span class="nav-text">高级函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">5.1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter"><span class="nav-number">5.2.</span> <span class="nav-text">Filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reduce"><span class="nav-number">5.3.</span> <span class="nav-text">Reduce</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#装饰器"><span class="nav-number">6.</span> <span class="nav-text">装饰器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个装饰器"><span class="nav-number">6.1.</span> <span class="nav-text">第一个装饰器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用场景"><span class="nav-number">6.2.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带参数的装饰"><span class="nav-number">6.3.</span> <span class="nav-text">带参数的装饰</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装饰器类"><span class="nav-number">6.4.</span> <span class="nav-text">装饰器类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">7.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Owenli</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jesusLove"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
