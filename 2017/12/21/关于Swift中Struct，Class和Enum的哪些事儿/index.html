@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Struct Class Enum," />
+  <meta name="keywords" content="Swift," />
 
 
 
@@ -104,8 +104,8 @@ Swift是强类型的，尽管只有六种类型。
 
 可能会有疑问，那些基本类型：Bool，Int，UInt,  Float, Double, Character, String, Array, Set,  Dictionary,  Option">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Getting to Know Enums, Structs and Classes in Swift">
-<meta property="og:url" content="https://jesusLove.github.io/2017/03/22/Getting-to-Know-Enums-Structs-and-Classes-in-Swift/index.html">
+<meta property="og:title" content="关于Swift中Struct，Class和Enum的哪些事儿">
+<meta property="og:url" content="https://jesusLove.github.io/2017/12/21/关于Swift中Struct，Class和Enum的哪些事儿/index.html">
 <meta property="og:site_name" content="紫电清霜">
 <meta property="og:description" content="前言Swift type System
 
@@ -116,10 +116,10 @@ Swift是强类型的，尽管只有六种类型。
 
 
 可能会有疑问，那些基本类型：Bool，Int，UInt,  Float, Double, Character, String, Array, Set,  Dictionary,  Option">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-2e345f512c635c19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640">
-<meta property="og:updated_time" content="2017-03-26T08:24:41.000Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-2e345f512c635c19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1020">
+<meta property="og:updated_time" content="2017-12-21T05:57:41.824Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Getting to Know Enums, Structs and Classes in Swift">
+<meta name="twitter:title" content="关于Swift中Struct，Class和Enum的哪些事儿">
 <meta name="twitter:description" content="前言Swift type System
 
 Swift是强类型的，尽管只有六种类型。
@@ -129,7 +129,7 @@ Swift是强类型的，尽管只有六种类型。
 
 
 可能会有疑问，那些基本类型：Bool，Int，UInt,  Float, Double, Character, String, Array, Set,  Dictionary,  Option">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1363078-2e345f512c635c19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1363078-2e345f512c635c19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1020">
 
 
 
@@ -150,9 +150,9 @@ Swift是强类型的，尽管只有六种类型。
 
 
 
-  <link rel="canonical" href="https://jesusLove.github.io/2017/03/22/Getting-to-Know-Enums-Structs-and-Classes-in-Swift/"/>
+  <link rel="canonical" href="https://jesusLove.github.io/2017/12/21/关于Swift中Struct，Class和Enum的哪些事儿/"/>
 
-  <title> Getting to Know Enums, Structs and Classes in Swift | 紫电清霜 </title>
+  <title> 关于Swift中Struct，Class和Enum的哪些事儿 | 紫电清霜 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -292,7 +292,7 @@ Swift是强类型的，尽管只有六种类型。
             
             
               
-                Getting to Know Enums, Structs and Classes in Swift
+                关于Swift中Struct，Class和Enum的哪些事儿
               
             
           </h1>
@@ -304,8 +304,8 @@ Swift是强类型的，尽管只有六种类型。
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-03-22T15:05:02+08:00" content="2017-03-22">
-              2017-03-22
+            <time itemprop="dateCreated" datetime="2017-12-21T13:51:50+08:00" content="2017-12-21">
+              2017-12-21
             </time>
           </span>
 
@@ -318,8 +318,8 @@ Swift是强类型的，尽管只有六种类型。
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -357,7 +357,7 @@ Swift是强类型的，尽管只有六种类型。
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>Swift type System</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1363078-2e345f512c635c19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="types.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-2e345f512c635c19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1020" alt="types.png"></p>
 <p>Swift是强类型的，尽管只有六种类型。</p>
 <ul>
 <li>命名类型： protocol, class , struct , enum</li>
@@ -366,7 +366,7 @@ Swift是强类型的，尽管只有六种类型。
 <blockquote>
 <p>可能会有疑问，那些基本类型：Bool，Int，UInt,  Float, Double, Character, String, Array, Set,  Dictionary,  Optional。实际上他们都是通过命名类型创建的。</p>
 </blockquote>
-<h1 id="Struct-Class-and-Enum-对比"><a href="#Struct-Class-and-Enum-对比" class="headerlink" title="Struct Class and Enum 对比"></a>Struct Class and Enum 对比</h1><p>Swift中提供了多种可以结构化存储数据的方式，它们是： <code>struct</code>、<code>enum</code>和<br><code>class</code>。Swift标准库中的绝大多数类型都是<code>struct</code>,甚至Foundation中的一些类也提供了它们在Swift中的<code>struct</code>版本，而<code>class</code>和<code>enum</code>只占很少一部分。</p>
+<h1 id="Struct-Class-and-Enum-比较"><a href="#Struct-Class-and-Enum-比较" class="headerlink" title="Struct Class and Enum 比较"></a>Struct Class and Enum 比较</h1><p>Swift中提供了多种可以结构化存储数据的方式，它们是： <code>struct</code>、<code>enum</code>和<br><code>class</code>。Swift标准库中的绝大多数类型都是<code>struct</code>,甚至Foundation中的一些类也提供了它们在Swift中的<code>struct</code>版本，而<code>class</code>和<code>enum</code>只占很少一部分。</p>
 <p>Class,Struct and Enum对比表</p>
 <table>
 <thead>
@@ -422,18 +422,18 @@ Swift是强类型的，尽管只有六种类型。
 <li><strong>一类必须有明确生命周期的，它们必须被明确的初始化、使用、最后明确的被释放</strong>。例如：文件句柄、数据库连接、线程同步锁等等。这些类型的初始化和释放都不是拷贝内存这么简单，通常，这类内容，我们会选择使用<code>class</code>来实现。</li>
 <li><strong>另一类，则是没有那么明显的生命周期。</strong> 例如：整数、字符串、URL等等。这些对象一旦被创建之后，就很少被修改，我们只是需要使用这些对象的值，用完之后，我们也无需为这些对象的销毁做更多额外的工作，只是把它们占用的内存回收就好了。这类内容，通常我们会选择使用<code>struct</code>或<code>enum</code>来实现。</li>
 </ul>
-<h1 id="Struct"><a href="#Struct" class="headerlink" title="Struct"></a>Struct</h1><h2 id="Struct的定义和初始化"><a href="#Struct的定义和初始化" class="headerlink" title="Struct的定义和初始化"></a>Struct的定义和初始化</h2><p> <strong>  定义结构体  </strong><br>下面定义了一个二维空间坐标的类型：</p>
+<h1 id="Struct"><a href="#Struct" class="headerlink" title="Struct"></a>Struct</h1><h2 id="Struct的定义和初始化"><a href="#Struct的定义和初始化" class="headerlink" title="Struct的定义和初始化"></a>Struct的定义和初始化</h2><p> <strong>定义结构体</strong><br>下面定义了一个二维空间坐标的类型：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">struct Point &#123;</div><div class="line">    <span class="keyword">var</span> x: <span class="built_in">Double</span></div><div class="line">    <span class="keyword">var</span> y: <span class="built_in">Double</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这个结构体包含两个名x和y的存储属性。存储属性是被绑定和存储在结构体中的常量或变量。</p>
-<p><strong> 初始化 </strong> </p>
+<p><strong>初始化</strong> </p>
 <ul>
-<li><p>结构体类型的逐一初始化<br>所有的结构体都有一个自动生成的成员逐一构造器</p>
-  <figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var pointA = Point(<span class="string">x:</span> <span class="number">10</span>, <span class="string">y:</span> <span class="number">20</span>)</div></pre></td></tr></table></figure>
-</li>
-<li><p>默认初始化<br>我们也可以在定义的时候直接给属性初始化</p>
-  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">struct Point &#123;</div><div class="line">   <span class="selector-tag">var</span> x = <span class="number">0.0</span></div><div class="line">   	<span class="selector-tag">var</span> y = <span class="number">0.0</span></div><div class="line">&#125;</div><div class="line"><span class="selector-tag">var</span> pointB = Point()</div></pre></td></tr></table></figure>
-</li>
+<li>结构体类型的逐一初始化<br>所有的结构体都有一个自动生成的成员逐一构造器</li>
 </ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var pointA = Point(<span class="string">x:</span> <span class="number">10</span>, <span class="string">y:</span> <span class="number">20</span>)</div></pre></td></tr></table></figure>
+<ul>
+<li>默认初始化<br>我们也可以在定义的时候直接给属性初始化</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">struct Point &#123;</div><div class="line">    <span class="selector-tag">var</span> x = <span class="number">0.0</span></div><div class="line">    <span class="selector-tag">var</span> y = <span class="number">0.0</span></div><div class="line">&#125;</div><div class="line"><span class="selector-tag">var</span> pointB = Point()</div></pre></td></tr></table></figure>
 <p>使用这种方法，<strong>必须给每一个属性指定默认值</strong>。因为Swift中要求<code>init</code>方法必须初始化自定义类型每个属性。如果无法做到，我们可以自定义逐一初始化方法。</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">struct Point &#123;</div><div class="line">    <span class="selector-tag">var</span> x : Double</div><div class="line">    <span class="selector-tag">var</span> y : Double</div><div class="line">    init(_ x : Double = <span class="number">0.0</span>, y : Double = <span class="number">0.0</span>) &#123;</div><div class="line">        self<span class="selector-class">.x</span> = x</div><div class="line">        self<span class="selector-class">.y</span> = y</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>当我们自定义<code>init</code>方法之后，Swift将不会再自动创建逐一初始化方法。</p>
@@ -494,14 +494,15 @@ Swift是强类型的，尽管只有六种类型。
 <h1 id="值类型和引用类型（Value-vs-Reference-Type）"><a href="#值类型和引用类型（Value-vs-Reference-Type）" class="headerlink" title="值类型和引用类型（Value vs. Reference Type）"></a>值类型和引用类型（Value vs. Reference Type）</h1><p>Class和Struct有很多相似的地方，他们都可以用来自定义类型、都可以有属性、都可以有方法。作为Swift中的引用类型，<code>class</code>表达的是一个具有明生命周期的对象，我们关心的是类的生命周期。而值类型，我关注的是值本身。</p>
 <h2 id="差异对比"><a href="#差异对比" class="headerlink" title="差异对比"></a>差异对比</h2><ol>
 <li>引用类型必须明确指定init方法<br>Swift中<code>class</code>不会自动生成<code>init</code>方法。如果不定义编译器报错。</li>
-<li>引用类型关注的是对象本身<br>Circle (定义为Class)<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">var</span> <span class="selector-tag">a</span> = Circle()</div><div class="line"><span class="selector-tag">a</span><span class="selector-class">.radius</span> = <span class="number">80</span></div><div class="line"><span class="selector-tag">var</span> <span class="selector-tag">b</span> = <span class="selector-tag">a</span></div><div class="line"><span class="selector-tag">a</span><span class="selector-class">.radius</span> = <span class="number">1000</span></div><div class="line"><span class="selector-tag">b</span><span class="selector-class">.radius</span> <span class="comment">// 1000</span></div></pre></td></tr></table></figure>
+<li><p>引用类型关注的是对象本身</p>
+<p> Circle (定义为Class)</p>
+ <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">var</span> <span class="selector-tag">a</span> = Circle()</div><div class="line"><span class="selector-tag">a</span><span class="selector-class">.radius</span> = <span class="number">80</span></div><div class="line"><span class="selector-tag">var</span> <span class="selector-tag">b</span> = <span class="selector-tag">a</span></div><div class="line"><span class="selector-tag">a</span><span class="selector-class">.radius</span> = <span class="number">1000</span></div><div class="line"><span class="selector-tag">b</span><span class="selector-class">.radius</span> <span class="comment">// 1000</span></div></pre></td></tr></table></figure>
+<p> Circle(定义为Struct)</p>
+ <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">var</span> <span class="selector-tag">a</span> = Circle()</div><div class="line"><span class="selector-tag">a</span><span class="selector-class">.radius</span> = <span class="number">80</span></div><div class="line"><span class="selector-tag">var</span> <span class="selector-tag">b</span> = <span class="selector-tag">a</span></div><div class="line"><span class="selector-tag">a</span><span class="selector-class">.radius</span> = <span class="number">1000</span></div><div class="line"><span class="selector-tag">b</span><span class="selector-class">.radius</span> <span class="comment">// 80</span></div></pre></td></tr></table></figure>
+<p> 使用值类型创建新对象时，将复制；使用引用类型时，新变量引用同一个对象。这是两者的关键区别。</p>
 </li>
-</ol>
-<p>Circle(定义为Struct)</p>
-  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">var</span> <span class="selector-tag">a</span> = Circle()</div><div class="line"><span class="selector-tag">a</span><span class="selector-class">.radius</span> = <span class="number">80</span></div><div class="line"><span class="selector-tag">var</span> <span class="selector-tag">b</span> = <span class="selector-tag">a</span></div><div class="line"><span class="selector-tag">a</span><span class="selector-class">.radius</span> = <span class="number">1000</span></div><div class="line"><span class="selector-tag">b</span><span class="selector-class">.radius</span> <span class="comment">// 80</span></div></pre></td></tr></table></figure>
-<p>使用值类型创建新对象时，将复制；使用引用类型时，新变量引用同一个对象。这是两者的关键区别。</p>
-<ol>
-<li>引用类型的默认值是可以修改的<br>我们之前提到过，给<code>struct</code>添加的方法，默认的都是只读的。如果要修改必须用<code>mutating</code>来修饰。<code>class</code>中则不同，我们可以直接给 <code>self</code>赋值。</li>
+<li><p>引用类型的默认值是可以修改的<br>我们之前提到过，给<code>struct</code>添加的方法，默认的都是只读的。如果要修改必须用<code>mutating</code>来修饰。<code>class</code>中则不同，我们可以直接给 <code>self</code>赋值。</p>
+</li>
 </ol>
 <h1 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h1><h2 id="理解class类型的各种init方法"><a href="#理解class类型的各种init方法" class="headerlink" title="理解class类型的各种init方法"></a>理解class类型的各种init方法</h2><p>由于<code>class</code>之间可以存在继承关系，因此它的初始化过程要比<code>struct</code>复杂，为了保证一个<code>class</code>中的所有属性都被初始化，Swift中引入一系列特定规则。</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point2D</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> x : <span class="built_in">Double</span></div><div class="line">    <span class="keyword">var</span> y : <span class="built_in">Double</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -554,12 +555,10 @@ Swift是强类型的，尽管只有六种类型。
 <li><strong>阶段二：所有属性都有初始值之后，从基类到派生类，自上而下对类的每个属性进行进一步加工。</strong></li>
 </ul>
 <p>两段式构造过程让构造过程更安全，同时整个类层级结构中给予了每个类完全的灵活性。两段式构造过程可以防止属性值在初始化之前被访问，也可以防止属性被另外一个构造器意外赋予不同的值。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="">The swift Programming Language</a></li>
-<li><a href="https://developer.apple.com/reference/swift" target="_blank" rel="external">Swift Standard Library</a></li>
-<li><a href="https://www.boxueio.com/skill/swift" target="_blank" rel="external">如何学习Swift编程语言-泊学</a></li>
-<li><a href="https://www.raywenderlich.com/119881/enums-structs-and-classes-in-swift" target="_blank" rel="external">Getting to Know Enums, Structs and Classes in Swift - raywenderlich</a></li>
-</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="">The swift Programming Language</a></p>
+<p><a href="https://developer.apple.com/reference/swift" target="_blank" rel="external">Swift Standard Library</a></p>
+<p><a href="https://www.boxueio.com/skill/swift" target="_blank" rel="external">如何学习Swift编程语言-泊学</a></p>
+<p><a href="https://www.raywenderlich.com/119881/enums-structs-and-classes-in-swift" target="_blank" rel="external">Getting to Know Enums, Structs and Classes in Swift - raywenderlich</a></p>
 
       
     </div>
@@ -603,7 +602,7 @@ Swift是强类型的，尽管只有六种类型。
       
         <div class="post-tags">
           
-            <a href="/tags/Struct-Class-Enum/" rel="tag">#Struct Class Enum</a>
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
           
         </div>
       
@@ -612,17 +611,13 @@ Swift是强类型的，尽管只有六种类型。
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/20/从-HTTP1-x-到-HTTP-2-0-变迁/" rel="next" title="从 HTTP1.x 到 HTTP 2.0 变迁">
-                <i class="fa fa-chevron-left"></i> 从 HTTP1.x 到 HTTP 2.0 变迁
+              <a href="/2017/08/07/Python3进阶：高级特性二/" rel="next" title="Python3进阶：高级特性二">
+                <i class="fa fa-chevron-left"></i> Python3进阶：高级特性二
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/21/Python3网络库Requests-一/" rel="prev" title="Python3网络库Requests(一)">
-                Python3网络库Requests(一) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -774,7 +769,7 @@ Swift是强类型的，尽管只有六种类型。
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Struct-Class-and-Enum-对比"><span class="nav-number">2.</span> <span class="nav-text">Struct Class and Enum 对比</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何抉择？"><span class="nav-number">3.</span> <span class="nav-text">如何抉择？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Struct"><span class="nav-number">4.</span> <span class="nav-text">Struct</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Struct的定义和初始化"><span class="nav-number">4.1.</span> <span class="nav-text">Struct的定义和初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Struct-值类型本质"><span class="nav-number">4.2.</span> <span class="nav-text">Struct 值类型本质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为Struct添加方法"><span class="nav-number">4.3.</span> <span class="nav-text">为Struct添加方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Enum"><span class="nav-number">5.</span> <span class="nav-text">Enum</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义enum"><span class="nav-number">5.1.</span> <span class="nav-text">定义enum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解Enum的“Value”"><span class="nav-number">5.2.</span> <span class="nav-text">理解Enum的“Value”</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#case-本身就是值"><span class="nav-number">5.2.1.</span> <span class="nav-text">case 本身就是值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定值-raw-values"><span class="nav-number">5.2.2.</span> <span class="nav-text">绑定值(raw values)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联值（Associated-value"><span class="nav-number">5.2.3.</span> <span class="nav-text">关联值（Associated value)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协议和方法（Protocol-and-Method）"><span class="nav-number">5.3.</span> <span class="nav-text">协议和方法（Protocol and Method）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是Copy-on-write-COW-？"><span class="nav-number">6.</span> <span class="nav-text">什么是Copy on write  (COW) ？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#值类型和引用类型（Value-vs-Reference-Type）"><span class="nav-number">7.</span> <span class="nav-text">值类型和引用类型（Value vs. Reference Type）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#差异对比"><span class="nav-number">7.1.</span> <span class="nav-text">差异对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class"><span class="nav-number">8.</span> <span class="nav-text">Class</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#理解class类型的各种init方法"><span class="nav-number">8.1.</span> <span class="nav-text">理解class类型的各种init方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指定构造器-Designated-init"><span class="nav-number">8.1.1.</span> <span class="nav-text">指定构造器(Designated init)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#便利构造器-（convenience-init）"><span class="nav-number">8.1.2.</span> <span class="nav-text">便利构造器 （convenience init）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可失败构造器-（Failable-init-）"><span class="nav-number">8.1.3.</span> <span class="nav-text">可失败构造器 （Failable init ）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类的继承和构造过程"><span class="nav-number">8.2.</span> <span class="nav-text">类的继承和构造过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#init的继承"><span class="nav-number">8.2.1.</span> <span class="nav-text">init的继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重载init方法"><span class="nav-number">8.2.2.</span> <span class="nav-text">重载init方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两段式构造过程"><span class="nav-number">8.2.3.</span> <span class="nav-text">两段式构造过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Struct-Class-and-Enum-比较"><span class="nav-number">2.</span> <span class="nav-text">Struct Class and Enum 比较</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何抉择？"><span class="nav-number">3.</span> <span class="nav-text">如何抉择？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Struct"><span class="nav-number">4.</span> <span class="nav-text">Struct</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Struct的定义和初始化"><span class="nav-number">4.1.</span> <span class="nav-text">Struct的定义和初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Struct-值类型本质"><span class="nav-number">4.2.</span> <span class="nav-text">Struct 值类型本质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为Struct添加方法"><span class="nav-number">4.3.</span> <span class="nav-text">为Struct添加方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Enum"><span class="nav-number">5.</span> <span class="nav-text">Enum</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义enum"><span class="nav-number">5.1.</span> <span class="nav-text">定义enum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解Enum的“Value”"><span class="nav-number">5.2.</span> <span class="nav-text">理解Enum的“Value”</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#case-本身就是值"><span class="nav-number">5.2.1.</span> <span class="nav-text">case 本身就是值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定值-raw-values"><span class="nav-number">5.2.2.</span> <span class="nav-text">绑定值(raw values)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联值（Associated-value"><span class="nav-number">5.2.3.</span> <span class="nav-text">关联值（Associated value)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协议和方法（Protocol-and-Method）"><span class="nav-number">5.3.</span> <span class="nav-text">协议和方法（Protocol and Method）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是Copy-on-write-COW-？"><span class="nav-number">6.</span> <span class="nav-text">什么是Copy on write  (COW) ？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#值类型和引用类型（Value-vs-Reference-Type）"><span class="nav-number">7.</span> <span class="nav-text">值类型和引用类型（Value vs. Reference Type）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#差异对比"><span class="nav-number">7.1.</span> <span class="nav-text">差异对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class"><span class="nav-number">8.</span> <span class="nav-text">Class</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#理解class类型的各种init方法"><span class="nav-number">8.1.</span> <span class="nav-text">理解class类型的各种init方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指定构造器-Designated-init"><span class="nav-number">8.1.1.</span> <span class="nav-text">指定构造器(Designated init)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#便利构造器-（convenience-init）"><span class="nav-number">8.1.2.</span> <span class="nav-text">便利构造器 （convenience init）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可失败构造器-（Failable-init-）"><span class="nav-number">8.1.3.</span> <span class="nav-text">可失败构造器 （Failable init ）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类的继承和构造过程"><span class="nav-number">8.2.</span> <span class="nav-text">类的继承和构造过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#init的继承"><span class="nav-number">8.2.1.</span> <span class="nav-text">init的继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重载init方法"><span class="nav-number">8.2.2.</span> <span class="nav-text">重载init方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两段式构造过程"><span class="nav-number">8.2.3.</span> <span class="nav-text">两段式构造过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
         </section>
