@@ -1,0 +1,875 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="目录
+JavaScript的基本数据类型
+JavaScript的执行环境和作用域链
+JavaScript的垃圾收集机制
+
+一.JavaScript的基本数据类型ECMAScript5中有5中基本数据类型：Undefined、Null、Boolean、Number和String。还有一种复杂数据类型——Object。
+1.typeof操作符用来检测给定变量的数据类型。12345678var boo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript入坑第一步：夯实基础">
+<meta property="og:url" content="https://jesusLove.github.io/2017/06/01/JavaScript入坑第一步：夯实基础/index.html">
+<meta property="og:site_name" content="紫电清霜">
+<meta property="og:description" content="目录
+JavaScript的基本数据类型
+JavaScript的执行环境和作用域链
+JavaScript的垃圾收集机制
+
+一.JavaScript的基本数据类型ECMAScript5中有5中基本数据类型：Undefined、Null、Boolean、Number和String。还有一种复杂数据类型——Object。
+1.typeof操作符用来检测给定变量的数据类型。12345678var boo">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-f834e6bbf9258c42.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-886c8ecce57b860c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-1dad3e39edc88635.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-ef044942e80b1d76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-28T02:56:06.307Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript入坑第一步：夯实基础">
+<meta name="twitter:description" content="目录
+JavaScript的基本数据类型
+JavaScript的执行环境和作用域链
+JavaScript的垃圾收集机制
+
+一.JavaScript的基本数据类型ECMAScript5中有5中基本数据类型：Undefined、Null、Boolean、Number和String。还有一种复杂数据类型——Object。
+1.typeof操作符用来检测给定变量的数据类型。12345678var boo">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1363078-f834e6bbf9258c42.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://jesusLove.github.io/2017/06/01/JavaScript入坑第一步：夯实基础/"/>
+
+  <title> JavaScript入坑第一步：夯实基础 | 紫电清霜 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">紫电清霜</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript入坑第一步：夯实基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-01T14:53:19+08:00" content="2017-06-01">
+              2017-06-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/1363078-f834e6bbf9258c42.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="拂晓"></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>JavaScript的基本数据类型</li>
+<li>JavaScript的执行环境和作用域链</li>
+<li>JavaScript的垃圾收集机制</li>
+</ul>
+<h2 id="一-JavaScript的基本数据类型"><a href="#一-JavaScript的基本数据类型" class="headerlink" title="一.JavaScript的基本数据类型"></a>一.JavaScript的基本数据类型</h2><p>ECMAScript5中有5中基本数据类型：Undefined、Null、Boolean、Number和String。还有一种复杂数据类型——Object。</p>
+<h3 id="1-typeof操作符"><a href="#1-typeof操作符" class="headerlink" title="1.typeof操作符"></a>1.typeof操作符</h3><p>用来检测给定变量的数据类型。<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">var</span> <span class="built_in">bool</span> = <span class="literal">true</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">bool</span>); <span class="comment">//boolean</span></div><div class="line"><span class="built_in">var</span> number = <span class="number">23</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> number);<span class="comment">//number</span></div><div class="line"><span class="built_in">var</span> <span class="built_in">string</span> = <span class="string">"String"</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">string</span>); <span class="comment">// string</span></div><div class="line"><span class="built_in">var</span> object = <span class="built_in">Object</span>(); </div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> object); <span class="comment">// object</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>typeof操作符不是函数，不需要使用圆括号。NULL是什么类型呢？<code>typeof null</code>返回值为”Object“。</p>
+</blockquote>
+<h3 id="2-Undefined类型"><a href="#2-Undefined类型" class="headerlink" title="2.Undefined类型"></a>2.Undefined类型</h3><p>Undefined类型只是一个值，特殊的Undefined。使用var声明变量未初始化时，这个值就是Undefined。</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="keyword">message</span>;</div><div class="line">console.log(typeof <span class="keyword">message</span>); <span class="comment">// undefined</span></div><div class="line">console.log(<span class="keyword">type</span> <span class="keyword">of</span> age); <span class="comment">// undefined</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>结果显示，对于未初始化和未定义的变量使用typeof操作符都会返回undefined。</p>
+</blockquote>
+<h3 id="3-Null类型"><a href="#3-Null类型" class="headerlink" title="3.Null类型"></a>3.Null类型</h3><p>Null是另一个只有一个值的数据类型，就是特殊值null。从逻辑角度看，null值表示一个空对象指针。也就是前面为什么<code>typeof null</code>会返回Object的原因。定义一个空对象指针的时候，可以将指针设为null就可以通过相应的变量判断是否是一个对象指针。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (car != <span class="literal">null</span>) &#123;</div><div class="line"><span class="comment">// 对car对象执行操作</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>实际上，Undefined值是从null值派生的。因此，当我们判断 <code>null == undefined</code>时，返回true。</p>
+</blockquote>
+<h3 id="4-Boolean类型"><a href="#4-Boolean类型" class="headerlink" title="4.Boolean类型"></a>4.Boolean类型</h3><p>JavaScript中经常使用的类型，该类型只有两个字面量：<code>true</code>和<code>false</code>。注意这里区分大小写。<br>通过Boolean()将其他类型转换为<code>Boolean</code>类型。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">数据类型</th>
+<th style="text-align:left">转为true的值</th>
+<th style="text-align:left">转为false的值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">任何非空字符串</td>
+<td style="text-align:left">空字符串””</td>
+</tr>
+<tr>
+<td style="text-align:left">Number</td>
+<td style="text-align:left">任何非零数值</td>
+<td style="text-align:left">0或NaN</td>
+</tr>
+<tr>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">任何对象</td>
+<td style="text-align:left">null</td>
+</tr>
+<tr>
+<td style="text-align:left">Undefined</td>
+<td style="text-align:left">n/a</td>
+<td style="text-align:left">undefined</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-Number类型"><a href="#5-Number类型" class="headerlink" title="5.Number类型"></a>5.Number类型</h3><p>JavaScript中使用IEEE754格式来表示整数和浮点数值。常用的有十进制，八进制和十六进制。</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> intNum = <span class="number">10</span>;</div><div class="line"><span class="keyword">var</span> octalNum = <span class="number">070</span>; <span class="comment">// 56（0-7取值）</span></div><div class="line"><span class="keyword">var</span> hexNum1 = <span class="number">0xA</span>; <span class="comment">//10 （0-F取值）</span></div></pre></td></tr></table></figure>
+<p>浮点数值的最高精度是17位小数，但在算数计算时精度远不如整数。<br>因为浮点数计算时会出现舍如误差，这是IEEE754数值计算的通病。</p>
+<p>数值范围，在JavaScript中，最小能表示的值<code>Number.MIN_VALUE</code>，最大值为<code>Number.MAX_VALUE</code>。超出表示范围，会被自动转为<code>Infinity</code>(无穷)。我们可以使用<code>isFinite()</code>函数来检验是否在范围之间。</p>
+<p>NaN，非数值是一个特殊的数值。表示一个本应该返回数值的操作数未返回数值的情况。NaN有两个特点，1. 任何涉及NaN的操作都返回NaN。2. NaN与任何值都不相等，包括本身。<br>我们可以使用<code>isNaN()</code>函数，检测参数是否”<strong>不是数值</strong>“。</p>
+<p>数值转换，JavaScript中提供了三个函数：<code>Number()</code>、<code>parseInt()</code>和<code>parseFloat()</code>。第一个函数可以转换任何数据类型，后两个函数专门用于把字符串转成数值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> num1 = <span class="built_in">Number</span>(<span class="string">"Hello world!"</span>); <span class="comment">// NaN</span></div><div class="line"><span class="keyword">var</span> num2 = <span class="built_in">Number</span>(<span class="string">""</span>); <span class="comment">// 0</span></div><div class="line"><span class="keyword">var</span> num3 = <span class="built_in">Number</span>(<span class="string">"00011"</span>);<span class="comment">//11</span></div><div class="line"><span class="keyword">var</span> num4 = <span class="built_in">Number</span>(<span class="literal">true</span>);<span class="comment">//1</span></div></pre></td></tr></table></figure></p>
+<p>使用Number()转换字符串复杂不够合理。处理字符串常用<code>parseInt()</code>函数，它会更多的关注是否符合数值模式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> num1 = <span class="built_in">parseInt</span>(<span class="string">"1234abc"</span>); <span class="comment">//1234</span></div><div class="line"><span class="keyword">var</span> num2 = <span class="built_in">parseInt</span>(<span class="string">""</span>);<span class="comment">//NaN</span></div><div class="line"><span class="keyword">var</span> num3 = <span class="built_in">parseInt</span>(<span class="string">"0xA"</span>);<span class="comment">//10</span></div><div class="line"><span class="keyword">var</span> num4 = <span class="built_in">parseInt</span>(<span class="string">"070"</span>);<span class="comment">//56</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意： 在ECMAScript 3中num4为56，在ECMAScript 5中num4为70。</p>
+</blockquote>
+<p>为了解决这个问题，可以给<code>parseInt()</code>传第二个参数：用来指定转换的进制。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="built_in">num</span> = parseInt(<span class="string">"0xAF"</span>, <span class="number">16</span>); <span class="comment">// 175</span></div><div class="line"><span class="comment">//或者</span></div><div class="line"><span class="keyword">var</span> <span class="built_in">num</span> = parseInt(<span class="string">"AF"</span>, <span class="number">16</span>);</div></pre></td></tr></table></figure></p>
+<p>与<code>parseInt()</code>类似，<code>parseFloat()</code>也是从第一个字符开始，直达解析到末尾或者遇到无效的浮点数字。另外，始终会忽略前导的零。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="built_in">num</span> = parseFloat(<span class="string">"070"</span>); <span class="comment">//70</span></div></pre></td></tr></table></figure></p>
+<h3 id="6-String类型"><a href="#6-String类型" class="headerlink" title="6.String类型"></a>6.String类型</h3><p>String类型用与表示零或多个16位Unicode字符组成的字符序列。在JavaScript中，使用双引号和单引号表示，两者没有任何区别。</p>
+<p>字符串是不可变的，一旦创建就不可以修改。</p>
+<p>数值转为字符串有两种方式：<code>toString()</code> 和 <code>String()</code>。第一个方法，返回数值的字符串表示形式。第二个可以将任何类型的值转为字符串，在不知道转值是否为null和undefined时使用。</p>
+<h3 id="7-Object类型"><a href="#7-Object类型" class="headerlink" title="7.Object类型"></a>7.Object类型</h3><p>ECMAScript中对象其实就是一组数据和功能的集合。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="class"><span class="keyword">object</span> </span>= <span class="keyword">new</span> <span class="type">Object</span>();</div></pre></td></tr></table></figure></p>
+<p>创建一个对象，与Java很相似。Object类型是所有他的实例的基础。也就是，Object类型所具有的任何属性和方法同样存在于更具体的对象中。</p>
+<p>Object的每个实例具有的属性和方法：</p>
+<ul>
+<li>constructor : 构造函数。用于创建对象的函数。</li>
+<li>hasOwnProperty(propertyName): 用于检查给定的属性在当前对象实例中是否存在。参数以字符串形式表示<code>o.hasOwnProperty(&quot;name&quot;)</code>。</li>
+<li>isPrototypeof(object)：用于检查传入的对象是否是当前对象的原型。</li>
+<li>propertyIsEnumerable(propertyName): 用于检查给定的属性是否能够使用for-in语句。</li>
+<li>toLocaleString():返回对象的字符串表示。</li>
+<li>toString(): 返回对象的字符串表示。</li>
+<li>valueOf(): 返回对象的字符串、数值或布尔值表示。</li>
+</ul>
+<p>Object是所有对象的基础，因此所有对象都具有这些基本的属性和方法。</p>
+<h2 id="二-JavaScript的作用域"><a href="#二-JavaScript的作用域" class="headerlink" title="二.JavaScript的作用域"></a>二.JavaScript的作用域</h2><p>JavaScript的变量和其他语言有很大差别。JavaScript的变量是松散类型的本质，所谓的松散类型就是可以保存任何类型的数据。这个本质决定了它只是保存特定值的名字而已。因为这个属性，变量的值和数据类型可以在脚本的生命周期内改变。</p>
+<h3 id="1-基本类型和引用类型"><a href="#1-基本类型和引用类型" class="headerlink" title="1.基本类型和引用类型"></a>1.基本类型和引用类型</h3><p>ECMAScript中包含两种不同的数据类型值： 基本类型值和引用类型值。基本类型值是指简单的数据段，引用类型值值那些可能由多个值构成的对象。</p>
+<p>动态的属性，只能给引用类型值动态添加属性。</p>
+<p>复制，基本类型复制值，引用类型复制指针。</p>
+<p>传递参数，所有函数的参数都是按值传递的。基本类型值很好理解，直接传递值。但是，引用类型值也是按值传递的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setName</span>(<span class="params">objc</span>) </span>&#123;</div><div class="line">	objc.name = <span class="string">"Owenli"</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">setName(person);</div><div class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">//Owenli</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>创建了一个person对象，传递给setName()函数之后被复制给objc。在函数内部，objc和person引用的是同一个对象。<strong>即使是按值传递的，objc也会按引用来访问同一个对象</strong>。添加name属性后，person也会有反应，因为person指向的对象在堆中只有一个，并且是全局对象。 </p>
+</blockquote>
+<p>这是有人会误以为是引用传递，那么看下一个示例：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setName</span>(<span class="params">objc</span>) </span>&#123;</div><div class="line">	objc.name = <span class="string">"Owenli"</span>;</div><div class="line">	objc = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">	objc.name = <span class="string">"Tom"</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">setName(person);</div><div class="line"><span class="built_in">console</span>.log(person.name);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这段代码输出什么呢？ 如果你认为输出 Tom，那就入坑了。其实结果是Owenli。即使在函数内部修改了参数的值，但原始的引用仍然保持不变。实际上，虽然在setName()函数中，将新对象赋给objc，这个变量引用的是局部对象，在函数执行完毕后立即被销毁。</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-886c8ecce57b860c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="参数传递"></p>
+<p>检测类型，之前<code>typeof</code>操作符用来检测基本类型，但是用来检测引用类型需要使用<code>instanceof</code>操作符。</p>
+<h3 id="2-执行环境和作用域"><a href="#2-执行环境和作用域" class="headerlink" title="2.执行环境和作用域"></a>2.执行环境和作用域</h3><p>执行环境定义了变量或函数有权访问的其他数据，决定了他们各自的行为，每个执行环境都有一个与之关联的<strong>变量对象</strong>（varable object），函数中定义的多有变量和函数都保存到这个对象中。</p>
+<p>每个函数都有自己的执行环境，当执行流进入一个函数，函数的环境就会被推入一个<strong>环境栈</strong>中。而在函数执行之后，栈将其环境弹出，把控制权返给之前的执行环境。</p>
+<p>当代码在一个环境中执行时，会创建变量对象的一个作用域链。作用域链的用途是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端，始终都是当前执行的代码所在环境的变量对象。如果这个环境是函数，则将其<strong>活动对象</strong>作为变量对象。活动对象最开始只包含一个变量，即arguments对象。</p>
+<p>举个<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">var</span> <span class="built_in">color</span> = <span class="string">"blue"</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeColor</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="built_in">var</span> anotherColor = <span class="string">"red"</span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">swapColors</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="built_in">var</span> tempColor  anotherColor;</div><div class="line">		anotherColor = <span class="built_in">color</span>;</div><div class="line">		<span class="built_in">color</span> = tempColor;</div><div class="line">		<span class="comment">//访问color,anotherColor和tempColor</span></div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 访问color和anotherColor，但不能访问tempColor</span></div><div class="line">	swapColors();</div><div class="line">&#125;</div><div class="line"><span class="comment">// 只能访问color</span></div><div class="line">changeColor();</div></pre></td></tr></table></figure></p>
+<p>作用域链效果图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-1dad3e39edc88635.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="作用域链.jpg"></p>
+<blockquote>
+<p>内部环境可以通过作用域链访问所有的外部环境，但是外部环境不可以访问内部环境中的任何变量和函数。环境之间的联系是线性、有序的。每个环境都可以向上搜索作用域链，以查询变量和函数名。 </p>
+</blockquote>
+<p> 延长作用域链，环境类型只有两种：全局和局部（函数），但还有其他方法来延长作用域链。</p>
+<ul>
+<li>try-catch语句的catch块</li>
+<li>with语句</li>
+</ul>
+<p>这两个语句都会在作用域链的前端添加一个变量对象。<code>with</code>语句，就会指定的对象添加到作用域链中。<code>catch</code>语句，会创建一个新的变量对象，其中包含的是被抛出的错误对象的声明。</p>
+<p>没有块级作用域，和其他语言相比，JavaScript没有块级作用域。例如，<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</div><div class="line">	<span class="built_in">var</span> <span class="built_in">color</span> = <span class="string">"blue"</span>;</div><div class="line"> &#125;</div><div class="line"> console.<span class="built_in">log</span>(<span class="built_in">color</span>);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>在C语言中，会在if语句结束后销毁color。但是在JavaScript中，if中声明的变量会被添加到当前的执行环境中(上面是全局环境)。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i ++) &#123;</div><div class="line">	<span class="comment">///dosomething</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(i); <span class="comment">// 10</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：JavaScript中，即使for循环结束，i仍然存在于当前的执行环境中。</p>
+</blockquote>
+<p>变量声明，使用var声明的变量会被添加到最近的环境中。如果声明没有使用var则会被添加到全局环境中。</p>
+<p>标识符搜索，搜索过程是从作用域链的前端开始，向上逐级查询与给定名字匹配的标识符。如果局部环境中存在着同名标识符，那么就不会使用位于父级的标志符。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-ef044942e80b1d76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="标识符查找.jpg"></p>
+<h2 id="三-垃圾收集"><a href="#三-垃圾收集" class="headerlink" title="三.垃圾收集"></a>三.垃圾收集</h2><p>JavaScript具有自动垃圾收集机制，执行环境负责管理代码执行过程中使用的内存。垃圾回收原理：垃圾收集器会周期地找到那些不在使用的变量，然后释放其内存。两种垃圾回收策略：标记清除和引用计数。</p>
+<h3 id="1-标记清除"><a href="#1-标记清除" class="headerlink" title="1.标记清除"></a>1.标记清除</h3><p>JavaScript中最常用的垃圾收集方法<strong>标记清除</strong>。当变量进入环境标记为“进入环境”，此状态下变量可能会用到。当变量离开环境时，将其标记为“离开环境”，此时可以被垃圾收集器回收。</p>
+<h3 id="2-引用计数"><a href="#2-引用计数" class="headerlink" title="2.引用计数"></a>2.引用计数</h3><p>在Objective-C中使用引用计数。关于引用计数可以看<a href="">《iOS高级编程》第一章</a>。注意引用计数存在循环引用问题。</p>
+<p>性能问题，由于垃圾收集器是周期运行的，所以确定时间间隔是一个非常重要的问题。IE曾因为这个出现过性能问题。</p>
+<p>管理内存，出于安全角度考虑，给Web浏览器分配的内存数量通常比分配给桌面应用的少。因此，一旦数据不再用，最好通过将其值设置为null来释放其引用——接触引用。解除一个引用不代表立即被回收，只是让其脱离执行环境，以便垃圾收集器下次运行时将其回收。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
+<li>首先，学习javaScript的基本数据类型，有其他编程语言基础，学起来很简单，只需记住不同点即可。</li>
+<li>其次，学习javaScript的作用域链和执行环境，理解作用域链和执行环境等概念对后期的学习很有帮助，需要充分理解。</li>
+<li>最后，javaScript的垃圾收集机制，最常用的是标记清除。iOS中使用的是引用计数。</li>
+<li>下一篇学习JavaScript中对象。</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="">《JavaScript高级程序设计》</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript" target="_blank" rel="external">《JavaScript - MDN》</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tracing_garbage_collection" target="_blank" rel="external">Tracing garbage collection - wiki</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.png" alt="Owenli WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.png" alt="Owenli Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/28/初识Bluetooth开发/" rel="next" title="初识Bluetooth开发">
+                <i class="fa fa-chevron-left"></i> 初识Bluetooth开发
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/14/JavaScript入坑第二步：对象/" rel="prev" title="JavaScript入坑第二步：对象">
+                JavaScript入坑第二步：对象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/me.png"
+               alt="Owenli" />
+          <p class="site-author-name" itemprop="name">Owenli</p>
+          <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一-JavaScript的基本数据类型"><span class="nav-number">2.</span> <span class="nav-text">一.JavaScript的基本数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-typeof操作符"><span class="nav-number">2.1.</span> <span class="nav-text">1.typeof操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Undefined类型"><span class="nav-number">2.2.</span> <span class="nav-text">2.Undefined类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Null类型"><span class="nav-number">2.3.</span> <span class="nav-text">3.Null类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Boolean类型"><span class="nav-number">2.4.</span> <span class="nav-text">4.Boolean类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Number类型"><span class="nav-number">2.5.</span> <span class="nav-text">5.Number类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-String类型"><span class="nav-number">2.6.</span> <span class="nav-text">6.String类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Object类型"><span class="nav-number">2.7.</span> <span class="nav-text">7.Object类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-JavaScript的作用域"><span class="nav-number">3.</span> <span class="nav-text">二.JavaScript的作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基本类型和引用类型"><span class="nav-number">3.1.</span> <span class="nav-text">1.基本类型和引用类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-执行环境和作用域"><span class="nav-number">3.2.</span> <span class="nav-text">2.执行环境和作用域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-垃圾收集"><span class="nav-number">4.</span> <span class="nav-text">三.垃圾收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-标记清除"><span class="nav-number">4.1.</span> <span class="nav-text">1.标记清除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-引用计数"><span class="nav-number">4.2.</span> <span class="nav-text">2.引用计数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Owenli</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
