@@ -1,0 +1,831 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="YYModel," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言YYModel一个高性能模型框架。
+作者在Github上给出的性能对比图(iphone 6 y：时间)
+
+YYModel：具体以下特点：高性能、自动类型转换、类型安全、非侵入性、轻量等。
+关于如何使用YYModel查看文档和示例【传送门】。
+本文主要任务，分析YYModel的整体架构，实现思路，涉及到的知识点。
+版本：1.0.4
+文件结构
+YYModel，只有5个文件。接下我们会具体看这五个文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从YYModel源码中可以学到什么：前篇">
+<meta property="og:url" content="https://jesusLove.github.io/2017/12/21/YYModel源码解析一/index.html">
+<meta property="og:site_name" content="紫电清霜">
+<meta property="og:description" content="前言YYModel一个高性能模型框架。
+作者在Github上给出的性能对比图(iphone 6 y：时间)
+
+YYModel：具体以下特点：高性能、自动类型转换、类型安全、非侵入性、轻量等。
+关于如何使用YYModel查看文档和示例【传送门】。
+本文主要任务，分析YYModel的整体架构，实现思路，涉及到的知识点。
+版本：1.0.4
+文件结构
+YYModel，只有5个文件。接下我们会具体看这五个文">
+<meta property="og:image" content="https://camo.githubusercontent.com/73e6774154cfe8652b61f62e8ea32cac48969033/68747470733a2f2f7261772e6769746875622e636f6d2f69626972656d652f59594d6f64656c2f6d61737465722f42656e63686d61726b2f526573756c742e706e67">
+<meta property="og:image" content="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/YYModel/YYModel.png">
+<meta property="og:image" content="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/YYModel/YYModel%E7%BB%93%E6%9E%84%E5%9B%BE.png">
+<meta property="og:image" content="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/YYModel/YYClassInfo.png">
+<meta property="og:updated_time" content="2017-12-28T02:28:06.024Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从YYModel源码中可以学到什么：前篇">
+<meta name="twitter:description" content="前言YYModel一个高性能模型框架。
+作者在Github上给出的性能对比图(iphone 6 y：时间)
+
+YYModel：具体以下特点：高性能、自动类型转换、类型安全、非侵入性、轻量等。
+关于如何使用YYModel查看文档和示例【传送门】。
+本文主要任务，分析YYModel的整体架构，实现思路，涉及到的知识点。
+版本：1.0.4
+文件结构
+YYModel，只有5个文件。接下我们会具体看这五个文">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/73e6774154cfe8652b61f62e8ea32cac48969033/68747470733a2f2f7261772e6769746875622e636f6d2f69626972656d652f59594d6f64656c2f6d61737465722f42656e63686d61726b2f526573756c742e706e67">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://jesusLove.github.io/2017/12/21/YYModel源码解析一/"/>
+
+  <title> 从YYModel源码中可以学到什么：前篇 | 紫电清霜 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">紫电清霜</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                从YYModel源码中可以学到什么：前篇
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-12-21T15:10:30+08:00" content="2017-12-21">
+              2017-12-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a href="https://github.com/ibireme/YYModel" target="_blank" rel="external"><code>YYModel</code></a>一个高性能模型框架。</p>
+<p>作者在<code>Github</code>上给出的性能对比图(iphone 6 y：时间)</p>
+<p><img src="https://camo.githubusercontent.com/73e6774154cfe8652b61f62e8ea32cac48969033/68747470733a2f2f7261772e6769746875622e636f6d2f69626972656d652f59594d6f64656c2f6d61737465722f42656e63686d61726b2f526573756c742e706e67" alt=""></p>
+<p><code>YYModel</code>：具体以下特点：高性能、自动类型转换、类型安全、非侵入性、轻量等。</p>
+<p>关于如何使用<code>YYModel</code>查看文档和示例<a href="https://github.com/ibireme/YYModel" target="_blank" rel="external">【传送门】</a>。</p>
+<p>本文主要任务，分析<code>YYModel</code>的整体架构，实现思路，涉及到的知识点。</p>
+<p>版本：1.0.4</p>
+<h1 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h1><p><img src="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/YYModel/YYModel.png" alt="YYModel文件目录"></p>
+<p><code>YYModel</code>，只有5个文件。接下我们会具体看这五个文件都做了什么工作。</p>
+<ul>
+<li><code>YYModel.h</code>头文件，通过<code>#import</code>该文件使用库。</li>
+<li><code>YYClassInfo.h</code> 根据名字应该能猜出，关于Class信息的文件。</li>
+<li><code>NSObject + YYModel.h</code> 这个<code>NSObject</code>的一个<code>Category</code>。还定义了一些内部类。</li>
+</ul>
+<p><img src="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/YYModel/YYModel%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt=""></p>
+<h2 id="YYModel头文件"><a href="#YYModel头文件" class="headerlink" title="YYModel头文件"></a>YYModel头文件</h2><p>该文件只是一个头文件，代码很少。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">if</span> __has_include(<span class="meta-string">&lt;YYModel/YYModel.h&gt;</span>)</span></div><div class="line">FOUNDATION_EXPORT <span class="keyword">double</span> YYModelVersionNumber;</div><div class="line">FOUNDATION_EXPORT <span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> YYModelVersionString[];</div><div class="line"><span class="meta">#import <span class="meta-string">&lt;YYModel/NSObject+YYModel.h&gt;</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;YYModel/YYClassInfo.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"NSObject+YYModel.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"YYClassInfo.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>拓展：</p>
+<ol>
+<li><p><code>FOUNDATION_EXPORT</code>是用来定义常量的，另外一个经常用到的<code>#define</code>定义常量。</p>
+<p> 那么两者的区别？<br> 假设分别使用两者定义字符串常量，前者可以通过<code>==</code>来判断字符串是否相等，后者则需要使用<code>isEqualToString:</code>来判断。因为，前者比较的是字符串指针地址，后者比较每个字符，因此前者效率更高。</p>
+</li>
+<li><p><code>__has_include()</code></p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; 	<span class="meta">#<span class="meta-keyword">if</span> __has_include(<span class="meta-string">&lt;UIKit/UIKit.h&gt;</span>)</span></div><div class="line">		<span class="comment">// 包含</span></div><div class="line">	<span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line">    	<span class="comment">// 不包含</span></div><div class="line">	<span class="meta">#<span class="meta-keyword">endif</span>			</span></div><div class="line">&gt; </div><div class="line">&gt;</div></pre></td></tr></table></figure>
+<p> 判断<code>UIKit</code>库是否存在。</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="YYClassInfo"><a href="#YYClassInfo" class="headerlink" title="YYClassInfo"></a>YYClassInfo</h2><p>在<code>YYClassInfo</code>文件中定义四个类，涉及到<code>Runtime</code>知识，请看这篇文章<a href="https://github.com/jesusLove/iOS-day-by-day" target="_blank" rel="external">博文</a>或者直接查看<a href="">objc4源码</a></p>
+<p><img src="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/YYModel/YYClassInfo.png" alt="YYClassInfo"></p>
+<ul>
+<li><p>YYClassIvarInfo </p>
+<p>  该类对应实例变量信息（ivars），包含：名称，偏移量，类型编码，类型；其中类型请查看<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html" target="_blank" rel="external">【官方文档Type Encodings】</a></p>
+</li>
+<li><p>YYClassMethodInfo </p>
+<p>  方法的信息类，包含，方法名称，SEL，IMP，参数类型编码，返回值类型编码等。</p>
+</li>
+<li><p>YYClassPropertyInfo</p>
+<p>  属性信息类，包含名称，类型，类型编码，ivar名称，类，协议列表，setter/getter等。</p>
+</li>
+<li><p>YYClassInfo：类信息。</p>
+</li>
+</ul>
+<p><strong>拓展</strong></p>
+<blockquote>
+<p><strong>Ivar, Method, Property, SEL, IMP都是什么？</strong></p>
+<p>理解这些需要对<code>runtime</code>了解，上面给出了博文链接，这里简单复习一下。</p>
+</blockquote>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">typedef <span class="class"><span class="keyword">struct</span> <span class="title">objc_method</span></span> *Method; <span class="comment">// 方法</span></div><div class="line">typedef <span class="class"><span class="keyword">struct</span> <span class="title">objc_ivar</span></span> *Ivar; <span class="comment">// 实例变量</span></div><div class="line">typedef <span class="class"><span class="keyword">struct</span> <span class="title">objc_category</span></span> *Category; <span class="comment">//分类</span></div><div class="line">typedef <span class="class"><span class="keyword">struct</span> <span class="title">objc_property</span></span> *objc_property_t; <span class="comment">// 属性</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">objc_class</span></span> &#123;</div><div class="line">    Class isa </div><div class="line">    Class super_class <span class="comment">// 指向父类  </span></div><div class="line">    <span class="keyword">const</span> <span class="keyword">char</span> * name <span class="comment">// 名称                   </span></div><div class="line">    long version                                          </div><div class="line">    long info                                               </div><div class="line">    long instance_size                                      </div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">objc_ivar_list</span></span> * ivars <span class="comment">// 实例变量表</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">objc_method_list</span></span> * * methodLists  <span class="comment">//方法表                 </span></div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">objc_cache</span></span> * cache                    </div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">objc_protocol_list</span></span> * protocols <span class="comment">//协议表 </span></div><div class="line"></div><div class="line">&#125;;</div><div class="line"><span class="comment">/* Use `Class` instead of `struct objc_class *` */</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>Ivar</code>指实例变量，存放在实例变量表中。<code>Method</code>方法，存放在方法表中。</p>
+</blockquote>
+<p>接下再看一下<code>Objc_method</code>结构体</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">objc_method</span> </span>&#123;</div><div class="line">    SEL method_name</div><div class="line">    char * method_types</div><div class="line">    IMP method_imp </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>SEL</code>指方法名称，<code>IMP</code>指方法实现。</p>
+</blockquote>
+<h2 id="NSObject-YYModel"><a href="#NSObject-YYModel" class="headerlink" title="NSObject + YYModel"></a>NSObject + YYModel</h2><p>该文件定义三个分类和一个协议，以及两个内部类，下面是<code>.h</code>文件中提供的接口。</p>
+<h3 id="NSObject分类"><a href="#NSObject分类" class="headerlink" title="NSObject分类"></a>NSObject分类</h3><p>提供了一些<code>data</code>与<code>model</code>转换的方法。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 根据接收到JSON创建一个实例，该方法是线程安全的。</span></div><div class="line"><span class="comment">// json对象可以是 NSDictionary，NSString，NSData.</span></div><div class="line">+ (<span class="keyword">nullable</span> <span class="keyword">instancetype</span>)yy_modelWithJSON:(<span class="keyword">id</span>)json;</div><div class="line"></div><div class="line"><span class="comment">// 字典转Model </span></div><div class="line">+ (<span class="keyword">nullable</span> <span class="keyword">instancetype</span>)yy_modelWithDictionary:(<span class="built_in">NSDictionary</span> *)dictionary;</div><div class="line"></div><div class="line"><span class="comment">// 通过json设置属性, 无效的数据会被忽略</span></div><div class="line">- (<span class="built_in">BOOL</span>)yy_modelSetWithJSON:(<span class="keyword">id</span>)json;</div><div class="line">- (<span class="built_in">BOOL</span>)yy_modelSetWithDictionary:(<span class="built_in">NSDictionary</span> *)dic;</div><div class="line"></div><div class="line"><span class="comment">// model转json对象（NSDictionary/NSArray）, NSData, NSString</span></div><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)yy_modelToJSONObject;</div><div class="line">- (<span class="keyword">nullable</span> <span class="built_in">NSData</span> *)yy_modelToJSONData;</div><div class="line">- (<span class="keyword">nullable</span> <span class="built_in">NSString</span> *)yy_modelToJSONString;</div><div class="line"></div><div class="line"><span class="meta">#pragma mark - 其他快捷方法</span></div><div class="line"><span class="comment">// 拷贝（NSCoping协议）</span></div><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)yy_modelCopy;</div><div class="line"></div><div class="line"><span class="comment">// 编码和解码(对应NSCoding协议的两个方法)</span></div><div class="line">- (<span class="keyword">void</span>)yy_modelEncodeWithCoder:(<span class="built_in">NSCoder</span> *)aCoder;</div><div class="line">- (<span class="keyword">id</span>)yy_modelInitWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder;</div><div class="line"></div><div class="line"><span class="comment">// NSObject协议</span></div><div class="line"><span class="comment">// 哈希值</span></div><div class="line">- (<span class="built_in">NSUInteger</span>)yy_modelHash;</div><div class="line"><span class="comment">// 相等判断</span></div><div class="line">- (<span class="built_in">BOOL</span>)yy_modelIsEqual:(<span class="keyword">id</span>)model;</div><div class="line"><span class="comment">// Debug描述</span></div><div class="line">- (<span class="built_in">NSString</span> *)yy_modelDescription;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>以上NSObject分类中提供的接口，具体实现稍后学习。</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 直接添加以下代码即可自动完成</span></div><div class="line">-<span class="ruby"> (void)<span class="symbol">encodeWithCoder:</span>(NSCoder *)aCoder &#123; [<span class="keyword">self</span> <span class="symbol">yy_modelEncodeWithCoder:</span>aCoder]; &#125;</span></div><div class="line">-<span class="ruby"> (id)<span class="symbol">initWithCoder:</span>(NSCoder *)aDecoder &#123; <span class="keyword">self</span> = [<span class="keyword">super</span> init]; <span class="keyword">return</span> [<span class="keyword">self</span> <span class="symbol">yy_modelInitWithCoder:</span>aDecoder]; &#125;</span></div><div class="line">-<span class="ruby"> (id)<span class="symbol">copyWithZone:</span>(NSZone *)zone &#123; <span class="keyword">return</span> [<span class="keyword">self</span> yy_modelCopy]; &#125;</span></div><div class="line">-<span class="ruby"> (NSUInteger)hash &#123; <span class="keyword">return</span> [<span class="keyword">self</span> yy_modelHash]; &#125;</span></div><div class="line">-<span class="ruby"> (BOOL)<span class="symbol">isEqual:</span>(id)object &#123; <span class="keyword">return</span> [<span class="keyword">self</span> <span class="symbol">yy_modelIsEqual:</span>object]; &#125;</span></div><div class="line">-<span class="ruby"> (NSString *)description &#123; <span class="keyword">return</span> [<span class="keyword">self</span> yy_modelDescription]; &#125;</span></div></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="NSArray分类"><a href="#NSArray分类" class="headerlink" title="NSArray分类"></a>NSArray分类</h3><p>从json-array中创建一个数组, 其实也是遍历循环调用字典转Model。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (<span class="keyword">nullable</span> <span class="built_in">NSArray</span> *)yy_modelArrayWithClass:(Class)cls json:(<span class="keyword">id</span>)json;</div></pre></td></tr></table></figure>
+<h3 id="NSDictionary分类"><a href="#NSDictionary分类" class="headerlink" title="NSDictionary分类"></a>NSDictionary分类</h3><p>从json创建字典。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (<span class="keyword">nullable</span> <span class="built_in">NSDictionary</span> *)yy_modelDictionaryWithClass:(Class)cls json:(<span class="keyword">id</span>)json;</div></pre></td></tr></table></figure>
+<h3 id="YYModel协议"><a href="#YYModel协议" class="headerlink" title="YYModel协议"></a>YYModel协议</h3><p><code>YYModel</code>协议，通过实现响应的方法，可以提供白名单，黑名单，自定义属性名称等功能。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 自定义属性名称，可以将json中的名称映射到自定义的名称，可以解决冲突例如`id`。</span></div><div class="line">+ (<span class="keyword">nullable</span> <span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; *)modelCustomPropertyMapper;</div><div class="line"></div><div class="line"><span class="comment">// 如果属性是一个容器对象，例如NSArray/NSSet/NSDictonary,实现该方法可以返回一个映射字典（property -&gt; class）</span></div><div class="line">+ (<span class="keyword">nullable</span> <span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; *)modelContainerPropertyGenericClass;</div><div class="line"></div><div class="line">+ (<span class="keyword">nullable</span> Class)modelCustomClassForDictionary:(<span class="built_in">NSDictionary</span> *)dictionary;</div><div class="line"></div><div class="line"><span class="comment">// 白名单和黑名单（若实现，忽略黑名单，只处理白名单）</span></div><div class="line">+ (<span class="keyword">nullable</span> <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *)modelPropertyBlacklist;</div><div class="line">+ (<span class="keyword">nullable</span> <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *)modelPropertyWhitelist;</div><div class="line"></div><div class="line">- (<span class="built_in">NSDictionary</span> *)modelCustomWillTransformFromDictionary:(<span class="built_in">NSDictionary</span> *)dic;</div><div class="line"></div><div class="line"><span class="comment">// 数据验证和自定义转换</span></div><div class="line"><span class="comment">// 当JSON转为Model完成后，会调用该方法。可以在该方法中进行校验工作，返回NO该Model被忽略，也可以完成一些转换工作。</span></div><div class="line">- (<span class="built_in">BOOL</span>)modelCustomTransformFromDictionary:(<span class="built_in">NSDictionary</span> *)dic;</div><div class="line">- (<span class="built_in">BOOL</span>)modelCustomTransformToDictionary:(<span class="built_in">NSMutableDictionary</span> *)dic;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>拓展</p>
+<ol>
+<li><p>在源码中会发现有一对<code>NS_ASSUME_NONNULL_BEGIN</code>和<code>NS_ASSUME_NONNULL_END</code>宏。</p>
+<p> 在Swift中存在<code>Option</code>类型，可以使用<code>!</code>和<code>?</code>声明变量，但是在OC中没有这个特性。出现新的关键词用于OC转Swift时区分能否为空。</p>
+<p><code>nullable</code> &amp;&amp; <code>nonnull</code></p>
+<p><code>nullable</code>指对象可以为NULL。</p>
+<p><code>nonnull</code>指对象不可以为NULL。</p>
+<p>如果不遵循这一规则，编译器就会给出警告。</p>
+<p>为了简化书写，在<code>NS_ASSUME_NONNULL_BEGIN</code>和<code>NS_ASSUME_NONNULL_END</code>宏之间的代码，默认都是<code>nonnull</code>。所以我们只需指定哪些<code>nullable</code>的指针就可以了。<br><a href="https://stackoverflow.com/questions/37956272/ns-assume-nonnull-begin-macro" target="_blank" rel="external">StackOverflow</a>关于该宏的问题。</p>
+</li>
+</ol>
+</blockquote>
+<h1 id="其他知识点"><a href="#其他知识点" class="headerlink" title="其他知识点"></a>其他知识点</h1><p>接下来补充一些知识点，或许对以后开发有帮助。</p>
+<h2 id="NS-OPTIONS-amp-amp-NS-ENUM"><a href="#NS-OPTIONS-amp-amp-NS-ENUM" class="headerlink" title="NS_OPTIONS &amp;&amp; NS_ENUM"></a><code>NS_OPTIONS</code> &amp;&amp; <code>NS_ENUM</code></h2><p>这是两个简单方便的宏定义，从iOS6开始，他们取代了原来的<code>enum</code>。</p>
+<p>例如：</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">typedef <span class="type">NS_ENUM</span>(<span class="type">NSInteger</span>, <span class="type">UITableViewCellStyle</span>) &#123;</div><div class="line">    <span class="type">UITableViewCellStyleDefault</span>,</div><div class="line">    <span class="type">UITableViewCellStyleValue1</span>,</div><div class="line">    <span class="type">UITableViewCellStyleValue2</span>,</div><div class="line">    <span class="type">UITableViewCellStyleSubtitle</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>其中第一个元素存储类型。第二个参数是名字。</p>
+<p>另外，<code>enum</code>也可以被定义为按位掩码。用简单的OR和AND数学运算既可实现一个整型值的编码。请看这篇文章<a href="http://nshipster.cn/ns_enum-ns_options/" target="_blank" rel="external">《NS_ OPTIONS &amp;&amp; NS _ENUM - NShipster》</a>。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>本章主要整理<code>YYModel</code>整体框架以及开发者提供的接口，并没有涉及到内部实现。接下来的文章，我将会一步步分析源码实现。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/ibireme/YYModel" target="_blank" rel="external">Github - ibireme/YYModel</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.png" alt="Owenli WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.png" alt="Owenli Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/YYModel/" rel="tag">#YYModel</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/07/Python3进阶：高级特性二/" rel="next" title="Python3进阶：高级特性二">
+                <i class="fa fa-chevron-left"></i> Python3进阶：高级特性二
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/me.png"
+               alt="Owenli" />
+          <p class="site-author-name" itemprop="name">Owenli</p>
+          <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件结构"><span class="nav-number">2.</span> <span class="nav-text">文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#YYModel头文件"><span class="nav-number">2.1.</span> <span class="nav-text">YYModel头文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#YYClassInfo"><span class="nav-number">2.2.</span> <span class="nav-text">YYClassInfo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSObject-YYModel"><span class="nav-number">2.3.</span> <span class="nav-text">NSObject + YYModel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSObject分类"><span class="nav-number">2.3.1.</span> <span class="nav-text">NSObject分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSArray分类"><span class="nav-number">2.3.2.</span> <span class="nav-text">NSArray分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSDictionary分类"><span class="nav-number">2.3.3.</span> <span class="nav-text">NSDictionary分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YYModel协议"><span class="nav-number">2.3.4.</span> <span class="nav-text">YYModel协议</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他知识点"><span class="nav-number">3.</span> <span class="nav-text">其他知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NS-OPTIONS-amp-amp-NS-ENUM"><span class="nav-number">3.1.</span> <span class="nav-text">NS_OPTIONS && NS_ENUM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Owenli</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
