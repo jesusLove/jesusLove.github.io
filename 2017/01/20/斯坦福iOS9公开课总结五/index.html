@@ -1,0 +1,789 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Stanford iOS9," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言本课以上节课的代码为基础
+课程概要
+Interface Builder Demo在storyboard中，绘制和编写你的UIViews。
+The FaceViewController MVC`s Model
+Gestures获取手势输入。
+Demo: Modifying the facial expression滑动，轻拍，旋转等。
+Multiple MVCstabBar, Navigatio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="斯坦福iOS9公开课总结五:InterfaceBuilder">
+<meta property="og:url" content="https://jesusLove.github.io/2017/01/20/斯坦福iOS9公开课总结五/index.html">
+<meta property="og:site_name" content="紫电清霜">
+<meta property="og:description" content="前言本课以上节课的代码为基础
+课程概要
+Interface Builder Demo在storyboard中，绘制和编写你的UIViews。
+The FaceViewController MVC`s Model
+Gestures获取手势输入。
+Demo: Modifying the facial expression滑动，轻拍，旋转等。
+Multiple MVCstabBar, Navigatio">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-2b894475ec80e099.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-4534e08a0c62fb94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640">
+<meta property="og:updated_time" content="2017-12-28T03:36:49.796Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="斯坦福iOS9公开课总结五:InterfaceBuilder">
+<meta name="twitter:description" content="前言本课以上节课的代码为基础
+课程概要
+Interface Builder Demo在storyboard中，绘制和编写你的UIViews。
+The FaceViewController MVC`s Model
+Gestures获取手势输入。
+Demo: Modifying the facial expression滑动，轻拍，旋转等。
+Multiple MVCstabBar, Navigatio">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1363078-2b894475ec80e099.gif?imageMogr2/auto-orient/strip">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://jesusLove.github.io/2017/01/20/斯坦福iOS9公开课总结五/"/>
+
+  <title> 斯坦福iOS9公开课总结五:InterfaceBuilder | 紫电清霜 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">紫电清霜</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                斯坦福iOS9公开课总结五:InterfaceBuilder
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-20T21:18:43+08:00" content="2017-01-20">
+              2017-01-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Stanford-iOS9-with-Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Stanford iOS9 with Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本课以上节课的代码为基础</p>
+<h1 id="课程概要"><a href="#课程概要" class="headerlink" title="课程概要"></a>课程概要</h1><ul>
+<li>Interface Builder Demo<br>在<code>storyboard</code>中，绘制和编写你的<code>UIViews</code>。</li>
+<li>The FaceViewController MVC`s Model</li>
+<li>Gestures<br>获取手势输入。</li>
+<li>Demo: Modifying the facial expression<br>滑动，轻拍，旋转等。</li>
+<li>Multiple MVCs<br>tabBar, Navigation and Split View Controllers</li>
+</ul>
+<h1 id="Interface-Builder-Demo"><a href="#Interface-Builder-Demo" class="headerlink" title="Interface Builder Demo"></a>Interface Builder Demo</h1><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>本课在上节课的<code>demo</code>基础上进行编写，如有疑问请看上篇文章。上节课完成笑脸的绘制，现在我们给笑脸加眉毛，实现原理跟画眼睛一样，主要是计算坐标位置。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     *  @brief 画眉毛</div><div class="line">     *</div><div class="line">     *  @param eye枚举类型，表示左右眼</div><div class="line">     *</div><div class="line">     *  @return 返回贝塞尔曲线</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">pathForBrow</span><span class="params">(eye: Eye)</span></span> -&gt; <span class="type">UIBezierPath</span> &#123;</div><div class="line">        <span class="keyword">var</span> tilt = eyeBrowTilt;</div><div class="line">        <span class="keyword">switch</span> eye &#123;</div><div class="line">        <span class="keyword">case</span> .<span class="type">Left</span>:</div><div class="line">            tilt *= -<span class="number">1.0</span></div><div class="line">        <span class="keyword">case</span> .<span class="type">Right</span>:</div><div class="line">            <span class="keyword">break</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">var</span> browCenter = getEyeCenter(eye: eye)</div><div class="line">        browCenter.y -= skullRadius / <span class="type">Ratios</span>.<span class="type">SkullRadiusToBrowOffset</span></div><div class="line">        <span class="keyword">let</span> eyeRadius = skullRadius / <span class="type">Ratios</span>.<span class="type">SkullRadiusToEyeRadius</span></div><div class="line">        <span class="keyword">let</span> tiltOffset = <span class="type">CGFloat</span>(<span class="built_in">max</span>(-<span class="number">1</span>, <span class="built_in">min</span>(tilt, <span class="number">1</span>))) * eyeRadius / <span class="number">2</span></div><div class="line">        <span class="keyword">let</span> browStart = <span class="type">CGPoint</span>(x: browCenter.x - eyeRadius, y: browCenter.y - tiltOffset)</div><div class="line">        <span class="keyword">let</span> browEnd = <span class="type">CGPoint</span>(x: browCenter.x + eyeRadius, y: browCenter.y + tiltOffset)</div><div class="line">        <span class="keyword">let</span> path = <span class="type">UIBezierPath</span>()</div><div class="line">        path.move(to: browStart)</div><div class="line">        path.addLine(to: browEnd)</div><div class="line">        path.lineWidth = lineWidth;</div><div class="line">        <span class="keyword">return</span> path</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>注意需要在<code>Ratios</code>中添加<code>SkullRadiusToBrowOffset</code>。另外，更新后的代码将一些变量定义为属性。例如：线条宽度，线条颜色，眉毛形状，眼睛，嘴巴形状等。</p>
+<h2 id="IBDesignable-amp-IBInspactable"><a href="#IBDesignable-amp-IBInspactable" class="headerlink" title="IBDesignable &amp; IBInspactable"></a>IBDesignable &amp; IBInspactable</h2><p><img src="http://upload-images.jianshu.io/upload_images/1363078-2b894475ec80e099.gif?imageMogr2/auto-orient/strip" alt="FaceIt.gif"></p>
+<p>从上节课知道，我们明明是在<code>FaceView</code>绘制的笑脸，为什么能够在 <code>storyboard</code>中显示，并且属性还可以在<code>面板</code>中更改。这里就需要使用<code>IBDesignable</code>和<code>IBInspactable</code>。通过将<code>@IBDesignable</code>添加到<code>FaceView</code>前，可以使<code>FaceView</code>显示在<code>Interface Builder</code>中。通过将<code>@IBInspectable</code>添加在每个属性前，可以在<code>Interface Builder</code>中显示属性。</p>
+<h3 id="IBDesignable"><a href="#IBDesignable" class="headerlink" title="IBDesignable"></a>IBDesignable</h3><p><code>IBDesignable</code>在<code>Xcode6</code>亮相。当应用到<code>UIView</code>或<code>NSView</code>子类中的时候，<code>@IBDesignable</code>让<code>Interface Builder</code>直接渲染视图。每次更改完视图不必编译运行就可以直接显示。<br>使用很简单只要在类名前添加<code>@IBDesignable</code>前缀（Objective-C里的IB_DESIGNABLE宏）。<br>此外，一些问题可以避免在编译和运行整个程序来调试。调试方法，在代码中设置断点，在<code>Interface Builder</code>中选择视图，并选择<strong>Editor -&gt; Debug Selected Views</strong>。</p>
+<p>有时我们需要使用模拟数据，可以使用方法：</p>
+<ul>
+<li>prepareForInterfaceBuilder(): 此方法与你代码的其余部分一起编译，但只有当视图正在准备在 Interface Builder 显示时执行。</li>
+<li>TARGET_INTERFACE_BUILDER：#if TARGET_INTERFACE_BUILDER<br>预处理宏在 Objective-C 或 Swift 下都是工作的，它会视情况编译正确代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">if</span> !TARGET_INTERFACE_BUILDER </span></div><div class="line">    <span class="comment">// this code will run in the app itself</span></div><div class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></div><div class="line">    <span class="comment">// this code will execute only in IB</span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
+<h3 id="IBInspectable"><a href="#IBInspectable" class="headerlink" title="IBInspectable"></a>IBInspectable</h3><p>IBInspectable属性提供了访问自定义运行时属性的方法。在<code>Identity inspector</code>中访问。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-4534e08a0c62fb94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="identity inspector.png"></p>
+<h2 id="FacialExpression"><a href="#FacialExpression" class="headerlink" title="FacialExpression"></a>FacialExpression</h2><p>上面我们已经设计<code>FaceView(View)</code>,现在我们来设计<code>FacialExpression(Model)</code>。以下是<code>FacialExpression</code>全部代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">FacialExpression</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="comment">// 眼睛样式</span></div><div class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">Eyes</span>: <span class="title">Int</span> </span>&#123;</div><div class="line">        <span class="keyword">case</span> <span class="type">Open</span></div><div class="line">        <span class="keyword">case</span> <span class="type">Closed</span></div><div class="line">        <span class="keyword">case</span> <span class="type">Squinting</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">//眉毛样式</span></div><div class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">EyeBrows</span>: <span class="title">Int</span> </span>&#123;</div><div class="line">        <span class="keyword">case</span> <span class="type">Relaxed</span></div><div class="line">        <span class="keyword">case</span> <span class="type">Normal</span></div><div class="line">        <span class="keyword">case</span> <span class="type">Furrowed</span></div><div class="line">        </div><div class="line">        <span class="function"><span class="keyword">func</span> <span class="title">moreRelaxedBrow</span><span class="params">()</span></span> -&gt; <span class="type">EyeBrows</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="type">EyeBrows</span>(rawValue: rawValue - <span class="number">1</span>) ?? .<span class="type">Relaxed</span></div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">func</span> <span class="title">moreFurrowBrow</span><span class="params">()</span></span> -&gt; <span class="type">EyeBrows</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="type">EyeBrows</span>(rawValue: rawValue + <span class="number">1</span>) ?? .<span class="type">Furrowed</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//嘴巴样式</span></div><div class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">Mouth</span>: <span class="title">Int</span> </span>&#123;</div><div class="line">        <span class="keyword">case</span> <span class="type">Frown</span></div><div class="line">        <span class="keyword">case</span> <span class="type">Smirk</span></div><div class="line">        <span class="keyword">case</span> <span class="type">Neutral</span></div><div class="line">        <span class="keyword">case</span> <span class="type">Grin</span></div><div class="line">        <span class="keyword">case</span> <span class="type">Smile</span></div><div class="line">        <span class="function"><span class="keyword">func</span> <span class="title">sadderMouth</span><span class="params">()</span></span> -&gt; <span class="type">Mouth</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="type">Mouth</span>(rawValue: rawValue - <span class="number">1</span>) ?? .<span class="type">Frown</span></div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">func</span> <span class="title">happierMouth</span><span class="params">()</span></span> -&gt; <span class="type">Mouth</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="type">Mouth</span>(rawValue: rawValue + <span class="number">1</span>) ?? .<span class="type">Smile</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> eyes: <span class="type">Eyes</span></div><div class="line">    <span class="keyword">var</span> eyebrows: <span class="type">EyeBrows</span></div><div class="line">    <span class="keyword">var</span> mouth: <span class="type">Mouth</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="FaceViewController"><a href="#FaceViewController" class="headerlink" title="FaceViewController"></a>FaceViewController</h2><p>接下来实现<code>FaceViewController(Controller)</code>。在<code>Controller</code>中通过<code>Model</code>提供的数据更改<code>View</code>中的显示样式。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FaceViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line">    <span class="comment">//创建expression对象，当内容改变是更新UI</span></div><div class="line">    <span class="keyword">var</span> expression = <span class="type">FacialExpression</span>(eyes: .<span class="type">Closed</span>, eyebrows: .<span class="type">Normal</span>, mouth: .<span class="type">Smirk</span>) &#123;</div><div class="line">        <span class="keyword">didSet</span> &#123;</div><div class="line">            updateUI()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">//获取storyboard中的View</span></div><div class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> faceView: <span class="type">FaceView</span>! &#123;</div><div class="line">        <span class="keyword">didSet</span> &#123;</div><div class="line">            updateUI()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="keyword">var</span> mouthCurvature = [<span class="type">FacialExpression</span>.<span class="type">Mouth</span>.<span class="type">Frown</span>: -<span class="number">1.0</span>, .<span class="type">Grin</span>: <span class="number">0.5</span>, .<span class="type">Smile</span>: <span class="number">1.0</span>, .<span class="type">Smirk</span>: -<span class="number">0.5</span>, .<span class="type">Neutral</span>: <span class="number">0.0</span>]</div><div class="line">    <span class="keyword">private</span> <span class="keyword">var</span> eyeBrowTilts = [<span class="type">FacialExpression</span>.<span class="type">EyeBrows</span>.<span class="type">Relaxed</span>: <span class="number">0.5</span>, .<span class="type">Furrowed</span>: -<span class="number">0.5</span>, .<span class="type">Normal</span>: <span class="number">0.0</span>]</div><div class="line">    </div><div class="line">    <span class="comment">//更新UI, 眼睛，眉毛，嘴巴</span></div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">updateUI</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">switch</span> expression.eyes &#123;</div><div class="line">        <span class="keyword">case</span> .<span class="type">Open</span>:</div><div class="line">            faceView.eyeOpen = <span class="literal">true</span></div><div class="line">        <span class="keyword">case</span> .<span class="type">Closed</span>:</div><div class="line">            faceView.eyeOpen = <span class="literal">false</span></div><div class="line">        <span class="keyword">case</span> .<span class="type">Squinting</span>:</div><div class="line">            faceView.eyeOpen = <span class="literal">false</span></div><div class="line">        &#125;</div><div class="line">        faceView.mouthCurvature = mouthCurvature[expression.mouth] ?? <span class="number">0.0</span></div><div class="line">        faceView.eyeBrowTilt = eyeBrowTilts[expression.eyebrows] ?? <span class="number">0.0</span></div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Guestures-amp-amp-Demo"><a href="#Guestures-amp-amp-Demo" class="headerlink" title="Guestures &amp;&amp; Demo"></a>Guestures &amp;&amp; Demo</h2><p>iOS系统在3.2以后，提供了一些常用手势：</p>
+<ul>
+<li>UITapGestureRecognizer(轻拍)</li>
+<li>UISwipeGestureRecognizer（轻扫）</li>
+<li>UIPinchGestureRecognizer（捏合）</li>
+<li>UIPanGestureRecognizer (拖动)</li>
+</ul>
+<blockquote>
+<p>拖动手势三个方法</p>
+<ul>
+<li>func translation(UIView) -&gt;CGPoint </li>
+<li>func setTranslation(CGPoint, UIView) //允许我们reset </li>
+<li>func velocity(UIView) -&gt; CGPoint  //移动速度(points/second)</li>
+</ul>
+</blockquote>
+<ul>
+<li>UIRotationGestureRecognizer (旋转)</li>
+<li>UILongPressGestureRecognizer （长按）<br>另外，我们可以通过UIGestureRecognizer类，实现自定义的手势。</li>
+</ul>
+<p>在<code>UIGestureRecognizer</code>类中，提供<code>state</code>如下：<br><code>possible</code>, <code>began</code>,<code>changed</code>,<code>ended</code>,<code>cancelled</code>,<code>failed</code>。</p>
+<p>Demo中，只添加了捏合，轻扫，轻拍手势。其他手势自行练习。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取storyboard中的View</span></div><div class="line">    @IBOutlet weak <span class="selector-tag">var</span> faceView: FaceView! &#123;</div><div class="line">        didSet &#123;</div><div class="line">            <span class="comment">// 捏合手势，缩放笑脸大小</span></div><div class="line">            faceView.addGestureRecognizer(UIPinchGestureRecognizer(target: faceView, action: #selector(FaceView.changeScale(recognizer:))))</div><div class="line">            </div><div class="line">            <span class="comment">//轻扫手势，向上笑脸</span></div><div class="line">            let happierSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(FaceViewController.increaseHappiness))</div><div class="line">            happierSwipeGestureRecognizer<span class="selector-class">.direction</span> = <span class="selector-class">.up</span></div><div class="line">            faceView.addGestureRecognizer(happierSwipeGestureRecognizer)</div><div class="line">            </div><div class="line">            <span class="comment">//向下哭脸</span></div><div class="line">            let sadderSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(FaceViewController.reduceSadder))</div><div class="line">            sadderSwipeGestureRecognizer<span class="selector-class">.direction</span> = <span class="selector-class">.down</span></div><div class="line">            faceView.addGestureRecognizer(sadderSwipeGestureRecognizer)</div><div class="line">            </div><div class="line">            updateUI()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"> <span class="comment">// 添加轻拍手势，更改眼睛形状, 通过在Interface Builder中添加手势</span></div><div class="line">    @IBAction func toggleEyes(_ recognizer: UITapGestureRecognizer) &#123;</div><div class="line">        <span class="keyword">if</span> recognizer<span class="selector-class">.state</span> == <span class="selector-class">.ended</span> &#123;</div><div class="line">            switch expression<span class="selector-class">.eyes</span> &#123;</div><div class="line">            case <span class="selector-class">.Closed</span>:</div><div class="line">                expression<span class="selector-class">.eyes</span> = <span class="selector-class">.Open</span></div><div class="line">            case <span class="selector-class">.Open</span>:</div><div class="line">                expression<span class="selector-class">.eyes</span> = <span class="selector-class">.Closed</span></div><div class="line">            case <span class="selector-class">.Squinting</span>:</div><div class="line">                break</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    func increaseHappiness() &#123;</div><div class="line">        expression<span class="selector-class">.mouth</span> = expression<span class="selector-class">.mouth</span><span class="selector-class">.happierMouth</span>()</div><div class="line">    &#125;</div><div class="line">    func reduceSadder() &#123;</div><div class="line">        expression<span class="selector-class">.mouth</span> = expression<span class="selector-class">.mouth</span><span class="selector-class">.sadderMouth</span>()</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="Multiple-MVC-s"><a href="#Multiple-MVC-s" class="headerlink" title="Multiple MVC`s"></a>Multiple MVC`s</h2><ul>
+<li>UITabBarViewController</li>
+<li>UINavigationViewController</li>
+<li>UISplitViewController</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>英语水平有限，如有错误，欢迎指正。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.png" alt="Owenli WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.png" alt="Owenli Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Stanford-iOS9/" rel="tag">#Stanford iOS9</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/10/Git克隆提交出现“ssh-connect-to-host-github-com-port-22-Operation-timed-out-fatal”/" rel="next" title="Git克隆提交出现“ssh: connect to host github.com port 22: Operation timed out fatal”问题">
+                <i class="fa fa-chevron-left"></i> Git克隆提交出现“ssh: connect to host github.com port 22: Operation timed out fatal”问题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/18/你真的了解Git和Github吗？/" rel="prev" title="你真的了解Git和Github吗？">
+                你真的了解Git和Github吗？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/me.png"
+               alt="Owenli" />
+          <p class="site-author-name" itemprop="name">Owenli</p>
+          <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#课程概要"><span class="nav-number">2.</span> <span class="nav-text">课程概要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Interface-Builder-Demo"><span class="nav-number">3.</span> <span class="nav-text">Interface Builder Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">3.1.</span> <span class="nav-text">补充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IBDesignable-amp-IBInspactable"><span class="nav-number">3.2.</span> <span class="nav-text">IBDesignable & IBInspactable</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IBDesignable"><span class="nav-number">3.2.1.</span> <span class="nav-text">IBDesignable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IBInspectable"><span class="nav-number">3.2.2.</span> <span class="nav-text">IBInspectable</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FacialExpression"><span class="nav-number">3.3.</span> <span class="nav-text">FacialExpression</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FaceViewController"><span class="nav-number">3.4.</span> <span class="nav-text">FaceViewController</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Guestures-amp-amp-Demo"><span class="nav-number">3.5.</span> <span class="nav-text">Guestures && Demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiple-MVC-s"><span class="nav-number">3.6.</span> <span class="nav-text">Multiple MVC`s</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">3.7.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Owenli</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

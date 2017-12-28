@@ -1,0 +1,1004 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="网络," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="2015WWDC最近在恶补iOS网络相关的知识，所以从WWDC入手，本文是WWDC2015网络部分讲座，学习笔记方便日后复习，后续内容会陆续以笔记的形式发布。欢迎大家一起学习😆！
+网络和URL会话（Networking with NSURLSession）
+主要内容
+
+网络传输安全问题
+URLSession添加了哪些新特性
+URLSession API变化
+
+视频地址: Networking">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS网络更新WWDC">
+<meta property="og:url" content="https://jesusLove.github.io/2017/09/01/iOS网络更新WWDC/index.html">
+<meta property="og:site_name" content="紫电清霜">
+<meta property="og:description" content="2015WWDC最近在恶补iOS网络相关的知识，所以从WWDC入手，本文是WWDC2015网络部分讲座，学习笔记方便日后复习，后续内容会陆续以笔记的形式发布。欢迎大家一起学习😆！
+网络和URL会话（Networking with NSURLSession）
+主要内容
+
+网络传输安全问题
+URLSession添加了哪些新特性
+URLSession API变化
+
+视频地址: Networking">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-daf458fb4a9dabc2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-563de33222f98d19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-19dba3fc09b13527.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-43170761dd8a8b3c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-f86a9e9ad67514de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-8823c8e9ba98525e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-50960ed5d24a9df3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-df15063922a80931.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-0054f4cc0db05f51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-d6212837489a4991.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-640b96ef48128af2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-8b41d79be824ef34.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-8fb49ec7af5ddd5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-c668fac86e65311b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-75569253a349ac6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-9d7982950b69393f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-d0ed407dac3b8d88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-adfeae454d590f14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-6fb43dc5d989ea39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-81788cb55d81cfee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-28T04:17:35.036Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS网络更新WWDC">
+<meta name="twitter:description" content="2015WWDC最近在恶补iOS网络相关的知识，所以从WWDC入手，本文是WWDC2015网络部分讲座，学习笔记方便日后复习，后续内容会陆续以笔记的形式发布。欢迎大家一起学习😆！
+网络和URL会话（Networking with NSURLSession）
+主要内容
+
+网络传输安全问题
+URLSession添加了哪些新特性
+URLSession API变化
+
+视频地址: Networking">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1363078-daf458fb4a9dabc2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://jesusLove.github.io/2017/09/01/iOS网络更新WWDC/"/>
+
+  <title> iOS网络更新WWDC | 紫电清霜 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">紫电清霜</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS网络更新WWDC
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-09-01T12:13:04+08:00" content="2017-09-01">
+              2017-09-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/WWDC/" itemprop="url" rel="index">
+                    <span itemprop="name">WWDC</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/1363078-daf458fb4a9dabc2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h1 id="2015WWDC"><a href="#2015WWDC" class="headerlink" title="2015WWDC"></a>2015WWDC</h1><p>最近在恶补iOS网络相关的知识，所以从WWDC入手，本文是WWDC2015网络部分讲座，学习笔记方便日后复习，后续内容会陆续以笔记的形式发布。欢迎大家一起学习😆！</p>
+<p><strong>网络和URL会话（Networking with NSURLSession）</strong></p>
+<p>主要内容</p>
+<ul>
+<li>网络传输安全问题</li>
+<li>URLSession添加了哪些新特性</li>
+<li>URLSession API变化</li>
+</ul>
+<p>视频地址: <strong><a href="https://developer.apple.com/videos/play/wwdc2015/711/" target="_blank" rel="external">Networking with NSURLSession</a></strong></p>
+<h2 id="1-网络传输安全问题"><a href="#1-网络传输安全问题" class="headerlink" title="1 网络传输安全问题"></a>1 网络传输安全问题</h2><h3 id="1-1-URL会话和HTTP协议的背景"><a href="#1-1-URL会话和HTTP协议的背景" class="headerlink" title="1.1 URL会话和HTTP协议的背景"></a>1.1 URL会话和HTTP协议的背景</h3><p><strong>URLSession</strong></p>
+<ul>
+<li>URLSession是一个网络API，主要用于从网站下载HTTP内容。</li>
+<li>大量的委托方法（Delegate），可以用来处理认证或者其他重要的事情</li>
+<li>另外，可以在没有后台下载API的情况下做网络层任务</li>
+</ul>
+<p><strong>HTTP/HTTPS</strong></p>
+<p>HTTP使用明码（cleartext）进行数据传输，存在安全问题。HTTPS解决了HTTP的安全问题，HTTPS的本质是HTTP的上一层协议，属于传输层安全协议，传输层安全协议会通过公钥密码学方式进行一个多点的信号交换之后，创建一个安全的连接。</p>
+<p>所谓的安全性是基于三个属性来讲的：</p>
+<ul>
+<li>Encryption(加密)：网络上传输的数据是被加密过的。</li>
+<li>Integrity（完整）：提供消息完整性参数，所以消息在检测之前是不可修改的</li>
+<li>Authentication（验证）：支持身份验证，可以验证对话对象</li>
+</ul>
+<p>关于HTTP1.1和HTTP2的详情内容请看【<strong><a href="http://www.jianshu.com/p/5db20e9cc714" target="_blank" rel="external">从 HTTP1.x 到 HTTP 2.0 变迁</a></strong>】</p>
+<h3 id="1-2-App-Transport-Security"><a href="#1-2-App-Transport-Security" class="headerlink" title="1.2 App Transport Security"></a>1.2 App Transport Security</h3><p>App Transport Security（ATS） 是iOS9的一个新功能，从本质上讲其核心是防止用户的个人隐私数据被意外泄露。ATS加强了URL会话的默认方法。</p>
+<p>什么是ATS？</p>
+<ul>
+<li><p>不允许明码HTTP进行加载，只使用HTTPS连接，对TLS进行了限制，其中密码组合，信任证书，证书密钥的大小等都是作为限制条件。</p>
+</li>
+<li><p>通过info.plist进行配置ATS<br><img src="http://upload-images.jianshu.io/upload_images/1363078-563de33222f98d19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ATS配置.png"></p>
+</li>
+</ul>
+<ul>
+<li>在特殊情况下ATS也可以加载HTTP，需要配置<code>NSExceptionDomains</code>,将特殊的URL地址添加到里面</li>
+<li>另外，可以设置<code>NSAllowsArbitraryLoads = YES</code>，这时ATS可以加载HTTP和HTTPS。可以对特定资源进行保护<code>NSExceptionAllowsInsecureHTTPLoads = NO</code>。</li>
+</ul>
+<h2 id="1-3-URLSession添加了哪些新的协议"><a href="#1-3-URLSession添加了哪些新的协议" class="headerlink" title="1.3 URLSession添加了哪些新的协议"></a>1.3 URLSession添加了哪些新的协议</h2><p>URLSession支持HTTP/2协议。</p>
+<p>为什么需要HTTP/2,HTTP/1.1有什么问题？</p>
+<p>HTTP/1.1的问题</p>
+<ul>
+<li>每一个TCP连接只有一个优先请求</li>
+<li>HTTP管道并不适用于所有的服务器或网络，大多数主流网页浏览器都是禁止的。</li>
+<li>多个连接，增加服务器资源开销</li>
+<li>缺少头压缩</li>
+</ul>
+<p>HTTP/2协议的重要的功能？</p>
+<ul>
+<li>HTTP/2仅支持一台主机开放一个TCP连接，减少服务器资源开销</li>
+<li>HTTP/2完全多路复用，多个请求合并到同一个TCP连接中</li>
+<li>HTTP/2有请求优先级，所以重要资源可以优先提供给有用更高权限的客户端。</li>
+<li>HTTP/2是一个二进制协议，数据处理和解析速度更快</li>
+<li>HTTP/2使用<code>HPACK</code>头压缩机制，HTTP/1.1没有头压缩</li>
+</ul>
+<p>HTTP/2多路复用如何解决队首阻塞问题？</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-19dba3fc09b13527.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="HTTP:2解决队首阻塞问题.png"></p>
+<p>HTTP/2的头压缩机制（HPACK）</p>
+<p><code>HPACK</code>基于两个表静态表和动态表。静态表中包含常用的HTTP信息头并且不可修改，动态表可以通过指针应用静态表内容。</p>
+<p>HTTP/2协议在程序中的适配性？</p>
+<p>HTTP/2被无缝集成到URLSession的API中，只需要支持HTTP/2的服务器。</p>
+<h2 id="1-4-URLSession-API变化"><a href="#1-4-URLSession-API变化" class="headerlink" title="1.4 URLSession API变化"></a>1.4 URLSession API变化</h2><p><strong>HTTPCookieStorage</strong></p>
+<p>分享cookie在APPs和扩展之间</p>
+<ul>
+<li>默认情况下，APP和扩展的cookie存在不同的位置。</li>
+<li>可以使用程序组来访问共享数据存储其，这些存储器无论APP还是扩展都可以访问。</li>
+<li>HTTPCookieStorage可以创建一个与组存储器相关的cookie存储。</li>
+</ul>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> <span class="attr">ident</span> = <span class="string">"group.mycompany.mygroupname"</span></div><div class="line"><span class="keyword">let</span> <span class="attr">cookieStorage</span> = HTTPCookieStorage.sharedCookieStorage(forGroupContainerIdentifier: ident)</div><div class="line"><span class="keyword">let</span> <span class="attr">config</span> = URLSessionConfiguration.default</div><div class="line">        config.<span class="attr">httpCookieStorage</span> = cookieStorage</div><div class="line"><span class="keyword">let</span> <span class="attr">session</span> = URLSession(configuration: config)</div></pre></td></tr></table></figure>
+<p>创建一个cookieStorage，所有的操作都会被存到这个cookie组中。</p>
+<p><strong>URLSessionStreamTask</strong> </p>
+<p>在底层提取文件直接在TCP连接上。</p>
+<p>相对NSInputStream和NSOutputStream的优点</p>
+<ul>
+<li>异步读写接口，只需设置一个委托监听事件。</li>
+<li>自动通过HTTP代理</li>
+</ul>
+<p>支持TCP/IP连接</p>
+<ul>
+<li>可以通过主机名和端口号创建一个连接 </li>
+</ul>
+<h2 id="2-补充"><a href="#2-补充" class="headerlink" title="2. 补充"></a>2. 补充</h2><h3 id="2-1-知识点"><a href="#2-1-知识点" class="headerlink" title="2.1 知识点"></a>2.1 知识点</h3><ul>
+<li><strong>TLS</strong> ： 传输层安全协议（Transport Layer Security），及其前身<strong>安全套接触</strong>（Secure Sockert Layer, SSL）是一种安全协议，目的是为互联网通信，提供安全及数据完整性保障。</li>
+<li><strong>HPACK</strong> : 是HTTP/2的一个算法，用于HTTP头部压缩。</li>
+</ul>
+<h2 id="3-Reference"><a href="#3-Reference" class="headerlink" title="3 Reference"></a>3 Reference</h2><ul>
+<li><a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/URLLoadingSystem/URLLoadingSystem.html" target="_blank" rel="external">URLSession Programming Guide</a></li>
+<li><a href="https://developer.apple.com/library/content/documentation/NetworkingInternetWeb/Conceptual/NetworkingOverview/Introduction/Introduction.html#//apple_ref/doc/uid/TP40010220-CH12-BBCFIHFH" target="_blank" rel="external">About Networking</a></li>
+<li><a href="https://developer.apple.com/documentation/foundation/urlsessionconfiguration" target="_blank" rel="external">URLSessionConfiguration</a></li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-43170761dd8a8b3c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h1 id="2017WWDC"><a href="#2017WWDC" class="headerlink" title="2017WWDC"></a>2017WWDC</h1><p>本文是WWDC2017网络部分讲座两个部分的学习笔记。本文是学习过程中的笔记方便日后复习，后续内容会陆续以笔记的形式发布。欢迎大家一起学习😆！</p>
+<h1 id="1-Advances-in-Networking-Part-1"><a href="#1-Advances-in-Networking-Part-1" class="headerlink" title="1. Advances in Networking Part 1"></a>1. Advances in Networking Part 1</h1><p>视频地址：<a href="">Advances in Networking Part 1</a><br>第一部分，介绍近几年工作中技术的更新。</p>
+<ul>
+<li>ECN(Explicit Congestion Notification）显式拥塞通知，是一个对网际协议和传输控制协议（TCP）的扩展，定义为RFC 3168。ECN允许拥塞控制的端对端通知而避免丢包。</li>
+<li>IPv6&amp;NAT64新兴的互联网协议</li>
+<li>iOS中网络堆栈的一些变化和一些可以网络扩展的新工具</li>
+<li>关于多路径协议介绍，iPhone是多路径设备。</li>
+</ul>
+<h2 id="1-1-ECN-显式拥塞通知"><a href="#1-1-ECN-显式拥塞通知" class="headerlink" title="1.1 ECN (显式拥塞通知)"></a>1.1 ECN (显式拥塞通知)</h2><p>ECN允许拥塞控制的端对端通知而避免丢包。通常情况下，TCP/IP 网络通过丢弃数据包来表明信道阻塞。在ECN成功协商的情况下，ECN感知路由器可以在IP头中设置一个标记来代替丢弃数据包，以表明阻塞即将发生。数据包的接收端回应发送端，发送端降低其传输速率，如同检测到丢包那样。</p>
+<h2 id="1-2-IPv6-NAT64"><a href="#1-2-IPv6-NAT64" class="headerlink" title="1.2 IPv6 / NAT64"></a>1.2 IPv6 / NAT64</h2><p>NAT64是一种IPv6转换机制，他通过一种网络地址转换（NAT）形式促成IPv6与IPv4主机之间的通信。<br>iOS开发中，使用高层的网络框架，例如URLSession、CFNetwork。避免单独使用IPv4地址。</p>
+<p>由于目前IPv4所占比重较大，所以服务器同时支持IPv6和IPv4，这种成为（Dual-Stack）双栈连接。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-f86a9e9ad67514de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Dual-Stack.png"></p>
+<p>对于仅支持IPv6的应用，不能使用IPv4地址。可以通过NAT64进行转换。<br><img src="http://upload-images.jianshu.io/upload_images/1363078-8823c8e9ba98525e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="NAT64.png"></p>
+<h2 id="1-3-User-Space-Networking（用户空间网络）"><a href="#1-3-User-Space-Networking（用户空间网络）" class="headerlink" title="1.3 User-Space Networking（用户空间网络）"></a>1.3 User-Space Networking（用户空间网络）</h2><p>网络栈演变（Network Stack）<br><img src="http://upload-images.jianshu.io/upload_images/1363078-50960ed5d24a9df3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="NetworkStackEvolution_1.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-df15063922a80931.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="NetworkStackEvolution_2.png"></p>
+<p>TCP/IPv6 从内核空间到用户空间。</p>
+<h2 id="1-4-Network-Extension"><a href="#1-4-Network-Extension" class="headerlink" title="1.4 Network Extension"></a>1.4 Network Extension</h2><p>NetworkExtension是在WWDC2015提出的，如下图：<br><img src="http://upload-images.jianshu.io/upload_images/1363078-0054f4cc0db05f51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="NetworkExtension.png"><br>在WWDC2015<a href="">What’s New in Network Extension and VPN</a>中，介绍了NetworkExtension。包含四个部分：</p>
+<ul>
+<li>NEVPNManager 允许配置设备上的VPN堆栈。</li>
+<li>NETunnelProvider 允许构建自己的VPN协议</li>
+<li>NEHotspotHelper 自定义设备如何验证Wi-Fi热点</li>
+<li>NEFilterProvider 允许建立一个安全的基于设备的内容过滤器</li>
+</ul>
+<p>新增APIs，Wi-Fi 配置和DNS 代理，如下图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-d6212837489a4991.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="NetworkExtensionNew.png"></p>
+<ul>
+<li>NEHotspotConfiguration：热点配置，例如，自动加入到智能相机的Wi-Fi中，而不需要输入密码等复杂操作。</li>
+</ul>
+<p>代码实现例子：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-640b96ef48128af2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="NetworkExtensionWiFiConfigurationAPI.png"></p>
+<ul>
+<li>NEDNSProxyProvider </li>
+</ul>
+<p>接收系统DNS查询信息，并处理他们。发送到选择的迭代解析器中，或者可以发送选择的协议中，例如，TLS或者HTTP。</p>
+<h2 id="1-5-多路径协议"><a href="#1-5-多路径协议" class="headerlink" title="1.5 多路径协议"></a>1.5 多路径协议</h2><p>场景：</p>
+<p>当我们在WiFi环境下进行数据传输，在逐渐远离WiFi环境，随着信号的减弱传输最终停止，检测到进入蜂窝网络或者重新进入WiFi环境，继续进行网络传输。</p>
+<p>上述场景看起来没问题，但是由于不知道何时会断开网络，所以需要保存传输状态并且增加了资源消耗和降低了传输效率。</p>
+<p><strong>Wi-Fi Assist </strong></p>
+<p>iOS9 出现Wi-Fi Assist目的解决上述问题。原理：当我们在Wi-Fi信号不理想的环境下Wi-Fi就被开启。</p>
+<p>触发时机：</p>
+<ul>
+<li>边缘Wi-Fi，比较Wi-Fi信号和蜂窝网络信号强弱（优胜劣汰）。</li>
+<li>Wi-Fi信号逐渐强于蜂窝网络信号。</li>
+</ul>
+<p>Wi-Fi Assist 已经集成到URLSession APIs中。</p>
+<p>参考视频：</p>
+<ul>
+<li><a href="">Your App and Next Generation Networks-WWDC 2015</a></li>
+<li><a href="">Networking for the Modern Internet - WWDC 2016</a></li>
+</ul>
+<p><strong>Multipath TCP (多路径协议）</strong></p>
+<p>多路径协议是专为移动网路设计的协议。由IEIF提出，提供了和TCP完全一样的服务，它是建立在TCP之上的，所以可以无缝对接。</p>
+<p>Multipath TCP (MPTCP - RFC 6824 “TCP Extension for Multipath Operation”)</p>
+<ul>
+<li>建立在TCP之上，可靠，拥塞控制。</li>
+<li>提供了Wi-Fi和蜂窝的无缝对接。</li>
+<li>帮助选择最佳的网络连接。</li>
+</ul>
+<p>Multipath TCP 实现</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-8b41d79be824ef34.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Multipath TCP.png"></p>
+<p>MPTCP在URLSession下方，当通过URLSession发送数据时经过MPTCP堆栈，MPTCP负责将这些数据规划，选择通过Wi-Fi或蜂窝网络发送。</p>
+<p>它是如何实现网络选择的？</p>
+<p>通过创建TCP子数据流实现的，TCP子数据流实际上是完整的TCP连接。MPTCP负责创建和销毁TCP子数据流，通过管理子数据流实现数据实时传输。</p>
+<p>在iOS 7 Siri已经实现了Multipath TCP。</p>
+<p><strong>Multipath TCP APIs</strong></p>
+<p>iOS 11 开放Multipath TCP API，使用它需要条件。</p>
+<blockquote>
+<p> 注意：需要服务器支持</p>
+</blockquote>
+<p>MPTCP两种模式</p>
+<ul>
+<li>Handover Model (交接模式) ： 提供可靠的长连接</li>
+<li>Interactive Model (交互模式) ： Siri使用的是交互模式，针对延迟敏连接感</li>
+</ul>
+<blockquote>
+<p>Handover Model (交接模式)</p>
+</blockquote>
+<p>数据连接从Wi-Fi到蜂窝网络切换，以及从蜂窝网络移回Wi-Fi。当Wi-Fi网络不好时，MPTCP会创建TCP子数据流，通过蜂窝网络传输数据，此时Wi-Fi子数据流未销毁。当Wi-Fi网络变好MPTCP会切换到Wi-Fi子数据流，并销毁蜂窝网络子数据流。</p>
+<p>注意：Wi-Fi Assist 对蜂窝数据设置了上限。达到上限停止使用。</p>
+<blockquote>
+<p>Interactive Model (交互模式)</p>
+</blockquote>
+<p>主要目的降低延迟，与交接模式不同的是在Wi-Fi网络变好，不会立即切换。</p>
+<p><strong>URLSessionConfiguration配置MPTCP</strong><br><img src="http://upload-images.jianshu.io/upload_images/1363078-8fb49ec7af5ddd5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="URLSession配置MPTCP"></p>
+<p>注意：还需要在Xcode中添加<code>Multipath</code>。</p>
+<h1 id="2-Advances-in-Networking-Part-2"><a href="#2-Advances-in-Networking-Part-2" class="headerlink" title="2. Advances in Networking Part 2"></a>2. Advances in Networking Part 2</h1><p>第二部内容：URLSession的新进展和新的API。</p>
+<h2 id="2-1-URLSession介绍"><a href="#2-1-URLSession介绍" class="headerlink" title="2.1  URLSession介绍"></a>2.1  URLSession介绍</h2><p>URLSession是易用的网络API，支持Apple所有平台，替代过时的NSURLConnection API。</p>
+<p>具体看<strong><a href="">2013&amp;2014-What’s New in Foundation Networking</a></strong></p>
+<h2 id="2-2-URLSession-Adaptable-Connectivity-API"><a href="#2-2-URLSession-Adaptable-Connectivity-API" class="headerlink" title="2.2 URLSession Adaptable Connectivity API"></a>2.2 URLSession Adaptable Connectivity API</h2><p>监控连接，通过开启它告诉URLSession，任务由于无法连接而失败，它应该等待与服务器的连接，而不是直接失败。</p>
+<p>开启方法：设置URLSessionConfiguration属性<code>var waitsForConnectivity: Bool</code>。</p>
+<p>新的URLSessionTaskDelegate方法 <code>urlSession(_:taskIsWaitingForConnectivity:)</code>只用在URLSession中配置打开才可以用，并且只会回调一次。</p>
+<p>示例代码：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-c668fac86e65311b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="URLSession配置waitConnectivity"></p>
+<h2 id="2-3-URLSessionTask-Scheduling-API"><a href="#2-3-URLSessionTask-Scheduling-API" class="headerlink" title="2.3 URLSessionTask Scheduling API"></a>2.3 URLSessionTask Scheduling API</h2><p><strong>Background URLSession</strong></p>
+<p>在APP未运行的状态下，上传和下载数据。</p>
+<p>后台APP刷新，什么是后台APP刷新，在APP未启动的时候，可以刷新数据减少启动时数据刷新等待时间。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-75569253a349ac6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BackgroundAPPRefreshAction"></p>
+<blockquote>
+<ol>
+<li>在APP运行时设置在后台APP刷新需要更新的数据</li>
+<li>APP关闭时，URLSessionTask更新数据</li>
+<li>打开APP，看到后台刷新的数据</li>
+</ol>
+</blockquote>
+<p>上述方法存在几个问题</p>
+<ul>
+<li>额外的launch影响电池寿命</li>
+<li>无法预知未来的变化，请求下来数据可能无用</li>
+<li>数据包大小问题</li>
+</ul>
+<p>为了解决上述问题，提出了URLSessionTask调度API。为URLSessionTask新属性<code>var earlistBeginDate:Date?</code>设置一个时间，允许任务准备好开始运行。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-9d7982950b69393f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="earlistBeginDate"></p>
+<p>添加这个属性上述后台APP刷新则变为：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-d0ed407dac3b8d88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Background APP Refresh"></p>
+<p>新的URLSessionTaskDelegate方法 <code>urlSession(_:task:willBeginDelayedRequest:completionHandler:)</code><br>当系统准备联网有机会改变请求。</p>
+<p>指定URLSessionTask的传输数据量，可以让系统更好的进行调度。</p>
+<p>URLSessionTask的两个新属性：</p>
+<ul>
+<li><code>var countOfBytesClientExpectsToSend: Int64</code></li>
+<li><code>var countOfBytesClientExpectsToReceive; Int64</code><br>给出最适当的值或者设定为<code>NSURLSessionTransferSizeUnknown</code>。</li>
+</ul>
+<p>下面看一下示例代码</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-adfeae454d590f14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-6fb43dc5d989ea39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="2-4-URLSession的改进"><a href="#2-4-URLSession的改进" class="headerlink" title="2.4 URLSession的改进"></a>2.4 URLSession的改进</h2><p>更新内容</p>
+<ol>
+<li>进度更新</li>
+<li>Brotli 压缩</li>
+<li>公开后缀列表更新</li>
+<li>URLSessionStreamTask和认证代理</li>
+</ol>
+<h3 id="2-4-1-URLSessionTask-Progress-Tracking"><a href="#2-4-1-URLSessionTask-Progress-Tracking" class="headerlink" title="2.4.1 URLSessionTask Progress Tracking"></a>2.4.1 URLSessionTask Progress Tracking</h3><p>旧的进度计算的API。</p>
+<p>UIRLSession API额外的工作。<br>键值观察设置：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">countOfBytesExpectedToReceive, countOfBytesReceived</div><div class="line">countOfBytesExpectedToSend, countOfBytesSent</div></pre></td></tr></table></figure>
+<p>不总是可用<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">countOfBytesExpectedToReceive</span></div><div class="line">countOfBytesExpectedToSend</div></pre></td></tr></table></figure></p>
+<h3 id="2-4-2-URLSessionTask-Adopts-ProgressReporting"><a href="#2-4-2-URLSessionTask-Adopts-ProgressReporting" class="headerlink" title="2.4.2 URLSessionTask Adopts ProgressReporting"></a>2.4.2 URLSessionTask Adopts ProgressReporting</h3><p>新的PregressReporting协议<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">URLSessionTask</span>: <span class="type">NSObject</span>,<span class="type">NSCopying</span>, <span class="type">ProgressReporting</span></span></div><div class="line"><span class="keyword">public</span> <span class="keyword">var</span> progress:Progress&#123;<span class="keyword">get</span>&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> fractionCompleted: <span class="built_in">Double</span> [<span class="number">0.0</span>,<span class="number">1.0</span>]</div><div class="line"></div><div class="line"><span class="comment">// 普通和指定的进度描述</span></div><div class="line"><span class="keyword">var</span> localizedDescription: String!</div><div class="line"><span class="keyword">var</span> localizedAdditionalDescription: String!</div></pre></td></tr></table></figure></p>
+<p>可以添加到UIProgressView或者NSProgressIndicator<br>通过使用父进度对象来进行多个任务<br>键值观察和Cocoa绑定</p>
+<p>URLSessionTask和Progress对象状态管理</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1363078-81788cb55d81cfee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3 id="2-4-3-URLSession-Brotli-Support"><a href="#2-4-3-URLSession-Brotli-Support" class="headerlink" title="2.4.3 URLSession Brotli Support"></a>2.4.3 URLSession Brotli Support</h3><p>Brotli数据压缩<br>Content-Encoding: br<br>Faster URL loads<br>Requires HTTPS(TLS)</p>
+<h3 id="2-4-4-URLSession-Public-Suffix-List"><a href="#2-4-4-URLSession-Public-Suffix-List" class="headerlink" title="2.4.4 URLSession Public Suffix List"></a>2.4.4 URLSession Public Suffix List</h3><h3 id="2-4-5-URLSessionStreamTask"><a href="#2-4-5-URLSessionStreamTask" class="headerlink" title="2.4.5 URLSessionStreamTask"></a>2.4.5 URLSessionStreamTask</h3><ul>
+<li>允许直接TCP/IP连接</li>
+<li>可选安全握手</li>
+<li>转换能力 NSInputStream/NSOutputStream </li>
+<li>建议新代码中使用 URLSessionStreamTask</li>
+<li>验证HTTPS代理的导航</li>
+</ul>
+<p>##3 拓展</p>
+<p><strong>TLS</strong> ： 传输层安全协议（Transport Layer Security），及其前身<strong>安全套接触</strong>（Secure Sockert Layer, SSL）是一种安全协议，目的是为互联网通信，提供安全及数据完整性保障。</p>
+<p>Reference：</p>
+<ul>
+<li><a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/URLLoadingSystem/URLLoadingSystem.html" target="_blank" rel="external">URLSession Programming Guide</a></li>
+<li><a href="https://developer.apple.com/library/content/documentation/NetworkingInternetWeb/Conceptual/NetworkingOverview/Introduction/Introduction.html#//apple_ref/doc/uid/TP40010220-CH12-BBCFIHFH" target="_blank" rel="external">About Networking</a></li>
+<li><a href="https://developer.apple.com/documentation/foundation/urlsessionconfiguration" target="_blank" rel="external">URLSessionConfiguration</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.png" alt="Owenli WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.png" alt="Owenli Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络/" rel="tag">#网络</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/07/Python3进阶：高级特性二/" rel="next" title="Python3进阶：高级特性二">
+                <i class="fa fa-chevron-left"></i> Python3进阶：高级特性二
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/17/Alamofire源码笔记/" rel="prev" title="Alamofire源码笔记">
+                Alamofire源码笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/me.png"
+               alt="Owenli" />
+          <p class="site-author-name" itemprop="name">Owenli</p>
+          <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2015WWDC"><span class="nav-number">1.</span> <span class="nav-text">2015WWDC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-网络传输安全问题"><span class="nav-number">1.1.</span> <span class="nav-text">1 网络传输安全问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-URL会话和HTTP协议的背景"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 URL会话和HTTP协议的背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-App-Transport-Security"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 App Transport Security</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-URLSession添加了哪些新的协议"><span class="nav-number">1.2.</span> <span class="nav-text">1.3 URLSession添加了哪些新的协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-URLSession-API变化"><span class="nav-number">1.3.</span> <span class="nav-text">1.4 URLSession API变化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-补充"><span class="nav-number">1.4.</span> <span class="nav-text">2. 补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-知识点"><span class="nav-number">1.4.1.</span> <span class="nav-text">2.1 知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Reference"><span class="nav-number">1.5.</span> <span class="nav-text">3 Reference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017WWDC"><span class="nav-number">2.</span> <span class="nav-text">2017WWDC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Advances-in-Networking-Part-1"><span class="nav-number">3.</span> <span class="nav-text">1. Advances in Networking Part 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-ECN-显式拥塞通知"><span class="nav-number">3.1.</span> <span class="nav-text">1.1 ECN (显式拥塞通知)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-IPv6-NAT64"><span class="nav-number">3.2.</span> <span class="nav-text">1.2 IPv6 / NAT64</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-User-Space-Networking（用户空间网络）"><span class="nav-number">3.3.</span> <span class="nav-text">1.3 User-Space Networking（用户空间网络）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-Network-Extension"><span class="nav-number">3.4.</span> <span class="nav-text">1.4 Network Extension</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-多路径协议"><span class="nav-number">3.5.</span> <span class="nav-text">1.5 多路径协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Advances-in-Networking-Part-2"><span class="nav-number">4.</span> <span class="nav-text">2. Advances in Networking Part 2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-URLSession介绍"><span class="nav-number">4.1.</span> <span class="nav-text">2.1  URLSession介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-URLSession-Adaptable-Connectivity-API"><span class="nav-number">4.2.</span> <span class="nav-text">2.2 URLSession Adaptable Connectivity API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-URLSessionTask-Scheduling-API"><span class="nav-number">4.3.</span> <span class="nav-text">2.3 URLSessionTask Scheduling API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-URLSession的改进"><span class="nav-number">4.4.</span> <span class="nav-text">2.4 URLSession的改进</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1-URLSessionTask-Progress-Tracking"><span class="nav-number">4.4.1.</span> <span class="nav-text">2.4.1 URLSessionTask Progress Tracking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2-URLSessionTask-Adopts-ProgressReporting"><span class="nav-number">4.4.2.</span> <span class="nav-text">2.4.2 URLSessionTask Adopts ProgressReporting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-3-URLSession-Brotli-Support"><span class="nav-number">4.4.3.</span> <span class="nav-text">2.4.3 URLSession Brotli Support</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-4-URLSession-Public-Suffix-List"><span class="nav-number">4.4.4.</span> <span class="nav-text">2.4.4 URLSession Public Suffix List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-5-URLSessionStreamTask"><span class="nav-number">4.4.5.</span> <span class="nav-text">2.4.5 URLSessionStreamTask</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Owenli</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
