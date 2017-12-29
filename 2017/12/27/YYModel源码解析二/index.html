@@ -119,7 +119,7 @@ JSON转Model
 <meta property="og:image" content="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/YYModel/JSON-%3EDictionary-%3EModel.png">
 <meta property="og:image" content="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/YYModel/YYModelFlow.png">
 <meta property="og:image" content="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/YYModel/Model-%3EJSON.png">
-<meta property="og:updated_time" content="2017-12-29T02:24:42.219Z">
+<meta property="og:updated_time" content="2017-12-29T02:40:37.351Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从YYModel源码中可以学到什么：后篇">
 <meta name="twitter:description" content="前言上一篇中《从YYModel源码中可以学到什么：后篇》中主要学习了YYModel的源码结构，只是分享了YYModel整体结构。
@@ -401,7 +401,7 @@ JSON转Model
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取到字典的键值对，和上下文信息。</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> ModelSetWithDictionaryFunction(<span class="keyword">const</span> <span class="keyword">void</span> *_key, <span class="keyword">const</span> <span class="keyword">void</span> *_value, <span class="keyword">void</span> *_context) &#123;</div><div class="line">    <span class="comment">// 上下文，包含模型元，模型实例，字典</span></div><div class="line">    ModelSetContext *context = _context;</div><div class="line">    <span class="comment">//模型元</span></div><div class="line">    __<span class="keyword">unsafe_unretained</span> _YYModelMeta *meta = (__bridge _YYModelMeta *)(context-&gt;modelMeta);</div><div class="line">    <span class="comment">//在模型元属性字典中查找键值为key的属性</span></div><div class="line">    __<span class="keyword">unsafe_unretained</span> _YYModelPropertyMeta *propertyMeta = [meta-&gt;_mapper objectForKey:(__bridge <span class="keyword">id</span>)(_key)];</div><div class="line">    <span class="comment">// 模型实例</span></div><div class="line">    __<span class="keyword">unsafe_unretained</span> <span class="keyword">id</span> model = (__bridge <span class="keyword">id</span>)(context-&gt;model);</div><div class="line">    <span class="comment">// 核心内容，遍历所有的属性元。知道_next = nil</span></div><div class="line">    <span class="keyword">while</span> (propertyMeta) &#123;</div><div class="line">        <span class="keyword">if</span> (propertyMeta-&gt;_<span class="keyword">setter</span>) &#123;</div><div class="line">        		<span class="comment">// 最终转换（高潮）</span></div><div class="line">            ModelSetValueForProperty(model, (__bridge __<span class="keyword">unsafe_unretained</span> <span class="keyword">id</span>)_value, propertyMeta);</div><div class="line">        &#125;</div><div class="line">        propertyMeta = propertyMeta-&gt;_next;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>该方法主要任务是，遍历所有的属性元，调用模型属性赋值方法<code>ModelSetValueForProperty</code>。</p>
 <p>最终实现。也就是<code>YYModel</code>的最最最核心的部分。不过，这个方法长的离谱。由于涉及到较多的编码类型，需要对不同的类型区分处理，导致代码过长。</p>
-<p>由于<code>ModelSetValueForPorperty</code>代码较长，这里不再复制代码。只梳理一下实现的逻辑，注释代码在<a href="">Github</a>自行查阅。</p>
+<p>由于<code>ModelSetValueForPorperty</code>代码较长，这里不再复制代码。只梳理一下实现的逻辑，注释代码在<a href="https://github.com/jesusLove/Owenli_Blog/tree/master/Content/Code/YYModelCode" target="_blank" rel="external">Github</a>自行查阅。</p>
 <ul>
 <li>元类型，<code>isCNumber</code>, <code>nsType</code>和其他类型来区分处理。</li>
 <li><code>isCNumber</code>此时调用方法<code>ModelSetNumberToPorperty</code>。该方法将NSNumber类型的值根据不同的编码赋值给属性。</li>
@@ -430,7 +430,7 @@ JSON转Model
 <li>根据参数类型进行处理，NSString, NSNumber直接返回数据；字典，集合，数组类型，需要遍历所有元素递归处理；最后处理对象类型。</li>
 <li>返回不同类型的处理结果</li>
 </ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>承接上文，本文对JSON转Model主线路进行详细的分析，关于一些辅助功能没有分析。还有，一些代码比较长，由于篇幅限制，所以注释代码放在<a href="">《GitHub》</a>。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>承接上文，本文对JSON转Model主线路进行详细的分析，关于一些辅助功能没有分析。还有，一些代码比较长，由于篇幅限制，所以注释代码放在<a href="https://github.com/jesusLove/Owenli_Blog/tree/master/Content/Code/YYModelCode" target="_blank" rel="external">《GitHub》</a>。</p>
 <p>由于笔者能力有限，不可避免的出现错误，欢迎大家指正。</p>
 
       
