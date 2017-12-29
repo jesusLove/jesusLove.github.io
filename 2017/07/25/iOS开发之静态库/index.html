@@ -112,7 +112,7 @@
 库的分类？开源库
 公开源代码，别人可以看到，例如：MJExtension，MJRefresh等。
 闭源库">
-<meta property="og:updated_time" content="2017-12-28T04:22:50.661Z">
+<meta property="og:updated_time" content="2017-12-29T03:04:57.998Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS开发之静态库">
 <meta name="twitter:description" content="前言相信很多人都是用过库，Github上有很多优秀的开源库。如果我们不想暴露源代码还希望提过给他人使用，这就需要闭源库。通过将代码打包，分发给使用者。既方便使用者，也不会泄露核心代码。接下来我们看看如何打包库吧！
@@ -396,9 +396,10 @@
 <li><code>.a + .h + soucreFile = .framework</code></li>
 <li>建议使用<code>.framework</code></li>
 </ol>
-<h2 id="Swift动态库"><a href="#Swift动态库" class="headerlink" title="Swift动态库"></a>Swift动态库</h2><blockquote>
-<p>Swift 不支持静态库，创建.framework类型的动态库。注意在使用的时候需要手动引入。 </p>
-</blockquote>
+<h2 id="Swift动态库"><a href="#Swift动态库" class="headerlink" title="Swift动态库"></a>Swift动态库</h2><p><del>Swift 不支持静态库，创建.framework类型的动态库。注意在使用的时候需要手动引入</del></p>
+<h1 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h1><p>在Xcode 9中，Swift对静态库实现原生支持。</p>
+<p>关于静态库可以参考这篇文章</p>
+<p><a href="https://zhuanlan.zhihu.com/p/32178522?group_id=926848741735350272&amp;from=groupmessage&amp;isappinstalled=0" target="_blank" rel="external">即刻Swift静态库实践</a></p>
 
       
     </div>
@@ -613,7 +614,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#静态库基本概念"><span class="nav-number">2.</span> <span class="nav-text">静态库基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是库？"><span class="nav-number">2.1.</span> <span class="nav-text">什么是库？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#库的分类？"><span class="nav-number">2.2.</span> <span class="nav-text">库的分类？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态库的存在形式？"><span class="nav-number">2.3.</span> <span class="nav-text">静态库的存在形式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态库的存在形式？"><span class="nav-number">2.4.</span> <span class="nav-text">动态库的存在形式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态库和动态库的区别？"><span class="nav-number">2.5.</span> <span class="nav-text">静态库和动态库的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态库应用场景？"><span class="nav-number">2.6.</span> <span class="nav-text">静态库应用场景？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态库的特点？"><span class="nav-number">2.7.</span> <span class="nav-text">静态库的特点？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#静态库的生成"><span class="nav-number">3.</span> <span class="nav-text">静态库的生成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#架构"><span class="nav-number">3.1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本"><span class="nav-number">3.2.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a和-framework的区别？"><span class="nav-number">3.3.</span> <span class="nav-text">.a和 .framework的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift动态库"><span class="nav-number">3.4.</span> <span class="nav-text">Swift动态库</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#静态库基本概念"><span class="nav-number">2.</span> <span class="nav-text">静态库基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是库？"><span class="nav-number">2.1.</span> <span class="nav-text">什么是库？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#库的分类？"><span class="nav-number">2.2.</span> <span class="nav-text">库的分类？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态库的存在形式？"><span class="nav-number">2.3.</span> <span class="nav-text">静态库的存在形式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态库的存在形式？"><span class="nav-number">2.4.</span> <span class="nav-text">动态库的存在形式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态库和动态库的区别？"><span class="nav-number">2.5.</span> <span class="nav-text">静态库和动态库的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态库应用场景？"><span class="nav-number">2.6.</span> <span class="nav-text">静态库应用场景？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态库的特点？"><span class="nav-number">2.7.</span> <span class="nav-text">静态库的特点？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#静态库的生成"><span class="nav-number">3.</span> <span class="nav-text">静态库的生成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#架构"><span class="nav-number">3.1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本"><span class="nav-number">3.2.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a和-framework的区别？"><span class="nav-number">3.3.</span> <span class="nav-text">.a和 .framework的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift动态库"><span class="nav-number">3.4.</span> <span class="nav-text">Swift动态库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更新"><span class="nav-number">4.</span> <span class="nav-text">更新</span></a></li></ol></div>
             
           </div>
         </section>
