@@ -1,18 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
+  
 
-<html class="theme-next mist">
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
 
 
 
@@ -32,50 +52,27 @@
 
 
 
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Stanford iOS9," />
@@ -84,26 +81,21 @@
 
 
 
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+  <link rel="alternate" href="/atom.xml" title="紫电清霜" type="application/atom+xml" />
 
 
 
 
 
 
-<meta name="description" content="前言
-在此之前就看到过斯坦福公开课《Developing iOS9 Apps With Swift》，一直没能静下心来认真学习。最近工作比较轻松时间充足，打算用两个月的时间，认真学习斯坦福iOS9开发视频。本文集，一方面通过视频可以学习Swift，另一方面通过记录笔记督促学习。
-课程地址：【最新】Developing iOS 9 Apps with Swift(斯坦福大学公开课：iOS 9开发)">
+<meta name="description" content="前言 在此之前就看到过斯坦福公开课《Developing iOS9 Apps With Swift》，一直没能静下心来认真学习。最近工作比较轻松时间充足，打算用两个月的时间，认真学习斯坦福iOS9开发视频。本文集，一方面通过视频可以学习Swift，另一方面通过记录笔记督促学习。 课程地址：【最新】Developing iOS 9 Apps with Swift(斯坦福大学公开课：iOS 9开发)">
+<meta name="keywords" content="Stanford iOS9">
 <meta property="og:type" content="article">
 <meta property="og:title" content="斯坦福iOS9公开课总结（一）：What`s in iOS">
 <meta property="og:url" content="https://jesusLove.github.io/2016/11/23/斯坦福iOS9公开课总结-一-what-is-in-iOS/index.html">
 <meta property="og:site_name" content="紫电清霜">
-<meta property="og:description" content="前言
-在此之前就看到过斯坦福公开课《Developing iOS9 Apps With Swift》，一直没能静下心来认真学习。最近工作比较轻松时间充足，打算用两个月的时间，认真学习斯坦福iOS9开发视频。本文集，一方面通过视频可以学习Swift，另一方面通过记录笔记督促学习。
-课程地址：【最新】Developing iOS 9 Apps with Swift(斯坦福大学公开课：iOS 9开发)">
+<meta property="og:description" content="前言 在此之前就看到过斯坦福公开课《Developing iOS9 Apps With Swift》，一直没能静下心来认真学习。最近工作比较轻松时间充足，打算用两个月的时间，认真学习斯坦福iOS9开发视频。本文集，一方面通过视频可以学习Swift，另一方面通过记录笔记督促学习。 课程地址：【最新】Developing iOS 9 Apps with Swift(斯坦福大学公开课：iOS 9开发)">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/Art/SystemLayers_2x.png">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-37cdf27c49611f5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-4a4e4bc00ba86df7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640">
@@ -112,37 +104,44 @@
 <meta property="og:updated_time" content="2016-12-18T08:56:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="斯坦福iOS9公开课总结（一）：What`s in iOS">
-<meta name="twitter:description" content="前言
-在此之前就看到过斯坦福公开课《Developing iOS9 Apps With Swift》，一直没能静下心来认真学习。最近工作比较轻松时间充足，打算用两个月的时间，认真学习斯坦福iOS9开发视频。本文集，一方面通过视频可以学习Swift，另一方面通过记录笔记督促学习。
-课程地址：【最新】Developing iOS 9 Apps with Swift(斯坦福大学公开课：iOS 9开发)">
+<meta name="twitter:description" content="前言 在此之前就看到过斯坦福公开课《Developing iOS9 Apps With Swift》，一直没能静下心来认真学习。最近工作比较轻松时间充足，打算用两个月的时间，认真学习斯坦福iOS9开发视频。本文集，一方面通过视频可以学习Swift，另一方面通过记录笔记督促学习。 课程地址：【最新】Developing iOS 9 Apps with Swift(斯坦福大学公开课：iOS 9开发)">
 <meta name="twitter:image" content="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/Art/SystemLayers_2x.png">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
     fancybox: true,
-    motion: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="https://jesusLove.github.io/2016/11/23/斯坦福iOS9公开课总结-一-what-is-in-iOS/"/>
 
-  <title> 斯坦福iOS9公开课总结（一）：What`s in iOS | 紫电清霜 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+
+
+  <title>斯坦福iOS9公开课总结（一）：What`s in iOS | 紫电清霜</title>
   
 
 
@@ -152,36 +151,42 @@
 
 
 
+</head>
 
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">紫电清霜</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">紫电清霜</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -202,7 +207,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -212,7 +217,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -222,7 +227,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -232,7 +237,7 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -248,6 +253,8 @@
   
 </nav>
 
+
+
  </div>
     </header>
 
@@ -261,49 +268,68 @@
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jesusLove.github.io/2016/11/23/斯坦福iOS9公开课总结-一-what-is-in-iOS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Owenli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫电清霜">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                斯坦福iOS9公开课总结（一）：What`s in iOS
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">斯坦福iOS9公开课总结（一）：What`s in iOS</h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-23T14:11:45+08:00" content="2016-11-23">
-              2016-11-23
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-23T14:11:45+08:00">
+                2016-11-23
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Stanford-iOS9-with-Swift/" itemprop="url" rel="index">
                     <span itemprop="name">Stanford iOS9 with Swift</span>
                   </a>
@@ -311,7 +337,6 @@
 
                 
                 
-
               
             </span>
           
@@ -321,21 +346,21 @@
           
 
           
-
-          
           
 
           
-              &nbsp; | &nbsp;
-              <span class="page-pv"><i class="fa fa-file-o"></i>
-              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-              </span>
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -344,10 +369,10 @@
       
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><hr>
 <p>在此之前就看到过斯坦福公开课《Developing iOS9 Apps With Swift》，一直没能静下心来认真学习。最近工作比较轻松时间充足，打算用两个月的时间，认真学习斯坦福iOS9开发视频。本文集，一方面通过视频可以学习Swift，另一方面通过记录笔记督促学习。</p>
-<p>课程地址：<a href="http://www.swiftv.cn/course/ineay9b9" target="_blank" rel="external">【最新】Developing iOS 9 Apps with Swift(斯坦福大学公开课：iOS 9开发)</a></p>
+<p>课程地址：<a href="http://www.swiftv.cn/course/ineay9b9" target="_blank" rel="noopener">【最新】Developing iOS 9 Apps with Swift(斯坦福大学公开课：iOS 9开发)</a></p>
 <p>多说无益，开始吧！</p>
-<h3 id="what-s-in-iOS"><a href="#what-s-in-iOS" class="headerlink" title="what`s in iOS"></a>what`s in iOS</h3><p>关于iOS系统参考：<a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007898-CH1-SW1" target="_blank" rel="external">官方文档</a><br><img src="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/Art/SystemLayers_2x.png" alt="Layers of iOS"></p>
-<p><strong>Core OS</strong><br><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/CoreOSLayer/CoreOSLayer.html#//apple_ref/doc/uid/TP40007898-CH11-SW1" target="_blank" rel="external">Core OS Layer</a>包含大多数技术所基于的低级功能。即使不直接在应用中使用这些技术，它们也很可能被其他框架使用。在需要明确处理安全性或与外部硬件附件通信的情况下，您可以使用此层中的框架。<br><img src="http://upload-images.jianshu.io/upload_images/1363078-37cdf27c49611f5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="Core OS"></p>
+<h3 id="what-s-in-iOS"><a href="#what-s-in-iOS" class="headerlink" title="what`s in iOS"></a>what`s in iOS</h3><p>关于iOS系统参考：<a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007898-CH1-SW1" target="_blank" rel="noopener">官方文档</a><br><img src="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/Art/SystemLayers_2x.png" alt="Layers of iOS"></p>
+<p><strong>Core OS</strong><br><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/CoreOSLayer/CoreOSLayer.html#//apple_ref/doc/uid/TP40007898-CH11-SW1" target="_blank" rel="noopener">Core OS Layer</a>包含大多数技术所基于的低级功能。即使不直接在应用中使用这些技术，它们也很可能被其他框架使用。在需要明确处理安全性或与外部硬件附件通信的情况下，您可以使用此层中的框架。<br><img src="http://upload-images.jianshu.io/upload_images/1363078-37cdf27c49611f5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="Core OS"></p>
 <p>主要包含：</p>
 <ol>
 <li><code>Accelerate.framework</code> ：包含用于执行数字信号处理（DSP），线性代数，和图像处理的计算机接口。框架有点是，他们对所有存在的iOS设备的硬件配置进行优化。因此可以编写一次代码保证其高效运行在所有设备上。</li>
@@ -359,17 +384,17 @@
 <li><code>Security.framework</code>: 安全框架可以使用它来保证应用程序管理数据的安全性。该框架提供了管理证书，公钥和私钥以及信任策略的接口。</li>
 <li><code>OSX Kernel</code>： 系统内核。</li>
 </ol>
-<p><strong>Core Services</strong><br><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/CoreServicesLayer/CoreServicesLayer.html#//apple_ref/doc/uid/TP40007898-CH10-SW5" target="_blank" rel="external">Core Services Layer</a>核心服务层包含应用程序的基本系统服务。<br>提供：<br><img src="http://upload-images.jianshu.io/upload_images/1363078-4a4e4bc00ba86df7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="Core Services"></p>
-<p><strong>Media</strong><br><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/MediaLayer/MediaLayer.html#//apple_ref/doc/uid/TP40007898-CH9-SW4" target="_blank" rel="external">Media Layer</a>媒体层包含用于在应用中实现多媒体的图形，音频和视频技术。<br><img src="http://upload-images.jianshu.io/upload_images/1363078-8b8b039efa7f2bbe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="Media Layer"></p>
-<p><strong>Cocoa Touch ❤️❤️</strong><br><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/iPhoneOSTechnologies/iPhoneOSTechnologies.html#//apple_ref/doc/uid/TP40007898-CH3-SW1" target="_blank" rel="external">Cocoa Touch Layer</a>本次是应用程序开发的关键框架。他为我们提供了关键技术，如多任务，基于触摸输入，推送通知，许多高层次的系统服务等支持。<br><img src="http://upload-images.jianshu.io/upload_images/1363078-66ac099d10f3e849.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="Cocoa Touch Layer"></p>
-<p>关于iOS系统内容较多，具体请参考官方文档：<a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007898-CH1-SW1" target="_blank" rel="external">【iOS Technology Overview】</a></p>
+<p><strong>Core Services</strong><br><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/CoreServicesLayer/CoreServicesLayer.html#//apple_ref/doc/uid/TP40007898-CH10-SW5" target="_blank" rel="noopener">Core Services Layer</a>核心服务层包含应用程序的基本系统服务。<br>提供：<br><img src="http://upload-images.jianshu.io/upload_images/1363078-4a4e4bc00ba86df7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="Core Services"></p>
+<p><strong>Media</strong><br><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/MediaLayer/MediaLayer.html#//apple_ref/doc/uid/TP40007898-CH9-SW4" target="_blank" rel="noopener">Media Layer</a>媒体层包含用于在应用中实现多媒体的图形，音频和视频技术。<br><img src="http://upload-images.jianshu.io/upload_images/1363078-8b8b039efa7f2bbe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="Media Layer"></p>
+<p><strong>Cocoa Touch ❤️❤️</strong><br><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/iPhoneOSTechnologies/iPhoneOSTechnologies.html#//apple_ref/doc/uid/TP40007898-CH3-SW1" target="_blank" rel="noopener">Cocoa Touch Layer</a>本次是应用程序开发的关键框架。他为我们提供了关键技术，如多任务，基于触摸输入，推送通知，许多高层次的系统服务等支持。<br><img src="http://upload-images.jianshu.io/upload_images/1363078-66ac099d10f3e849.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="Cocoa Touch Layer"></p>
+<p>关于iOS系统内容较多，具体请参考官方文档：<a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007898-CH1-SW1" target="_blank" rel="noopener">【iOS Technology Overview】</a></p>
 <h3 id="CalculatorDemo"><a href="#CalculatorDemo" class="headerlink" title="CalculatorDemo"></a>CalculatorDemo</h3><p>简单的计算器demo，主要代码如下：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">  <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> display: <span class="type">UILabel</span>!</div><div class="line">    <span class="keyword">var</span> userInTheMiddleOfTyping = <span class="literal">false</span></div><div class="line">    <span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">targetDigit</span><span class="params">(<span class="number">_</span> sender: UIButton)</span></span> &#123;</div><div class="line">        <span class="keyword">let</span> digit = sender.currentTitle! <span class="comment">//容易是程序崩溃。Optional类型</span></div><div class="line">        <span class="keyword">if</span> userInTheMiddleOfTyping &#123;</div><div class="line">            <span class="keyword">let</span> textCurrentlyInDisplay = display.text!</div><div class="line">            display.text = textCurrentlyInDisplay + digit</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            display.text = digit</div><div class="line">        &#125;</div><div class="line">        userInTheMiddleOfTyping = <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">performOperation</span><span class="params">(<span class="number">_</span> sender: UIButton)</span></span> &#123;</div><div class="line">        userInTheMiddleOfTyping = <span class="literal">false</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> mathematicalSymbol = sender.currentTitle <span class="comment">//这种写法防止崩溃&#123;</span></div><div class="line">            <span class="keyword">if</span> mathematicalSymbol == <span class="string">"π"</span> &#123;</div><div class="line">                display.text = <span class="type">String</span>(<span class="type">M_PI</span>)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">  <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> display: <span class="type">UILabel</span>!</span><br><span class="line">    <span class="keyword">var</span> userInTheMiddleOfTyping = <span class="literal">false</span></span><br><span class="line">    <span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">targetDigit</span><span class="params">(<span class="number">_</span> sender: UIButton)</span></span> &#123;</span><br><span class="line">        <span class="keyword">let</span> digit = sender.currentTitle! <span class="comment">//容易是程序崩溃。Optional类型</span></span><br><span class="line">        <span class="keyword">if</span> userInTheMiddleOfTyping &#123;</span><br><span class="line">            <span class="keyword">let</span> textCurrentlyInDisplay = display.text!</span><br><span class="line">            display.text = textCurrentlyInDisplay + digit</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            display.text = digit</span><br><span class="line">        &#125;</span><br><span class="line">        userInTheMiddleOfTyping = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">performOperation</span><span class="params">(<span class="number">_</span> sender: UIButton)</span></span> &#123;</span><br><span class="line">        userInTheMiddleOfTyping = <span class="literal">false</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> mathematicalSymbol = sender.currentTitle <span class="comment">//这种写法防止崩溃&#123;</span></span><br><span class="line">            <span class="keyword">if</span> mathematicalSymbol == <span class="string">"π"</span> &#123;</span><br><span class="line">                display.text = <span class="type">String</span>(<span class="type">M_PI</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>Optional类型：可选类型， 可以有值，也可以没有值。Optional类型的值是不能被直接使用的，当需要的时候需要拆包，以表明Optional是一定有值的。之所以需要拆包其实Optional是一个枚举类型。<br>显式拆包</p>
-<figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var <span class="built_in">str</span>: <span class="keyword">String</span>? = <span class="string">"Hello"</span></div><div class="line"><span class="built_in">str</span>!  <span class="comment">//显式拆包</span></div></pre></td></tr></table></figure>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">str</span>: <span class="keyword">String</span>? = <span class="string">"Hello"</span></span><br><span class="line"><span class="built_in">str</span>!  <span class="comment">//显式拆包</span></span><br></pre></td></tr></table></figure>
 <p>隐式拆包</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">var</span> <span class="keyword">str: </span><span class="keyword">String! </span>= <span class="string">"Hello"</span></div></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">var</span> <span class="keyword">str: </span><span class="keyword">String! </span>= <span class="string">"Hello"</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>告诉编译器：Optional值使用前，已经被初始化，保证有值，编译器帮我们做了一次拆包。</p>
@@ -377,49 +402,74 @@
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
 
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/images/wechatpay.png" alt="Owenli WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/images/alipay.png" alt="Owenli Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Owenli 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Owenli 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
   </div>
+</div>
 
+      </div>
+    
 
-      
-    </div>
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Owenli
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://jesusLove.github.io/2016/11/23/斯坦福iOS9公开课总结-一-what-is-in-iOS/" title="斯坦福iOS9公开课总结（一）：What`s in iOS">https://jesusLove.github.io/2016/11/23/斯坦福iOS9公开课总结-一-what-is-in-iOS/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/Stanford-iOS9/" rel="tag">#Stanford iOS9</a>
+            <a href="/tags/Stanford-iOS9/" rel="tag"># Stanford iOS9</a>
           
         </div>
+      
+
+      
+      
       
 
       
@@ -431,6 +481,8 @@
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -445,6 +497,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -460,9 +516,7 @@
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
+  
 
 
         </div>
@@ -478,120 +532,141 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
             站点概览
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/me.png"
-               alt="Owenli" />
-          <p class="site-author-name" itemprop="name">Owenli</p>
-          <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">40</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/me.png"
+                alt="Owenli" />
+            
+              <p class="site-author-name" itemprop="name">Owenli</p>
+              <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            
           </div>
 
           
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
           
 
           
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
           
 
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
           
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
-                  
-                    <i class="fa fa-fw fa-twitter"></i>
-                  
-                  Twitter
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  微博
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  简书
-                </a>
-              </span>
-            
-          
+
         </div>
-
-        
-        
-
-        
-        
-
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#what-s-in-iOS"><span class="nav-number">2.</span> <span class="nav-text">what`s in iOS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CalculatorDemo"><span class="nav-number">3.</span> <span class="nav-text">CalculatorDemo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
       
 
     </div>
@@ -604,42 +679,34 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Owenli</span>
+
+  
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a></div>
+
+
+
 
         
 
-<div class="busuanzi-count">
 
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-  
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
-  
 
-  
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
-  
-</div>
 
 
 
@@ -647,9 +714,13 @@
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -669,6 +740,15 @@
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -694,34 +774,9 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
-
-
-
-  
-
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
 
 
 
@@ -729,26 +784,60 @@
   
 
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
 
   
 

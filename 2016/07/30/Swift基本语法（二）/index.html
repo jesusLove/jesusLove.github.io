@@ -1,18 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
+  
 
-<html class="theme-next mist">
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
 
 
 
@@ -32,50 +52,27 @@
 
 
 
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Swift基本语法," />
@@ -84,56 +81,61 @@
 
 
 
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+  <link rel="alternate" href="/atom.xml" title="紫电清霜" type="application/atom+xml" />
 
 
 
 
 
 
-<meta name="description" content="枚举定义枚举为一组相关的值定义了一个共同的类型，使你可以在你的代码中以类型安全的方式来使用这些值。Swift中枚举与C和Objective-C不同，这些枚举成员本身就是完整的值，这些值的类型是已经明确定义好的CompassPoint类型。枚举名字必须以一个大写字母开头。
-1234567enum CompassPoint &amp;#123;    case North    case South    c">
+<meta name="description" content="枚举定义枚举为一组相关的值定义了一个共同的类型，使你可以在你的代码中以类型安全的方式来使用这些值。Swift中枚举与C和Objective-C不同，这些枚举成员本身就是完整的值，这些值的类型是已经明确定义好的CompassPoint类型。枚举名字必须以一个大写字母开头。 1234567enum CompassPoint &amp;#123;    case North    case South    c">
+<meta name="keywords" content="Swift基本语法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift基本语法（二）">
 <meta property="og:url" content="https://jesusLove.github.io/2016/07/30/Swift基本语法（二）/index.html">
 <meta property="og:site_name" content="紫电清霜">
-<meta property="og:description" content="枚举定义枚举为一组相关的值定义了一个共同的类型，使你可以在你的代码中以类型安全的方式来使用这些值。Swift中枚举与C和Objective-C不同，这些枚举成员本身就是完整的值，这些值的类型是已经明确定义好的CompassPoint类型。枚举名字必须以一个大写字母开头。
-1234567enum CompassPoint &amp;#123;    case North    case South    c">
+<meta property="og:description" content="枚举定义枚举为一组相关的值定义了一个共同的类型，使你可以在你的代码中以类型安全的方式来使用这些值。Swift中枚举与C和Objective-C不同，这些枚举成员本身就是完整的值，这些值的类型是已经明确定义好的CompassPoint类型。枚举名字必须以一个大写字母开头。 1234567enum CompassPoint &amp;#123;    case North    case South    c">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-10-15T00:28:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift基本语法（二）">
-<meta name="twitter:description" content="枚举定义枚举为一组相关的值定义了一个共同的类型，使你可以在你的代码中以类型安全的方式来使用这些值。Swift中枚举与C和Objective-C不同，这些枚举成员本身就是完整的值，这些值的类型是已经明确定义好的CompassPoint类型。枚举名字必须以一个大写字母开头。
-1234567enum CompassPoint &amp;#123;    case North    case South    c">
+<meta name="twitter:description" content="枚举定义枚举为一组相关的值定义了一个共同的类型，使你可以在你的代码中以类型安全的方式来使用这些值。Swift中枚举与C和Objective-C不同，这些枚举成员本身就是完整的值，这些值的类型是已经明确定义好的CompassPoint类型。枚举名字必须以一个大写字母开头。 1234567enum CompassPoint &amp;#123;    case North    case South    c">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
     fancybox: true,
-    motion: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="https://jesusLove.github.io/2016/07/30/Swift基本语法（二）/"/>
 
-  <title> Swift基本语法（二） | 紫电清霜 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+
+
+  <title>Swift基本语法（二） | 紫电清霜</title>
   
 
 
@@ -143,36 +145,42 @@
 
 
 
+</head>
 
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">紫电清霜</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">紫电清霜</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -193,7 +201,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -203,7 +211,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -213,7 +221,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -223,7 +231,7 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -239,6 +247,8 @@
   
 </nav>
 
+
+
  </div>
     </header>
 
@@ -252,49 +262,68 @@
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jesusLove.github.io/2016/07/30/Swift基本语法（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Owenli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫电清霜">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Swift基本语法（二）
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">Swift基本语法（二）</h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-30T09:08:59+08:00" content="2016-07-30">
-              2016-07-30
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-30T09:08:59+08:00">
+                2016-07-30
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Swift/" itemprop="url" rel="index">
                     <span itemprop="name">Swift</span>
                   </a>
@@ -302,7 +331,6 @@
 
                 
                 
-
               
             </span>
           
@@ -312,21 +340,21 @@
           
 
           
-
-          
           
 
           
-              &nbsp; | &nbsp;
-              <span class="page-pv"><i class="fa fa-file-o"></i>
-              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-              </span>
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -334,16 +362,16 @@
 
       
         <h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>枚举为一组相关的值定义了一个共同的类型，使你可以在你的代码中以类型安全的方式来使用这些值。Swift中枚举与C和Objective-C不同，这些枚举成员本身就是完整的值，这些值的类型是已经明确定义好的CompassPoint类型。枚举名字必须以一个大写字母开头。</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">CompassPoint</span> &#123;</span></div><div class="line">    <span class="keyword">case</span> North</div><div class="line">    <span class="keyword">case</span> South</div><div class="line">    <span class="keyword">case</span> East</div><div class="line">    <span class="keyword">case</span> West</div><div class="line">&#125;</div><div class="line">/<span class="regexp">/枚举多个成员可以出现在同一行，用逗号隔开</span></div></pre></td></tr></table></figure>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">CompassPoint</span> &#123;</span></span><br><span class="line">    <span class="keyword">case</span> North</span><br><span class="line">    <span class="keyword">case</span> South</span><br><span class="line">    <span class="keyword">case</span> East</span><br><span class="line">    <span class="keyword">case</span> West</span><br><span class="line">&#125;</span><br><span class="line">/<span class="regexp">/枚举多个成员可以出现在同一行，用逗号隔开</span></span><br></pre></td></tr></table></figure>
 <p>枚举定义了一个全新的类型，所有首字母必须大写。</p>
-<figure class="highlight sqf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var <span class="built_in">direction</span> = CompassPoint.<span class="built_in">East</span></div><div class="line"><span class="comment">//简化</span></div><div class="line"><span class="built_in">direction</span> = .<span class="built_in">East</span></div></pre></td></tr></table></figure>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">direction</span> = CompassPoint.<span class="built_in">East</span></span><br><span class="line"><span class="comment">//简化</span></span><br><span class="line"><span class="built_in">direction</span> = .<span class="built_in">East</span></span><br></pre></td></tr></table></figure>
 <p>使用switch语句匹配枚举值</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">switch</span> direction &#123;</div><div class="line"><span class="built_in">case</span> .North:</div><div class="line">    <span class="built_in">print</span>(<span class="string">"North"</span>)</div><div class="line"><span class="built_in">case</span> .East:</div><div class="line">    <span class="built_in">print</span>(<span class="string">"East"</span>)</div><div class="line"><span class="built_in">case</span> .South:</div><div class="line">    <span class="built_in">print</span>(<span class="string">"South"</span>)</div><div class="line"><span class="built_in">case</span> .West:</div><div class="line">    <span class="built_in">print</span>(<span class="string">"West"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">switch</span> direction &#123;</span><br><span class="line"><span class="built_in">case</span> .North:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"North"</span>)</span><br><span class="line"><span class="built_in">case</span> .East:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"East"</span>)</span><br><span class="line"><span class="built_in">case</span> .South:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"South"</span>)</span><br><span class="line"><span class="built_in">case</span> .West:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"West"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当不需要全部匹配的时候，使用default。</p>
-<h4 id="关联值"><a href="#关联值" class="headerlink" title="关联值"></a>关联值</h4><figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// 定义两种商品条形码的枚举</div><div class="line"><span class="keyword">enum</span> Barcode &#123;</div><div class="line">    <span class="keyword">case</span> UPCA(<span class="built_in">Int</span>, <span class="built_in">Int</span>, <span class="built_in">Int</span>, <span class="built_in">Int</span>)</div><div class="line">    <span class="keyword">case</span> QRCode(<span class="built_in">String</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">var productBarcode = Barcode.UPCA(<span class="number">8</span>, <span class="number">85909</span>, <span class="number">52233</span>, <span class="number">3</span>)</div><div class="line">productBarcode = .QRCode(<span class="string">"ABCDJLJELKJLE"</span>)</div></pre></td></tr></table></figure>
+<h4 id="关联值"><a href="#关联值" class="headerlink" title="关联值"></a>关联值</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义两种商品条形码的枚举</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Barcode</span> &#123;</span></span><br><span class="line">    <span class="keyword">case</span> UPCA(<span class="keyword">Int</span>, <span class="keyword">Int</span>, <span class="keyword">Int</span>, <span class="keyword">Int</span>)</span><br><span class="line">    <span class="keyword">case</span> QRCode(<span class="keyword">String</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> productBarcode = Barcode.UPCA(<span class="number">8</span>, <span class="number">85909</span>, <span class="number">52233</span>, <span class="number">3</span>)</span><br><span class="line">productBarcode = .QRCode(<span class="string">"ABCDJLJELKJLE"</span>)</span><br></pre></td></tr></table></figure>
 <p>Barcode类型的常量和变量可以存储一个.UPCA或者.QRCode。同一时间只能存储这两个值得一个值。</p>
 <h4 id="递归枚举"><a href="#递归枚举" class="headerlink" title="递归枚举"></a>递归枚举</h4><p>在枚举类型前加indirect来表示该枚举所有成员可递归。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">indirect</span> <span class="class"><span class="keyword">enum</span> <span class="title">ArithmeticExpression</span> </span>&#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Number</span>(<span class="type">Int</span>)</div><div class="line">    <span class="keyword">case</span> <span class="type">Addition</span>(<span class="type">ArithmeticExpression</span>, <span class="type">ArithmeticExpression</span>)</div><div class="line">    <span class="keyword">case</span> <span class="type">Multipliation</span>(<span class="type">ArithmeticExpression</span>, <span class="type">ArithmeticExpression</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">evaluate</span><span class="params">(expression: ArithmeticExpression)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">switch</span> expression &#123;</div><div class="line">    <span class="keyword">case</span> .<span class="type">Number</span>(<span class="keyword">let</span> value):</div><div class="line">        <span class="keyword">return</span> value</div><div class="line">    <span class="keyword">case</span> .<span class="type">Addition</span>(<span class="keyword">let</span> <span class="keyword">left</span>, <span class="keyword">let</span> <span class="keyword">right</span>):</div><div class="line">        <span class="keyword">return</span> evaluate(<span class="keyword">left</span>) + evaluate(<span class="keyword">right</span>)</div><div class="line">    <span class="keyword">case</span> .<span class="type">Multipliation</span>(<span class="keyword">let</span> <span class="keyword">left</span>, <span class="keyword">let</span> <span class="keyword">right</span>):</div><div class="line">        <span class="keyword">return</span> evaluate(<span class="keyword">left</span>) * evaluate(<span class="keyword">right</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//计算 （ 5 + 4 ） * 2</span></div><div class="line"><span class="keyword">let</span> five = <span class="type">ArithmeticExpression</span>.<span class="type">Number</span>(<span class="number">4</span>)</div><div class="line"><span class="keyword">let</span> four = <span class="type">ArithmeticExpression</span>.<span class="type">Number</span>(<span class="number">5</span>)</div><div class="line"><span class="keyword">let</span> sum = <span class="type">ArithmeticExpression</span>.<span class="type">Addition</span>(five, four)</div><div class="line"><span class="keyword">let</span> product = <span class="type">ArithmeticExpression</span>.<span class="type">Multipliation</span>(sum, <span class="type">ArithmeticExpression</span>.<span class="type">Number</span>(<span class="number">2</span>))</div><div class="line"><span class="built_in">print</span>(evaluate(product)) <span class="comment">//输出结果 18</span></div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">indirect</span> <span class="class"><span class="keyword">enum</span> <span class="title">ArithmeticExpression</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Number</span>(<span class="type">Int</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Addition</span>(<span class="type">ArithmeticExpression</span>, <span class="type">ArithmeticExpression</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Multipliation</span>(<span class="type">ArithmeticExpression</span>, <span class="type">ArithmeticExpression</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">evaluate</span><span class="params">(expression: ArithmeticExpression)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> expression &#123;</span><br><span class="line">    <span class="keyword">case</span> .<span class="type">Number</span>(<span class="keyword">let</span> value):</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">    <span class="keyword">case</span> .<span class="type">Addition</span>(<span class="keyword">let</span> <span class="keyword">left</span>, <span class="keyword">let</span> <span class="keyword">right</span>):</span><br><span class="line">        <span class="keyword">return</span> evaluate(<span class="keyword">left</span>) + evaluate(<span class="keyword">right</span>)</span><br><span class="line">    <span class="keyword">case</span> .<span class="type">Multipliation</span>(<span class="keyword">let</span> <span class="keyword">left</span>, <span class="keyword">let</span> <span class="keyword">right</span>):</span><br><span class="line">        <span class="keyword">return</span> evaluate(<span class="keyword">left</span>) * evaluate(<span class="keyword">right</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//计算 （ 5 + 4 ） * 2</span></span><br><span class="line"><span class="keyword">let</span> five = <span class="type">ArithmeticExpression</span>.<span class="type">Number</span>(<span class="number">4</span>)</span><br><span class="line"><span class="keyword">let</span> four = <span class="type">ArithmeticExpression</span>.<span class="type">Number</span>(<span class="number">5</span>)</span><br><span class="line"><span class="keyword">let</span> sum = <span class="type">ArithmeticExpression</span>.<span class="type">Addition</span>(five, four)</span><br><span class="line"><span class="keyword">let</span> product = <span class="type">ArithmeticExpression</span>.<span class="type">Multipliation</span>(sum, <span class="type">ArithmeticExpression</span>.<span class="type">Number</span>(<span class="number">2</span>))</span><br><span class="line"><span class="built_in">print</span>(evaluate(product)) <span class="comment">//输出结果 18</span></span><br></pre></td></tr></table></figure>
 <h3 id="类和结构体"><a href="#类和结构体" class="headerlink" title="类和结构体"></a>类和结构体</h3><h4 id="两者比较"><a href="#两者比较" class="headerlink" title="两者比较"></a>两者比较</h4><p>共同点：</p>
 <ul>
 <li>定义属性用于存储值</li>
@@ -362,67 +390,92 @@
 </ul>
 <p>在Swift中 结构体是值类型，String， Array和Dictionary 类型均以结构体的形式实现， 在被赋值给新的常量或变量，或者被传入函数或方法中时，会进行值拷贝。另外，类是引用类型。在Objective-C中NSString, NSArray和NSDictionary类型均以类的形式实现。</p>
 <h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><h4 id="存储属性"><a href="#存储属性" class="headerlink" title="存储属性"></a>存储属性</h4><p>一个存储属性就是存储在特定类或结构体的实例里的一个常量或变量。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">struct FixedLengthRange &#123;    <span class="selector-tag">var</span> firstValue: Int    let length: Int&#125;<span class="selector-tag">var</span> rangeOfThreeItems = FixedLengthRange(firstValue: <span class="number">0</span>, length: <span class="number">3</span>) <span class="comment">// 该区间表示整数0,1,2</span>rangeOfThreeItems<span class="selector-class">.firstValue</span> = <span class="number">6</span><span class="comment">// 该区间现在表示整数6,7,8</span></div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">struct FixedLengthRange &#123;    <span class="selector-tag">var</span> firstValue: Int    let length: Int&#125;<span class="selector-tag">var</span> rangeOfThreeItems = FixedLengthRange(firstValue: <span class="number">0</span>, length: <span class="number">3</span>) <span class="comment">// 该区间表示整数0,1,2</span>rangeOfThreeItems<span class="selector-class">.firstValue</span> = <span class="number">6</span><span class="comment">// 该区间现在表示整数6,7,8</span></span><br></pre></td></tr></table></figure>
 <h4 id="延迟存储属性"><a href="#延迟存储属性" class="headerlink" title="延迟存储属性"></a>延迟存储属性</h4><p>延迟存储属性是指当第一次被调用的时候才去计算初始值的属性。使用lazy修饰，例如：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">lazy</span> <span class="keyword">var</span> importer = <span class="type">DataImporter</span>()</div><div class="line"><span class="comment">// 耗时操作，用到的时候再去创建。</span></div></pre></td></tr></table></figure>
-<h4 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">struct Point &#123;</div><div class="line">    <span class="selector-tag">var</span> x = <span class="number">0.0</span>, y = <span class="number">0.0</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//封装了一个width和height</span></div><div class="line">struct Size &#123;</div><div class="line">    <span class="selector-tag">var</span> <span class="attribute">width</span> = <span class="number">0.0</span>, height = <span class="number">0.0</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//一个有原点和尺寸的矩形</span></div><div class="line">struct Rect &#123;</div><div class="line">    <span class="selector-tag">var</span> origin = Point()</div><div class="line">    <span class="selector-tag">var</span> size = Size()</div><div class="line">    <span class="comment">//计算属性</span></div><div class="line">    <span class="selector-tag">var</span> center: Point &#123;</div><div class="line">        get &#123;</div><div class="line">            let centerX = origin<span class="selector-class">.x</span> + (size<span class="selector-class">.width</span> / <span class="number">2</span>)</div><div class="line">            let centerY = origin<span class="selector-class">.y</span> + (size<span class="selector-class">.height</span> / <span class="number">2</span>)</div><div class="line">            return Point(x: centerX, y: centerY)</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//如果setter没有定义新值得参数名，则可以使用默认名称newValue</span></div><div class="line">        set(newCenter) &#123;</div><div class="line">            origin<span class="selector-class">.x</span> = newCenter<span class="selector-class">.x</span> - (size<span class="selector-class">.width</span> / <span class="number">2</span>)</div><div class="line">            origin<span class="selector-class">.y</span> = newCenter<span class="selector-class">.y</span> - (size<span class="selector-class">.height</span> / <span class="number">2</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">var</span> square = Rect(origin: Point(x: <span class="number">0.0</span>, y: <span class="number">0.0</span>), size: Size(<span class="attribute">width</span>: <span class="number">10.0</span>, height: <span class="number">10.0</span>))</div><div class="line">let initialSquareCenter = square<span class="selector-class">.center</span></div><div class="line">square<span class="selector-class">.center</span>  = Point(x: <span class="number">15.0</span>, y: <span class="number">15.0</span>)</div><div class="line"><span class="function"><span class="title">print</span><span class="params">(<span class="string">"原点为：（\(square.origin.x),\(square.origin.y)）"</span>)</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lazy</span> <span class="keyword">var</span> importer = <span class="type">DataImporter</span>()</span><br><span class="line"><span class="comment">// 耗时操作，用到的时候再去创建。</span></span><br></pre></td></tr></table></figure>
+<h4 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">struct Point &#123;</span><br><span class="line">    <span class="selector-tag">var</span> x = <span class="number">0.0</span>, y = <span class="number">0.0</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//封装了一个width和height</span></span><br><span class="line">struct Size &#123;</span><br><span class="line">    <span class="selector-tag">var</span> <span class="attribute">width</span> = <span class="number">0.0</span>, height = <span class="number">0.0</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//一个有原点和尺寸的矩形</span></span><br><span class="line">struct Rect &#123;</span><br><span class="line">    <span class="selector-tag">var</span> origin = Point()</span><br><span class="line">    <span class="selector-tag">var</span> size = Size()</span><br><span class="line">    <span class="comment">//计算属性</span></span><br><span class="line">    <span class="selector-tag">var</span> center: Point &#123;</span><br><span class="line">        get &#123;</span><br><span class="line">            let centerX = origin<span class="selector-class">.x</span> + (size<span class="selector-class">.width</span> / <span class="number">2</span>)</span><br><span class="line">            let centerY = origin<span class="selector-class">.y</span> + (size<span class="selector-class">.height</span> / <span class="number">2</span>)</span><br><span class="line">            return Point(x: centerX, y: centerY)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果setter没有定义新值得参数名，则可以使用默认名称newValue</span></span><br><span class="line">        set(newCenter) &#123;</span><br><span class="line">            origin<span class="selector-class">.x</span> = newCenter<span class="selector-class">.x</span> - (size<span class="selector-class">.width</span> / <span class="number">2</span>)</span><br><span class="line">            origin<span class="selector-class">.y</span> = newCenter<span class="selector-class">.y</span> - (size<span class="selector-class">.height</span> / <span class="number">2</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">var</span> square = Rect(origin: Point(x: <span class="number">0.0</span>, y: <span class="number">0.0</span>), size: Size(<span class="attribute">width</span>: <span class="number">10.0</span>, height: <span class="number">10.0</span>))</span><br><span class="line">let initialSquareCenter = square.center</span><br><span class="line">square<span class="selector-class">.center</span>  = Point(x: <span class="number">15.0</span>, y: <span class="number">15.0</span>)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(<span class="string">"原点为：（\(square.origin.x),\(square.origin.y)）"</span>)</span></span></span><br></pre></td></tr></table></figure>
 <h4 id="属性观察器"><a href="#属性观察器" class="headerlink" title="属性观察器"></a>属性观察器</h4><p>属性观察器监控和响应属性值的变化，每次属性被设置值得时候都会调用属性观察器。<br>属性观察器：</p>
 <ul>
 <li>willSet在新的值被设置之前调用，将新的值作为常量参数传入，默认名称newValue</li>
 <li>didSet在新的值被设置之后立即调用，将新的值作为常量参数传入，默认名称oldValue</li>
 </ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">StepCounter</span> </span>&#123;</div><div class="line">	<span class="comment">//添加两个观察器</span></div><div class="line">    <span class="keyword">var</span> totalSteps: <span class="type">Int</span> = <span class="number">0</span> &#123;</div><div class="line">        <span class="keyword">willSet</span>(newTotalSteps) &#123;</div><div class="line">            <span class="built_in">print</span>(<span class="string">"About to set totalSteps to <span class="subst">\(newTotalSteps)</span>"</span>)</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">didSet</span> &#123;</div><div class="line">            <span class="keyword">if</span> totalSteps &gt; oldValue &#123;</div><div class="line">                <span class="built_in">print</span>(<span class="string">"Added <span class="subst">\(totalSteps - oldValue)</span> steps"</span>)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> stepCounter = <span class="type">StepCounter</span>()</div><div class="line">stepCounter.totalSteps = <span class="number">200</span></div><div class="line"><span class="comment">// About to set totalSteps to 200</span></div><div class="line"><span class="comment">// Added 200 steps</span></div><div class="line">stepCounter.totalSteps = <span class="number">360</span></div><div class="line"><span class="comment">// Added 160 steps</span></div><div class="line">stepCounter.totalSteps = <span class="number">896</span></div><div class="line"><span class="comment">// About to set totalSteps to 896</span></div><div class="line"><span class="comment">// Added 536 steps</span></div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StepCounter</span> </span>&#123;</span><br><span class="line">	<span class="comment">//添加两个观察器</span></span><br><span class="line">    <span class="keyword">var</span> totalSteps: <span class="type">Int</span> = <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">willSet</span>(newTotalSteps) &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"About to set totalSteps to <span class="subst">\(newTotalSteps)</span>"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">didSet</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> totalSteps &gt; oldValue &#123;</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"Added <span class="subst">\(totalSteps - oldValue)</span> steps"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> stepCounter = <span class="type">StepCounter</span>()</span><br><span class="line">stepCounter.totalSteps = <span class="number">200</span></span><br><span class="line"><span class="comment">// About to set totalSteps to 200</span></span><br><span class="line"><span class="comment">// Added 200 steps</span></span><br><span class="line">stepCounter.totalSteps = <span class="number">360</span></span><br><span class="line"><span class="comment">// Added 160 steps</span></span><br><span class="line">stepCounter.totalSteps = <span class="number">896</span></span><br><span class="line"><span class="comment">// About to set totalSteps to 896</span></span><br><span class="line"><span class="comment">// Added 536 steps</span></span><br></pre></td></tr></table></figure>
 <p>注意： 在didSet观察器中给属性赋值，这个值会替换之前的设置的值。</p>
 <h4 id="类型属性"><a href="#类型属性" class="headerlink" title="类型属性"></a>类型属性</h4><p>使用关键字static定义</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SomeStruce</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">var</span> storedTypeProperty = <span class="string">"Some value"</span></div><div class="line">    <span class="keyword">static</span> <span class="keyword">var</span> computedTypeProperty: <span class="type">Int</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">SomeEnumeration</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">var</span> storedTypeProperty = <span class="string">"Some value"</span></div><div class="line">    <span class="keyword">static</span> <span class="keyword">var</span> computedTypeProperty: <span class="type">Int</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">6</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">var</span> storedTypeProperty = <span class="string">"Some value"</span></div><div class="line">    <span class="keyword">static</span> <span class="keyword">var</span> computedTypeProperty: <span class="type">Int</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">27</span></div><div class="line">    &#125;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">var</span> <span class="title">overrideableComputedTypeProperty</span>:<span class="title">Int</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">107</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//获取和设置类型属性的值</span></div><div class="line"><span class="built_in">print</span>(<span class="type">SomeStruce</span>.storedTypeProperty)</div><div class="line"><span class="type">SomeStruce</span>.storedTypeProperty = <span class="string">"Another value"</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">**注意：类型属性是通过类型本身来获取和设置，而不是通过实例。**</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">AudioChannel</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">let</span> thresholdLevel = <span class="number">10</span></div><div class="line">    <span class="keyword">static</span> <span class="keyword">var</span> maxInputLevelForAllChannels = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> currentLevel: <span class="type">Int</span> = <span class="number">0</span> &#123;</div><div class="line">        <span class="keyword">didSet</span> &#123;</div><div class="line">            <span class="keyword">if</span> currentLevel &gt; <span class="type">AudioChannel</span>.thresholdLevel &#123;</div><div class="line">                <span class="comment">//限制最大值</span></div><div class="line">                currentLevel = <span class="type">AudioChannel</span>.thresholdLevel</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> currentLevel &gt; <span class="type">AudioChannel</span>.maxInputLevelForAllChannels &#123;</div><div class="line">                <span class="comment">//保存新值</span></div><div class="line">                <span class="type">AudioChannel</span>.maxInputLevelForAllChannels = currentLevel</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SomeStruce</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> storedTypeProperty = <span class="string">"Some value"</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> computedTypeProperty: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">SomeEnumeration</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> storedTypeProperty = <span class="string">"Some value"</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> computedTypeProperty: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">6</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> storedTypeProperty = <span class="string">"Some value"</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> computedTypeProperty: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">27</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">var</span> <span class="title">overrideableComputedTypeProperty</span>:<span class="title">Int</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">107</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取和设置类型属性的值</span></span><br><span class="line"><span class="built_in">print</span>(<span class="type">SomeStruce</span>.storedTypeProperty)</span><br><span class="line"><span class="type">SomeStruce</span>.storedTypeProperty = <span class="string">"Another value"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**注意：类型属性是通过类型本身来获取和设置，而不是通过实例。**</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">AudioChannel</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> thresholdLevel = <span class="number">10</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> maxInputLevelForAllChannels = <span class="number">0</span></span><br><span class="line">    <span class="keyword">var</span> currentLevel: <span class="type">Int</span> = <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">didSet</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> currentLevel &gt; <span class="type">AudioChannel</span>.thresholdLevel &#123;</span><br><span class="line">                <span class="comment">//限制最大值</span></span><br><span class="line">                currentLevel = <span class="type">AudioChannel</span>.thresholdLevel</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> currentLevel &gt; <span class="type">AudioChannel</span>.maxInputLevelForAllChannels &#123;</span><br><span class="line">                <span class="comment">//保存新值</span></span><br><span class="line">                <span class="type">AudioChannel</span>.maxInputLevelForAllChannels = currentLevel</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>本文学习整理了枚举，类和结构体，属性等相关知识。</p>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>The Swift Programming Language</p>
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
 
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/images/wechatpay.png" alt="Owenli WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/images/alipay.png" alt="Owenli Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Owenli 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Owenli 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
   </div>
+</div>
 
+      </div>
+    
 
-      
-    </div>
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Owenli
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://jesusLove.github.io/2016/07/30/Swift基本语法（二）/" title="Swift基本语法（二）">https://jesusLove.github.io/2016/07/30/Swift基本语法（二）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/Swift基本语法/" rel="tag">#Swift基本语法</a>
+            <a href="/tags/Swift基本语法/" rel="tag"># Swift基本语法</a>
           
         </div>
+      
+
+      
+      
       
 
       
@@ -434,6 +487,8 @@
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -448,6 +503,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -463,9 +522,7 @@
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
+  
 
 
         </div>
@@ -481,120 +538,141 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
             站点概览
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/me.png"
-               alt="Owenli" />
-          <p class="site-author-name" itemprop="name">Owenli</p>
-          <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">40</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/me.png"
+                alt="Owenli" />
+            
+              <p class="site-author-name" itemprop="name">Owenli</p>
+              <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            
           </div>
 
           
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
           
 
           
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
           
 
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
           
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
-                  
-                    <i class="fa fa-fw fa-twitter"></i>
-                  
-                  Twitter
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  微博
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  简书
-                </a>
-              </span>
-            
-          
+
         </div>
-
-        
-        
-
-        
-        
-
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举"><span class="nav-number">1.</span> <span class="nav-text">枚举</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关联值"><span class="nav-number">1.2.</span> <span class="nav-text">关联值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#递归枚举"><span class="nav-number">1.3.</span> <span class="nav-text">递归枚举</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类和结构体"><span class="nav-number">2.</span> <span class="nav-text">类和结构体</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#两者比较"><span class="nav-number">2.1.</span> <span class="nav-text">两者比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性"><span class="nav-number">3.</span> <span class="nav-text">属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#存储属性"><span class="nav-number">3.1.</span> <span class="nav-text">存储属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#延迟存储属性"><span class="nav-number">3.2.</span> <span class="nav-text">延迟存储属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性"><span class="nav-number">3.3.</span> <span class="nav-text">计算属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#属性观察器"><span class="nav-number">3.4.</span> <span class="nav-text">属性观察器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型属性"><span class="nav-number">3.5.</span> <span class="nav-text">类型属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
       
 
     </div>
@@ -607,42 +685,34 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Owenli</span>
+
+  
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a></div>
+
+
+
 
         
 
-<div class="busuanzi-count">
 
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-  
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
-  
 
-  
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
-  
-</div>
 
 
 
@@ -650,9 +720,13 @@
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -672,6 +746,15 @@
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -697,34 +780,9 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
-
-
-
-  
-
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
 
 
 
@@ -732,26 +790,60 @@
   
 
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
 
   
 

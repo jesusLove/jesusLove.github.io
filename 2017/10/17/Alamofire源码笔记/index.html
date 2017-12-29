@@ -1,18 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
+  
 
-<html class="theme-next mist">
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
 
 
 
@@ -32,50 +52,27 @@
 
 
 
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Alamofire," />
@@ -84,59 +81,64 @@
 
 
 
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+  <link rel="alternate" href="/atom.xml" title="紫电清霜" type="application/atom+xml" />
 
 
 
 
 
 
-<meta name="description" content="1. Alamofire结构Alamofire全部实现共有17个文件组成，如下：
-1234567891011121314151617181920212223242526--------接口----------Alamofire.swift // api 声明--------请求----------Request.swift // 请求类，用于构建请求ParameterEncoding.swift">
+<meta name="description" content="1. Alamofire结构Alamofire全部实现共有17个文件组成，如下： 1234567891011121314151617181920212223242526--------接口----------Alamofire.swift // api 声明--------请求----------Request.swift // 请求类，用于构建请求ParameterEncoding.swift">
+<meta name="keywords" content="Alamofire">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Alamofire源码笔记">
 <meta property="og:url" content="https://jesusLove.github.io/2017/10/17/Alamofire源码笔记/index.html">
 <meta property="og:site_name" content="紫电清霜">
-<meta property="og:description" content="1. Alamofire结构Alamofire全部实现共有17个文件组成，如下：
-1234567891011121314151617181920212223242526--------接口----------Alamofire.swift // api 声明--------请求----------Request.swift // 请求类，用于构建请求ParameterEncoding.swift">
+<meta property="og:description" content="1. Alamofire结构Alamofire全部实现共有17个文件组成，如下： 1234567891011121314151617181920212223242526--------接口----------Alamofire.swift // api 声明--------请求----------Request.swift // 请求类，用于构建请求ParameterEncoding.swift">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-8f58c7bc1766a54f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-5051da9bf18af637.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:updated_time" content="2017-12-28T03:16:21.501Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Alamofire源码笔记">
-<meta name="twitter:description" content="1. Alamofire结构Alamofire全部实现共有17个文件组成，如下：
-1234567891011121314151617181920212223242526--------接口----------Alamofire.swift // api 声明--------请求----------Request.swift // 请求类，用于构建请求ParameterEncoding.swift">
+<meta name="twitter:description" content="1. Alamofire结构Alamofire全部实现共有17个文件组成，如下： 1234567891011121314151617181920212223242526--------接口----------Alamofire.swift // api 声明--------请求----------Request.swift // 请求类，用于构建请求ParameterEncoding.swift">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1363078-8f58c7bc1766a54f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
     fancybox: true,
-    motion: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="https://jesusLove.github.io/2017/10/17/Alamofire源码笔记/"/>
 
-  <title> Alamofire源码笔记 | 紫电清霜 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+
+
+  <title>Alamofire源码笔记 | 紫电清霜</title>
   
 
 
@@ -146,36 +148,42 @@
 
 
 
+</head>
 
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">紫电清霜</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">紫电清霜</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -196,7 +204,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -206,7 +214,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -216,7 +224,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -226,7 +234,7 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -242,6 +250,8 @@
   
 </nav>
 
+
+
  </div>
     </header>
 
@@ -255,49 +265,68 @@
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jesusLove.github.io/2017/10/17/Alamofire源码笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Owenli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫电清霜">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Alamofire源码笔记
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">Alamofire源码笔记</h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-10-17T21:14:46+08:00" content="2017-10-17">
-              2017-10-17
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-17T21:14:46+08:00">
+                2017-10-17
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Swift/" itemprop="url" rel="index">
                     <span itemprop="name">Swift</span>
                   </a>
@@ -305,7 +334,6 @@
 
                 
                 
-
               
             </span>
           
@@ -315,21 +343,21 @@
           
 
           
-
-          
           
 
           
-              &nbsp; | &nbsp;
-              <span class="page-pv"><i class="fa fa-file-o"></i>
-              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-              </span>
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -338,7 +366,7 @@
       
         <p><img src="http://upload-images.jianshu.io/upload_images/1363078-8f58c7bc1766a54f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alamofire"></p>
 <h1 id="1-Alamofire结构"><a href="#1-Alamofire结构" class="headerlink" title="1. Alamofire结构"></a>1. Alamofire结构</h1><p>Alamofire全部实现共有17个文件组成，如下：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">--------接口----------</div><div class="line">Alamofire<span class="selector-class">.swift</span> <span class="comment">// api 声明</span></div><div class="line"></div><div class="line">--------请求----------</div><div class="line">Request<span class="selector-class">.swift</span> <span class="comment">// 请求类，用于构建请求</span></div><div class="line">ParameterEncoding<span class="selector-class">.swift</span> <span class="comment">// 参数编码</span></div><div class="line">MultipartFormData<span class="selector-class">.swift</span> <span class="comment">// 自定义表单类</span></div><div class="line">ServerTrustPolicy<span class="selector-class">.swift</span> <span class="comment">// 服务器验证</span></div><div class="line"></div><div class="line">--------响应-----------</div><div class="line">Response<span class="selector-class">.swift</span> <span class="comment">// 相应类，用于构建响应</span></div><div class="line">ResponseSerialization<span class="selector-class">.swift</span> <span class="comment">// 响应数据序列化</span></div><div class="line">Validation<span class="selector-class">.swift</span> <span class="comment">// 响应数据验证</span></div><div class="line">Result<span class="selector-class">.swift</span> <span class="comment">// 请求结果表示</span></div><div class="line">AFError<span class="selector-class">.swift</span> <span class="comment">// 错误类型</span></div><div class="line"></div><div class="line">--------底层-----------</div><div class="line">SessionManager<span class="selector-class">.swift</span> <span class="comment">// 请求session的管理类，底层使用NSURLSession实现</span></div><div class="line">SessionDelegate<span class="selector-class">.swift</span> <span class="comment">// 请求Session的代理对象，主要实现NSURLSession的代理方法以及回调闭包</span></div><div class="line">TaskDelegate<span class="selector-class">.swift</span> <span class="comment">// 请求Task任务的代理对象，主要实现NSURLDataTask的代理方法</span></div><div class="line">DispatchQueue+Alamofire<span class="selector-class">.swift</span> <span class="comment">//GCD扩展，定义多个不同功能的队列</span></div><div class="line"></div><div class="line">---------其他-----------</div><div class="line">NetworkReachabilityManager<span class="selector-class">.swift</span> <span class="comment">// 网络状态监听类</span></div><div class="line">Notifications<span class="selector-class">.swift</span> <span class="comment">// 定义通知</span></div><div class="line">Timeline<span class="selector-class">.swift</span> <span class="comment">//描述请求有关的时间 结构体</span></div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">--------接口----------</span><br><span class="line">Alamofire<span class="selector-class">.swift</span> <span class="comment">// api 声明</span></span><br><span class="line"></span><br><span class="line">--------请求----------</span><br><span class="line">Request<span class="selector-class">.swift</span> <span class="comment">// 请求类，用于构建请求</span></span><br><span class="line">ParameterEncoding<span class="selector-class">.swift</span> <span class="comment">// 参数编码</span></span><br><span class="line">MultipartFormData<span class="selector-class">.swift</span> <span class="comment">// 自定义表单类</span></span><br><span class="line">ServerTrustPolicy<span class="selector-class">.swift</span> <span class="comment">// 服务器验证</span></span><br><span class="line"></span><br><span class="line">--------响应-----------</span><br><span class="line">Response<span class="selector-class">.swift</span> <span class="comment">// 相应类，用于构建响应</span></span><br><span class="line">ResponseSerialization<span class="selector-class">.swift</span> <span class="comment">// 响应数据序列化</span></span><br><span class="line">Validation<span class="selector-class">.swift</span> <span class="comment">// 响应数据验证</span></span><br><span class="line">Result<span class="selector-class">.swift</span> <span class="comment">// 请求结果表示</span></span><br><span class="line">AFError<span class="selector-class">.swift</span> <span class="comment">// 错误类型</span></span><br><span class="line"></span><br><span class="line">--------底层-----------</span><br><span class="line">SessionManager<span class="selector-class">.swift</span> <span class="comment">// 请求session的管理类，底层使用NSURLSession实现</span></span><br><span class="line">SessionDelegate<span class="selector-class">.swift</span> <span class="comment">// 请求Session的代理对象，主要实现NSURLSession的代理方法以及回调闭包</span></span><br><span class="line">TaskDelegate<span class="selector-class">.swift</span> <span class="comment">// 请求Task任务的代理对象，主要实现NSURLDataTask的代理方法</span></span><br><span class="line">DispatchQueue+Alamofire<span class="selector-class">.swift</span> <span class="comment">//GCD扩展，定义多个不同功能的队列</span></span><br><span class="line"></span><br><span class="line">---------其他-----------</span><br><span class="line">NetworkReachabilityManager<span class="selector-class">.swift</span> <span class="comment">// 网络状态监听类</span></span><br><span class="line">Notifications<span class="selector-class">.swift</span> <span class="comment">// 定义通知</span></span><br><span class="line">Timeline<span class="selector-class">.swift</span> <span class="comment">//描述请求有关的时间 结构体</span></span><br></pre></td></tr></table></figure>
 <p>Alamofire有五模块组成，即接口、请求、响应、底层和其他。分析各模块的实现，功能和联系就可以理解Alamofire。</p>
 <h1 id="2-Alamofire源码分析"><a href="#2-Alamofire源码分析" class="headerlink" title="2. Alamofire源码分析"></a>2. Alamofire源码分析</h1><h2 id="2-1-Alamofire-swift文件"><a href="#2-1-Alamofire-swift文件" class="headerlink" title="2.1 Alamofire.swift文件"></a>2.1 Alamofire.swift文件</h2><p>查看源码可以发现分为两部分：</p>
 <ul>
@@ -384,9 +412,9 @@
 <h2 id="2-3-ParameterEncoding-swift文件"><a href="#2-3-ParameterEncoding-swift文件" class="headerlink" title="2.3 ParameterEncoding.swift文件"></a>2.3 ParameterEncoding.swift文件</h2><p>由名字可以理解该文件负责对请求参数进行转码，如：URL转码、JSON转码和PropertyList转码。三种转码对应三个结构体：<code>URLEncoding</code>，<code>JSONEncoding</code>和<code>PropertyListEncoding</code>。他们都遵循<code>ParameterEncoding</code>协议。协议只有一个方法：<code>func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -&gt; URLRequest</code>, 把参数转成目标格式，另外还设置HTTP头部的信息。例如<code>Content-Type:application/json</code>。</p>
 <h2 id="2-4-MultipartFormData-swift文件"><a href="#2-4-MultipartFormData-swift文件" class="headerlink" title="2.4 MultipartFormData.swift文件"></a>2.4 MultipartFormData.swift文件</h2><p>构建用于在HTTP或HTTPS主体中上传的multipart/form-data。 目前有两种编码多部分表单数据的方式。 第一种方法是直接在内存中编码数据。 这是非常有效的，但如果数据集太大，可能会导致内存问题。 第二种方式是设计用于较大的数据集，并将所有数据写入磁盘上的单个文件，并具有所有正确的边界分割。 第二种方法必须用于较大的数据集，如视频内容，否则，当您尝试对数据集进行编码时，应用程序可能会耗尽内存。<br>有关multipart/form-data的更多信息，请参考RFC-2388和RFC-2045规范以及w3表单文档。</p>
 <ul>
-<li><a href="https://www.ietf.org/rfc/rfc2388" target="_blank" rel="external">https://www.ietf.org/rfc/rfc2388</a>.</li>
-<li><a href="https://www.ietf.org/rfc/rfc2045" target="_blank" rel="external">https://www.ietf.org/rfc/rfc2045</a>.</li>
-<li><a href="https://www.w3.org/TR/html401/interact/forms.html#h-17.13" target="_blank" rel="external">https://www.w3.org/TR/html401/interact/forms.html#h-17.13</a></li>
+<li><a href="https://www.ietf.org/rfc/rfc2388" target="_blank" rel="noopener">https://www.ietf.org/rfc/rfc2388</a>.</li>
+<li><a href="https://www.ietf.org/rfc/rfc2045" target="_blank" rel="noopener">https://www.ietf.org/rfc/rfc2045</a>.</li>
+<li><a href="https://www.w3.org/TR/html401/interact/forms.html#h-17.13" target="_blank" rel="noopener">https://www.w3.org/TR/html401/interact/forms.html#h-17.13</a></li>
 </ul>
 <p>涉及到的知识比较深，需要补充一下。开个坑，以后填！</p>
 <h2 id="2-5-ServerTrustPolicy-swift文件"><a href="#2-5-ServerTrustPolicy-swift文件" class="headerlink" title="2.5 ServerTrustPolicy.swift文件"></a>2.5 ServerTrustPolicy.swift文件</h2><p>服务器验证。开个坑，以后填！</p>
@@ -401,7 +429,7 @@
 </ul>
 <h3 id="2-6-3-对比"><a href="#2-6-3-对比" class="headerlink" title="2.6.3 对比"></a>2.6.3 对比</h3><p>无论是DataResponse还是DownloadResponse都有两个方法：<code>public func map&lt;T&gt;(_ transform: (Value) -&gt; T) -&gt; XXXResponse&lt;T&gt;</code>和<code>public func flatMap&lt;T&gt;(_ transform: (Value) throws -&gt; T) -&gt; XXXResponse&lt;T&gt;</code>用于数据转化，区别在于后者会抛出异常。无论是服务器原始数据，还是序列化后的数据，都会被存放在result枚举的case绑定的元组中，success为泛型，failure为Error。具体内容后面在Result.swift中讲解。</p>
 <h2 id="2-7-ResponseSerialization-swift文件"><a href="#2-7-ResponseSerialization-swift文件" class="headerlink" title="2.7 ResponseSerialization.swift文件"></a>2.7 ResponseSerialization.swift文件</h2><p>查看源码，文件由两个协议、两个结构体和多个extension组成。</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">--------协议---------</div><div class="line"><span class="bullet">1. </span>DataResponseSerializerProtocol</div><div class="line"><span class="bullet">2. </span>DownloadResponseSerializerProtocol</div><div class="line"></div><div class="line">--------结构体--------</div><div class="line"><span class="bullet">1. </span>DataResponseSerializer<span class="xml"><span class="tag">&lt;<span class="name">Value</span>&gt;</span></span></div><div class="line"><span class="bullet">2. </span>DownloadResponseSerializer<span class="xml"><span class="tag">&lt;<span class="name">Value</span>&gt;</span></span></div><div class="line"></div><div class="line">--------Request扩展------</div><div class="line"><span class="bullet">0. </span>Timeline</div><div class="line"><span class="bullet">1. </span>Default</div><div class="line"><span class="bullet">2. </span>Data</div><div class="line"><span class="bullet">3. </span>String</div><div class="line"><span class="bullet">4. </span>JSON</div><div class="line"><span class="bullet">5. </span>Property List</div></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">--------协议---------</span><br><span class="line"><span class="bullet">1. </span>DataResponseSerializerProtocol</span><br><span class="line"><span class="bullet">2. </span>DownloadResponseSerializerProtocol</span><br><span class="line"></span><br><span class="line">--------结构体--------</span><br><span class="line"><span class="bullet">1. </span>DataResponseSerializer<span class="xml"><span class="tag">&lt;<span class="name">Value</span>&gt;</span></span></span><br><span class="line"><span class="bullet">2. </span>DownloadResponseSerializer<span class="xml"><span class="tag">&lt;<span class="name">Value</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">--------Request扩展------</span><br><span class="line"><span class="bullet">0. </span>Timeline</span><br><span class="line"><span class="bullet">1. </span>Default</span><br><span class="line"><span class="bullet">2. </span>Data</span><br><span class="line"><span class="bullet">3. </span>String</span><br><span class="line"><span class="bullet">4. </span>JSON</span><br><span class="line"><span class="bullet">5. </span>Property List</span><br></pre></td></tr></table></figure>
 <ul>
 <li>Request扩展中2-5都依赖于扩展1的方法，底层调用构造response,几种序列化过程基本相同。</li>
 </ul>
@@ -418,7 +446,7 @@
 </ul>
 <p>两者区别，前者不会抛出一样。</p>
 <h2 id="2-9-AFError-swift"><a href="#2-9-AFError-swift" class="headerlink" title="2.9 AFError.swift"></a>2.9 AFError.swift</h2><p>枚举类型AFError，包含四个内部枚举：</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">* ParameterEncodingFailureReason <span class="comment">// 参数编码错误</span></div><div class="line">* MultipartEncodingFailureReason <span class="comment">// 表单错误</span></div><div class="line">* ResponseValidationFailureReason <span class="comment">// 响应验证错误</span></div><div class="line">* ResponseSerializationFailureReason <span class="comment">// 数据序列化错误</span></div></pre></td></tr></table></figure>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* ParameterEncodingFailureReason <span class="comment">// 参数编码错误</span></span><br><span class="line">* MultipartEncodingFailureReason <span class="comment">// 表单错误</span></span><br><span class="line">* ResponseValidationFailureReason <span class="comment">// 响应验证错误</span></span><br><span class="line">* ResponseSerializationFailureReason <span class="comment">// 数据序列化错误</span></span><br></pre></td></tr></table></figure>
 <p>除了四个内部枚举外，AFError本身还有一个，URL无效错误。</p>
 <p>另外，还可以通过布尔值判断是否有错误。</p>
 <p>AFError.swift涉及到内联枚举，枚举绑定值和提取判断等。</p>
@@ -475,54 +503,79 @@ where S.Iterator.Element == String
 <p>URL加载系统包括加载URL的类，以及一些重要的帮助类。主要的帮助类：协议支持，身份验证和凭据，Cookie存储，配置管理和缓存管理等。 </p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>初步学习了Alamofire源码文件，并没有深入探究源码具体实现。后续内容稍后补充，先补补基础知识。🤣</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://blog.oneinbest.com/2017/04/27/swift%E5%AD%A6%E4%B9%A0%E5%8F%8AAlamofire%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" target="_blank" rel="external">swift学习及Alamofire源码阅读</a></li>
+<li><a href="http://blog.oneinbest.com/2017/04/27/swift%E5%AD%A6%E4%B9%A0%E5%8F%8AAlamofire%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" target="_blank" rel="noopener">swift学习及Alamofire源码阅读</a></li>
 </ul>
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
 
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/images/wechatpay.png" alt="Owenli WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/images/alipay.png" alt="Owenli Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Owenli 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Owenli 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
   </div>
+</div>
 
+      </div>
+    
 
-      
-    </div>
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Owenli
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://jesusLove.github.io/2017/10/17/Alamofire源码笔记/" title="Alamofire源码笔记">https://jesusLove.github.io/2017/10/17/Alamofire源码笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/Alamofire/" rel="tag">#Alamofire</a>
+            <a href="/tags/Alamofire/" rel="tag"># Alamofire</a>
           
         </div>
+      
+
+      
+      
       
 
       
@@ -534,6 +587,8 @@ where S.Iterator.Element == String
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -548,6 +603,10 @@ where S.Iterator.Element == String
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -563,9 +622,7 @@ where S.Iterator.Element == String
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
+  
 
 
         </div>
@@ -581,120 +638,141 @@ where S.Iterator.Element == String
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
             站点概览
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/me.png"
-               alt="Owenli" />
-          <p class="site-author-name" itemprop="name">Owenli</p>
-          <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">40</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/me.png"
+                alt="Owenli" />
+            
+              <p class="site-author-name" itemprop="name">Owenli</p>
+              <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            
           </div>
 
           
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
           
 
           
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
           
 
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
           
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
-                  
-                    <i class="fa fa-fw fa-twitter"></i>
-                  
-                  Twitter
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  微博
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  简书
-                </a>
-              </span>
-            
-          
+
         </div>
-
-        
-        
-
-        
-        
-
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Alamofire结构"><span class="nav-number">1.</span> <span class="nav-text">1. Alamofire结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Alamofire源码分析"><span class="nav-number">2.</span> <span class="nav-text">2. Alamofire源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Alamofire-swift文件"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Alamofire.swift文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Request-swift文件"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Request.swift文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-Request类"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 Request类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-DataRequest类"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2 DataRequest类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-DownloadRequest类"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.2.3 DownloadRequest类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4-UploadRequest类"><span class="nav-number">2.2.4.</span> <span class="nav-text">2.2.4 UploadRequest类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-5-StreamRequest类"><span class="nav-number">2.2.5.</span> <span class="nav-text">2.2.5 StreamRequest类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-6-对比"><span class="nav-number">2.2.6.</span> <span class="nav-text">2.2.6 对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-ParameterEncoding-swift文件"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 ParameterEncoding.swift文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-MultipartFormData-swift文件"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 MultipartFormData.swift文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-ServerTrustPolicy-swift文件"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 ServerTrustPolicy.swift文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-Response-swift文件"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 Response.swift文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-1-DefaultDataResponse-DataResponse结构体"><span class="nav-number">2.6.1.</span> <span class="nav-text">2.6.1 DefaultDataResponse/DataResponse结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-2-DefaultDownloadResponse-DownloadResponse结构体"><span class="nav-number">2.6.2.</span> <span class="nav-text">2.6.2 DefaultDownloadResponse/DownloadResponse结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-3-对比"><span class="nav-number">2.6.3.</span> <span class="nav-text">2.6.3 对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-ResponseSerialization-swift文件"><span class="nav-number">2.7.</span> <span class="nav-text">2.7 ResponseSerialization.swift文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-Result-swift"><span class="nav-number">2.8.</span> <span class="nav-text">2.8 Result.swift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-9-AFError-swift"><span class="nav-number">2.9.</span> <span class="nav-text">2.9 AFError.swift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-10-Validation-swift"><span class="nav-number">2.10.</span> <span class="nav-text">2.10 Validation.swift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-11-SessionManager-swift-SessionDelegate-swift-TaskDelegate-swift"><span class="nav-number">2.11.</span> <span class="nav-text">2.11 SessionManager.swift/SessionDelegate.swift/TaskDelegate.swift</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充"><span class="nav-number">3.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-URL-Loading-System架构"><span class="nav-number">3.1.</span> <span class="nav-text">1. URL Loading System架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
       
 
     </div>
@@ -707,42 +785,34 @@ where S.Iterator.Element == String
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Owenli</span>
+
+  
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a></div>
+
+
+
 
         
 
-<div class="busuanzi-count">
 
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-  
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
-  
 
-  
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
-  
-</div>
 
 
 
@@ -750,9 +820,13 @@ where S.Iterator.Element == String
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -772,6 +846,15 @@ where S.Iterator.Element == String
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -797,34 +880,9 @@ where S.Iterator.Element == String
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
-
-
-
-  
-
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
 
 
 
@@ -832,26 +890,60 @@ where S.Iterator.Element == String
   
 
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
 
   
 
