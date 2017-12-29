@@ -88,19 +88,19 @@
 
 
 
-<meta name="description" content="前言本节学习Python中的模块、输入和输出。 模块简介Python提供了一个方法可以从文件中获取定义，在脚本或者解释器的一个交互式实例中使用。这个文件就是模块。 模块是包含Python定义和声明的文件。文件以.py为后缀，模块的模块名可以有全局变量__name__得到。 举个🌰：fibo.py 1234567891011121314def fib(n):    a, b = 0, 1">
+<meta name="description" content="本节学习Python中的模块、输入和输出。">
 <meta name="keywords" content="Python3:模块、输入输出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python3基础知识：模块和输入输出">
 <meta property="og:url" content="https://jesusLove.github.io/2017/08/02/Python3基础知识：模块和输入输出/index.html">
 <meta property="og:site_name" content="紫电清霜">
-<meta property="og:description" content="前言本节学习Python中的模块、输入和输出。 模块简介Python提供了一个方法可以从文件中获取定义，在脚本或者解释器的一个交互式实例中使用。这个文件就是模块。 模块是包含Python定义和声明的文件。文件以.py为后缀，模块的模块名可以有全局变量__name__得到。 举个🌰：fibo.py 1234567891011121314def fib(n):    a, b = 0, 1">
+<meta property="og:description" content="本节学习Python中的模块、输入和输出。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://blog.techbridge.cc/img/kdchang/python-logo.png">
-<meta property="og:updated_time" content="2017-08-04T01:33:13.000Z">
+<meta property="og:updated_time" content="2017-12-29T12:28:39.103Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python3基础知识：模块和输入输出">
-<meta name="twitter:description" content="前言本节学习Python中的模块、输入和输出。 模块简介Python提供了一个方法可以从文件中获取定义，在脚本或者解释器的一个交互式实例中使用。这个文件就是模块。 模块是包含Python定义和声明的文件。文件以.py为后缀，模块的模块名可以有全局变量__name__得到。 举个🌰：fibo.py 1234567891011121314def fib(n):    a, b = 0, 1">
+<meta name="twitter:description" content="本节学习Python中的模块、输入和输出。">
 <meta name="twitter:image" content="http://blog.techbridge.cc/img/kdchang/python-logo.png">
 
 
@@ -364,7 +364,7 @@
 
       
         <p><img src="http://blog.techbridge.cc/img/kdchang/python-logo.png" alt="Python"></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本节学习Python中的模块、输入和输出。</p>
+<p>本节学习Python中的模块、输入和输出。<br><a id="more"></a></p>
 <h1 id="模块简介"><a href="#模块简介" class="headerlink" title="模块简介"></a>模块简介</h1><p>Python提供了一个方法可以从文件中获取定义，在脚本或者解释器的一个交互式实例中使用。这个文件就是模块。</p>
 <p>模块是包含Python定义和声明的文件。文件以<code>.py</code>为后缀，模块的模块名可以有全局变量<code>__name__</code>得到。</p>
 <p>举个🌰：<code>fibo.py</code></p>
@@ -736,7 +736,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模块简介"><span class="nav-number">2.</span> <span class="nav-text">模块简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深入模块"><span class="nav-number">3.</span> <span class="nav-text">深入模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#作为脚本来执行模块"><span class="nav-number">3.1.</span> <span class="nav-text">作为脚本来执行模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块的搜索路径"><span class="nav-number">3.2.</span> <span class="nav-text">模块的搜索路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#“编译的”Python文件"><span class="nav-number">3.3.</span> <span class="nav-text">“编译的”Python文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#标准模块"><span class="nav-number">4.</span> <span class="nav-text">标准模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dir-函数"><span class="nav-number">4.1.</span> <span class="nav-text">dir()函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输入和输出"><span class="nav-number">5.</span> <span class="nav-text">输入和输出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化输出"><span class="nav-number">5.1.</span> <span class="nav-text">格式化输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件读写"><span class="nav-number">5.2.</span> <span class="nav-text">文件读写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件对象方法"><span class="nav-number">5.2.1.</span> <span class="nav-text">文件对象方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用JSON存储结构化数据"><span class="nav-number">5.2.2.</span> <span class="nav-text">使用JSON存储结构化数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">6.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#模块简介"><span class="nav-number">1.</span> <span class="nav-text">模块简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深入模块"><span class="nav-number">2.</span> <span class="nav-text">深入模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#作为脚本来执行模块"><span class="nav-number">2.1.</span> <span class="nav-text">作为脚本来执行模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块的搜索路径"><span class="nav-number">2.2.</span> <span class="nav-text">模块的搜索路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#“编译的”Python文件"><span class="nav-number">2.3.</span> <span class="nav-text">“编译的”Python文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#标准模块"><span class="nav-number">3.</span> <span class="nav-text">标准模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dir-函数"><span class="nav-number">3.1.</span> <span class="nav-text">dir()函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输入和输出"><span class="nav-number">4.</span> <span class="nav-text">输入和输出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化输出"><span class="nav-number">4.1.</span> <span class="nav-text">格式化输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件读写"><span class="nav-number">4.2.</span> <span class="nav-text">文件读写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件对象方法"><span class="nav-number">4.2.1.</span> <span class="nav-text">文件对象方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用JSON存储结构化数据"><span class="nav-number">4.2.2.</span> <span class="nav-text">使用JSON存储结构化数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
             
 
           </div>

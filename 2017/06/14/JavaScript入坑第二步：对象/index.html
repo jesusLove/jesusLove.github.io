@@ -88,21 +88,21 @@
 
 
 
-<meta name="description" content="引言面向对象都有类的概念，通过类可以创建多个具有相同属性和方法的对象。ECMAScript中没有类的概念，因此它的对象与基于类的语言的对象有所不同。 ##目录  一.理解JavaScript的对象 二.JavaScript中创建对象方法 1工厂模式 2 构造函数模式 3 原型模式 4 组合使用构造函数模式和原型模式    一.理解JavaScript的对象JavaScript中的对象是一种无序的">
+<meta name="description" content="面向对象都有类的概念，通过类可以创建多个具有相同属性和方法的对象。ECMAScript中没有类的概念，因此它的对象与基于类的语言的对象有所不同。">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript入坑第二步：对象">
 <meta property="og:url" content="https://jesusLove.github.io/2017/06/14/JavaScript入坑第二步：对象/index.html">
 <meta property="og:site_name" content="紫电清霜">
-<meta property="og:description" content="引言面向对象都有类的概念，通过类可以创建多个具有相同属性和方法的对象。ECMAScript中没有类的概念，因此它的对象与基于类的语言的对象有所不同。 ##目录  一.理解JavaScript的对象 二.JavaScript中创建对象方法 1工厂模式 2 构造函数模式 3 原型模式 4 组合使用构造函数模式和原型模式    一.理解JavaScript的对象JavaScript中的对象是一种无序的">
+<meta property="og:description" content="面向对象都有类的概念，通过类可以创建多个具有相同属性和方法的对象。ECMAScript中没有类的概念，因此它的对象与基于类的语言的对象有所不同。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-58de468a2d6e99cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-05df3fa45cbfc417.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-0cb465aafdc1b437.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-28T03:00:27.921Z">
+<meta property="og:updated_time" content="2017-12-29T12:30:20.603Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript入坑第二步：对象">
-<meta name="twitter:description" content="引言面向对象都有类的概念，通过类可以创建多个具有相同属性和方法的对象。ECMAScript中没有类的概念，因此它的对象与基于类的语言的对象有所不同。 ##目录  一.理解JavaScript的对象 二.JavaScript中创建对象方法 1工厂模式 2 构造函数模式 3 原型模式 4 组合使用构造函数模式和原型模式    一.理解JavaScript的对象JavaScript中的对象是一种无序的">
+<meta name="twitter:description" content="面向对象都有类的概念，通过类可以创建多个具有相同属性和方法的对象。ECMAScript中没有类的概念，因此它的对象与基于类的语言的对象有所不同。">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1363078-58de468a2d6e99cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -365,8 +365,8 @@
       
 
       
-        <p><img src="http://upload-images.jianshu.io/upload_images/1363078-58de468a2d6e99cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AirLines"></p>
-<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>面向对象都有类的概念，通过类可以创建多个具有相同属性和方法的对象。<code>ECMAScript</code>中没有类的概念，因此它的对象与基于类的语言的对象有所不同。</p>
+        <p><img src="http://upload-images.jianshu.io/upload_images/1363078-58de468a2d6e99cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AirLines"><br>面向对象都有类的概念，通过类可以创建多个具有相同属性和方法的对象。<code>ECMAScript</code>中没有类的概念，因此它的对象与基于类的语言的对象有所不同。</p>
+<a id="more"></a>
 <p>##目录</p>
 <ul>
 <li>一.理解<code>JavaScript</code>的对象</li>
@@ -775,7 +775,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一-理解JavaScript的对象"><span class="nav-number">2.</span> <span class="nav-text">一.理解JavaScript的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-对象"><span class="nav-number">2.1.</span> <span class="nav-text">1.对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-属性类型"><span class="nav-number">2.2.</span> <span class="nav-text">2.属性类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-JavaScript中创建对象的方法"><span class="nav-number">3.</span> <span class="nav-text">二.JavaScript中创建对象的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-工厂模式"><span class="nav-number">3.1.</span> <span class="nav-text">1 工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-构造函数模式"><span class="nav-number">3.2.</span> <span class="nav-text">2 构造函数模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-原型模式"><span class="nav-number">3.3.</span> <span class="nav-text">3 原型模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-原型对象"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.1 原型对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-组合使用构造函数模式和原型模式"><span class="nav-number">3.4.</span> <span class="nav-text">4 组合使用构造函数模式和原型模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-理解JavaScript的对象"><span class="nav-number">1.</span> <span class="nav-text">一.理解JavaScript的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-对象"><span class="nav-number">1.1.</span> <span class="nav-text">1.对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-属性类型"><span class="nav-number">1.2.</span> <span class="nav-text">2.属性类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-JavaScript中创建对象的方法"><span class="nav-number">2.</span> <span class="nav-text">二.JavaScript中创建对象的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-工厂模式"><span class="nav-number">2.1.</span> <span class="nav-text">1 工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-构造函数模式"><span class="nav-number">2.2.</span> <span class="nav-text">2 构造函数模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-原型模式"><span class="nav-number">2.3.</span> <span class="nav-text">3 原型模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-原型对象"><span class="nav-number">2.3.1.</span> <span class="nav-text">3.1 原型对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-组合使用构造函数模式和原型模式"><span class="nav-number">2.4.</span> <span class="nav-text">4 组合使用构造函数模式和原型模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

@@ -88,19 +88,16 @@
 
 
 
-<meta name="description" content="标准库简介（更新中）操作系统接口 os模块提供很多与操作系统交互的函数： 12345678910111213141516# 导入OS模块&amp;gt;&amp;gt;&amp;gt; import os# 获取当前路径&amp;gt;&amp;gt;&amp;gt; os.getcwd()&apos;/Users/lqq/Desktop/Python3/Exercise1&apos;# 修改当前路径&amp;gt;&amp;gt;&amp;gt; os.chdir(&apos;/Users/l">
 <meta name="keywords" content="Python3标准库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python3标准库简介">
 <meta property="og:url" content="https://jesusLove.github.io/2017/08/04/Python3标准库简介/index.html">
 <meta property="og:site_name" content="紫电清霜">
-<meta property="og:description" content="标准库简介（更新中）操作系统接口 os模块提供很多与操作系统交互的函数： 12345678910111213141516# 导入OS模块&amp;gt;&amp;gt;&amp;gt; import os# 获取当前路径&amp;gt;&amp;gt;&amp;gt; os.getcwd()&apos;/Users/lqq/Desktop/Python3/Exercise1&apos;# 修改当前路径&amp;gt;&amp;gt;&amp;gt; os.chdir(&apos;/Users/l">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://blog.techbridge.cc/img/kdchang/python-logo.png">
-<meta property="og:updated_time" content="2017-08-04T02:36:03.000Z">
+<meta property="og:updated_time" content="2017-12-29T12:28:50.984Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python3标准库简介">
-<meta name="twitter:description" content="标准库简介（更新中）操作系统接口 os模块提供很多与操作系统交互的函数： 12345678910111213141516# 导入OS模块&amp;gt;&amp;gt;&amp;gt; import os# 获取当前路径&amp;gt;&amp;gt;&amp;gt; os.getcwd()&apos;/Users/lqq/Desktop/Python3/Exercise1&apos;# 修改当前路径&amp;gt;&amp;gt;&amp;gt; os.chdir(&apos;/Users/l">
 <meta name="twitter:image" content="http://blog.techbridge.cc/img/kdchang/python-logo.png">
 
 
@@ -364,6 +361,7 @@
 
       
         <p><img src="http://blog.techbridge.cc/img/kdchang/python-logo.png" alt="Python"></p>
+<a id="more"></a>
 <h1 id="标准库简介（更新中）"><a href="#标准库简介（更新中）" class="headerlink" title="标准库简介（更新中）"></a>标准库简介（更新中）</h1><p><strong>操作系统接口</strong></p>
 <p><code>os</code>模块提供很多与操作系统交互的函数：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 导入OS模块</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import os</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 获取当前路径</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; os.getcwd()</span></span><br><span class="line">'/Users/lqq/Desktop/Python3/Exercise1'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改当前路径</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; os.chdir(<span class="string">'/Users/lqq/Desktop/Python3'</span>)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; os.getcwd()</span></span><br><span class="line">'/Users/lqq/Desktop/Python3'</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建today文件夹</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; os.system(<span class="string">'mkdir today'</span>)</span></span><br><span class="line">0</span><br></pre></td></tr></table></figure>

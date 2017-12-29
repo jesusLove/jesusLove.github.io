@@ -88,20 +88,17 @@
 
 
 
-<meta name="description" content="1. Alamofire结构Alamofire全部实现共有17个文件组成，如下： 1234567891011121314151617181920212223242526--------接口----------Alamofire.swift // api 声明--------请求----------Request.swift // 请求类，用于构建请求ParameterEncoding.swift">
 <meta name="keywords" content="Alamofire">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Alamofire源码笔记">
 <meta property="og:url" content="https://jesusLove.github.io/2017/10/17/Alamofire源码笔记/index.html">
 <meta property="og:site_name" content="紫电清霜">
-<meta property="og:description" content="1. Alamofire结构Alamofire全部实现共有17个文件组成，如下： 1234567891011121314151617181920212223242526--------接口----------Alamofire.swift // api 声明--------请求----------Request.swift // 请求类，用于构建请求ParameterEncoding.swift">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-8f58c7bc1766a54f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-5051da9bf18af637.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-28T03:16:21.501Z">
+<meta property="og:updated_time" content="2017-12-29T12:19:35.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Alamofire源码笔记">
-<meta name="twitter:description" content="1. Alamofire结构Alamofire全部实现共有17个文件组成，如下： 1234567891011121314151617181920212223242526--------接口----------Alamofire.swift // api 声明--------请求----------Request.swift // 请求类，用于构建请求ParameterEncoding.swift">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1363078-8f58c7bc1766a54f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -365,6 +362,7 @@
 
       
         <p><img src="http://upload-images.jianshu.io/upload_images/1363078-8f58c7bc1766a54f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alamofire"></p>
+<a id="more"></a>
 <h1 id="1-Alamofire结构"><a href="#1-Alamofire结构" class="headerlink" title="1. Alamofire结构"></a>1. Alamofire结构</h1><p>Alamofire全部实现共有17个文件组成，如下：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">--------接口----------</span><br><span class="line">Alamofire<span class="selector-class">.swift</span> <span class="comment">// api 声明</span></span><br><span class="line"></span><br><span class="line">--------请求----------</span><br><span class="line">Request<span class="selector-class">.swift</span> <span class="comment">// 请求类，用于构建请求</span></span><br><span class="line">ParameterEncoding<span class="selector-class">.swift</span> <span class="comment">// 参数编码</span></span><br><span class="line">MultipartFormData<span class="selector-class">.swift</span> <span class="comment">// 自定义表单类</span></span><br><span class="line">ServerTrustPolicy<span class="selector-class">.swift</span> <span class="comment">// 服务器验证</span></span><br><span class="line"></span><br><span class="line">--------响应-----------</span><br><span class="line">Response<span class="selector-class">.swift</span> <span class="comment">// 相应类，用于构建响应</span></span><br><span class="line">ResponseSerialization<span class="selector-class">.swift</span> <span class="comment">// 响应数据序列化</span></span><br><span class="line">Validation<span class="selector-class">.swift</span> <span class="comment">// 响应数据验证</span></span><br><span class="line">Result<span class="selector-class">.swift</span> <span class="comment">// 请求结果表示</span></span><br><span class="line">AFError<span class="selector-class">.swift</span> <span class="comment">// 错误类型</span></span><br><span class="line"></span><br><span class="line">--------底层-----------</span><br><span class="line">SessionManager<span class="selector-class">.swift</span> <span class="comment">// 请求session的管理类，底层使用NSURLSession实现</span></span><br><span class="line">SessionDelegate<span class="selector-class">.swift</span> <span class="comment">// 请求Session的代理对象，主要实现NSURLSession的代理方法以及回调闭包</span></span><br><span class="line">TaskDelegate<span class="selector-class">.swift</span> <span class="comment">// 请求Task任务的代理对象，主要实现NSURLDataTask的代理方法</span></span><br><span class="line">DispatchQueue+Alamofire<span class="selector-class">.swift</span> <span class="comment">//GCD扩展，定义多个不同功能的队列</span></span><br><span class="line"></span><br><span class="line">---------其他-----------</span><br><span class="line">NetworkReachabilityManager<span class="selector-class">.swift</span> <span class="comment">// 网络状态监听类</span></span><br><span class="line">Notifications<span class="selector-class">.swift</span> <span class="comment">// 定义通知</span></span><br><span class="line">Timeline<span class="selector-class">.swift</span> <span class="comment">//描述请求有关的时间 结构体</span></span><br></pre></td></tr></table></figure>
 <p>Alamofire有五模块组成，即接口、请求、响应、底层和其他。分析各模块的实现，功能和联系就可以理解Alamofire。</p>
