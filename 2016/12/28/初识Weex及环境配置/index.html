@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="紫电清霜">
 <meta property="og:description" content="环境配置  Node.js环境 npm包管理工具   使用npm安装weex-toolkit 1$npm install -g weex-toolkit 如果想使用beta版本1$npm install -g weex-toolkit@beta 编译程序命令 1$ weex hello.we 预览页面 1$ weex hello.we --qr 调试页面weex-toolkit继承了Debugge">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-03-26T08:24:41.000Z">
+<meta property="og:updated_time" content="2018-01-02T02:10:14.559Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识Weex及环境配置">
 <meta name="twitter:description" content="环境配置  Node.js环境 npm包管理工具   使用npm安装weex-toolkit 1$npm install -g weex-toolkit 如果想使用beta版本1$npm install -g weex-toolkit@beta 编译程序命令 1$ weex hello.we 预览页面 1$ weex hello.we --qr 调试页面weex-toolkit继承了Debugge">
@@ -429,9 +429,11 @@
 <h2 id="创建Weex项目"><a href="#创建Weex项目" class="headerlink" title="创建Weex项目"></a>创建Weex项目</h2><p>安装<code>Weexpack</code></p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> weexpack -g</span><br></pre></td></tr></table></figure>
 <p>创建项目</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> weexpack init appName</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> weexpack create appName</span></span><br></pre></td></tr></table></figure>
 <p>进入项目，并安装依赖</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> appName &amp;&amp; npm install</span></span><br></pre></td></tr></table></figure>
+<p>安装iOS platform</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ weexpack platform <span class="keyword">add</span><span class="bash"> ios</span></span><br></pre></td></tr></table></figure>
 <p>运行打包</p>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//模拟器运行</span></span><br><span class="line"><span class="symbol">$</span> weexpack run ios </span><br><span class="line"></span><br><span class="line"><span class="comment">//构建ipa包</span></span><br><span class="line"><span class="symbol">$</span> weexpack build ios</span><br></pre></td></tr></table></figure>
 
@@ -718,7 +720,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

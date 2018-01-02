@@ -278,7 +278,7 @@
   <entry>
     <title><![CDATA[初识Weex及环境配置]]></title>
     <url>%2F2016%2F12%2F28%2F%E5%88%9D%E8%AF%86Weex%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%2F</url>
-    <content type="text"><![CDATA[环境配置 Node.js环境 npm包管理工具 使用npm安装weex-toolkit 1$npm install -g weex-toolkit 如果想使用beta版本1$npm install -g weex-toolkit@beta 编译程序命令 1$ weex hello.we 预览页面 1$ weex hello.we --qr 调试页面weex-toolkit继承了Debugger。 1$ weex debug hello.we 两种调试模式：Debugger和Inspector Debugger： 将会打开js debugger页面，调试js。 Inspector: 打开inspector页面，通过Weex页面的element属性结构，包含高亮元素，展示样式表，以及显示native的log. 创建Weex项目安装Weexpack 1npm install weexpack -g 创建项目 1$ weexpack init appName 进入项目，并安装依赖 1$ cd appName &amp;&amp; npm install 运行打包 12345//模拟器运行$ weexpack run ios //构建ipa包$ weexpack build ios]]></content>
+    <content type="text"><![CDATA[环境配置 Node.js环境 npm包管理工具 使用npm安装weex-toolkit 1$npm install -g weex-toolkit 如果想使用beta版本1$npm install -g weex-toolkit@beta 编译程序命令 1$ weex hello.we 预览页面 1$ weex hello.we --qr 调试页面weex-toolkit继承了Debugger。 1$ weex debug hello.we 两种调试模式：Debugger和Inspector Debugger： 将会打开js debugger页面，调试js。 Inspector: 打开inspector页面，通过Weex页面的element属性结构，包含高亮元素，展示样式表，以及显示native的log. 创建Weex项目安装Weexpack 1npm install weexpack -g 创建项目 1$ weexpack create appName 进入项目，并安装依赖 1$ cd appName &amp;&amp; npm install 安装iOS platform 1$ weexpack platform add ios 运行打包 12345//模拟器运行$ weexpack run ios //构建ipa包$ weexpack build ios]]></content>
       <categories>
         <category>Weex</category>
       </categories>
