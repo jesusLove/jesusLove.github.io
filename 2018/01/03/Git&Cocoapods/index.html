@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Git," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="紫电清霜" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git&amp;Cocoapods&amp;私有化">
+<meta property="og:url" content="https://jesusLove.github.io/2018/01/03/Git&Cocoapods/index.html">
+<meta property="og:site_name" content="紫电清霜">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/BGImages/watch.jpg">
+<meta property="og:image" content="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/Git%26CocoaPods/Git%E5%8E%9F%E7%90%86.png">
+<meta property="og:image" content="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/Git%26CocoaPods/Cocoapods.png">
+<meta property="og:updated_time" content="2018-01-03T06:25:54.008Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git&amp;Cocoapods&amp;私有化">
+<meta name="twitter:image" content="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/BGImages/watch.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jesusLove.github.io/2018/01/03/Git&Cocoapods/"/>
+
+
+
+
+
+  <title>Git&Cocoapods&私有化 | 紫电清霜</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">紫电清霜</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jesusLove.github.io/2018/01/03/Git&Cocoapods/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Owenli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫电清霜">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git&Cocoapods&私有化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-03T14:09:40+08:00">
+                2018-01-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/01/03/Git&Cocoapods/" class="leancloud_visitors" data-flag-title="Git&Cocoapods&私有化">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/BGImages/watch.jpg" alt=""></p>
+<a id="more"></a>
+<h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><p>理解Git的设计思想和基本的工作原理，对更好的使用Git至关重要。</p>
+<h2 id="Git思想"><a href="#Git思想" class="headerlink" title="Git思想"></a>Git思想</h2><p>直接记录快照，而非比较差异。和其他版本控制系统不同的是，Git存储数据时将数据看成小型的文件系统的一组快照，每次在修改文件提交更新后，它主要对当时的所有文件制作一个快照并保存到快照索引中。Git还对这一个保存过程进行了优化，也就是说当文件没有本修改时，Git不会重新存储文件而是只保留一个链接指向之前存储的文件。这是Git与其他版本控制系统的重要区别。</p>
+<p>近乎所有的操作都是在本地执行。Git的大多数操作都是在本地完成，当我们在没有网络或者没有VPN的情况下，同样可以使用Git进行办公。因为在本地磁盘上有项目的完整历史，可以在任何时候浏览项目的历史。</p>
+<p>保证数据的完整性。Git为了保证数据的完整性在存储前都会计算校验和，通过校验和来引用。校验和机制叫做SHA-1散列，也叫哈希散列。Git通过对校验和的检查可以保证数据的完整性。</p>
+<p>校验和是40个十六进制组成的字符串。例如</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">24</span>b9da6552252987aa493b52f8696cd<span class="number">6d3b00373</span></span><br></pre></td></tr></table></figure>
+<p>在Git中，所以文件都是通过校验和进行查找的，而不是文件名。</p>
+<h2 id="Git工作原理"><a href="#Git工作原理" class="headerlink" title="Git工作原理"></a>Git工作原理</h2><p>为了更好的理解Git，需要理解其设计原理。在Git中，文件有三种状态： 已提交（committed）,已修改（modified）和已暂存（staged）。</p>
+<ul>
+<li>已提交： 数据已经安全的保存到本地数据库中。</li>
+<li>已修改： 数据文件被修改，还没保存到数据库中。</li>
+<li>已暂存： 对已经修改的文件的当前版本做了标记，包含下次提交的快照。</li>
+</ul>
+<p>对应文件的三种状态，还引入了三个工作区域的概念： Git仓库，工作目录和暂存区域。</p>
+<ul>
+<li>Git仓库： 用来保存项目的数据的地方。</li>
+<li>工作目录：项目中某个版本独立提取出来的内容。</li>
+<li>暂存区域：保存文件下次提交的信息。</li>
+</ul>
+<p>工作流程：</p>
+<ul>
+<li>在工作目录中修改文件。</li>
+<li>暂存文件，将文件的快照放入暂存区域。</li>
+<li>提交更新，找到暂存区域的文件，将快照永久存储。</li>
+</ul>
+<p>工作区域和文件状态关系，如下图：</p>
+<p><img src="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/Git%26CocoaPods/Git%E5%8E%9F%E7%90%86.png" alt="Git原理"></p>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>首先在桌面创建一个文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> Desktop &amp; mkdir GitDemo &amp; <span class="built_in">cd</span> GitDemo</span></span><br></pre></td></tr></table></figure>
+<p>初始化Git仓库</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git init</span></span><br></pre></td></tr></table></figure>
+<p>查看Git仓库状态</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">// 输出：</span><br><span class="line">		On branch master</span><br><span class="line">		</span><br><span class="line">		No commits yet</span><br><span class="line">		</span><br><span class="line">		nothing <span class="built_in">to</span> commit (<span class="built_in">create</span>/copy <span class="built_in">files</span> <span class="keyword">and</span> use <span class="string">"git add"</span> <span class="built_in">to</span> track)</span><br></pre></td></tr></table></figure>
+<p>提示没有可以提交的内容，因为现在工作区什么都没有，下面添加A.md文件。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 创建A.md文件</span><br><span class="line">touch A.md</span><br><span class="line">// 查看Git状态</span><br><span class="line">git status</span><br><span class="line">// 输出：</span><br><span class="line">	On branch master</span><br><span class="line">	</span><br><span class="line">	No commits yet</span><br><span class="line">	</span><br><span class="line">	Untracked files:</span><br><span class="line">	  (<span class="keyword">use</span> <span class="string">"git add &lt;file&gt;..."</span> <span class="keyword">to</span> <span class="keyword">include</span> <span class="keyword">in</span> what will be committed)</span><br><span class="line">	</span><br><span class="line">		A.md</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">nothing</span> added <span class="keyword">to</span> <span class="keyword">commit</span> but untracked files <span class="keyword">present</span> (<span class="keyword">use</span> <span class="string">"git add"</span> <span class="keyword">to</span> track)</span><br></pre></td></tr></table></figure>
+<p>此时工作目录中新添加了一个文件，也就是说A.md文件被修改。在查看仓库状态会发现<code>Untracked files A.md</code>， 文件是为跟踪状态。可以使用<code>git add &lt;file&gt;</code>命令提交跟踪。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">add</span> A.md</span><br><span class="line">git status</span><br><span class="line">// 输出：</span><br><span class="line">	On branch master</span><br><span class="line">	</span><br><span class="line">	No commits yet</span><br><span class="line">	</span><br><span class="line">	Changes <span class="built_in">to</span> be committed:</span><br><span class="line">	  (use <span class="string">"git rm --cached &lt;file&gt;..."</span> <span class="built_in">to</span> unstage)</span><br><span class="line">	</span><br><span class="line">		<span class="built_in">new</span> <span class="built_in">file</span>:   A.md</span><br></pre></td></tr></table></figure>
+<p>输出结果新的文件<code>A.md</code>，通过<code>git add &lt;file&gt;</code>命令，此时的A文件已经被提交到暂存区，文件的状态是已暂存状态。<code>git rm --cached &lt;file&gt;...</code>可以将暂存的文件从暂存区移除。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">commit</span> -m <span class="string">'add A.md'</span></span><br><span class="line">// 输出；</span><br><span class="line">	[<span class="keyword">master</span> (root-<span class="keyword">commit</span>) af93fed] <span class="keyword">add</span> A.md</span><br><span class="line">	 <span class="number">1</span> <span class="keyword">file</span> <span class="keyword">changed</span>, <span class="number">0</span> insertions(+), <span class="number">0</span> deletions(-)</span><br><span class="line">	 <span class="keyword">create</span> <span class="keyword">mode</span> <span class="number">100644</span> A.md</span><br></pre></td></tr></table></figure>
+<p>输出结果显示了一些提交的基本信息，master分支，当前校验和[af93fed]以及在本次提交中，有多少文件修订过，多少行添加和删改过。通过此命令将文件提交到仓库中，此时文件的状态是已提交状态。</p>
+<h1 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h1><p>前面的提到，Git的大部分操作都是在本地完成的，但是为了多人协作就需要进行远程仓库管理。一些基本操作：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看远程仓库服务器</span></span><br><span class="line">git remote -v </span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加远程仓库</span></span><br><span class="line">git remote add <span class="params">&lt;name&gt;</span> <span class="params">&lt;url&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">// 拉取仓库信息</span></span><br><span class="line">git fetch <span class="params">&lt;name&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">// 推送到远程仓库</span></span><br><span class="line">git push origin master</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看远程仓库</span></span><br><span class="line">git remote show origin</span><br><span class="line"></span><br><span class="line"><span class="comment">// 远程仓库的移除和重命名</span></span><br><span class="line">git remote rename <span class="params">&lt;oldName&gt;</span> <span class="params">&lt;newName&gt;</span></span><br><span class="line">git remote rm <span class="params">&lt;name&gt;</span></span><br></pre></td></tr></table></figure>
+<p>标签操作</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看所有标签</span></span><br><span class="line">git tag</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加标签</span></span><br><span class="line">git tag -a <span class="number">0.1</span><span class="number">.1</span> -m 'message'</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示标签信息</span></span><br><span class="line">git show <span class="number">0.1</span><span class="number">.1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 提价标签到远程(--tags所有标签)</span></span><br><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure>
+<p>以上，只是Git的基本原理，其他内容请看官方文档。<a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">Git</a></p>
+<h1 id="Cocoapods"><a href="#Cocoapods" class="headerlink" title="Cocoapods"></a>Cocoapods</h1><p>作为iOS开发者，想必对Cocoapods都不会陌生，那么有没有思考过这些问题？它的是如何查找库，如何集成库的，它的工作原理是什么。那么接下来我们学习一下Cocoapods的工作原理。</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>理解其工作原理需要知道几个概念：代码库，索引库，本索引库，podspec。</p>
+<p><img src="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/Git%26CocoaPods/Cocoapods.png" alt=""></p>
+<ul>
+<li>代码库：Github上公开的代码仓库，可以集成使用。例如： Alamofire、AFNworking等。</li>
+<li>索引库：<a href="https://github.com/CocoaPods/Specs.git" target="_blank" rel="noopener">官方索引库</a>，能够通过Pod安装的库都在这里面，存放的是每个库的Podspec。</li>
+<li>本地索引库：在安装Pod时，会把官方索引库拉取到本地。通过<code>pod repo</code>查看索引库信息。</li>
+<li>Podspec：库的描述文件，里面记录着库的描述，版本，地址，依赖库等信息。</li>
+</ul>
+<p>工作流程：</p>
+<ul>
+<li>安装Cocoapods后，本地会来去官方的索引库，生成本地索引表。</li>
+<li>使用<code>Pod install</code>时，默认情况下，会去更新本地索引库，可以在后面添加<code>--no-repo-update</code>忽略更新。</li>
+<li>pod会根据<code>Podfile</code>文件内容查找索引表，找到库所对应的的<code>Podspec</code>文件，获取库的真是地址。</li>
+<li>下载三方库到本地。</li>
+</ul>
+<blockquote>
+<p>关于 <code>Podfile</code> 设置请看<a href="https://guides.cocoapods.org/using/the-podfile.html" target="_blank" rel="noopener">The Podfile</a>。</p>
+</blockquote>
+<p><code>Podspec</code>后面在做讲解，也可以查看<a href="https://guides.cocoapods.org/syntax/podspec.html" target="_blank" rel="noopener">Podspec Syntax Reference</a></p>
+<h1 id="Cocoapods私有化"><a href="#Cocoapods私有化" class="headerlink" title="Cocoapods私有化"></a>Cocoapods私有化</h1><p>理解了<code>Git</code>和<code>Cocoapods</code>的工作原理，我们需要学以致用。本节我们学习创建私有索引库，可以说这是组件化的基础。</p>
+<h2 id="索引库"><a href="#索引库" class="headerlink" title="索引库"></a>索引库</h2><p>前面提到通过命令<code>pod repo</code>可以查看本地的索引库。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">master</span><br><span class="line">- <span class="string">Type:</span> git (master)</span><br><span class="line">- <span class="string">URL:</span>  <span class="string">https:</span><span class="comment">//github.com/CocoaPods/Specs.git</span></span><br><span class="line">- <span class="string">Path:</span> <span class="regexp">/Users/</span>lqq<span class="regexp">/.cocoapods/</span>repos/master</span><br></pre></td></tr></table></figure>
+<p>上面的<code>URL</code>地址就是公共索引库的地址，浏览器打开其实就是一个仓库。里面存放着所有支持<code>cocoapods</code>的库的索引文件<code>podspec</code>。因为该库是公共的，任何人都可访问，所以为了使我们私有的库也支持<code>cocoapods</code>就需要创建私有的索引库。</p>
+<p>下面我们看如何创建私有索引库，其实很简单。你可以选用一些代码托管平台，例如：<a href="https://gitee.com" target="_blank" rel="noopener">码云</a>, <a href="https://coding.net/" target="_blank" rel="noopener">Coding</a>。这里以码云为例。</p>
+<p>在码云中创建一个私有索引库，命名为<code>LQQSpecs</code>。</p>
+<p>OK私有库就创建好了。接下来将私有索引库添加到本地。通过命令<code>pod repo add &lt;Name&gt; &lt;URL&gt;</code></p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo <span class="keyword">add</span><span class="bash"> LQQSpecs &lt;URL&gt;</span></span><br></pre></td></tr></table></figure>
+<p>添加完成后运行<code>pod repo</code>就可以看到私有索引库了。</p>
+<p>至此，私有索引库创建完成。</p>
+<h2 id="代码库"><a href="#代码库" class="headerlink" title="代码库"></a>代码库</h2><p><code>Cocoapods</code>提供了创建代码库的命令。</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="class"><span class="keyword">lib</span> <span class="title">create</span> &lt;<span class="title">Name</span>&gt; // 创建仓库</span></span><br><span class="line">/<span class="regexp">/ 拉取模板库</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 1. 设置：编程语言 OC 、Swift</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 2. 是否生成Demo？</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 3. 是否生成单元测试</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 4. 是否生成UI测试</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 5. 文件前缀</span></span><br></pre></td></tr></table></figure>
+<p>文件目录结构如下。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">├── Example</span><br><span class="line">│   ├── LQQSegmentBar</span><br><span class="line">│   ├── LQQSegmentBar.xcodeproj</span><br><span class="line">│   ├── LQQSegmentBar.xcworkspace</span><br><span class="line">│   ├── Podfile</span><br><span class="line">│   ├── Podfile.lock</span><br><span class="line">│   ├── Pods</span><br><span class="line">│   └── Tests</span><br><span class="line">├── LICENSE</span><br><span class="line">├── LQQSegmentBar</span><br><span class="line">│   ├── Assets</span><br><span class="line">│   └── Classes</span><br><span class="line">├── LQQSegmentBar.podspec</span><br><span class="line">├── README.md</span><br><span class="line">└── _Pods<span class="selector-class">.xcodeproj</span> -&gt; Example/Pods/Pods.xcodeproj</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Example: Demo文件对应前面第二步，在这里写测试代码，或实例程序</li>
+<li>LQQSegmentBar: 封装的库。</li>
+<li>LQQSegementBar.podspec: 这是库的描述文件，将它提交到索引库，后面在解释。</li>
+</ul>
+<blockquote>
+<p>这里需要注意是，当封装库更新时，<code>Example</code>需要使用<code>pod install</code>更新，才能正常使用修改过的库。</p>
+</blockquote>
+<h2 id="配置Podspec"><a href="#配置Podspec" class="headerlink" title="配置Podspec"></a>配置Podspec</h2><p>下面我们来看一下<code>Podspec</code>文件。 由于上面使用<code>pod</code>提供的模板库创建的项目，所以默认生成了该文件。如果为现有的库添加该文件，需要使用命令</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec create &lt;<span class="keyword">name</span>&gt; <span class="comment">//创建Podspec</span></span><br></pre></td></tr></table></figure>
+<p>Podspec文件创建成功。那么文件里有什么内容，如何设置。由于涉及到的参数较多，所以这里只找几个关键的。其他请看<a href="https://guides.cocoapods.org/syntax/podspec.html" target="_blank" rel="noopener">Podspec Syntax Reference</a></p>
+<p>下面以<code>AFNworking</code>的<code>Podspec</code>文件为例。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Pod::Spec.<span class="keyword">new</span> <span class="keyword">do</span> |s|</span><br><span class="line">  s.name     = <span class="string">'AFNetworking'</span> <span class="comment">// 名称</span></span><br><span class="line">  s.version  = <span class="string">'3.2.0'</span> <span class="comment">// 版本</span></span><br><span class="line">  s.license  = <span class="string">'MIT'</span> <span class="comment">// License</span></span><br><span class="line">  s.summary  = <span class="string">'A delightful iOS and OS X networking framework.'</span> <span class="comment">// 简介</span></span><br><span class="line">  s.homepage = <span class="string">'https://github.com/AFNetworking/AFNetworking'</span> <span class="comment">// 项目主页</span></span><br><span class="line">  s.authors  = &#123; <span class="string">'Mattt Thompson'</span> =&gt; <span class="string">'m@mattt.me'</span> &#125; <span class="comment">// 作者</span></span><br><span class="line">  s.source   = &#123; :git =&gt; <span class="string">'https://github.com/AFNetworking/AFNetworking.git'</span>, :tag =&gt; s.version, :submodules =&gt; <span class="keyword">true</span> &#125; <span class="comment">// 仓库地址</span></span><br><span class="line">  s.public_header_files = <span class="string">'AFNetworking/AFNetworking.h'</span> <span class="comment">// 头文件</span></span><br><span class="line">  s.source_files = <span class="string">'AFNetworking/AFNetworking.h'</span> <span class="comment">// 源文件</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">#......</span></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上面只是涉及最基础的设置，其他的请查看官方文档。</p>
+</blockquote>
+<p>封装好代码并且修改好<code>Podspec</code>文件，我们可以将项目上传到私有仓库了。</p>
+<p>上传完成后需要为项目打标签，这个标签与<code>Podspec</code>文件中的版本号对应。</p>
+<p>接下来将<code>Podspec</code>上传到私有索引库就可以，在上传之前最好验证<code>Podspec</code>文件是否有错误。</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="class"><span class="keyword">lib</span> <span class="title">lint</span> // 本地验证</span></span><br><span class="line"></span><br><span class="line">pod spec lint /<span class="regexp">/ 远程验证</span></span><br></pre></td></tr></table></figure>
+<p>上传到私有索引库<code>pod repo push &lt;索引库名&gt; &lt;Podspec文件&gt;</code></p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">pod</span> repo <span class="keyword">push </span>LQQSpecs xxx.podspec</span><br></pre></td></tr></table></figure>
+<p>OK！至此，私有索引库，私有仓库，添加到私有索引库都完成了。</p>
+<p>检验成果的时候到了。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="built_in">search</span> <span class="string">'xxx'</span></span><br><span class="line"></span><br><span class="line">// [!] Unable <span class="keyword">to</span> <span class="keyword">find</span> <span class="keyword">a</span> pod with name, author, summary, <span class="built_in">or</span> description matching `xxx`</span><br></pre></td></tr></table></figure>
+<p>WTF! 这是什么情况呢, 不要着急，并不是上述没有成功，是因为电脑有缓存。</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">资料库-&gt;Caches-&gt;Cocoapods</span><br></pre></td></tr></table></figure>
+<p>那么，如何将个人开源库发送到共有索引库，想必也回来。唯一的区别是<code>Podspec</code>上传的位置不同。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文学习了Git和Cocoapods工作原理。以及通过Cocoapods创建私有库，并集成<code>Cocoapods</code>功能。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">Git官方文档-中文版</a></li>
+<li><a href="https://guides.cocoapods.org/" target="_blank" rel="noopener">Cocoapods官方文档</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Owenli 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Owenli 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Owenli
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://jesusLove.github.io/2018/01/03/Git&Cocoapods/" title="Git&Cocoapods&私有化">https://jesusLove.github.io/2018/01/03/Git&Cocoapods/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/27/YYModel源码解析二/" rel="next" title="从YYModel源码中可以学到什么：后篇">
+                <i class="fa fa-chevron-left"></i> 从YYModel源码中可以学到什么：后篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/me.png"
+                alt="Owenli" />
+            
+              <p class="site-author-name" itemprop="name">Owenli</p>
+              <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git"><span class="nav-number">1.</span> <span class="nav-text">Git</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git思想"><span class="nav-number">1.1.</span> <span class="nav-text">Git思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git工作原理"><span class="nav-number">1.2.</span> <span class="nav-text">Git工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证"><span class="nav-number">1.3.</span> <span class="nav-text">验证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#远程仓库"><span class="nav-number">2.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cocoapods"><span class="nav-number">3.</span> <span class="nav-text">Cocoapods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工作原理"><span class="nav-number">3.1.</span> <span class="nav-text">工作原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cocoapods私有化"><span class="nav-number">4.</span> <span class="nav-text">Cocoapods私有化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引库"><span class="nav-number">4.1.</span> <span class="nav-text">索引库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码库"><span class="nav-number">4.2.</span> <span class="nav-text">代码库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Podspec"><span class="nav-number">4.3.</span> <span class="nav-text">配置Podspec</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Owenli</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        app_id: 'QfqKpSCunU088bTCXRvh0IDq-gzGzoHsz',
+        app_key: 'KGVXfETAJhm1Rvq4UedrDF5B',
+        placeholder: '留下你的足迹吧！'
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("QfqKpSCunU088bTCXRvh0IDq-gzGzoHsz", "KGVXfETAJhm1Rvq4UedrDF5B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

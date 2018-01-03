@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-b4cc0fb671d44066.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-4d2ef16745784b78.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1363078-72e2586b378f1595.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640">
-<meta property="og:updated_time" content="2017-03-26T08:24:41.000Z">
+<meta property="og:updated_time" content="2018-01-03T01:07:05.500Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你真的了解Git和Github吗？">
 <meta name="twitter:description" content="前言整理Git常用命令，最后附有张哥的Github系列文章。 安装Git如何安装Git， 这里我们就不说了，自行Google。安装完后，检查是否安装成功，在终端输入：git， 如果有git相关的帮助提示，则证明安装成功。 Git命令 mkdir Test     创建文件夹Test cd  Test   切换到Test文件夹 touch  a.md  (新建a.md文件） 目前为止，Test还不是">
@@ -455,8 +455,10 @@
 <li><strong>Push</strong> 例如：<code>git push origin master</code> 把本地代码推到<code>master</code>分支。</li>
 <li><strong>Pull</strong>  例如： <code>git pull origin master</code> 把远程代码拉取到本地。注意：在push代码的时候，先pull代码，这样不容易产生冲突。</li>
 <li><strong>Clone</strong> : 例如： <code>git clone XXX</code> 将Github的代码clone到本地。</li>
-<li><strong>git remote origin XXX</strong> 常见远程仓库。</li>
-<li><strong> git remoter -v</strong> 查看当前项目远程仓库。</li>
+<li><strong>git remote origin XXX</strong> 创建远程仓库。</li>
+<li><strong>git remote remove origin</strong> 删除名称为origin的地址</li>
+<li><strong>git remote add origin XXX</strong> 添加仓库地址名称设置为origin</li>
+<li><strong>git remote -v</strong> 查看当前项目远程仓库。</li>
 </ul>
 <p>另外：提交代码需要设置用户名和密码：<br><code>git config -global user.name &quot;XXX&quot;</code><br><code>git config -global user.email &quot;XXX&quot;</code> 以上是全局配置，如果需要给某个项目设置特定的邮箱和用户名，可以<code>-global</code>参数移除。</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>以上是Git最基本的用法，至于团队合作解决冲突，可以查看<code>stormzhang</code>的文章：</p>
@@ -644,7 +646,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
