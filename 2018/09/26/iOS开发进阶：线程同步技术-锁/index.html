@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="锁," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="紫电清霜" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="在iOS多线程中，经常会出现资源竞争和死锁的问题。本节将学习iOS中不同的锁。 线程同步方案 常见的两个问题：多线程买票和存取钱问题。  示例：存取钱问题 12345678910111213141516171819202122232425262728293031// 示例：存取钱问题- (void)moneyTest &amp;#123;    self.moneyCount = 100;">
+<meta name="keywords" content="锁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS开发进阶：线程同步技术-锁">
+<meta property="og:url" content="https://jesusLove.github.io/2018/09/26/iOS开发进阶：线程同步技术-锁/index.html">
+<meta property="og:site_name" content="紫电清霜">
+<meta property="og:description" content="在iOS多线程中，经常会出现资源竞争和死锁的问题。本节将学习iOS中不同的锁。 线程同步方案 常见的两个问题：多线程买票和存取钱问题。  示例：存取钱问题 12345678910111213141516171819202122232425262728293031// 示例：存取钱问题- (void)moneyTest &amp;#123;    self.moneyCount = 100;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1363078-7fd0b6548d057739.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-09-26T10:04:33.171Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS开发进阶：线程同步技术-锁">
+<meta name="twitter:description" content="在iOS多线程中，经常会出现资源竞争和死锁的问题。本节将学习iOS中不同的锁。 线程同步方案 常见的两个问题：多线程买票和存取钱问题。  示例：存取钱问题 12345678910111213141516171819202122232425262728293031// 示例：存取钱问题- (void)moneyTest &amp;#123;    self.moneyCount = 100;">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1363078-7fd0b6548d057739.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jesusLove.github.io/2018/09/26/iOS开发进阶：线程同步技术-锁/"/>
+
+
+
+
+
+  <title>iOS开发进阶：线程同步技术-锁 | 紫电清霜</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">紫电清霜</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jesusLove.github.io/2018/09/26/iOS开发进阶：线程同步技术-锁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Owenli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫电清霜">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS开发进阶：线程同步技术-锁</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-26T18:01:14+08:00">
+                2018-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/09/26/iOS开发进阶：线程同步技术-锁/" class="leancloud_visitors" data-flag-title="iOS开发进阶：线程同步技术-锁">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/1363078-7fd0b6548d057739.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="多线程.png"></p>
+<p>在iOS多线程中，经常会出现资源竞争和死锁的问题。本节将学习iOS中不同的锁。</p>
+<h1 id="线程同步方案"><a href="#线程同步方案" class="headerlink" title="线程同步方案"></a>线程同步方案</h1><blockquote>
+<p>常见的两个问题：多线程买票和存取钱问题。</p>
+</blockquote>
+<p>示例：存取钱问题</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 示例：存取钱问题</span></span><br><span class="line">- (<span class="keyword">void</span>)moneyTest &#123;</span><br><span class="line">    <span class="keyword">self</span>.moneyCount = <span class="number">100</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            [<span class="keyword">self</span> saveMoney];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            [<span class="keyword">self</span> takeMoney];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)saveMoney &#123;</span><br><span class="line">    <span class="keyword">int</span> oldCount = <span class="keyword">self</span>.moneyCount;</span><br><span class="line">    sleep(<span class="number">0.2</span>);</span><br><span class="line">    oldCount += <span class="number">50</span>;</span><br><span class="line">    <span class="keyword">self</span>.moneyCount = oldCount;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"存50，还剩%d钱"</span>, <span class="keyword">self</span>.moneyCount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)takeMoney &#123;</span><br><span class="line">    <span class="keyword">int</span> oldCount = <span class="keyword">self</span>.moneyCount;</span><br><span class="line">    sleep(<span class="number">0.2</span>);</span><br><span class="line">    oldCount -= <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">self</span>.moneyCount = oldCount;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"取20，还剩%d钱"</span>, <span class="keyword">self</span>.moneyCount);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>示例：卖票问题</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 示例：买票</span></span><br><span class="line">- (<span class="keyword">void</span>)sellTest &#123;</span><br><span class="line">    <span class="keyword">self</span>.count = <span class="number">15</span>;</span><br><span class="line">    <span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            [<span class="keyword">self</span> printTest2];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            [<span class="keyword">self</span> printTest2];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            [<span class="keyword">self</span> printTest2];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)printTest2 &#123;</span><br><span class="line">    <span class="built_in">NSInteger</span> oldCount = <span class="keyword">self</span>.count;</span><br><span class="line">    sleep(<span class="number">0.2</span>);</span><br><span class="line">    oldCount --;</span><br><span class="line">    <span class="keyword">self</span>.count = oldCount;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"还剩%ld张票 - %@"</span>, (<span class="keyword">long</span>)oldCount, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解决上面这种资源共享问题，就需要使用线程同步技术。线程同步技术的核心是：锁。下面学习iOS中不同锁的使用，比较不同锁之间的优缺点。</p>
+<p>示例代码：<a href="https://github.com/jesusLove/Owenli_Blog/tree/master/Content/iOS/%E5%A4%9A%E7%BA%BF%E7%A8%8B" target="_blank" rel="noopener">演示购票和存取钱问题：Demo</a></p>
+<h1 id="iOS当中有哪些锁？"><a href="#iOS当中有哪些锁？" class="headerlink" title="iOS当中有哪些锁？"></a>iOS当中有哪些锁？</h1><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@synchronized</span> 常用于单例</span><br><span class="line">atomic 原子性</span><br><span class="line">OSSpinLock 自旋锁</span><br><span class="line"><span class="built_in">NSRecursiveLock</span> 递归锁</span><br><span class="line"><span class="built_in">NSLock</span> </span><br><span class="line">dispatch_semaphore_t 信号量</span><br><span class="line"><span class="built_in">NSCondition</span> 条件</span><br><span class="line"><span class="built_in">NSConditionLock</span> 条件锁</span><br></pre></td></tr></table></figure>
+<p>简介：</p>
+<ul>
+<li><code>@synchronized</code> 使用场景：一般在创建单例对象时使用，保证对象在多线程中是唯一的。</li>
+<li><code>atomic</code> 属性关键字原子性，保证赋值操作是线程安全的，读取操作不能保证线程安全。</li>
+<li><code>OSSpinLock</code> 自旋锁。特点：循环等待访问，不释放当前资源。常用于轻量级数据访问，简单的int值+1/-1操作。<br>*<code>NSLock</code> 某个线程A调用lock方法。这样，NSLock将被上锁。可以执行“关键部分”，完成后，调用unlock方法。如果，在线程A 调用unlock方法之前，另一个线程B调用了同一锁对象的lock方法。那么，线程B只有等待。直到线程A调用了unlock。</li>
+</ul>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">lock</span> <span class="built_in">lock</span>]; <span class="comment">//加锁</span></span><br><span class="line"><span class="comment">// 关键部分</span></span><br><span class="line">[<span class="built_in">lock</span> unlock]; <span class="comment">// 解锁</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>NSRecursiveLock</code> 递归锁，特点：递归锁在被同一线程重复获取时不会产生死锁。</li>
+<li><code>dispatch_semaphore_t</code> 信号量<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建信号量结构体对象，含有一个int成员</span></span><br><span class="line"><span class="selector-tag">dispatch_semaphore_create</span>(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 先对value减一，如果小于零表示没有资源可以访问。通过主动行为进行阻塞。</span></span><br><span class="line"><span class="selector-tag">dispatch_semaphore_wait</span>(semaphore, DISPATCH_TIME_FOREVER);</span><br><span class="line"><span class="comment">// value加1，小于等零表示有队列在排队，通过被动行为进行唤醒</span></span><br><span class="line"><span class="selector-tag">dispatch_semaphore_signal</span>(semaphore);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="OSSpinLock"><a href="#OSSpinLock" class="headerlink" title="OSSpinLock"></a>OSSpinLock</h1><p>自旋锁，等待锁的线程会处于忙等状态，一直占用着CPU资源。</p>
+<p>常用API：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">导入头文件</span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;libkern/OSAtomic.h&gt;</span></span></span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">OSSpinLock lock = OS_SPINLOCK_INIT;</span><br><span class="line"><span class="comment">// 尝试加锁</span></span><br><span class="line">OSSpinLockTry(&amp;lock);</span><br><span class="line"><span class="comment">// 加锁</span></span><br><span class="line">OSSpinLockLock(&amp;lock);</span><br><span class="line"><span class="comment">// 解锁</span></span><br><span class="line">OSSpinLockUnlock(&amp;lock);</span><br></pre></td></tr></table></figure>
+<p>使用<code>OSSpinLock</code>解决卖票问题</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自旋锁：#import &lt;libkern/OSAtomic.h&gt;</span></span><br><span class="line"><span class="comment">// 定义一个全局的自旋锁对象 lock 。</span></span><br><span class="line">- (<span class="keyword">void</span>)printTest2 &#123;</span><br><span class="line">    <span class="comment">// 加锁</span></span><br><span class="line">    OSSpinLockLock(&amp;_lock);</span><br><span class="line">    <span class="built_in">NSInteger</span> oldCount = <span class="keyword">self</span>.count;</span><br><span class="line">    sleep(<span class="number">0.2</span>);</span><br><span class="line">    oldCount --;</span><br><span class="line">    <span class="keyword">self</span>.count = oldCount;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"还剩%ld张票 - %@"</span>, (<span class="keyword">long</span>)oldCount, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    <span class="comment">// 解锁</span></span><br><span class="line">    OSSpinLockUnlock(&amp;_lock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用<code>OSSpinLock</code>解决存取钱问题</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">- (void)saveMoney &#123;</span><br><span class="line">    OSSpinLockLock(&amp;_moneyLock)<span class="comment">;</span></span><br><span class="line">    int oldCount = self.moneyCount<span class="comment">;</span></span><br><span class="line">    sleep(<span class="number">0</span>.<span class="number">2</span>)<span class="comment">;</span></span><br><span class="line">    oldCount += <span class="number">50</span><span class="comment">;</span></span><br><span class="line">    self.moneyCount = oldCount<span class="comment">;</span></span><br><span class="line">    NSLog(@<span class="string">"存50，还剩%d钱"</span>, self.moneyCount)<span class="comment">;</span></span><br><span class="line">    OSSpinLockUnlock(&amp;_moneyLock)<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line">- (void)takeMoney &#123;</span><br><span class="line">    OSSpinLockLock(&amp;_moneyLock)<span class="comment">;</span></span><br><span class="line">    int oldCount = self.moneyCount<span class="comment">;</span></span><br><span class="line">    sleep(<span class="number">0</span>.<span class="number">2</span>)<span class="comment">;</span></span><br><span class="line">    oldCount -= <span class="number">20</span><span class="comment">;</span></span><br><span class="line">    self.moneyCount = oldCount<span class="comment">;</span></span><br><span class="line">    NSLog(@<span class="string">"取20，还剩%d钱"</span>, self.moneyCount)<span class="comment">;</span></span><br><span class="line">    OSSpinLockUnlock(&amp;_moneyLock)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：卖票和取钱不要共用一把锁。这里创建了两把锁<code>sellLock</code>和<code>moneyLock</code>。</p>
+</blockquote>
+<p>自旋锁现在不再安全，因为可能出现优先级反转问题。如果等待锁的线程优先级较高，他会一直占用CPU资源，优先级低的线程就无法获取CPU资源完成任务并释放锁。可以查看这篇文章<a href="https://blog.ibireme.com/2016/01/16/spinlock_is_unsafe_in_ios/" target="_blank" rel="noopener">不再安全的OSSpinLock</a>。</p>
+<p>本节示例代码：<a href="https://github.com/jesusLove/Owenli_Blog/tree/master/Content/iOS/%E5%A4%9A%E7%BA%BF%E7%A8%8B/XMG_GCD_%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5" target="_blank" rel="noopener">线程同步解决方案Demo</a></p>
+<h1 id="os-unfair-lock"><a href="#os-unfair-lock" class="headerlink" title="os_unfair_lock"></a>os_unfair_lock</h1><p>自旋锁已经不再安全，存在优先级反转问题。苹果在iOS10开始使用<code>os_unfair_lock</code>取代了<code>OSSpinLock</code>。从底层调用来看，自旋锁和<code>os_unfair_lock</code>的区别，前者等待线程处于忙等，而后者等待线程处于休眠状态。</p>
+<p>常用API：</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">导入头文件 </span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;os/lock.h&gt;</span></span></span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">os_unfair_lock <span class="built_in">lock</span> = OS_UNFAIR_LOCK_INIT;</span><br><span class="line"><span class="comment">// 尝试加锁</span></span><br><span class="line">os_unfair_lock_trylock(&amp;<span class="variable">_lock</span>);</span><br><span class="line"><span class="comment">// 加锁</span></span><br><span class="line">os_unfair_lock_lock(&amp;<span class="variable">_lock</span>);</span><br><span class="line"><span class="comment">// 解锁</span></span><br><span class="line">os_unfair_lock_unlock(&amp;<span class="variable">_lock</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="pthread-mutex"><a href="#pthread-mutex" class="headerlink" title="pthread_mutex"></a>pthread_mutex</h1><p>互斥锁，等待锁的线程处于休眠状态。</p>
+<p>常用API：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 头文件 #import &lt;pthread.h&gt;</span></span><br><span class="line">- (<span class="keyword">void</span>)__initLock:(pthread_mutex_t *)lock &#123;</span><br><span class="line">    <span class="comment">// 初始化属性</span></span><br><span class="line">    pthread_mutexattr_t attr;</span><br><span class="line">    pthread_mutexattr_init(&amp;attr);</span><br><span class="line">    <span class="comment">// 设置为普通锁，PTHREAD_MUTEX_RECURSIVE表示递归锁</span></span><br><span class="line">    pthread_mutexattr_settype(&amp;attr, PTHREAD_MUTEX_DEFAULT);</span><br><span class="line">    <span class="comment">// 初始化锁</span></span><br><span class="line">    pthread_mutex_init(lock, &amp;attr);</span><br><span class="line">    <span class="comment">// 销毁属性</span></span><br><span class="line">    pthread_mutexattr_destroy(&amp;attr);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 加锁</span></span><br><span class="line">pthread_mutex_lock(&amp;lock);</span><br><span class="line"><span class="comment">// 解锁</span></span><br><span class="line"> pthread_mutex_unlock(&amp;lock);</span><br><span class="line"><span class="comment">// 初始化条件</span></span><br><span class="line">pthread_cond_init(&amp;cond, <span class="literal">NULL</span>)</span><br><span class="line"><span class="comment">// 等待条件（进入休眠，放开锁；被唤醒后，会再次加锁）</span></span><br><span class="line">pthread_cond_wait(&amp;cond, &amp;lock);</span><br><span class="line"><span class="comment">// 激活一个等待该条件的线程</span></span><br><span class="line">pthread_cond_signal(&amp;cond);</span><br><span class="line"><span class="comment">// 激活所有等待该条件的线程</span></span><br><span class="line">pthread_cond_broadcast(&amp;cond); </span><br><span class="line"><span class="comment">// 销毁资源</span></span><br><span class="line">pthread_mutex_destory(&amp;lock);</span><br><span class="line">pthread_cond_destory(&amp;cond);</span><br></pre></td></tr></table></figure>
+<p>其中<code>PTHREAD_MUTEX_DEFAULT</code>设置的是锁的类型，还有另一种类型<code>PTHREAD_MUTEX_RECURSIVE</code>表示递归锁。递归锁允许同一个线程对一把锁进行重复加锁。</p>
+<h1 id="NSLock-amp-NSRecursiveLock-amp-NSCondition"><a href="#NSLock-amp-NSRecursiveLock-amp-NSCondition" class="headerlink" title="NSLock&amp;NSRecursiveLock&amp;NSCondition"></a>NSLock&amp;NSRecursiveLock&amp;NSCondition</h1><p><code>NSLock</code>是对<code>mutex</code>普通锁的封装。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">NSLocking</span></span></span><br><span class="line">- (<span class="keyword">void</span>)lock;</span><br><span class="line">- (<span class="keyword">void</span>)unlock;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSLock</span> : <span class="title">NSObject</span> &lt;<span class="title">NSLocking</span>&gt; </span>&#123;</span><br><span class="line">- (<span class="built_in">BOOL</span>)tryLock; <span class="comment">// 尝试加锁</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)lockBeforeDate:(<span class="built_in">NSDate</span> *)limit; <span class="comment">//在时间之前获取锁并返回，YES表示成功。</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p><code>NSRecursiveLock</code>是对<code>mutex</code>递归锁的封装，API同<code>NSLock</code>相似。</p>
+<p><code>NSCondition</code>是对<code>mutex</code>条件的封装。</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@protocol NSLocking</span><br><span class="line">-<span class="ruby"> (void)lock;</span></span><br><span class="line"><span class="ruby">- (void)unlock;</span></span><br><span class="line"><span class="ruby">@end</span></span><br><span class="line"><span class="ruby">@interface NSCondition : NSObject &lt;NSLocking&gt; &#123;</span></span><br><span class="line"><span class="ruby">- (void)wait; <span class="regexp">//</span> 等待</span></span><br><span class="line"><span class="ruby">- (BOOL)<span class="symbol">waitUntilDate:</span>(NSDate *)limit; <span class="regexp">//</span> 等待某一个时间段</span></span><br><span class="line"><span class="ruby">- (void)signal; <span class="regexp">//</span> 唤醒</span></span><br><span class="line"><span class="ruby">- (void)broadcast; <span class="regexp">//</span> 唤醒所有睡眠线程</span></span><br><span class="line"><span class="ruby">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>以上可以查看<code>pthread_mutex</code>使用。</p>
+<h1 id="atomic"><a href="#atomic" class="headerlink" title="atomic"></a>atomic</h1><p><code>atomic</code>用于保证属性<code>setter</code>和<code>getter</code>的原子性操作，相当于对<code>setter</code>和<code>getter</code>内部加了同步锁。它并不能保证使用属性的使用过程是线程安全的。</p>
+<h1 id="NSConditionLock"><a href="#NSConditionLock" class="headerlink" title="NSConditionLock"></a>NSConditionLock</h1><p><code>NSConditionLock</code>是对<code>NSCondition</code>的进一步封装。可以设置具体的条件值。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 遵循NSLocking协议。</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSConditionLock</span> : <span class="title">NSObject</span> &lt;<span class="title">NSLocking</span>&gt; </span>&#123;</span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithCondition:(<span class="built_in">NSInteger</span>)condition <span class="built_in">NS_DESIGNATED_INITIALIZER</span>; <span class="comment">// 初始化，传入一个条件值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>) <span class="built_in">NSInteger</span> condition;</span><br><span class="line">- (<span class="keyword">void</span>)lockWhenCondition:(<span class="built_in">NSInteger</span>)condition; <span class="comment">// 条件值符合加锁</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)tryLock; <span class="comment">//尝试加锁</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)tryLockWhenCondition:(<span class="built_in">NSInteger</span>)condition;</span><br><span class="line">- (<span class="keyword">void</span>)unlockWithCondition:(<span class="built_in">NSInteger</span>)condition;</span><br><span class="line">- (<span class="built_in">BOOL</span>)lockBeforeDate:(<span class="built_in">NSDate</span> *)limit;</span><br><span class="line">- (<span class="built_in">BOOL</span>)lockWhenCondition:(<span class="built_in">NSInteger</span>)condition beforeDate:(<span class="built_in">NSDate</span> *)limit;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>示例代码：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除</span></span><br><span class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">__one</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当锁内部条件值为1时，加锁。</span></span><br><span class="line"><span class="comment">//    [self.condition lockWhenCondition:1];</span></span><br><span class="line">    <span class="selector-attr">[self.condition lock]</span>; <span class="comment">// 直接使用lock也可以</span></span><br><span class="line">    <span class="selector-tag">sleep</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="selector-tag">NSLog</span>(@<span class="string">"%s ①"</span>, __func__);</span><br><span class="line">    <span class="selector-attr">[self.condition unlockWithCondition:2]</span>; <span class="comment">// 解锁，并且条件设置为2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 添加</span></span><br><span class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">__two</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="selector-attr">[self.condition lockWhenCondition:2]</span>; <span class="comment">//条件值为2时，加锁。</span></span><br><span class="line">    <span class="selector-tag">sleep</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="selector-tag">NSLog</span>(@<span class="string">"%s ②"</span>, __func__);</span><br><span class="line">    <span class="selector-attr">[self.condition unlockWithCondition:3]</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加</span></span><br><span class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">__three</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="selector-attr">[self.condition lockWhenCondition:3]</span>; <span class="comment">//条件值为2时，加锁。</span></span><br><span class="line">    <span class="selector-tag">sleep</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="selector-tag">NSLog</span>(@<span class="string">"%s ③"</span>, __func__);</span><br><span class="line">    <span class="selector-attr">[self.condition unlock]</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">otherTest</span> &#123;</span><br><span class="line">    <span class="comment">// ①</span></span><br><span class="line">    <span class="selector-attr">[[[NSThread alloc]</span> <span class="selector-tag">initWithTarget</span><span class="selector-pseudo">:self</span> <span class="selector-tag">selector</span>:@<span class="selector-tag">selector</span>(__one) <span class="selector-tag">object</span><span class="selector-pseudo">:nil</span>] <span class="selector-tag">start</span>];</span><br><span class="line">    <span class="comment">// ②</span></span><br><span class="line">    <span class="selector-attr">[[[NSThread alloc]</span> <span class="selector-tag">initWithTarget</span><span class="selector-pseudo">:self</span> <span class="selector-tag">selector</span>:@<span class="selector-tag">selector</span>(__two) <span class="selector-tag">object</span><span class="selector-pseudo">:nil</span>] <span class="selector-tag">start</span>];</span><br><span class="line">    <span class="comment">// ③</span></span><br><span class="line">    <span class="selector-attr">[[[NSThread alloc]</span> <span class="selector-tag">initWithTarget</span><span class="selector-pseudo">:self</span> <span class="selector-tag">selector</span>:@<span class="selector-tag">selector</span>(__three) <span class="selector-tag">object</span><span class="selector-pseudo">:nil</span>] <span class="selector-tag">start</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 通过设置条件值，可以决定线程的执行顺序。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<blockquote>
+<p>-[LENSConditionLock <strong>one] ①<br> -[LENSConditionLock </strong>two] ②<br> -[LENSConditionLock __three] ③</p>
+</blockquote>
+<h1 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h1><p>常用API：</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化</span></span><br><span class="line"> dispatch_semaphore_t semaphore = dispatch_semaphore_create(<span class="number">5</span>);  </span><br><span class="line"><span class="comment">// 如果信号量的值&lt;=0，当前线程就会进入休眠等待，直到信号量的值&gt;0</span></span><br><span class="line"><span class="comment">// 如果信号量的值&gt;0，就减1，然后往下执行后面的代码</span></span><br><span class="line">dispatch_semaphore_wait(<span class="built_in">self</span>.semaphore, DISPATCH_TIME_FOREVER);</span><br><span class="line"><span class="comment">// 让信号量的值增加1，信号量值不等于零时，前面的等待的代码会执行。</span></span><br><span class="line">dispatch_semaphore_signal(<span class="built_in">self</span>.semaphore);</span><br></pre></td></tr></table></figure>
+<p><code>dispatch_semaphore</code>信号量的初始值，控制线程的最大并发访问数量。<br>信号量的初始值为1，代表同时只允许1条线程访问资源，保证线程同步。</p>
+<p>示例代码：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置信号量初始值为5。</span></span><br><span class="line">- (<span class="keyword">void</span>)otherTest &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i ++) &#123;</span><br><span class="line">        [[[<span class="built_in">NSThread</span> alloc] initWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(test) object:<span class="literal">nil</span>] start];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)test &#123;</span><br><span class="line">    <span class="comment">// 如果信号量的值&lt;=0，当前线程就会进入休眠等待，直到信号量的值&gt;0</span></span><br><span class="line">    <span class="comment">// 如果信号量的值&gt;0，就减1，然后往下执行后面的代码</span></span><br><span class="line">    dispatch_semaphore_wait(<span class="keyword">self</span>.semaphore, DISPATCH_TIME_FOREVER);</span><br><span class="line">    sleep(<span class="number">2</span>);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"test - %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    <span class="comment">// 让信号量的值增加1</span></span><br><span class="line">    dispatch_semaphore_signal(<span class="keyword">self</span>.semaphore);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="synchronized"><a href="#synchronized" class="headerlink" title="@synchronized"></a>@synchronized</h1><p><code>@synchronized</code>是对<code>mutex</code>递归锁的封装。<br>不推荐使用，性能比较差。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源码：objc4中的objc-sync.mm</span></span><br><span class="line"><span class="variable">@synchronized</span> (obj) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="性能比较"><a href="#性能比较" class="headerlink" title="性能比较"></a>性能比较</h1><p><a href="https://blog.ibireme.com/2016/01/16/spinlock_is_unsafe_in_ios/" target="_blank" rel="noopener">不再安全的OSSpinLock</a>中对比了不同锁的性能。<br>推荐使用<code>dispatch_semaphore</code>和<code>pthread_mutex</code>两个。因为<code>OSSpinLock</code>性能最好但是不安全，<code>os_unfair_lock</code>在iOS10才出现低版本不支持不推荐。</p>
+<h1 id="自旋锁、互斥锁的选择"><a href="#自旋锁、互斥锁的选择" class="headerlink" title="自旋锁、互斥锁的选择"></a>自旋锁、互斥锁的选择</h1><p>自旋锁预计线程等待锁的时间很短，加锁经常被调用但竞争情况很少出现。常用于多核处理器。<br>互斥锁预计等待锁的时间较长，单核处理器。临界区有IO操作，例如文件读写。</p>
+<p>示例代码：<a href="https://github.com/jesusLove/Owenli_Blog/tree/master/Content/iOS/%E5%A4%9A%E7%BA%BF%E7%A8%8B/XMG_GCD_%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5" target="_blank" rel="noopener">锁实例代码-Github</a></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li>怎样用GCD实现多读单写？</li>
+<li>iOS提供几种多线程技术各自的特点？</li>
+<li>NSOperation对象在Finished之后是怎样从队列中移除的？</li>
+<li>你都用过哪些锁？结合实际谈谈你是怎样使用的？</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="">小码哥底层班视频</a><br><a href="http://mrpeak.cn/blog/synchronized/" target="_blank" rel="noopener">正确使用多线程同步锁@synchronized()</a><br><a href="https://bestswifter.com/ios-lock/" target="_blank" rel="noopener">深入理解iOS开发中的锁</a><br><a href="http://blog.sina.com.cn/s/blog_7b9d64af0101d77e.html" target="_blank" rel="noopener">Object-C 多线程中锁的使用-NSLock</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Owenli 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Owenli 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Owenli
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://jesusLove.github.io/2018/09/26/iOS开发进阶：线程同步技术-锁/" title="iOS开发进阶：线程同步技术-锁">https://jesusLove.github.io/2018/09/26/iOS开发进阶：线程同步技术-锁/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/锁/" rel="tag"># 锁</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/26/iOS开发进阶：多线程/" rel="next" title="iOS开发进阶：多线程">
+                <i class="fa fa-chevron-left"></i> iOS开发进阶：多线程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/me.png"
+                alt="Owenli" />
+            
+              <p class="site-author-name" itemprop="name">Owenli</p>
+              <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线程同步方案"><span class="nav-number">1.</span> <span class="nav-text">线程同步方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iOS当中有哪些锁？"><span class="nav-number">2.</span> <span class="nav-text">iOS当中有哪些锁？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OSSpinLock"><span class="nav-number">3.</span> <span class="nav-text">OSSpinLock</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#os-unfair-lock"><span class="nav-number">4.</span> <span class="nav-text">os_unfair_lock</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pthread-mutex"><span class="nav-number">5.</span> <span class="nav-text">pthread_mutex</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSLock-amp-NSRecursiveLock-amp-NSCondition"><span class="nav-number">6.</span> <span class="nav-text">NSLock&amp;NSRecursiveLock&amp;NSCondition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#atomic"><span class="nav-number">7.</span> <span class="nav-text">atomic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSConditionLock"><span class="nav-number">8.</span> <span class="nav-text">NSConditionLock</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信号量"><span class="nav-number">9.</span> <span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#synchronized"><span class="nav-number">10.</span> <span class="nav-text">@synchronized</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性能比较"><span class="nav-number">11.</span> <span class="nav-text">性能比较</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自旋锁、互斥锁的选择"><span class="nav-number">12.</span> <span class="nav-text">自旋锁、互斥锁的选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">13.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">14.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Owenli</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        app_id: 'QfqKpSCunU088bTCXRvh0IDq-gzGzoHsz',
+        app_key: 'KGVXfETAJhm1Rvq4UedrDF5B',
+        placeholder: '留下你的足迹吧！'
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("QfqKpSCunU088bTCXRvh0IDq-gzGzoHsz", "KGVXfETAJhm1Rvq4UedrDF5B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
