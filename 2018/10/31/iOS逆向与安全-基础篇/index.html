@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="紫电清霜" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言从本篇文章开始，笔者会整理iOS逆向相关的笔记。作为一位新人，希望通过整理笔记能够更好的理解和掌握知识。能力有限，在行文时难免出现错误欢迎批评和指正。 前期准备：  一台越狱的iOS设备，笔者使用iPad mini2系统iOS9.2.1（推荐使用iOS9.1或者可以完美越狱的系统） 一台电脑，笔者使用的是MacBook Pro 一条数据线  如何越狱网上有很多教程帮助你来越狱，这里推荐两个网">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS逆向与安全:基础篇">
+<meta property="og:url" content="https://jesusLove.github.io/2018/10/31/iOS逆向与安全-基础篇/index.html">
+<meta property="og:site_name" content="紫电清霜">
+<meta property="og:description" content="前言从本篇文章开始，笔者会整理iOS逆向相关的笔记。作为一位新人，希望通过整理笔记能够更好的理解和掌握知识。能力有限，在行文时难免出现错误欢迎批评和指正。 前期准备：  一台越狱的iOS设备，笔者使用iPad mini2系统iOS9.2.1（推荐使用iOS9.1或者可以完美越狱的系统） 一台电脑，笔者使用的是MacBook Pro 一条数据线  如何越狱网上有很多教程帮助你来越狱，这里推荐两个网">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1363078-a0a7899eba0c7a15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1363078-fd54d1638acce3b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1363078-577e14f4816e38e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1363078-222a9702273c9d50.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1363078-9fb657a1bbd733ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1363078-d2ab060158eb4397.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-10-31T02:39:07.668Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS逆向与安全:基础篇">
+<meta name="twitter:description" content="前言从本篇文章开始，笔者会整理iOS逆向相关的笔记。作为一位新人，希望通过整理笔记能够更好的理解和掌握知识。能力有限，在行文时难免出现错误欢迎批评和指正。 前期准备：  一台越狱的iOS设备，笔者使用iPad mini2系统iOS9.2.1（推荐使用iOS9.1或者可以完美越狱的系统） 一台电脑，笔者使用的是MacBook Pro 一条数据线  如何越狱网上有很多教程帮助你来越狱，这里推荐两个网">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1363078-a0a7899eba0c7a15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jesusLove.github.io/2018/10/31/iOS逆向与安全-基础篇/"/>
+
+
+
+
+
+  <title>iOS逆向与安全:基础篇 | 紫电清霜</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">紫电清霜</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jesusLove.github.io/2018/10/31/iOS逆向与安全-基础篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Owenli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫电清霜">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS逆向与安全:基础篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T10:34:23+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS逆向/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS逆向</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/31/iOS逆向与安全-基础篇/" class="leancloud_visitors" data-flag-title="iOS逆向与安全:基础篇">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/1363078-a0a7899eba0c7a15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>从本篇文章开始，笔者会整理iOS逆向相关的笔记。作为一位新人，希望通过整理笔记能够更好的理解和掌握知识。能力有限，在行文时难免出现错误欢迎批评和指正。</p>
+<p>前期准备：</p>
+<ul>
+<li>一台越狱的iOS设备，笔者使用iPad mini2系统iOS9.2.1（推荐使用iOS9.1或者可以完美越狱的系统）</li>
+<li>一台电脑，笔者使用的是MacBook Pro</li>
+<li>一条数据线</li>
+</ul>
+<h1 id="如何越狱"><a href="#如何越狱" class="headerlink" title="如何越狱"></a>如何越狱</h1><p>网上有很多教程帮助你来越狱，这里推荐两个网站：</p>
+<ul>
+<li><a href="http://jailbreak.25pp.com" target="_blank" rel="noopener">PP助手</a></li>
+<li><a href="https://www.i4.cn/" target="_blank" rel="noopener">爱思助手</a></li>
+</ul>
+<blockquote>
+<p>注意：在购买iOS设备时直接购买对应版本的系统，由于苹果官方关闭降级通道所以无法刷固件降级。</p>
+</blockquote>
+<p>越狱成功后，桌面上会出现一个叫做<code>Cydia</code>的应用，它是越狱后的<code>App Store</code>可以安装各种第三方的软件，比如：插件、补丁、APP等。该应用的作者<code>Jay Freeman(saurik)</code>，一位骨灰级大神。</p>
+<p><strong>必装插件或补丁</strong></p>
+<ul>
+<li><code>Apple File Conduit 2</code>：可以访问整个iOS设备的文件系统。作者是<code>Jay Freeman</code>。</li>
+<li><code>AppSync unified</code>： 可以绕过系统验证，随意安装、运行破解的IPA安装包。</li>
+<li><code>PP助手</code>： 一个应用商店，可以自由安装海量APP。</li>
+<li><code>OpenSSH</code>: 用于远程登录iOS设备。</li>
+</ul>
+<p><strong>Mac 必备</strong></p>
+<ul>
+<li><code>iFunBox</code>: 管理文件系统。</li>
+<li><code>PP助手</code>：一个应用商店。</li>
+<li><code>iTerm2</code>: 一款优秀的命令行工具</li>
+<li><code>Alfred</code>: 便捷搜索，自定义工作流，调高效率的工具</li>
+</ul>
+<h2 id="配置远程登录"><a href="#配置远程登录" class="headerlink" title="配置远程登录"></a>配置远程登录</h2><p>SSH：Secure Shell的缩写，安全外壳协议，是一种可以为远程登录提供安全保障的协议。使用SSH可以把所有传输的数据进行加密，防止中间人攻击、DNS欺骗和IP欺骗。<br>OpenSSH: 是SSH协议的免费开源实现。通过它让Mac登录iOS设备，在<code>Cycript</code>中搜索安装。</p>
+<h3 id="使用密码登录"><a href="#使用密码登录" class="headerlink" title="使用密码登录"></a>使用密码登录</h3><p>如果iOS设备上已经安装了<code>OpenSSH</code>，此时就可以通过Mac终端登录iOS设备。前提，iOS设备和Mac需要处于相同WiFi环境下。在设置中查看iOS设备的IP地址。打开终端输入：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh root@iOS设备IP地址</span><br><span class="line"><span class="regexp">//</span> 回车，会提示时候建立连接输入<span class="literal">yes</span>即可。之后提示输入密码，默认密码是`<span class="javascript">alpine</span>`。</span><br></pre></td></tr></table></figure>
+<p>iOS设备上有两个默认账号：root，mobile。</p>
+<ul>
+<li>root：最高权限账户，$HOME是<code>/var/root</code>。或者通过终端输入<code>pwd</code>查看。</li>
+<li>mobile：普通权限账户，只能操作一些普通文件，$HOME是<code>/var/mobile</code>。</li>
+<li><code>mobile</code>登录方式：<code>ssh mobile@服务器地址</code>。初始密码<code>alpine</code>。</li>
+<li>修改root密码：<code>passwd</code>，修改<code>mobile</code>用户密码：<code>passwd mobile</code>。</li>
+</ul>
+<h3 id="公钥登录"><a href="#公钥登录" class="headerlink" title="公钥登录"></a>公钥登录</h3><p>上面的密码登录方式比较麻烦，在每次登录时都需要输入密码。SSH提供了公钥登录，以省去密码的步骤。下面来看看公钥登录流程：<br>将电脑端的SSH公钥保存在iOS设备中，登录时iOS设备端会向电脑端发送一个随机字符串，登录用户通过自己的私钥加密后发送给iOS端，iOS端通过事先存储好的公钥解密，如果解密成功，证明用户是可信的。</p>
+<p>查看<code>$HOME/.ssh/</code>目录，是否有<code>id_rsa</code>私钥和<code>id_rsa.pub</code>公钥，如果没有使用<code>ssh-keygen</code>生成。</p>
+<p>上传公钥到远程设备，通过<code>ssh-copy-id</code>命令。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -<span class="selector-tag">i</span> <span class="variable">$HOME</span>/.ssh/id_rsa<span class="selector-class">.pub</span> root@地址</span><br></pre></td></tr></table></figure>
+<p>该条命令的作用是将<code>id_rsa.pub</code>公钥追加到iOS设备的<code>$HOME/.ssh/authorized_keys</code>文件中。<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="variable">$HOME</span><span class="regexp">/.ssh/</span>authorized_keys <span class="regexp">//</span>查看文件内容</span><br></pre></td></tr></table></figure></p>
+<h3 id="通过USB登录设备"><a href="#通过USB登录设备" class="headerlink" title="通过USB登录设备"></a>通过USB登录设备</h3><p>在WiFi不稳定的情况下，通过WiFi登录会非常的卡顿。可以通过接口转发的方法，使用USB SSH登录，保证连接的稳定性。</p>
+<p>方法很简单，首先安装<code>libimobiledevice</code>，然后使用里面提供<code>iproxy</code>把本地端口(例如：2222)映射到设备的TCP端口22，就可以通过本地的2222端口建立连接了。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install libimobiledevice</span><br><span class="line">iproxy <span class="number">2222</span> <span class="number">22</span></span><br><span class="line">ssh root@localhost -p <span class="number">2222</span></span><br></pre></td></tr></table></figure>
+<p>如果，每次输入<code>iproxy 2222 22</code>进行接口转换比较麻烦，可以将其配置到电脑的开机启动项中。创建<code>~/Library/LaunchAgents/com.usbmux.iproxy.plist</code>，填入一下：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1363078-fd54d1638acce3b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>运行命令<code>launchctl load ~/Library/LaunchAgents/com.usbmux.iproxy.plist</code>使之生效。</p>
+<p>每次输入<code>ssh root@localhost -p 2222</code>也很麻烦，可以通过指定一个名称进行SSH连接，打开<code>$HOME/.ssh/config</code>文件，没有创建一个，写入一下内容。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host ipad </span><br><span class="line">Hostname localhost</span><br><span class="line">User root</span><br><span class="line">Port 2222</span><br></pre></td></tr></table></figure></p>
+<p>通过以上配置，在终端输入<code>ssh ipad</code>即可登录iOS设备了。</p>
+<h1 id="砸壳"><a href="#砸壳" class="headerlink" title="砸壳"></a>砸壳</h1><p>在<code>App Store</code>下载应用都会进行加密，破解加密称为砸壳。本节记录在学习砸壳中遇到的问题和解决方法。</p>
+<p>三种砸壳方案：</p>
+<ul>
+<li><a href="https://github.com/stefanesser/dumpdecrypted" target="_blank" rel="noopener">dumpdecrypted</a></li>
+<li><a href="https://github.com/KJCracks/Clutch" target="_blank" rel="noopener">Clutch</a></li>
+<li><a href="https://github.com/AloneMonkey/frida-ios-dump" target="_blank" rel="noopener">frida-ios-dump</a></li>
+</ul>
+<p>这三种方案网上很多教程，下面整理的是第三种方案简单高效。</p>
+<h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><p>iOS设备和电脑都需安装<code>Frida</code>，</p>
+<p>iOS设备安装<code>Frida</code>，打开<code>Cydia</code>添加软件源<code>https://build.frida.re</code>，之后搜索<code>Frida</code>安装。电脑端通过<code>pip</code>命令<code>sudo pip install frida</code>安装。</p>
+<p>接下来，克隆<strong><a href="https://github.com/AloneMonkey/frida-ios-dump" target="_blank" rel="noopener">frida-ios-dump</a></strong>库到本地。仓库有两个分支分别对应<code>python2.x</code>和<code>python3.x</code>,需要根据本地<code>Python</code>版本来判断。</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Mac终端</span></span><br><span class="line"><span class="keyword">python</span> -V</span><br><span class="line"><span class="comment">// 笔者：Python 3.6.3 :: Anaconda custom (64-bit)</span></span><br></pre></td></tr></table></figure>
+<p>由于笔者配置的<code>Python 3.x</code>，切换到3.x分支安装<code>firda-ios-dump</code>依赖。在<code>frida-ios-dump</code>仓库目录下运行下面命令。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip <span class="keyword">install</span> -r requirements.txt <span class="comment">--upgrade</span></span><br></pre></td></tr></table></figure>
+<p>安装结束后，将越狱设备通过USB连上电脑进行端口映射:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iproxy <span class="number">2222</span> <span class="number">22</span></span><br></pre></td></tr></table></figure>
+<p>到此配置结束，如果一切顺利就可以进行砸壳了。</p>
+<h2 id="进行砸壳"><a href="#进行砸壳" class="headerlink" title="进行砸壳"></a>进行砸壳</h2><p>在<code>frida-ios-dump</code>目录下，使用命令<code>./dump.py -l</code>查看应用名称和<code>Bundle ID</code>，通过命令<code>./dump.py + 程序名字 or BundleID</code>即可砸壳。当程序执行完，在当前目录中会出现一个<code>xxx.ipa</code>。</p>
+<p>不过，通往成功的道路永远不是一帆风顺的，在运行<code>./dump.py</code>命令是出现了错误<a href="https://github.com/AloneMonkey/frida-ios-dump/issues/37" target="_blank" rel="noopener">Waiting for USB device…</a>。在这个<code>issue</code>中给出了解决方案。</p>
+<p>推荐文章<a href="http://www.alonemonkey.com/2018/01/30/frida-ios-dump/" target="_blank" rel="noopener">一条命令完成砸壳</a></p>
+<h1 id="Reveal配置"><a href="#Reveal配置" class="headerlink" title="Reveal配置"></a>Reveal配置</h1><p>Reveal是一款用于查看程序界面结构和调试界面的工具，可以在开发中动态修改调试代码修改程序的样式，也可以注入到第三方APP查看应用的界面结构。</p>
+<p>本节将会学习如何在越狱设备和非越狱设备上查看应用的结构。</p>
+<h2 id="越狱设备集成Reveal"><a href="#越狱设备集成Reveal" class="headerlink" title="越狱设备集成Reveal"></a>越狱设备集成Reveal</h2><p>笔者在越狱设备集成Reveal遇到了一个问题，新版的<code>RevealServer</code>是<code>Framework</code>而旧版的是<code>dylib</code>，两者集成方式不同，但是网上很多资料都是过时的，所以这里给出新版的集成方式。</p>
+<p>首先在<code>Cydia</code>下载<code>Reveal2Loader</code>插件。插件安装后进入设置找到<code>Reveal--&gt;Enabled Applications</code>选择要查看的App。例如：简书</p>
+<p>电脑端安装<code>Reveal</code>软件，正常情况下，打开手机上的简书APP会在<code>Reveal</code>中看到下图，点击进入即可查看界面结构。<br><img src="https://upload-images.jianshu.io/upload_images/1363078-577e14f4816e38e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>有时会出现<code>RevealServer.framework</code>版本问题，电脑端点击<code>Help-&gt;Show Reveal Library in Finder</code>将<code>Framework</code>拷贝到手机<code>Library/Frameworks</code>目录下替换原来的。</p>
+<h2 id="非越狱设备集成Reveal"><a href="#非越狱设备集成Reveal" class="headerlink" title="非越狱设备集成Reveal"></a>非越狱设备集成Reveal</h2><p>如果在开发中集成<code>Reveal</code>直接使用<code>CocoaPods</code>即可，在<code>Podfile</code>文件加入以下内容：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//只在Debug模式下开启</span></span><br><span class="line"> pod <span class="string">'Reveal-SDK'</span>, :<span class="function"><span class="params">configurations</span> =&gt;</span> [<span class="string">'Debug'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>之后运行<code>pod install</code>即可集成。</p>
+<p>如果想在非越狱设备查看其它App的界面结构，需要使用<strong><a href="https://github.com/AloneMonkey/MonkeyDev" target="_blank" rel="noopener">MonkeyDev</a></strong>工具辅助完成。<br>首先安装MonkeyDev，安装在GitHub仓库有文档。</p>
+<ul>
+<li><a href="https://github.com/AloneMonkey/MonkeyDev/wiki/%E5%AE%89%E8%A3%85" target="_blank" rel="noopener">安装</a></li>
+</ul>
+<p>非越狱设备集成<code>Reveal</code>还需要目标App的脱壳<code>ipa</code>包。具体步骤查看文章：</p>
+<ul>
+<li><a href="https://github.com/AloneMonkey/MonkeyDev/wiki/%E9%9D%9E%E8%B6%8A%E7%8B%B1App%E9%9B%86%E6%88%90" target="_blank" rel="noopener">非越狱App集成</a></li>
+<li><a href="http://www.alonemonkey.com/2017/07/12/monkeydev-without-jailbreak/" target="_blank" rel="noopener">无须越狱、自动集成、只需要一个砸壳的应用—MonkeyDev</a></li>
+</ul>
+<h1 id="Cycript配置"><a href="#Cycript配置" class="headerlink" title="Cycript配置"></a>Cycript配置</h1><p><a href="http://www.cycript.org/" target="_blank" rel="noopener">Cycript</a>是允许开发者使用<code>Objective-C++</code>和<code>Javascript</code>组合语法查看及修改运行时APP内存信息的工具。</p>
+<ul>
+<li><a href="http://www.cycript.org/manual/" target="_blank" rel="noopener">官方文档</a></li>
+</ul>
+<h2 id="在越狱设备上安装"><a href="#在越狱设备上安装" class="headerlink" title="在越狱设备上安装"></a>在越狱设备上安装</h2><p> <code>Cycript</code>是<code>saurik</code>提供的工具，在<code>Cydia</code>中搜索<code>Cycript</code>并安装即可。</p>
+<p>安装完成后，用SSH登录设备输入<code>cycript</code>命令，就可以进入交互界面。</p>
+<p>在越狱设备上，可以使用一些命令注入目标进程，调试目标函数。下面例子：脚本注入到SpringBoard（桌面）中，使其弹出一个提示框。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iPad:~ root# cycript -p SpringBoard</span><br><span class="line"><span class="meta">cy#</span><span class="bash"> var alert = [[UIAlertView alloc] initWithTitle:@<span class="string">"Hello"</span> message:@<span class="string">"Hello, wold!"</span> delegate:nil cancelButtonTitle: @<span class="string">"cancel"</span> otherButtonTitles: nil]</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="string">"&lt;UIAlertView: 0x1348bd1f0; frame = (0 0; 0 0); layer = &lt;CALayer: 0x1321c89b0&gt;&gt;"</span></span></span><br><span class="line"><span class="meta">cy#</span><span class="bash"> [alert show]</span></span><br></pre></td></tr></table></figure>
+<p>这是《iOS应用逆向与安全》中给出的一个简单的例子。</p>
+<h2 id="Cycript分析应用"><a href="#Cycript分析应用" class="headerlink" title="Cycript分析应用"></a><code>Cycript</code>分析应用</h2><p>上面例子中使用了一条命令<code>cycript -p SpringBoard</code>，通过该命令可以调试指定APP。该命令有两种使用方式，除了上面的<code>cycript -p 程序名称</code>，还可以通过<code>cycript -p 程序进程ID</code>。注意这里的程序的名称并不是APP的名称。</p>
+<p>查看程序的名称和进程ID可以通过安装一个插件<code>adv-cmds</code>。通过它使用<code>ps</code>命令查看当前运行程序的进程ID及可执行文件的路径。</p>
+<p>安装完成后，通过<code>ps -A</code>命令查看当前设备的进程ID和可执行文件的路径。同时，支持关键词搜索<code>ps -A | grep 关键词</code>。</p>
+<p>例如，查看简书的路径和进程ID</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1363078-222a9702273c9d50.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="简书"></p>
+<blockquote>
+<p>由于程序的进程ID是会发生变换的推荐使用名称。</p>
+</blockquote>
+<p>下面就以简书为例，学习如何使用<code>cycript</code>的使用。</p>
+<h3 id="查看应用信息"><a href="#查看应用信息" class="headerlink" title="查看应用信息"></a>查看应用信息</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">cy</span># <span class="selector-tag">NSHomeDirectory</span>() <span class="comment">// 沙盒路径</span></span><br><span class="line"><span class="selector-tag">cy</span># <span class="selector-tag">NSBundle</span><span class="selector-class">.mainBundle</span>()<span class="selector-class">.bundleIdentifier</span> <span class="comment">//BundleID</span></span><br><span class="line"><span class="selector-tag">cy</span># <span class="selector-tag">NSBundle</span><span class="selector-class">.mainBundle</span>()<span class="selector-class">.bundlePath</span> <span class="comment">//mainBundlePath</span></span><br><span class="line"><span class="selector-tag">cy</span># <span class="selector-tag">NSSearchPathForDirectoriesInDomains</span> (NSDocumentDirectory , NSUserDomainMask , YES)<span class="selector-attr">[0]</span> <span class="comment">// Document Path</span></span><br><span class="line"><span class="selector-tag">cy</span># <span class="selector-tag">NSSearchPathForDirectoriesInDomains</span> (NSCachesDirectory , NSUserDomainMask , YES)<span class="selector-attr">[0]</span> <span class="comment">// cache Path</span></span><br></pre></td></tr></table></figure>
+<p>查看<code>APP</code>的<code>Application</code>信息，例如：查看简书的<code>Application</code>对象，为自定义的<code>HGApplication</code>。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">cy#</span><span class="bash"> UIApp </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="string">"&lt;HGApplication: 0x154d49910&gt;"</span></span></span><br></pre></td></tr></table></figure></p>
+<p>查看<code>rootViewController</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">cy#</span><span class="bash"> UIApp.keyWindow .rootViewController</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="string">"&lt;HGTabBarController: 0x155006200&gt;"</span></span></span><br></pre></td></tr></table></figure>
+<p>还可以使用地址查看信息。例如：查看<code>HGTabBarController</code>的<code>view</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">cy#</span><span class="bash"> <span class="comment">#0x155006200.view</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="string">"&lt;UILayoutContainerView: 0x154fca480; frame = (0 0; 1024 768); autoresize = W+H; layer = &lt;CALayer: 0x154f65a20&gt;&gt;"</span></span></span><br></pre></td></tr></table></figure>
+<p>另外Cycript提供了<code>choose()</code>函数选择某个类的实例数组。例如：学习简书中所有的Button类的所有实例数组。</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">cy# choose(UIButton)</span></span><br><span class="line"><span class="xml">[#"<span class="tag">&lt;<span class="name">UIButton:</span> <span class="attr">0x157210600</span>; <span class="attr">frame</span> = <span class="string">(0</span> <span class="attr">8.5</span>; <span class="attr">685</span> <span class="attr">16</span>); <span class="attr">opaque</span> = <span class="string">NO;</span> <span class="attr">userInteractionEnabled</span> = <span class="string">NO;</span> <span class="attr">layer</span> = &lt;<span class="attr">CALayer:</span> <span class="attr">0x15705f020</span>&gt;</span>&gt;",</span></span><br><span class="line"><span class="xml">#"<span class="tag">&lt;<span class="name">HGAvatarButton:</span> <span class="attr">0x15724ead0</span>; <span class="attr">baseClass</span> = <span class="string">UIButton;</span> <span class="attr">frame</span> = <span class="string">(16</span> <span class="attr">14.5</span>; <span class="attr">45</span> <span class="attr">45</span>); <span class="attr">clipsToBounds</span> = <span class="string">YES;</span> <span class="attr">opaque</span> = <span class="string">NO;</span> <span class="attr">userInteractionEnabled</span> = <span class="string">NO;</span> <span class="attr">layer</span> = &lt;<span class="attr">CALayer:</span> <span class="attr">0x1572088b0</span>&gt;</span>&gt;".....]</span></span><br></pre></td></tr></table></figure>
+<p>以上是<code>cycript</code>的基本用法。</p>
+<h2 id="cycript高级用法"><a href="#cycript高级用法" class="headerlink" title="cycript高级用法"></a><code>cycript</code>高级用法</h2><p>每次要输入那么多的代码是在有点麻烦，能不能将常用的代码封装起来呢？答案是肯定的。</p>
+<p>Cycript本身是支持加载自己的脚本的，可以通过<code>@import</code>命令加载。例如：加载<a href="https://github.com/CoderMJLee/mjcript/blob/master/mjcript.cy" target="_blank" rel="noopener">mjscript</a>脚本。<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cy# @<span class="keyword">import</span> mjcript</span><br></pre></td></tr></table></figure></p>
+<p>关于如何将自己学的脚本添加到手机上查看<a href="https://github.com/CoderMJLee/mjcript" target="_blank" rel="noopener">【越狱-逆向】基于Cycript实现的一些实用函数</a>文档，对如何添加，如何使用写的比较详细，这里就不再重复赘述。</p>
+<h1 id="Class-dump"><a href="#Class-dump" class="headerlink" title="Class-dump"></a>Class-dump</h1><p>本节学习如何使用工具导出第三方App的头文件，学习前需要补充点基础知识。</p>
+<h2 id="Mach-O文件"><a href="#Mach-O文件" class="headerlink" title="Mach-O文件"></a>Mach-O文件</h2><p>想让程序在设备上运行起来，需要将写好的代码生成可执行文件这样才能被操作系统所理解。比如，在<code>Linux</code>下可执行文件的格式是<code>ELF</code>，在<code>Window</code>中可执行文件是<code>PE32/PE32+</code>，而在<code>MAC</code>和<code>iOS</code>中是<code>Mach-O</code>格式。</p>
+<p>Mach-O的组成结构如下图：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1363078-9fb657a1bbd733ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片来自《Mach-O 文件格式探索》"></p>
+<p>可以看的出 Mach-O 主要由 3 部分组成:</p>
+<ul>
+<li>Mach-O 头（Mach Header）：这里描述了 Mach-O 的 CPU 架构、文件类型以及加载命令等信息；</li>
+<li>加载命令（Load Command）：描述了文件中数据的具体组织结构，不同的数据类型使用不同的加载命令表示；</li>
+<li>数据区（Data）：Data 中每一个段（Segment）的数据都保存在此，段的概念和 ELF 文件中段的概念类似，都拥有一个或多个 Section ，用来存放数据和代码。</li>
+</ul>
+<p>如何获取Mach-O文件，在<code>App Store</code>中下载应用<code>.ipa</code>改成<code>.zip</code>格式，之后解压缩会在里面发现一个应用同名的文件。<br>下面是简书的Mach-O文件：<br><img src="https://upload-images.jianshu.io/upload_images/1363078-d2ab060158eb4397.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="Class-dump使用"><a href="#Class-dump使用" class="headerlink" title="Class-dump使用"></a>Class-dump使用</h2><p><a href="http://stevenygard.com/projects/class-dump/" target="_blank" rel="noopener">class-dump</a>的作用就是把<code>Mach-O</code>文件的class信息导出来生成头文件。</p>
+<p>下载后将其中的<code>class-dump</code>拷贝到<code>/usr/local/bin</code>目录下，就可以在终端使用<code>class-dump</code>命令。</p>
+<p>终端输入<code>class-dump</code>：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class-dump 3.5 (64 bit) (Debug version compiled Sep 17 2017 16:24:48)</span><br><span class="line">Usage: class-dump [options] &lt;mach-o-file&gt;</span><br><span class="line"></span><br><span class="line">  where options are:</span><br><span class="line">        -<span class="ruby">a             show instance variable offsets</span></span><br><span class="line"><span class="ruby">        -A             show implementation addresses</span></span><br><span class="line"><span class="ruby">        --arch &lt;arch&gt;  choose a specific architecture from a universal binary (ppc, ppc64, i386, x86_64, armv6, armv7, armv7s, arm64)</span></span><br><span class="line"><span class="ruby">        -C &lt;regex&gt;     only display classes matching regular expression</span></span><br><span class="line"><span class="ruby">        -f &lt;str&gt;       find string <span class="keyword">in</span> method name</span></span><br><span class="line"><span class="ruby">        -H             generate header files <span class="keyword">in</span> current directory, <span class="keyword">or</span> directory specified with -o</span></span><br><span class="line"><span class="ruby">        -I             sort classes, categories, <span class="keyword">and</span> protocols by inheritance (overrides -s)</span></span><br><span class="line"><span class="ruby">        -o &lt;dir&gt;       output directory used <span class="keyword">for</span> -H</span></span><br><span class="line"><span class="ruby">        -r             recursively expand frameworks <span class="keyword">and</span> fixed VM shared libraries</span></span><br><span class="line"><span class="ruby">        -s             sort classes <span class="keyword">and</span> categories by name</span></span><br><span class="line"><span class="ruby">        -S             sort methods by name</span></span><br><span class="line"><span class="ruby">        -t             suppress header <span class="keyword">in</span> output, <span class="keyword">for</span> testing</span></span><br><span class="line"><span class="ruby">        --list-arches  list the arches <span class="keyword">in</span> the file, <span class="keyword">then</span> exit</span></span><br><span class="line"><span class="ruby">        --sdk-ios      specify iOS SDK version (will look <span class="keyword">for</span> /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS&lt;version&gt;.sdk</span></span><br><span class="line"><span class="ruby">                       <span class="keyword">or</span> /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS&lt;version&gt;.sdk)</span></span><br><span class="line"><span class="ruby">        --sdk-mac      specify Mac OS X version (will look <span class="keyword">for</span> /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX&lt;version&gt;.sdk</span></span><br><span class="line"><span class="ruby">                       <span class="keyword">or</span> /Developer/SDKs/MacOSX&lt;version&gt;.sdk)</span></span><br><span class="line"><span class="ruby">        --sdk-root     specify the full SDK root path (<span class="keyword">or</span> use --sdk-ios/--sdk-mac <span class="keyword">for</span> a shortcut)</span></span><br></pre></td></tr></table></figure>
+<p>安装成功，可以解析头文件方法很简单，常用指令。</p>
+<p><code>class-dump -H mach-o路径 -o 头文件存储路径</code></p>
+<p>以简书App为例，使用之前砸壳的<code>ipa</code>文件，找到里面的<code>Mach-O</code>文件。<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span>-<span class="title">dump</span> -<span class="title">H</span> <span class="title">Hugo</span> -<span class="title">o</span> ./<span class="title">Header</span></span></span><br></pre></td></tr></table></figure></p>
+<p>在当前目录中会生成Header文件夹，里面包含所有的头文件。</p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><ul>
+<li><a href="https://github.com/Desgard/iOS-Source-Probe/blob/master/C/mach-o/Mach-O%20%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E6%8E%A2%E7%B4%A2.md" target="_blank" rel="noopener">Mach-O 文件格式探索
+</a></li>
+<li><a href="https://www.jianshu.com/p/54d842db3f69" target="_blank" rel="noopener">趣探 Mach-O：文件格式分析</a></li>
+<li>《iOS应用逆向与安全》作者：刘培庆</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Owenli 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Owenli 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Owenli
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://jesusLove.github.io/2018/10/31/iOS逆向与安全-基础篇/" title="iOS逆向与安全:基础篇">https://jesusLove.github.io/2018/10/31/iOS逆向与安全-基础篇/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/23/iOS-RxSwift之Subjects/" rel="next" title="[iOS] RxSwift之Subjects">
+                <i class="fa fa-chevron-left"></i> [iOS] RxSwift之Subjects
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/me.png"
+                alt="Owenli" />
+            
+              <p class="site-author-name" itemprop="name">Owenli</p>
+              <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何越狱"><span class="nav-number">2.</span> <span class="nav-text">如何越狱</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置远程登录"><span class="nav-number">2.1.</span> <span class="nav-text">配置远程登录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用密码登录"><span class="nav-number">2.1.1.</span> <span class="nav-text">使用密码登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公钥登录"><span class="nav-number">2.1.2.</span> <span class="nav-text">公钥登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过USB登录设备"><span class="nav-number">2.1.3.</span> <span class="nav-text">通过USB登录设备</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#砸壳"><span class="nav-number">3.</span> <span class="nav-text">砸壳</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置环境"><span class="nav-number">3.1.</span> <span class="nav-text">配置环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进行砸壳"><span class="nav-number">3.2.</span> <span class="nav-text">进行砸壳</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reveal配置"><span class="nav-number">4.</span> <span class="nav-text">Reveal配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#越狱设备集成Reveal"><span class="nav-number">4.1.</span> <span class="nav-text">越狱设备集成Reveal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非越狱设备集成Reveal"><span class="nav-number">4.2.</span> <span class="nav-text">非越狱设备集成Reveal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cycript配置"><span class="nav-number">5.</span> <span class="nav-text">Cycript配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在越狱设备上安装"><span class="nav-number">5.1.</span> <span class="nav-text">在越狱设备上安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cycript分析应用"><span class="nav-number">5.2.</span> <span class="nav-text">Cycript分析应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看应用信息"><span class="nav-number">5.2.1.</span> <span class="nav-text">查看应用信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cycript高级用法"><span class="nav-number">5.3.</span> <span class="nav-text">cycript高级用法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class-dump"><span class="nav-number">6.</span> <span class="nav-text">Class-dump</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mach-O文件"><span class="nav-number">6.1.</span> <span class="nav-text">Mach-O文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class-dump使用"><span class="nav-number">6.2.</span> <span class="nav-text">Class-dump使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文章"><span class="nav-number">7.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Owenli</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        app_id: 'QfqKpSCunU088bTCXRvh0IDq-gzGzoHsz',
+        app_key: 'KGVXfETAJhm1Rvq4UedrDF5B',
+        placeholder: '留下你的足迹吧！'
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("QfqKpSCunU088bTCXRvh0IDq-gzGzoHsz", "KGVXfETAJhm1Rvq4UedrDF5B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
