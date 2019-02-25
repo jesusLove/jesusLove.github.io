@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Runtime," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="紫电清霜" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="基础部分基本术语SEL : 选择器，指方法的名字1typedef struct objc_selector *SEL; IMP ：指针，指向方法的具体实现地址1typedef void (*IMP)(void /* id, SEL, ... */ ); id ：表示任意的OC类型1234/// 代表OC类typedef struct objc_class *Class;/// 执行类实例的指针ty">
+<meta name="keywords" content="Runtime">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Runtime回顾笔记">
+<meta property="og:url" content="https://jesusLove.github.io/2019/02/25/Runtime回顾笔记/index.html">
+<meta property="og:site_name" content="紫电清霜">
+<meta property="og:description" content="基础部分基本术语SEL : 选择器，指方法的名字1typedef struct objc_selector *SEL; IMP ：指针，指向方法的具体实现地址1typedef void (*IMP)(void /* id, SEL, ... */ ); id ：表示任意的OC类型1234/// 代表OC类typedef struct objc_class *Class;/// 执行类实例的指针ty">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/2/25/16922d013c6bc26b?w=1066&h=1114&f=png&s=89593">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/2/25/1692384b7c06c5f8?w=1974&h=896&f=png&s=225513">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/2/25/169238ff9524002b?w=1550&h=720&f=png&s=230241">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/2/25/1692391c9b6917f6?w=1432&h=596&f=png&s=120874">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/2/25/169239299202af2b?w=1560&h=710&f=png&s=120694">
+<meta property="og:updated_time" content="2019-02-25T07:48:34.072Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Runtime回顾笔记">
+<meta name="twitter:description" content="基础部分基本术语SEL : 选择器，指方法的名字1typedef struct objc_selector *SEL; IMP ：指针，指向方法的具体实现地址1typedef void (*IMP)(void /* id, SEL, ... */ ); id ：表示任意的OC类型1234/// 代表OC类typedef struct objc_class *Class;/// 执行类实例的指针ty">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2019/2/25/16922d013c6bc26b?w=1066&h=1114&f=png&s=89593">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jesusLove.github.io/2019/02/25/Runtime回顾笔记/"/>
+
+
+
+
+
+  <title>Runtime回顾笔记 | 紫电清霜</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">紫电清霜</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jesusLove.github.io/2019/02/25/Runtime回顾笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Owenli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫电清霜">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Runtime回顾笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T15:42:30+08:00">
+                2019-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/02/25/Runtime回顾笔记/" class="leancloud_visitors" data-flag-title="Runtime回顾笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基础部分"><a href="#基础部分" class="headerlink" title="基础部分"></a>基础部分</h1><h2 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h2><h3 id="SEL-选择器，指方法的名字"><a href="#SEL-选择器，指方法的名字" class="headerlink" title="SEL : 选择器，指方法的名字"></a>SEL : 选择器，指方法的名字</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_selector *SEL;</span><br></pre></td></tr></table></figure>
+<h3 id="IMP-：指针，指向方法的具体实现地址"><a href="#IMP-：指针，指向方法的具体实现地址" class="headerlink" title="IMP ：指针，指向方法的具体实现地址"></a>IMP ：指针，指向方法的具体实现地址</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">void</span> (*IMP)(<span class="keyword">void</span> <span class="comment">/* id, SEL, ... */</span> );</span><br></pre></td></tr></table></figure>
+<h3 id="id-：表示任意的OC类型"><a href="#id-：表示任意的OC类型" class="headerlink" title="id ：表示任意的OC类型"></a>id ：表示任意的OC类型</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 代表OC类</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_class *Class;</span><br><span class="line"><span class="comment">/// 执行类实例的指针</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_object *<span class="keyword">id</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>Class</code> 是 <code>objc_class</code> 结构体类型的指针。 <code>id</code> 是 <code>objc_object</code> 结构体类型的指针。<code>id</code> 表示对象，<code>Class</code> 表示类。</p>
+</blockquote>
+<h3 id="isa-指向实例所属的类"><a href="#isa-指向实例所属的类" class="headerlink" title="isa : 指向实例所属的类"></a>isa : 指向实例所属的类</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">objc_object</span> &#123;</span></span><br><span class="line">    <span class="keyword">isa_t</span> isa;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>实例的 <code>isa</code> 指向 <code>class</code>，当调用对象方法时，通过 <code>isa</code> 找到对应的类，找到对应的方法进行调用。如果没有通过 <code>superclass</code> 查找父类。</li>
+<li>类的 <code>isa</code> 指向 <code>meta-class</code>，当调用类方法时，通过 <code>isa</code> 找到对应的元类，找到对应的方法进行调用。如果没有通过 <code>superclass</code> 查找父类。</li>
+</ol>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> method_t *Method;</span><br><span class="line"><span class="keyword">struct</span> method_t &#123;</span><br><span class="line">    <span class="comment">// 不同类的方法选择器可以是相同的</span></span><br><span class="line">    <span class="comment">// typedef struct objc_selector *SEL;</span></span><br><span class="line">    <span class="comment">// objc_selector 未开源，猜测应该与Char型相关。</span></span><br><span class="line">    SEL name; <span class="comment">// 函数名，类似C语言字符串，@selector()和 sel_registerName()获取字符串。</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *types; <span class="comment">//编码（返回值类型、参数类型）使用Type Encode</span></span><br><span class="line">    IMP imp;<span class="comment">//指向函数的指针（函数地址）</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>获取方法列表：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// cls : 类，outCount: 方法数量</span></span><br><span class="line">Method * class_copyMethodList(Class cls, <span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount)</span><br></pre></td></tr></table></figure></p>
+<h3 id="Ivar-实例变量"><a href="#Ivar-实例变量" class="headerlink" title="Ivar : 实例变量"></a>Ivar : 实例变量</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> ivar_t *Ivar;</span><br><span class="line"><span class="keyword">struct</span> ivar_t &#123;</span><br><span class="line">    int32_t *offset;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *name;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *type;</span><br><span class="line">    <span class="comment">// alignment is sometimes -1; use alignment() instead</span></span><br><span class="line">    uint32_t alignment_raw;</span><br><span class="line">    uint32_t size;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Category-：分类"><a href="#Category-：分类" class="headerlink" title="Category ：分类"></a>Category ：分类</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> category_t *Category;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 分类结构体</span></span><br><span class="line"><span class="keyword">struct</span> category_t &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *name; <span class="comment">// 名称</span></span><br><span class="line">    classref_t cls;</span><br><span class="line">    <span class="keyword">struct</span> method_list_t *instanceMethods; <span class="comment">// 实例方法列表</span></span><br><span class="line">    <span class="keyword">struct</span> method_list_t *classMethods; <span class="comment">// 类方法列表</span></span><br><span class="line">    <span class="keyword">struct</span> protocol_list_t *protocols; <span class="comment">// 协议列表</span></span><br><span class="line">    <span class="keyword">struct</span> property_list_t *instanceProperties; <span class="comment">// 属性列表</span></span><br><span class="line">    <span class="comment">// Fields below this point are not always present on disk.</span></span><br><span class="line">    <span class="keyword">struct</span> property_list_t *_classProperties; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="objc-property-t-实例属性"><a href="#objc-property-t-实例属性" class="headerlink" title="objc_property_t : 实例属性"></a>objc_property_t : 实例属性</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> property_t *objc_property_t;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> property_t &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *name;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *attributes;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>获取属性列表：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ivar * class_copyIvarList(Class cls, <span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount)</span><br></pre></td></tr></table></figure>
+<h3 id="Cache-缓存"><a href="#Cache-缓存" class="headerlink" title="Cache : 缓存"></a>Cache : 缓存</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 缓存曾经调用过的方法，提高查找速率</span></span><br><span class="line"><span class="keyword">struct</span> cache_t &#123;</span><br><span class="line">    <span class="keyword">struct</span> bucket_t *_buckets; <span class="comment">// 散列表， SLE ：IMP</span></span><br><span class="line">    mask_t _mask; <span class="comment">//散列表的长度 - 1</span></span><br><span class="line">    mask_t _occupied; <span class="comment">// 已经缓存的方法数量，散列表的长度使大于已经缓存的数量的。</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> bucket_t &#123;</span><br><span class="line">    cache_key_t _key; <span class="comment">//SEL作为Key</span></span><br><span class="line">    IMP _imp; <span class="comment">// 函数的内存地址</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> uintptr_t cache_key_t; <span class="comment">// ---&gt; unsigned long 类型</span></span><br><span class="line"><span class="keyword">typedef</span> uint32_t mask_t;</span><br></pre></td></tr></table></figure>
+<h3 id="objc-object-对象"><a href="#objc-object-对象" class="headerlink" title="objc_object : 对象"></a>objc_object : 对象</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> objc_object &#123;</span><br><span class="line">    isa_t isa;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="objc-class-类"><a href="#objc-class-类" class="headerlink" title="objc_class : 类"></a>objc_class : 类</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> objc_class : objc_object &#123;</span><br><span class="line">    <span class="comment">// Class ISA;</span></span><br><span class="line">    Class superclass; <span class="comment">//父类指针</span></span><br><span class="line">    cache_t cache;             <span class="comment">// formerly cache pointer and vtable 方法缓存</span></span><br><span class="line">    class_data_bits_t bits;    <span class="comment">// class_rw_t * plus custom rr/alloc flags 用于获取地址</span></span><br><span class="line"></span><br><span class="line">    class_rw_t *data() &#123; </span><br><span class="line">        <span class="keyword">return</span> bits.data(); <span class="comment">// &amp;FAST_DATA_MASK 获取地址值</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>继承自 <code>objc_object</code>, 所以 <code>objc_class</code> 也是对象，有成员变量 <code>isa</code> 。</p>
+</blockquote>
+<h3 id="元类"><a href="#元类" class="headerlink" title="元类"></a>元类</h3><p>元类是类对象的类。<code>objc_class</code> 继承自 <code>objc_object</code> 它也包含 <code>isa</code>指针，类自身也是对象，称为类对象。类对象对应的类就称为元类。实例对象的 <code>isa</code> 指针指向所对应的类，类的 <code>isa</code> 指针指向元类。</p>
+<h3 id="method-t"><a href="#method-t" class="headerlink" title="method_t"></a>method_t</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// method_t是对方法/函数的封装</span></span><br><span class="line"><span class="keyword">struct</span> method_t &#123;</span><br><span class="line">    <span class="comment">// 不同类的方法选择器可以是相同的</span></span><br><span class="line">    <span class="comment">// typedef struct objc_selector *SEL;</span></span><br><span class="line">    <span class="comment">// objc_selector 未开源，猜测应该与Char型相关。</span></span><br><span class="line">    SEL name; <span class="comment">// 函数名，类似C语言字符串，@selector()和 sel_registerName()获取。</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *types; <span class="comment">//编码（返回值类型、参数类型）使用Type Encode</span></span><br><span class="line">    IMP imp;<span class="comment">//指向函数的指针（函数地址）</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>SEL</code>：函数名，通过<code>@selector()</code> 和 <code>sel_registerName()</code>获取。通过 <code>sel_getName()</code> 和 <code>NSStringFromSelector()</code>转成字符串。</li>
+<li><code>types</code>: 表示返回值类型和参数类型，使用 <a href="https://nshipster.cn/type-encodings/" target="_blank" rel="noopener">Type Encodings - NSHipster</a>，另外，iOS提供了一个叫 <code>@encode</code>的指令，可以将具体的类型表示成字符串编码。</li>
+</ol>
+<h3 id="category-t"><a href="#category-t" class="headerlink" title="category_t"></a>category_t</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> category_t &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *name; <span class="comment">// 名称</span></span><br><span class="line">    classref_t cls; <span class="comment">// 所属类</span></span><br><span class="line">    <span class="keyword">struct</span> method_list_t *instanceMethods; <span class="comment">// 实例方法</span></span><br><span class="line">    <span class="keyword">struct</span> method_list_t *classMethods; <span class="comment">// 类方法</span></span><br><span class="line">    <span class="keyword">struct</span> protocol_list_t *protocols; <span class="comment">// 协议</span></span><br><span class="line">    <span class="keyword">struct</span> property_list_t *instanceProperties; <span class="comment">// 属性</span></span><br><span class="line">    <span class="comment">// Fields below this point are not always present on disk.</span></span><br><span class="line">    <span class="keyword">struct</span> property_list_t *_classProperties; </span><br><span class="line"></span><br><span class="line">    method_list_t *methodsForMeta(<span class="keyword">bool</span> isMeta) &#123;</span><br><span class="line">        <span class="keyword">if</span> (isMeta) <span class="keyword">return</span> classMethods;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> instanceMethods;</span><br><span class="line">    &#125;</span><br><span class="line">    property_list_t *propertiesForMeta(<span class="keyword">bool</span> isMeta, <span class="keyword">struct</span> header_info *hi);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>分类的底层结构 <code>category_t</code> 结构体，里面存储着分类的对象方法、类方法、属性、协议信息等。<br>在程序运行时，运行时系统会将分类的数据，合并到类信息中（类对象或者元类对象中）。<br><code>category</code>不同于<code>extension</code>，前者运行时合并信息，后者编译时就已经合并。</p>
+<p>分类中有<code>load</code>方法吗？<code>load</code>方法的调用顺序？</p>
+<p>分类中存在 <code>load</code> 方法，在运行时加载类、分类的时候调用。<br>另外，<code>load</code>方法可以继承，通常情况下系统会自动调用，无需手动。<br>先调用类的，按照编译顺序调用。调用子类的之前先调用父类的。在调用分类的 <code>load</code>方法，按照编译顺序（先编译先调用）。</p>
+<p>提到 <code>load</code> 方法，还有一个叫 <code>initialize</code>方法。</p>
+<p><code>initialize</code> 方法会在类第一接收到消息时调用。先调用父类，在调用子类。<br><code>initialize</code> 是通过 <code>objc_msgSend()</code> 方法实现的。</p>
+<h2 id="不一样的-isa"><a href="#不一样的-isa" class="headerlink" title="不一样的 isa"></a>不一样的 <code>isa</code></h2><p>网上很多关于 <code>isa</code> 的资料，发现大部分都是旧版的 <code>isa</code> 结构。所以学习新的运行时源码整理下面的笔记。</p>
+<p>旧版 <code>runtime</code> 中 <code>isa</code>，在苹果提供的运行时源码 <code>runtime.h</code> 文件中，<code>isa</code> 定义如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_class *Class;</span><br><span class="line">Class _Nonnull isa  OBJC_ISA_AVAILABILITY;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>isa</code> 是 <code>objc_class</code> 结构体类型的指针。</p>
+</blockquote>
+<p>源码文件 <code>objc_runtime_new.h/mm</code>。 新版 <code>isa</code> 此时不再是 <code>objc_class</code> 结构体类型，修改成了 <code>isa_t</code> 类型。 这段代码是运行时系统定义的对象结构体。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> objc_object &#123;</span><br><span class="line">    isa_t isa;    </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>另外，上面也提及到类的结构体 <code>objc_class</code> 继承自 <code>objc_object</code> 结构体，那么 <code>objc_class</code> 也包含 <code>isa_t</code> 类型的变量。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> objc_class : objc_object &#123;</span><br><span class="line">    <span class="comment">// Class ISA; // &lt;------ </span></span><br><span class="line">    Class superclass; <span class="comment">//父类指针</span></span><br><span class="line">    cache_t cache;             <span class="comment">// formerly cache pointer and vtable 方法缓存</span></span><br><span class="line">    class_data_bits_t bits;    <span class="comment">// class_rw_t * plus custom rr/alloc flags 用于获取地址</span></span><br><span class="line"></span><br><span class="line">    class_rw_t *data() &#123; </span><br><span class="line">        <span class="keyword">return</span> bits.data(); <span class="comment">// &amp;FAST_DATA_MASK 获取地址值</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>接下来我们看看 <code>isa_t</code> 究竟是什么？不过在此之前先复习一下共用体。</p>
+<h3 id="共用体"><a href="#共用体" class="headerlink" title="共用体"></a>共用体</h3><p>首先回顾一下 <code>共用体</code> 特点，通过对比结构体来理解共用体。</p>
+<ol>
+<li>结构体占用的内存大于等于所有成员占用的内存的总和（成员之间可能会存在缝隙）。</li>
+<li>共用体占用的内存等于最长的成员占用的内存。共用体使用了内存覆盖技术，同一时刻只能保存一个成员的值，如果对新的成员赋值，就会把原来成员的值覆盖掉。 </li>
+</ol>
+<p>上面提到共用体的特性：<strong>共用体占用的内存等于最大的成员占用的内存</strong>。这就说明共用体中的成员是共用一段内存，修改其中的值势必会修改其他的值。</p>
+<p>下面通过一段代码理解共用体。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> data &#123;</span><br><span class="line">    <span class="keyword">int</span> n; <span class="comment">// 4</span></span><br><span class="line">    <span class="keyword">char</span> ch; <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">short</span> f; <span class="comment">// 2</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[]) &#123;</span><br><span class="line">    <span class="keyword">union</span> data a;</span><br><span class="line">    printf(<span class="string">"%lu, %lu\n"</span>, <span class="keyword">sizeof</span>(a), <span class="keyword">sizeof</span>(<span class="keyword">union</span> data)); <span class="comment">// 大小为 4</span></span><br><span class="line">    </span><br><span class="line">    a.n = <span class="number">0x40</span>;</span><br><span class="line">    <span class="comment">// %X 16进制输出； %hX 16进制输出short int(2字节)</span></span><br><span class="line">    printf(<span class="string">"%X, %c, %hX\n"</span>, a.n, a.ch, a.f); <span class="comment">// 40, @, 40</span></span><br><span class="line">    </span><br><span class="line">    a.ch = <span class="string">'9'</span>;</span><br><span class="line">    printf(<span class="string">"%X, %c, %hX\n"</span>, a.n, a.ch, a.f); <span class="comment">// 39, 9, 39</span></span><br><span class="line">    </span><br><span class="line">    a.f = <span class="number">0x2059</span>;</span><br><span class="line">    printf(<span class="string">"%X, %c, %hX\n"</span>, a.n, a.ch, a.f); <span class="comment">// 2059, Y, 2059</span></span><br><span class="line">    </span><br><span class="line">    a.n = <span class="number">0x3E25AD54</span>;</span><br><span class="line">    printf(<span class="string">"%X, %c, %hX\n"</span>, a.n, a.ch, a.f); <span class="comment">// 3E25AD54, T, AD54</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span>, <span class="number">4</span></span><br><span class="line"><span class="number">40</span>, @, <span class="number">40</span></span><br><span class="line"><span class="number">39</span>, <span class="number">9</span>, <span class="number">39</span></span><br><span class="line"><span class="number">2059</span>, Y, <span class="number">2059</span></span><br><span class="line"><span class="number">3E25</span>AD54, T, AD54</span><br></pre></td></tr></table></figure>
+<p>共用体的内存结构。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/2/25/16922d013c6bc26b?w=1066&amp;h=1114&amp;f=png&amp;s=89593" alt=""></p>
+<blockquote>
+<p>在每次存入值时，共用体中成员的值都会发生改变。</p>
+</blockquote>
+<h3 id="isa-t-共用体"><a href="#isa-t-共用体" class="headerlink" title="isa_t 共用体"></a><code>isa_t</code> 共用体</h3><p>首先，运行时源代码 <code>isa_t</code> 的定义如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> isa_t &#123;</span><br><span class="line">    isa_t() &#123; &#125;</span><br><span class="line">    isa_t(uintptr_t value) : bits(value) &#123; &#125;</span><br><span class="line"></span><br><span class="line">    Class cls;</span><br><span class="line">    uintptr_t bits; </span><br><span class="line"><span class="meta"># if __arm64__ // arm64位系统</span></span><br><span class="line"><span class="meta">#   define ISA_MASK        0x0000000ffffffff8ULL //用来取出33位内存地址使用（&amp;）操作</span></span><br><span class="line"><span class="meta">#   define ISA_MAGIC_MASK  0x000003f000000001ULL</span></span><br><span class="line"><span class="meta">#   define ISA_MAGIC_VALUE 0x000001a000000001ULL</span></span><br><span class="line">    <span class="keyword">struct</span> &#123;</span><br><span class="line">        uintptr_t nonpointer        : <span class="number">1</span>; <span class="comment">//0：代表普通指针，1：表示优化过的，可以存储更多信息。</span></span><br><span class="line">        uintptr_t has_assoc         : <span class="number">1</span>; <span class="comment">//是否设置过关联对象。如果没设置过，释放会更快</span></span><br><span class="line">        uintptr_t has_cxx_dtor      : <span class="number">1</span>; <span class="comment">//是否有C++的析构函数</span></span><br><span class="line">        uintptr_t shiftcls          : <span class="number">33</span>; <span class="comment">// 存储着Class、Meta-Class对象的内存地址信息</span></span><br><span class="line">        uintptr_t magic             : <span class="number">6</span>; <span class="comment">//用于在调试时分辨对象是否未完成初始化</span></span><br><span class="line">        uintptr_t weakly_referenced : <span class="number">1</span>; <span class="comment">//是否有被弱引用指向过</span></span><br><span class="line">        uintptr_t deallocating      : <span class="number">1</span>; <span class="comment">//是否正在释放</span></span><br><span class="line">        uintptr_t has_sidetable_rc  : <span class="number">1</span>; <span class="comment">//引用计数器是否过大无法存储在ISA中。如果为1，那么引用计数会存储在一个叫做SideTable的类的属性中</span></span><br><span class="line">        uintptr_t extra_rc          : <span class="number">19</span>; <span class="comment">//里面存储的值是引用计数器减1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#       define RC_ONE   (1ULL<span class="meta-string">&lt;&lt;45)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#       define RC_HALF  (1ULL&lt;&lt;18)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">    &#125;;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">    // ....</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;;</span></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考上面的注释。</p>
+</blockquote>
+<h3 id="获取ISA"><a href="#获取ISA" class="headerlink" title="获取ISA"></a>获取ISA</h3><p>新版的 <code>isa</code> 获取真实的内存地址需要进行一次位运算。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">if</span> __arm64__ <span class="comment">// arm64位系统</span></span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> ISA_MASK        0x0000000ffffffff8ULL</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">elif</span> __x86_64__ <span class="comment">// arm32为系统</span></span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> ISA_MASK        0x00007ffffffffff8ULL</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>获取真实内存地址 <code>(Class)(isa.bits &amp; ISA_MASK);</code></p>
+<p>验证上面结论：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSObject</span> *objc = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line">    </span><br><span class="line">Class objcClass = [<span class="built_in">NSObject</span> <span class="keyword">class</span>];</span><br></pre></td></tr></table></figure>
+<p>设置断点，通过 <code>LLDB</code> 命令：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(lldb) p/x objc-&gt;isa</span><br><span class="line">(Class) $<span class="number">1</span> = <span class="number">0x001dffff8da8a141</span> NSObject</span><br><span class="line">(lldb) p/x objcClass</span><br><span class="line">(Class) $<span class="number">2</span> = <span class="number">0x00007fff8da8a140</span> NSObject</span><br></pre></td></tr></table></figure>
+<p>objc实例对象的isa指向的地址：<code>0x001dffff8da8a141</code>；objcClass的指向的地址值：<code>0x00007fff8da8a140</code>。 通过一次位运算 <code>0x001dffff8da8a141 &amp; ISA_MASK</code> 等到 <code>0x00007fff8da8a140</code>。</p>
+<h2 id="窥探-objc-class-结构"><a href="#窥探-objc-class-结构" class="headerlink" title="窥探 objc_class 结构"></a>窥探 <code>objc_class</code> 结构</h2><p>上面基础术语中给出了 <code>objc_class</code> 结构体的定义：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#define FAST_DATA_MASK          0x00007ffffffffff8UL</span></span><br><span class="line"><span class="keyword">struct</span> objc_class : objc_object &#123;</span><br><span class="line">    <span class="comment">// Class ISA;</span></span><br><span class="line">    Class superclass; <span class="comment">//父类指针</span></span><br><span class="line">    cache_t cache;             <span class="comment">// 方法缓存</span></span><br><span class="line">    class_data_bits_t bits;    <span class="comment">// 用于获取地址</span></span><br><span class="line"></span><br><span class="line">    class_rw_t *data() &#123; </span><br><span class="line">        <span class="keyword">return</span> bits.data(); <span class="comment">// &amp;FAST_DATA_MASK 获取地址值</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>bits</code> 获取地址，通过 <code>&amp;FAST_DATA_MASK</code> 运算获取。</li>
+<li><code>superclass</code> : 指向父类的指针。</li>
+<li><code>cache</code> : 方法缓存，后面详细讲解。</li>
+<li><code>isa</code> : 指向元类。</li>
+<li><code>data</code>: 指向 <code>class_rw_t</code> 结构体类型。</li>
+</ol>
+<p><code>class_rw_t</code> 结构体:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> class_rw_t &#123;</span><br><span class="line"></span><br><span class="line">    uint32_t flags;</span><br><span class="line">    uint32_t version;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> class_ro_t *ro; <span class="comment">// 指向只读的结构体,存放类初始信息</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     这三个都是二位数组，是可读可写的，包含了类的初始内容、分类的内容。</span></span><br><span class="line"><span class="comment">     methods中，存储 method_list_t ----&gt; method_t</span></span><br><span class="line"><span class="comment">     二维数组，method_list_t --&gt; method_t</span></span><br><span class="line"><span class="comment">     这三个二位数组中的数据有一部分是从class_ro_t中合并过来的。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    method_array_t methods; <span class="comment">// 方法列表（类对象存放对象方法，元类对象存放类方法）</span></span><br><span class="line">    property_array_t properties; <span class="comment">// 属性列表</span></span><br><span class="line">    protocol_array_t protocols; <span class="comment">//协议列表</span></span><br><span class="line"></span><br><span class="line">    Class firstSubclass;</span><br><span class="line">    Class nextSiblingClass;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> *demangledName;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>methods</code> 、<code>properties</code>、<code>protocols</code>都是二维数组，包含类的初始内容、分类的内容和协议等。</p>
+</blockquote>
+<p><code>class_ro_t</code> 结构体：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> class_ro_t &#123;</span><br><span class="line">    uint32_t flags; <span class="comment">// 判断是否为元类</span></span><br><span class="line">    uint32_t instanceStart;</span><br><span class="line">    uint32_t instanceSize; <span class="comment">// 实例对象占用的内存空间</span></span><br><span class="line"><span class="meta">#ifdef __LP64__</span></span><br><span class="line">    uint32_t reserved;</span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> uint8_t * ivarLayout;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> * name; <span class="comment">//类名</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        一维数组，只读的，包含的是类的初始信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    method_list_t * baseMethodList;</span><br><span class="line">    protocol_list_t * baseProtocols;</span><br><span class="line">    <span class="keyword">const</span> ivar_list_t * ivars; <span class="comment">// 成员变量列表</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> uint8_t * weakIvarLayout;</span><br><span class="line">    property_list_t *baseProperties;</span><br><span class="line"></span><br><span class="line">    method_list_t *baseMethods() <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> baseMethodList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="进阶部分"><a href="#进阶部分" class="headerlink" title="进阶部分"></a>进阶部分</h1><h2 id="KVO"><a href="#KVO" class="headerlink" title="KVO"></a>KVO</h2><h3 id="KVO实现原理"><a href="#KVO实现原理" class="headerlink" title="KVO实现原理"></a>KVO实现原理</h3><p><code>iOS</code>是如何实现对一个对象的 <code>KVO</code>？</p>
+<p>通过运行时系统动态生成一个子类，并且让实例对象的 <code>isa</code> 指向这个全新的子类。当实例对象的属性被修改时，通过调用 <code>Foundation</code> 的 <code>NSSetXXXValueAndNotify</code>函数。实现如下：</p>
+<ol>
+<li><code>willChangeValueForKey:</code> </li>
+<li>父类原来的Setter</li>
+<li><code>didChangeValueForKey:</code></li>
+</ol>
+<p>内部会调用监听器的监听方法：<code>observeValueForKeyPath:ofObject:change:context:</code>。</p>
+<p>如果想要手动触发 <code>KVO</code> 就需要手动调用，<code>willChangeValueForKey:</code>  和 <code>didChangeValueForKey:</code>方法。 直接修改成员变量不会触发<code>KVO</code>，但是通过属性可以触发 <code>KVO</code>。</p>
+<h2 id="关联对象"><a href="#关联对象" class="headerlink" title="关联对象"></a>关联对象</h2><p>有时需要给分类添加成员变量，通常使用 <code>关联对象</code> 间接实现。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject</span><br><span class="line">objc_getAssociatedObject</span><br><span class="line">objc_removeAssociatedObjects</span><br></pre></td></tr></table></figure>
+<p>推荐用法： 使用get方法的@selector作为key。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject(obj, <span class="keyword">@selector</span>(<span class="keyword">getter</span>), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC)</span><br><span class="line">objc_getAssociatedObject(obj, <span class="keyword">@selector</span>(<span class="keyword">getter</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p><img src="https://user-gold-cdn.xitu.io/2019/2/25/1692384b7c06c5f8?w=1974&amp;h=896&amp;f=png&amp;s=225513" alt=""></p>
+<p>参考文章：<a href="https://juejin.im/post/5af86b276fb9a07aa34a59e6" target="_blank" rel="noopener">OS底层原理总结 - 关联对象实现原理</a></p>
+<h2 id="objc-msgSend、动态方法解析、消息转发"><a href="#objc-msgSend、动态方法解析、消息转发" class="headerlink" title="objc_msgSend、动态方法解析、消息转发"></a>objc_msgSend、动态方法解析、消息转发</h2><p>在 <code>OC</code> 中调用方法，其实都是转成 <code>objc_msgSend</code> 方法。它的执行流程分为三步：</p>
+<ol>
+<li>消息发送</li>
+<li>动态方法解析</li>
+<li>消息转发</li>
+</ol>
+<h3 id="消息发送"><a href="#消息发送" class="headerlink" title="消息发送"></a>消息发送</h3><p><img src="https://user-gold-cdn.xitu.io/2019/2/25/169238ff9524002b?w=1550&amp;h=720&amp;f=png&amp;s=230241" alt="方法查找逻辑"></p>
+<h3 id="动态方法解析"><a href="#动态方法解析" class="headerlink" title="动态方法解析"></a>动态方法解析</h3><p><img src="https://user-gold-cdn.xitu.io/2019/2/25/1692391c9b6917f6?w=1432&amp;h=596&amp;f=png&amp;s=120874" alt=""></p>
+<h3 id="消息转发"><a href="#消息转发" class="headerlink" title="消息转发"></a>消息转发</h3><p><img src="https://user-gold-cdn.xitu.io/2019/2/25/169239299202af2b?w=1560&amp;h=710&amp;f=png&amp;s=120694" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><p><a href="https://juejin.im/post/5c6abfc86fb9a049c04396a7" target="_blank" rel="noopener">搞iOS的，面试官问Hash干嘛？原因远比我下面要介绍的多</a></p>
+</li>
+<li><p><a href="https://juejin.im/post/5addabad6fb9a07ab83da39e" target="_blank" rel="noopener">Runtime学习笔记整理</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Owenli 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Owenli 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Owenli
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://jesusLove.github.io/2019/02/25/Runtime回顾笔记/" title="Runtime回顾笔记">https://jesusLove.github.io/2019/02/25/Runtime回顾笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Runtime/" rel="tag"># Runtime</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/31/iOS逆向与安全-基础篇/" rel="next" title="iOS逆向与安全:基础篇">
+                <i class="fa fa-chevron-left"></i> iOS逆向与安全:基础篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/me.png"
+                alt="Owenli" />
+            
+              <p class="site-author-name" itemprop="name">Owenli</p>
+              <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/jesusLove" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liqianqian92" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/Liqianqian0124" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/users/10328c2b7d75/latest_articles" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础部分"><span class="nav-number">1.</span> <span class="nav-text">基础部分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本术语"><span class="nav-number">1.1.</span> <span class="nav-text">基本术语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SEL-选择器，指方法的名字"><span class="nav-number">1.1.1.</span> <span class="nav-text">SEL : 选择器，指方法的名字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IMP-：指针，指向方法的具体实现地址"><span class="nav-number">1.1.2.</span> <span class="nav-text">IMP ：指针，指向方法的具体实现地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#id-：表示任意的OC类型"><span class="nav-number">1.1.3.</span> <span class="nav-text">id ：表示任意的OC类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isa-指向实例所属的类"><span class="nav-number">1.1.4.</span> <span class="nav-text">isa : 指向实例所属的类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Method"><span class="nav-number">1.1.5.</span> <span class="nav-text">Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ivar-实例变量"><span class="nav-number">1.1.6.</span> <span class="nav-text">Ivar : 实例变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Category-：分类"><span class="nav-number">1.1.7.</span> <span class="nav-text">Category ：分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#objc-property-t-实例属性"><span class="nav-number">1.1.8.</span> <span class="nav-text">objc_property_t : 实例属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-缓存"><span class="nav-number">1.1.9.</span> <span class="nav-text">Cache : 缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#objc-object-对象"><span class="nav-number">1.1.10.</span> <span class="nav-text">objc_object : 对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#objc-class-类"><span class="nav-number">1.1.11.</span> <span class="nav-text">objc_class : 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元类"><span class="nav-number">1.1.12.</span> <span class="nav-text">元类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#method-t"><span class="nav-number">1.1.13.</span> <span class="nav-text">method_t</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#category-t"><span class="nav-number">1.1.14.</span> <span class="nav-text">category_t</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不一样的-isa"><span class="nav-number">1.2.</span> <span class="nav-text">不一样的 isa</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#共用体"><span class="nav-number">1.2.1.</span> <span class="nav-text">共用体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isa-t-共用体"><span class="nav-number">1.2.2.</span> <span class="nav-text">isa_t 共用体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取ISA"><span class="nav-number">1.2.3.</span> <span class="nav-text">获取ISA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#窥探-objc-class-结构"><span class="nav-number">1.3.</span> <span class="nav-text">窥探 objc_class 结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进阶部分"><span class="nav-number">2.</span> <span class="nav-text">进阶部分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#KVO"><span class="nav-number">2.1.</span> <span class="nav-text">KVO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KVO实现原理"><span class="nav-number">2.1.1.</span> <span class="nav-text">KVO实现原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关联对象"><span class="nav-number">2.2.</span> <span class="nav-text">关联对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现原理"><span class="nav-number">2.2.1.</span> <span class="nav-text">实现原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#objc-msgSend、动态方法解析、消息转发"><span class="nav-number">2.3.</span> <span class="nav-text">objc_msgSend、动态方法解析、消息转发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#消息发送"><span class="nav-number">2.3.1.</span> <span class="nav-text">消息发送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态方法解析"><span class="nav-number">2.3.2.</span> <span class="nav-text">动态方法解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息转发"><span class="nav-number">2.3.3.</span> <span class="nav-text">消息转发</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Owenli</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        app_id: 'QfqKpSCunU088bTCXRvh0IDq-gzGzoHsz',
+        app_key: 'KGVXfETAJhm1Rvq4UedrDF5B',
+        placeholder: '留下你的足迹吧！'
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("QfqKpSCunU088bTCXRvh0IDq-gzGzoHsz", "KGVXfETAJhm1Rvq4UedrDF5B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
