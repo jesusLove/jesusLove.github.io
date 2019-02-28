@@ -97,7 +97,7 @@
 <meta property="og:description" content="iOS中多线程首先看一道面试题  iOS中多线程有哪些实现方案？     技术方案 简介 语言 线程声明周期 使用频率     pthread 1. 一套通用的多线程API2. 跨平台/可移植3. 使用难度大 C 程序员管理 几乎不用   NSThread 1.面向对象 2.简单易用直接操作线程对象 OC 程序员管理 偶尔使用   GCD 1.旨在替代NSThread等线程技术  2.充分利用设">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1363078-7fd0b6548d057739.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-09-26T09:56:56.247Z">
+<meta property="og:updated_time" content="2019-02-27T07:17:59.311Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS开发进阶：多线程">
 <meta name="twitter:description" content="iOS中多线程首先看一道面试题  iOS中多线程有哪些实现方案？     技术方案 简介 语言 线程声明周期 使用频率     pthread 1. 一套通用的多线程API2. 跨平台/可移植3. 使用难度大 C 程序员管理 几乎不用   NSThread 1.面向对象 2.简单易用直接操作线程对象 OC 程序员管理 偶尔使用   GCD 1.旨在替代NSThread等线程技术  2.充分利用设">
@@ -512,6 +512,12 @@
 <p>结果：13。提交异步任务到并发队列,任务调用了<code>performSelector:withObject:afterDelay:</code>。由于GCD提交的任务是在某个子线程中执行，子线程没有RunLoop。由于<code>performSelector:withObject:afterDelay:</code>需要RunLoop才可生效，所以方法不执行。这个问题，考察<code>performSelector:withObject:afterDelay:</code>内部实现。</p>
 </blockquote>
 <p>任务和队列示例代码：<a href="https://github.com/jesusLove/Owenli_Blog/tree/master/Content/iOS/%E5%A4%9A%E7%BA%BF%E7%A8%8B" target="_blank" rel="noopener">任务和队列Demo包含面试题讲解</a></p>
+<h2 id="1-2-队列组"><a href="#1-2-队列组" class="headerlink" title="1.2 队列组"></a>1.2 队列组</h2><p>在追加到队列中的多个处理全部结束后才去执行结果处理，通常会使用 队列组 。</p>
+<p><code>dispatch_group</code> 监听所有任务结束。<br><code>dispatch_group_create()</code> //创建一个队列组，需要手动release<br><code>dispatch_group_async(组，队列，block)</code><br><code>dispatch_group_notify(组，队列，block)</code> // 所有任务都结束后调用<br>也可以使用<code>dispatch_group_wait()</code></p>
+<blockquote>
+<p>A B C D 四个任务，D要在之前的任务结束后才去执行。</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</span><br><span class="line">dispatch_group_t group =  dispatch_group_create();</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"A"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"B"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"C"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_notify(group, dispatch_get_main_queue(), ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"D"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">long</span> result = dispatch_group_wait(group, DISPATCH_TIME_FOREVER);</span><br><span class="line"><span class="keyword">if</span> (result == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"D"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="二、多读单写解决方案"><a href="#二、多读单写解决方案" class="headerlink" title="二、多读单写解决方案"></a>二、多读单写解决方案</h1><ul>
 <li>pthread_rwlock: 读写锁</li>
 <li>dispatch_barrier_async() 异步栅栏调用</li>
@@ -718,7 +724,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -729,7 +735,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -740,7 +746,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -808,7 +814,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#iOS中多线程"><span class="nav-number">1.</span> <span class="nav-text">iOS中多线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一、GCD"><span class="nav-number">2.</span> <span class="nav-text">一、GCD</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-同步-异步和串行-并发"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 同步/异步和串行/并发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-同步-串行"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1.1 同步 + 串行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-同步-并发"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.1.2 同步 + 并发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-异步-串行"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.1.3 异步 + 串行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-4-异步-并发"><span class="nav-number">2.1.4.</span> <span class="nav-text">1.1.4 异步 + 并发</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、多读单写解决方案"><span class="nav-number">3.</span> <span class="nav-text">二、多读单写解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-什么是多读单写？"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 什么是多读单写？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-解决方法"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 解决方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、dispatch-group-async"><span class="nav-number">4.</span> <span class="nav-text">三、dispatch_group_async()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、NSOperation"><span class="nav-number">5.</span> <span class="nav-text">四、NSOperation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、NSThread"><span class="nav-number">6.</span> <span class="nav-text">五、NSThread</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录"><span class="nav-number">7.</span> <span class="nav-text">附录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">8.</span> <span class="nav-text">小结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#iOS中多线程"><span class="nav-number">1.</span> <span class="nav-text">iOS中多线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一、GCD"><span class="nav-number">2.</span> <span class="nav-text">一、GCD</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-同步-异步和串行-并发"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 同步/异步和串行/并发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-同步-串行"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1.1 同步 + 串行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-同步-并发"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.1.2 同步 + 并发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-异步-串行"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.1.3 异步 + 串行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-4-异步-并发"><span class="nav-number">2.1.4.</span> <span class="nav-text">1.1.4 异步 + 并发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-队列组"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 队列组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、多读单写解决方案"><span class="nav-number">3.</span> <span class="nav-text">二、多读单写解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-什么是多读单写？"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 什么是多读单写？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-解决方法"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 解决方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、dispatch-group-async"><span class="nav-number">4.</span> <span class="nav-text">三、dispatch_group_async()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、NSOperation"><span class="nav-number">5.</span> <span class="nav-text">四、NSOperation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、NSThread"><span class="nav-number">6.</span> <span class="nav-text">五、NSThread</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录"><span class="nav-number">7.</span> <span class="nav-text">附录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">8.</span> <span class="nav-text">小结</span></a></li></ol></div>
             
 
           </div>
