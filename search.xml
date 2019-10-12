@@ -496,11 +496,11 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[ReactNative: Flexbox布局]]></title>
-    <url>%2F2016%2F12%2F13%2FReactNative-Flexbox%E5%B8%83%E5%B1%80%2F</url>
-    <content type="text"><![CDATA[ReactNative中Flexbox布局Flex布局是什么？Flex 布局是FlexBox布局的简写，意为“弹性布局”。ReactNative中的Flexbox布局工作原理和Web上的CSS中基本一致，只有少许差异。例如：flexDirection默认的是column而不是row。 容器的属性FlexDirectionflex-direction属性决定主轴方向。取值：row, row-reverse, column, column-reverse。在ReactNative默认：column。CSS中默认为：row。 column(ReactNative默认值)：主轴为垂直方向，起点在上端。 column-reverse: 与column相反。 row: 主轴水平方向，起点在左端。 row-reverse: 与row相反。 justify-content属性justify-content定义子项目在主轴上的对齐方式。取值：flex-start, flex-end, center, space-between,space-around。 flex-start（默认值）：左对齐 flex-end：右对齐 center： 居中 space-between：两端对齐，项目之间的间隔都相等。 space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。 align-itemsalign-items属性定义项目在交叉轴上如何对齐。取值：flex-start, center, flex-end和stretch。 注意：使用stretch时，子元素在次轴上不能够固定高度。 flex-start：交叉轴的起点对齐。 flex-end：交叉轴的终点对齐。 center：交叉轴的中点对齐。 stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。 flex-warpflex-warp默认情况下，元素是排列在一条线上的，当排不开则自动换行。取值：nowrap, wrap和wrap-reverse。 nowrap : （默认）不换行 wrap: 换行，第一行在上面。 wrap-reverse: 换行，第一行在下面。 小结本文介绍了Flexbox几个常用的属性。查看ReactNative相关的布局请查看这篇文档。]]></content>
+    <title><![CDATA[CSS之Flexbox布局]]></title>
+    <url>%2F2016%2F12%2F13%2FCSS%E4%B9%8BFlexbox%E5%B8%83%E5%B1%80%2F</url>
+    <content type="text"><![CDATA[Flexbox布局Flex布局是什么？Flex 布局是FlexBox布局的简写，意为“弹性布局”。ReactNative中的Flexbox布局工作原理和Web上的CSS中基本一致，只有少许差异。例如：flexDirection默认的是column而不是row。 容器的属性FlexDirectionflex-direction属性决定主轴方向。取值：row, row-reverse, column, column-reverse。在ReactNative默认：column。CSS中默认为：row。 column(ReactNative默认值)：主轴为垂直方向，起点在上端。 column-reverse: 与column相反。 row: 主轴水平方向，起点在左端。 row-reverse: 与row相反。 justify-content属性justify-content定义子项目在主轴上的对齐方式。取值：flex-start, flex-end, center, space-between,space-around。 flex-start（默认值）：左对齐 flex-end：右对齐 center： 居中 space-between：两端对齐，项目之间的间隔都相等。 space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。 align-itemsalign-items属性定义项目在交叉轴上如何对齐。取值：flex-start, center, flex-end和stretch。 注意：使用stretch时，子元素在次轴上不能够固定高度。 flex-start：交叉轴的起点对齐。 flex-end：交叉轴的终点对齐。 center：交叉轴的中点对齐。 stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。 flex-warpflex-warp默认情况下，元素是排列在一条线上的，当排不开则自动换行。取值：nowrap, wrap和wrap-reverse。 nowrap : （默认）不换行 wrap: 换行，第一行在上面。 wrap-reverse: 换行，第一行在下面。 小结本文介绍了Flexbox几个常用的属性。查看ReactNative相关的布局请查看这篇文档。]]></content>
       <categories>
-        <category>ReactNative</category>
+        <category>CSS</category>
       </categories>
       <tags>
         <tag>Flexbox</tag>
