@@ -429,7 +429,7 @@
 <h3 id="使用ES6中的-let"><a href="#使用ES6中的-let" class="headerlink" title="使用ES6中的 let"></a>使用ES6中的 let</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">  data[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// let 会创建块级作用域。</span></span><br></pre></td></tr></table></figure>
 <h1 id="四、作用域链与闭包"><a href="#四、作用域链与闭包" class="headerlink" title="四、作用域链与闭包"></a>四、作用域链与闭包</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">'global scope'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> scope = <span class="string">'local scope'</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> scope</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> f</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = checkscope()</span><br><span class="line"><span class="built_in">console</span>.log(foo()) <span class="comment">// local scope</span></span><br></pre></td></tr></table></figure>
 <p>调用栈执行顺序：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Stack.push(&lt;global&gt;)</span><br><span class="line">Stack.push(&lt;checkscope&gt;)</span><br><span class="line">Stack.pop()</span><br><span class="line">Stack.push(&lt;f&gt;)</span><br><span class="line">Stack.pop()</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Stack.push(<span class="xml"><span class="tag">&lt;<span class="name">global</span>&gt;</span>)</span></span><br><span class="line">Stack.push(&lt;checkscope&gt;)</span><br><span class="line">Stack.pop()</span><br><span class="line">Stack.push(&lt;f&gt;)</span><br><span class="line">Stack.pop()</span><br></pre></td></tr></table></figure>
 <p>函数 f 的执行是在 checkscope函数上下文被销毁之后，那么为何还能读取到 scope 变量？</p>
 <p>函数f执行后会维护一个作用域链，会指向checkscope 作用域，作用域链是一个数组。<br>如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fContext = &#123;</span><br><span class="line">    Scope: [AO, checkscopeContext.AO, globalContext.VO],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -609,7 +609,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -620,7 +620,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -631,7 +631,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
