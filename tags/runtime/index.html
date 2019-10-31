@@ -91,7 +91,7 @@
 <meta name="description" content="iOS菜鸟，前端小白">
 <meta property="og:type" content="website">
 <meta property="og:title" content="紫电清霜">
-<meta property="og:url" content="https://jesusLove.github.io/tags/Runtime/index.html">
+<meta property="og:url" content="https://jesusLove.github.io/tags/runtime/index.html">
 <meta property="og:site_name" content="紫电清霜">
 <meta property="og:description" content="iOS菜鸟，前端小白">
 <meta property="og:locale" content="zh-Hans">
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://jesusLove.github.io/tags/Runtime/"/>
+  <link rel="canonical" href="https://jesusLove.github.io/tags/runtime/"/>
 
 
 
 
 
-  <title>标签: Runtime | 紫电清霜</title>
+  <title>标签: runtime | 紫电清霜</title>
   
 
 
@@ -297,7 +297,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>Runtime<small>标签</small>
+        <h1>runtime<small>标签</small>
         </h1>
       </div>
 
@@ -309,9 +309,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2019/02/25/Runtime回顾笔记/" itemprop="url">
+            <a class="post-title-link" href="/2016/08/23/理解Objective-C-Runtime/" itemprop="url">
               
-                <span itemprop="name">iOS开发进阶：Runtime</span>
+                <span itemprop="name">理解Objective-C:Runtime</span>
               
             </a>
         
@@ -319,9 +319,37 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-25T15:42:30+08:00"
-              content="2019-02-25" >
-          02-25
+              datetime="2016-08-23T17:12:33+08:00"
+              content="2016-08-23" >
+          08-23
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2016/07/26/我的第一篇文章-使用Hexo搭建博客/" itemprop="url">
+              
+                <span itemprop="name">Objective-C Runtime:类和对象</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-07-26T14:28:04+08:00"
+              content="2016-07-26" >
+          07-26
         </time>
       </div>
 
@@ -387,7 +415,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1065,45 +1093,6 @@
             newcounter.save(null, {
               success: function(newcounter) {
                 var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-</body>
-</html>
-ElementById(url));
                 $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
               },
               error: function(newcounter, error) {
