@@ -81,7 +81,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="紫电清霜" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="紫电清霜Owenlee" type="application/atom+xml" />
 
 
 
@@ -90,13 +90,13 @@
 
 <meta name="description" content="iOS菜鸟，前端小白">
 <meta property="og:type" content="website">
-<meta property="og:title" content="紫电清霜">
-<meta property="og:url" content="https://jesusLove.github.io/tags/runtime/index.html">
-<meta property="og:site_name" content="紫电清霜">
+<meta property="og:title" content="紫电清霜Owenlee">
+<meta property="og:url" content="https://jesusLove.github.io/tags/Runtime/index.html">
+<meta property="og:site_name" content="紫电清霜Owenlee">
 <meta property="og:description" content="iOS菜鸟，前端小白">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="紫电清霜">
+<meta name="twitter:title" content="紫电清霜Owenlee">
 <meta name="twitter:description" content="iOS菜鸟，前端小白">
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://jesusLove.github.io/tags/runtime/"/>
+  <link rel="canonical" href="https://jesusLove.github.io/tags/Runtime/"/>
 
 
 
 
 
-  <title>标签: runtime | 紫电清霜</title>
+  <title>标签: Runtime | 紫电清霜Owenlee</title>
   
 
 
@@ -163,7 +163,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">紫电清霜</span>
+        <span class="site-title">紫电清霜Owenlee</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -297,7 +297,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>runtime<small>标签</small>
+        <h1>Runtime<small>标签</small>
         </h1>
       </div>
 
@@ -309,37 +309,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2016/08/23/理解Objective-C-Runtime/" itemprop="url">
+            <a class="post-title-link" href="/2019/02/25/Runtime回顾笔记/" itemprop="url">
               
-                <span itemprop="name">理解Objective-C:Runtime</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-23T17:12:33+08:00"
-              content="2016-08-23" >
-          08-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/26/我的第一篇文章-使用Hexo搭建博客/" itemprop="url">
-              
-                <span itemprop="name">Objective-C Runtime:类和对象</span>
+                <span itemprop="name">iOS开发进阶：Runtime</span>
               
             </a>
         
@@ -347,9 +319,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-26T14:28:04+08:00"
-              content="2016-07-26" >
-          07-26
+              datetime="2019-02-25T15:42:30+08:00"
+              content="2019-02-25" >
+          02-25
         </time>
       </div>
 
@@ -402,9 +374,9 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/images/me.png"
-                alt="Owenli" />
+                alt="Owenlee" />
             
-              <p class="site-author-name" itemprop="name">Owenli</p>
+              <p class="site-author-name" itemprop="name">Owenlee</p>
               <p class="site-description motion-element" itemprop="description">iOS菜鸟，前端小白</p>
           </div>
 
@@ -437,7 +409,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -514,7 +486,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Owenli</span>
+  <span class="author" itemprop="copyrightHolder">Owenlee</span>
 
   
 </div>
@@ -1093,6 +1065,45 @@
             newcounter.save(null, {
               success: function(newcounter) {
                 var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+ElementById(url));
                 $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
               },
               error: function(newcounter, error) {
