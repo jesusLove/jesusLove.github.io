@@ -480,7 +480,7 @@
 <p>参考上面的注释。</p>
 </blockquote>
 <h3 id="获取ISA"><a href="#获取ISA" class="headerlink" title="获取ISA"></a>获取ISA</h3><p>新版的 <code>isa</code> 获取真实的内存地址需要进行一次位运算。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">if</span> __arm64__ <span class="comment">// arm64位系统</span></span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> ISA_MASK        0x0000000ffffffff8ULL</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">elif</span> __x86_64__ <span class="comment">// arm32为系统</span></span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> ISA_MASK        0x00007ffffffffff8ULL</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">if</span> __arm64__ // arm64位系统</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   define ISA_MASK        0x0000000ffffffff8ULL</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">elif</span> __x86_64__ // arm32为系统</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   define ISA_MASK        0x00007ffffffffff8ULL</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> endif</span></span><br></pre></td></tr></table></figure>
 <p>获取真实内存地址 <code>(Class)(isa.bits &amp; ISA_MASK);</code></p>
 <p>验证上面结论：</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSObject</span> *objc = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line">    </span><br><span class="line">Class objcClass = [<span class="built_in">NSObject</span> <span class="keyword">class</span>];</span><br></pre></td></tr></table></figure>
@@ -707,7 +707,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -718,7 +718,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -729,7 +729,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

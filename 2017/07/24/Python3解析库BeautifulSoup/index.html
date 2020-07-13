@@ -421,7 +421,7 @@
 <p>安装完BeautifulSoup后，我们还需要HTTP解析器，例如三方解析器<code>lxml</code></p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="keyword">install</span> lxml</span><br></pre></td></tr></table></figure>
 <p>万事俱备只欠东风！</p>
-<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;from <span class="keyword">bs4 </span><span class="meta">import</span> <span class="keyword">BeautifulSoup</span></span><br><span class="line"><span class="keyword">&gt;&gt;&gt;soup </span>= <span class="keyword">BeautifulSoup('&lt;b </span>class=<span class="string">"boldest"</span>&gt;Extremely <span class="keyword">bold&lt;/b&gt;')</span></span><br></pre></td></tr></table></figure>
+<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt;from bs4 import BeautifulSoup</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt;soup = BeautifulSoup(<span class="string">'&lt;b class="boldest"&gt;Extremely bold&lt;/b&gt;'</span>)</span></span><br></pre></td></tr></table></figure>
 <h2 id="对象种类"><a href="#对象种类" class="headerlink" title="对象种类"></a>对象种类</h2><p>BeautifulSoup将复杂的HTML文档转为一个复杂的树形结构，每个节点都是Python对象，所有对象可以归纳为四种：Tag, NavigableString, BeautifulSoup, Comment。</p>
 <h3 id="Tag"><a href="#Tag" class="headerlink" title="Tag"></a>Tag</h3><p>Tag对象与XML和HTML原生文档中的tag相同。例如：</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt;tagb = soup.b</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt;type(tag) </span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">bs4</span>.<span class="title">element</span>.<span class="title">Tag</span>'&gt;</span></span><br></pre></td></tr></table></figure>
@@ -448,7 +448,7 @@
 <p>Comment 对象是一个特殊类型的<code>NavigableString</code>对象</p>
 </blockquote>
 <p><code>Comment</code>对象会使用特殊的格式输出：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(soup.b.prettify())</span><br><span class="line"><span class="tag">&lt;<span class="name">b</span>&gt;</span></span><br><span class="line"> <span class="comment">&lt;!--Hey, buddy. Want to buy a used parser?--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">b</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(soup.b.prettify())</span><br><span class="line">&lt;b&gt;</span><br><span class="line"> &lt;!--Hey, buddy. Want to buy a used parser?--&gt;</span><br><span class="line">&lt;<span class="regexp">/b&gt;</span></span><br></pre></td></tr></table></figure>
 <h1 id="遍历文档树"><a href="#遍历文档树" class="headerlink" title="遍历文档树"></a>遍历文档树</h1><p>🌰：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; html_doc = """</span><br><span class="line">... <span class="tag">&lt;<span class="name">html</span>&gt;</span><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">title</span>&gt;</span>The Dormouse's story<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">...     <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">... <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span><span class="tag">&lt;<span class="name">b</span>&gt;</span>The Dormouse's story<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">... <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"story"</span>&gt;</span>Once upon a time there were three little sisters; and their names were</span><br><span class="line">... <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://example.com/elsie"</span> <span class="attr">class</span>=<span class="string">"sister"</span> <span class="attr">id</span>=<span class="string">"link1"</span>&gt;</span>Elsie<span class="tag">&lt;/<span class="name">a</span>&gt;</span>,</span><br><span class="line">... <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://example.com/lacie"</span> <span class="attr">class</span>=<span class="string">"sister"</span> <span class="attr">id</span>=<span class="string">"link2"</span>&gt;</span>Lacie<span class="tag">&lt;/<span class="name">a</span>&gt;</span> and</span><br><span class="line">... <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://example.com/tillie"</span> <span class="attr">class</span>=<span class="string">"sister"</span> <span class="attr">id</span>=<span class="string">"link3"</span>&gt;</span>Tillie<span class="tag">&lt;/<span class="name">a</span>&gt;</span>;</span><br><span class="line">... and they lived at the bottom of a well.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">... <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"story"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">... """</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; from bs4 import BeautifulSoup</span><br><span class="line">&gt;&gt;&gt; soup = BeautifulSoup(html_doc, 'html.parser')</span><br></pre></td></tr></table></figure>
 <h2 id="子节点"><a href="#子节点" class="headerlink" title="子节点"></a>子节点</h2><p>一个Tag可能包含多个字符串或其它的Tag，这些都是这个Tag的子节点。Beautiful Soup提供了许多操作和遍历子节点的属性。</p>
@@ -704,7 +704,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -715,7 +715,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -726,7 +726,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

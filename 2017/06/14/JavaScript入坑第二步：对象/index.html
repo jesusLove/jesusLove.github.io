@@ -460,7 +460,7 @@
 </tbody>
 </table>
 <p>前面定义的<code>person</code>前三个特征都是默认的<code>true</code>。如果想修改特征，可以通过<code>Object.defineProperty()</code>方法。</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// person 是前面创建的对象</span></span><br><span class="line">Object.defineProperty(person, <span class="string">"name"</span>, &#123;</span><br><span class="line">	writable: <span class="literal">false</span>,</span><br><span class="line">	<span class="keyword">value</span>: <span class="string">"owenli"</span> </span><br><span class="line">&#125;);</span><br><span class="line">person.sayName(); <span class="comment">// owenli</span></span><br><span class="line">person.name = <span class="string">"Tom"</span>;</span><br><span class="line">person.sayName(); <span class="comment">// owenli</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// person 是前面创建的对象</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">"name"</span>, &#123;</span><br><span class="line">	writable: <span class="literal">false</span>,</span><br><span class="line">	value: <span class="string">"owenli"</span> </span><br><span class="line">&#125;);</span><br><span class="line">person.sayName(); <span class="comment">// owenli</span></span><br><span class="line">person.name = <span class="string">"Tom"</span>;</span><br><span class="line">person.sayName(); <span class="comment">// owenli</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><code>configurable</code>、<code>enumerable</code>、<code>writable</code>和<code>value</code>都可以通过此方法修改。</p>
 </blockquote>
@@ -734,7 +734,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -745,7 +745,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -756,7 +756,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

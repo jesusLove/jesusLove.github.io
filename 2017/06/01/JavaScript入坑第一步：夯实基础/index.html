@@ -421,11 +421,11 @@
 <p>typeof操作符不是函数，不需要使用圆括号。NULL是什么类型呢？<code>typeof null</code>返回值为”Object“。</p>
 </blockquote>
 <h3 id="2-Undefined类型"><a href="#2-Undefined类型" class="headerlink" title="2.Undefined类型"></a>2.Undefined类型</h3><p>Undefined类型只是一个值，特殊的Undefined。使用var声明变量未初始化时，这个值就是Undefined。</p>
-<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">message</span>;</span><br><span class="line">console.log(typeof <span class="keyword">message</span>); <span class="comment">// undefined</span></span><br><span class="line">console.log(<span class="keyword">type</span> <span class="keyword">of</span> age); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> message); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(type <span class="keyword">of</span> age); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>结果显示，对于未初始化和未定义的变量使用typeof操作符都会返回undefined。</p>
 </blockquote>
-<h3 id="3-Null类型"><a href="#3-Null类型" class="headerlink" title="3.Null类型"></a>3.Null类型</h3><p>Null是另一个只有一个值的数据类型，就是特殊值null。从逻辑角度看，null值表示一个空对象指针。也就是前面为什么<code>typeof null</code>会返回Object的原因。定义一个空对象指针的时候，可以将指针设为null就可以通过相应的变量判断是否是一个对象指针。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (car != <span class="literal">null</span>) &#123;</span><br><span class="line"><span class="comment">// 对car对象执行操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-Null类型"><a href="#3-Null类型" class="headerlink" title="3.Null类型"></a>3.Null类型</h3><p>Null是另一个只有一个值的数据类型，就是特殊值null。从逻辑角度看，null值表示一个空对象指针。也就是前面为什么<code>typeof null</code>会返回Object的原因。定义一个空对象指针的时候，可以将指针设为null就可以通过相应的变量判断是否是一个对象指针。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (car != <span class="literal">null</span>) &#123;</span><br><span class="line"><span class="comment">// 对car对象执行操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>实际上，Undefined值是从null值派生的。因此，当我们判断 <code>null == undefined</code>时，返回true。</p>
 </blockquote>
@@ -462,7 +462,7 @@
 </tbody>
 </table>
 <h3 id="5-Number类型"><a href="#5-Number类型" class="headerlink" title="5.Number类型"></a>5.Number类型</h3><p>JavaScript中使用IEEE754格式来表示整数和浮点数值。常用的有十进制，八进制和十六进制。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> intNum = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> octalNum = <span class="number">070</span>; <span class="comment">// 56（0-7取值）</span></span><br><span class="line"><span class="keyword">var</span> hexNum1 = <span class="number">0xA</span>; <span class="comment">//10 （0-F取值）</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> intNum = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> octalNum = <span class="number">070</span>; <span class="comment">// 56（0-7取值）</span></span><br><span class="line"><span class="keyword">var</span> hexNum1 = <span class="number">0xA</span>; <span class="comment">//10 （0-F取值）</span></span><br></pre></td></tr></table></figure>
 <p>浮点数值的最高精度是17位小数，但在算数计算时精度远不如整数。<br>因为浮点数计算时会出现舍如误差，这是IEEE754数值计算的通病。</p>
 <p>数值范围，在JavaScript中，最小能表示的值<code>Number.MIN_VALUE</code>，最大值为<code>Number.MAX_VALUE</code>。超出表示范围，会被自动转为<code>Infinity</code>(无穷)。我们可以使用<code>isFinite()</code>函数来检验是否在范围之间。</p>
 <p>NaN，非数值是一个特殊的数值。表示一个本应该返回数值的操作数未返回数值的情况。NaN有两个特点，1. 任何涉及NaN的操作都返回NaN。2. NaN与任何值都不相等，包括本身。<br>我们可以使用<code>isNaN()</code>函数，检测参数是否”<strong>不是数值</strong>“。</p>
@@ -472,8 +472,8 @@
 <blockquote>
 <p>注意： 在ECMAScript 3中num4为56，在ECMAScript 5中num4为70。</p>
 </blockquote>
-<p>为了解决这个问题，可以给<code>parseInt()</code>传第二个参数：用来指定转换的进制。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">num</span> = parseInt(<span class="string">"0xAF"</span>, <span class="number">16</span>); <span class="comment">// 175</span></span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line"><span class="keyword">var</span> <span class="built_in">num</span> = parseInt(<span class="string">"AF"</span>, <span class="number">16</span>);</span><br></pre></td></tr></table></figure></p>
-<p>与<code>parseInt()</code>类似，<code>parseFloat()</code>也是从第一个字符开始，直达解析到末尾或者遇到无效的浮点数字。另外，始终会忽略前导的零。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">num</span> = parseFloat(<span class="string">"070"</span>); <span class="comment">//70</span></span><br></pre></td></tr></table></figure></p>
+<p>为了解决这个问题，可以给<code>parseInt()</code>传第二个参数：用来指定转换的进制。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="built_in">parseInt</span>(<span class="string">"0xAF"</span>, <span class="number">16</span>); <span class="comment">// 175</span></span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line"><span class="keyword">var</span> num = <span class="built_in">parseInt</span>(<span class="string">"AF"</span>, <span class="number">16</span>);</span><br></pre></td></tr></table></figure></p>
+<p>与<code>parseInt()</code>类似，<code>parseFloat()</code>也是从第一个字符开始，直达解析到末尾或者遇到无效的浮点数字。另外，始终会忽略前导的零。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="built_in">parseFloat</span>(<span class="string">"070"</span>); <span class="comment">//70</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="6-String类型"><a href="#6-String类型" class="headerlink" title="6.String类型"></a>6.String类型</h3><p>String类型用与表示零或多个16位Unicode字符组成的字符序列。在JavaScript中，使用双引号和单引号表示，两者没有任何区别。</p>
 <p>字符串是不可变的，一旦创建就不可以修改。</p>
 <p>数值转为字符串有两种方式：<code>toString()</code> 和 <code>String()</code>。第一个方法，返回数值的字符串表示形式。第二个可以将任何类型的值转为字符串，在不知道转值是否为null和undefined时使用。</p>
@@ -721,7 +721,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -732,7 +732,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -743,7 +743,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

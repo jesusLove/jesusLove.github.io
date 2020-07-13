@@ -418,7 +418,7 @@
 <p>每个模块都有自己的私有符号表，被模块内所有的函数定义作为全局符号表使用。</p>
 <p>模块导入，一个好习惯是所有的<code>import</code>都放在模块的开始。被导入的模块被放在当前模块的全局符号表中。</p>
 <p><code>import</code>语句的一个变体直接从被导入的模块中导入命名到本模块的语义表中。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; from fibo import fib, fib2</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; fib(<span class="number">500</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; from fibo import fib, fib2</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; fib(500)</span></span><br></pre></td></tr></table></figure>
 <p>这样不会从局域语义表中导入模块名。</p>
 <p>导入模块所有定义</p>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from fibo import *</span><br><span class="line">&gt;&gt;&gt; fib(<span class="number">500</span>)</span><br><span class="line"><span class="number">1</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">5</span>  <span class="number">8</span>  <span class="number">13</span>  <span class="number">21</span>  <span class="number">34</span>  <span class="number">55</span>  <span class="number">89</span>  <span class="number">144</span>  <span class="number">233</span>  <span class="number">377</span></span><br></pre></td></tr></table></figure>
@@ -443,7 +443,7 @@
 <h2 id="“编译的”Python文件"><a href="#“编译的”Python文件" class="headerlink" title="“编译的”Python文件"></a>“编译的”Python文件</h2><p>为了加快加载模块的速度，Python会在<code>__pycache__</code>目录下以<code>module.version.pyc</code>名字缓存每个模块编译后的版本。</p>
 <h1 id="标准模块"><a href="#标准模块" class="headerlink" title="标准模块"></a>标准模块</h1><p>Python带有一个标准模块库，并发布有独立的文档，名为Python库参考手册。有些模块内置于解释器中，虽然不是语言内核一部分，但是内置解释器中，提高了效率，给系统调用等操作系统原生访问提供了接口。</p>
 <h2 id="dir-函数"><a href="#dir-函数" class="headerlink" title="dir()函数"></a>dir()函数</h2><p>内置函数dir(）用于按模块名搜索模块定义，返回一个字符串类型的存储列表</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt;import fibo, sys</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; dir(fibo)</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; dir(sys)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt;import fibo, sys</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; dir(fibo)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; dir(sys)</span></span><br></pre></td></tr></table></figure>
 <!--# 包
 
 为了让Python将目录当做内容包，目录中必须包含`__init__.py`文件。
@@ -492,7 +492,7 @@
 <p>如果向读取到一个列表中，可以使用<code>list(f)</code>或者<code>f.readlines()</code>。</p>
 <p><strong>write(string)</strong></p>
 <p>将<code>string</code>内容写入到文件中，并返回写入字符的长度。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; f = open(<span class="string">'test.txt'</span>, <span class="string">'r+'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; f.write(<span class="string">'This is a test'</span>)</span><br><span class="line"><span class="number">14</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; f.close()</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; f = open(<span class="string">'test.txt'</span>, <span class="string">'r+'</span>)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; f.write(<span class="string">'This is a test'</span>)</span></span><br><span class="line">14</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; f.close()</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>将字符写入到文件中，需要关闭才能生效。</p>
 </blockquote>
@@ -695,7 +695,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -706,7 +706,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -717,7 +717,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

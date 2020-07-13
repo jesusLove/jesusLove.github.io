@@ -529,7 +529,7 @@
 <p>定义了一个表示CSSColor的<code>enum</code>:</p>
 <figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">CSSColor</span> &#123;</span></span><br><span class="line">    <span class="keyword">case</span> named(ColorName)</span><br><span class="line">    <span class="keyword">case</span> rgb(UInt8, UInt8, UInt8)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> color1 = <span class="type">CSSColor</span>.named(.black)</span><br><span class="line"><span class="keyword">var</span> color2 = <span class="type">CSSColor</span>.rgb(<span class="number">0xAA</span>, <span class="number">0xAA</span>, <span class="number">0xAA</span>)</span><br><span class="line"><span class="keyword">switch</span> color2 &#123;</span><br><span class="line"><span class="keyword">case</span>  <span class="keyword">let</span>  .named(color):</span><br><span class="line">     <span class="built_in">print</span>(<span class="string">"<span class="subst">\(color)</span>"</span>)</span><br><span class="line"><span class="keyword">case</span> .rgb(<span class="keyword">let</span> r, <span class="keyword">let</span> g, <span class="keyword">let</span> b):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"<span class="subst">\(r)</span>, <span class="subst">\(g)</span>, <span class="subst">\(b)</span>"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> color1 = CSSColor.named(.black)</span><br><span class="line"><span class="keyword">var</span> color2 = CSSColor.rgb(<span class="number">0xAA</span>, <span class="number">0xAA</span>, <span class="number">0xAA</span>)</span><br><span class="line"><span class="keyword">switch</span> color2 &#123;</span><br><span class="line"><span class="keyword">case</span>  <span class="keyword">let</span>  .named(color):</span><br><span class="line">     <span class="built_in">print</span>(<span class="string">"\(color)"</span>)</span><br><span class="line"><span class="keyword">case</span> .rgb(<span class="keyword">let</span> r, <span class="keyword">let</span> g, <span class="keyword">let</span> b):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"\(r), \(g), \(b)"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>注意：<br>提取”关联值“的内容时，可以把<code>let</code>和<code>var</code>写在<code>case</code>前面或者后面。例如：<code>named</code>和<code>rgb</code>。</p>
 </blockquote>
@@ -786,7 +786,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -797,7 +797,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -808,7 +808,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

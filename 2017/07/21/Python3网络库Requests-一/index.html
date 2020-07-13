@@ -422,16 +422,16 @@
 <h1 id="Request基础知识"><a href="#Request基础知识" class="headerlink" title="Request基础知识"></a>Request基础知识</h1><p>确定前面的内容顺利完成，按我们开始学习如何使用Request吧。</p>
 <h2 id="发送一个网络请求"><a href="#发送一个网络请求" class="headerlink" title="发送一个网络请求"></a>发送一个网络请求</h2><p>打开终端，运行<code>python3</code>进入Python模式。</p>
 <p>导入模块：</p>
-<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="keyword">import</span> requests</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import requests</span></span><br></pre></td></tr></table></figure>
 <p>发送Get请求</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt;  r = requests.get(<span class="string">'https://api.github.com/events'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt;  r = requests.get(<span class="string">'https://api.github.com/events'</span>)</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>我们获取了名为r的Response对象，包含了我们需要的所有信息。</p>
 </blockquote>
 <p>发送Post请求</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; r = requests.post(<span class="string">'http://httpbin.org/post'</span>, data = &#123;<span class="string">'key'</span><span class="symbol">:<span class="string">'value'</span></span>&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; r = requests.post(<span class="string">'http://httpbin.org/post'</span>, data = &#123;<span class="string">'key'</span>:<span class="string">'value'</span>&#125;)</span></span><br></pre></td></tr></table></figure>
 <p>另外还可以发送Put，Delete，Head和Options等请求</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; r = requests.put(<span class="string">'http://httpbin.org/put'</span>, data = &#123;<span class="string">'key'</span><span class="symbol">:<span class="string">'value'</span></span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; r = requests.delete(<span class="string">'http://httpbin.org/delete'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; r = requests.head(<span class="string">'http://httpbin.org/get'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; r = requests.options(<span class="string">'http://httpbin.org/get'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; r = requests.put(<span class="string">'http://httpbin.org/put'</span>, data = &#123;<span class="string">'key'</span>:<span class="string">'value'</span>&#125;)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; r = requests.delete(<span class="string">'http://httpbin.org/delete'</span>)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; r = requests.head(<span class="string">'http://httpbin.org/get'</span>)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; r = requests.options(<span class="string">'http://httpbin.org/get'</span>)</span></span><br></pre></td></tr></table></figure>
 <h2 id="在URL中传递数据"><a href="#在URL中传递数据" class="headerlink" title="在URL中传递数据"></a>在URL中传递数据</h2><p>上面知道如何发送简单网络请求，那么如何在URL中传递参数呢。</p>
 <p>Request允许使用params关键字将参数以字符串字典的形式添加。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 传递参数</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; payload = &#123;<span class="string">'key1'</span>:<span class="string">'value1'</span>, <span class="string">'key2'</span>:<span class="string">'value2'</span>&#125;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; r = requests.get(<span class="string">'http://httpbin.org/get'</span>, params = payload)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="built_in">print</span>(r.url)</span></span><br><span class="line">http://httpbin.org/get?key1=value1&amp;key2=value2</span><br></pre></td></tr></table></figure>
@@ -446,9 +446,9 @@
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; r.encoding</span><br><span class="line"><span class="string">'utf-8'</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; r.encoding = <span class="string">'ISO-8859-1'</span></span><br></pre></td></tr></table></figure>
 <p><strong>content</strong></p>
 <p>将返回正文作为字节，而非文本请求</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; r.content</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; r.content</span></span><br></pre></td></tr></table></figure>
 <p><strong>json()</strong></p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; r.json()</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; r.json()</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>如果JSON解码异常会报<code>ValueError</code>错误。有时调用JSON成功并不能证明请求成功，需要使用<code>status_code</code>进行验证。</p>
 </blockquote>
@@ -457,16 +457,16 @@
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r.raw</span><br><span class="line">&lt;urllib3<span class="selector-class">.response</span><span class="selector-class">.HTTPResponse</span> <span class="selector-tag">object</span> at <span class="number">0</span>x10fab2550&gt;</span><br><span class="line">&gt;&gt;&gt; r<span class="selector-class">.raw</span><span class="selector-class">.read</span>(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
 <p><strong>status_code/raise_for_status</strong></p>
 <p>响应状态码</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; r.status_code</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; r.status_code</span></span><br></pre></td></tr></table></figure>
 <p><strong>headers</strong></p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; r.headers</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; r.headers</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>获取请求头信息</p>
 </blockquote>
 <h2 id="自定义请求头"><a href="#自定义请求头" class="headerlink" title="自定义请求头"></a>自定义请求头</h2><p>如果需要向请求添加请求头，只需向headers参数传递一个字典就可以。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; url = <span class="string">'https://api.github.com/some/endpoint'</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; headers = &#123;<span class="string">'user-agent'</span>: <span class="string">'my-app/0.0.1'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; r = requests.get(url, headers=headers)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; url = <span class="string">'https://api.github.com/some/endpoint'</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; headers = &#123;<span class="string">'user-agent'</span>: <span class="string">'my-app/0.0.1'</span>&#125;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; r = requests.get(url, headers=headers)</span></span><br></pre></td></tr></table></figure>
 <h2 id="更复杂的POST请求"><a href="#更复杂的POST请求" class="headerlink" title="更复杂的POST请求"></a>更复杂的POST请求</h2><p>发送JSON参数</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; url = <span class="string">'https://api.github.com/some/endpoint'</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; payload = &#123;<span class="string">'some'</span>: <span class="string">'data'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; r = requests.post(url, json=payload)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; url = <span class="string">'https://api.github.com/some/endpoint'</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; payload = &#123;<span class="string">'some'</span>: <span class="string">'data'</span>&#125;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; r = requests.post(url, json=payload)</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>使用JSON来代替dict,直接发送未编码的参数。</p>
 </blockquote>
@@ -659,7 +659,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -670,7 +670,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -681,7 +681,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

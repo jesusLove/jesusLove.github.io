@@ -559,7 +559,7 @@
 <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">squares = [x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">10</span>)]</span><br></pre></td></tr></table></figure>
 <p><strong>del语句</strong></p>
 <p>从列表中删除给定的索引项，他不同于有返回值的pop()。del还可以从列表中删除切片或清空整个列表。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; del a[<span class="number">0</span>] <span class="comment"># 删除第一个元素</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; a</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; del a[<span class="number">2</span><span class="symbol">:</span><span class="number">4</span>] <span class="comment"># 删除2-4元素</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; a</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; del a[<span class="symbol">:</span>] <span class="comment">#删除所有元素</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; a</span><br><span class="line">[]</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; del a <span class="comment"># 删除整个变量，需要重新赋值才能使用</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; a = [1, 2, 3, 4, 5, 6]</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; del a[0] <span class="comment"># 删除第一个元素</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; a</span></span><br><span class="line">[2, 3, 4, 5, 6]</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; del a[2:4] <span class="comment"># 删除2-4元素</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; a</span></span><br><span class="line">[2, 3, 6]</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; del a[:] <span class="comment">#删除所有元素</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; a</span></span><br><span class="line">[]</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; del a <span class="comment"># 删除整个变量，需要重新赋值才能使用</span></span></span><br></pre></td></tr></table></figure>
 <h2 id="元组和序列"><a href="#元组和序列" class="headerlink" title="元组和序列"></a>元组和序列</h2><p>前面字符串和列表都是序列类型。下面另一个标准序列类型：元组。一个元组有数个逗号分隔值组成。</p>
 <p>🌰：</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt;t = <span class="number">123</span>, <span class="number">5432</span>, <span class="string">'Hello!'</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; t[<span class="number">0</span>]</span><br><span class="line"><span class="number">123</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; t</span><br><span class="line">(<span class="number">123</span>, <span class="number">5432</span>, <span class="string">'Hello!'</span>)</span><br></pre></td></tr></table></figure>
@@ -762,7 +762,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -773,7 +773,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -784,7 +784,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
