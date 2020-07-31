@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="繁华落尽Owenlee">
 <meta property="og:description" content="前言 本文作为学习笔记，文中内容大多来自官方文档和一些资料，摘抄的部分会在文中标注出原文地址，可以直接参考原文。  前两篇学习了 TS 中基本类型、函数、类、接口、泛型以及高级类型概念和使用方法。这些是基础知识点，虽然简单但是很重要。本文将复习 JS 中的模块对比不同方式模块的区别；如何使用命名空间隔离代码；声明合并的规则等。 模块在 ES6 之前采用的模块加载方案，主要有 CommonJS 和">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-25T07:34:54.835Z">
+<meta property="og:updated_time" content="2020-07-31T07:13:22.858Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TypeScript 从入门到放弃(三)：模块、命名空间、声明合并、声明文件">
 <meta name="twitter:description" content="前言 本文作为学习笔记，文中内容大多来自官方文档和一些资料，摘抄的部分会在文中标注出原文地址，可以直接参考原文。  前两篇学习了 TS 中基本类型、函数、类、接口、泛型以及高级类型概念和使用方法。这些是基础知识点，虽然简单但是很重要。本文将复习 JS 中的模块对比不同方式模块的区别；如何使用命名空间隔离代码；声明合并的规则等。 模块在 ES6 之前采用的模块加载方案，主要有 CommonJS 和">
@@ -464,8 +464,14 @@
 <p>注意：和类与函数不同，枚举可以放在命名空间的后面。</p>
 </blockquote>
 <h1 id="声明文件"><a href="#声明文件" class="headerlink" title="声明文件"></a>声明文件</h1><p>当使用第三方库时，我们需要引用它的声明文件，才能获得对应的代码补全、接口提示等功能。</p>
+<p>声明文件通过 <code>declare</code> 关键字告诉 TS，正在表述其他地方已经存在的代码。</p>
 <p>参考<a href="https://ts.xcatliu.com/basics/declaration-files" target="_blank" rel="noopener">《TypeScript入门教程 - 声明文件》</a></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>以上是本篇的全部内容，都是一些比较基础的知识点，后续随着学习的深入在慢慢补充。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="">TypeScript 文档</a></li>
+<li><a href="">TypeScript 入门</a></li>
+<li><a href="">《极客时间 TypeScript 开发实践》</a></li>
+</ul>
 
       
     </div>
@@ -655,7 +661,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -666,7 +672,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -734,7 +740,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模块"><span class="nav-number">2.</span> <span class="nav-text">模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导出"><span class="nav-number">2.1.</span> <span class="nav-text">导出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入"><span class="nav-number">2.2.</span> <span class="nav-text">导入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器加载"><span class="nav-number">2.3.</span> <span class="nav-text">浏览器加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6-模块和-CommonJS-模块的区别"><span class="nav-number">2.4.</span> <span class="nav-text">ES6 模块和 CommonJS 模块的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TS-中模块"><span class="nav-number">2.5.</span> <span class="nav-text">TS 中模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#命名空间"><span class="nav-number">3.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#声明合并"><span class="nav-number">4.</span> <span class="nav-text">声明合并</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#接口的声明合并"><span class="nav-number">4.1.</span> <span class="nav-text">接口的声明合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命名空间的声明合并"><span class="nav-number">4.2.</span> <span class="nav-text">命名空间的声明合并</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数与命名空间合并"><span class="nav-number">4.2.1.</span> <span class="nav-text">函数与命名空间合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类与命名空间合并"><span class="nav-number">4.2.2.</span> <span class="nav-text">类与命名空间合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举与命名空间合并"><span class="nav-number">4.2.3.</span> <span class="nav-text">枚举与命名空间合并</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#声明文件"><span class="nav-number">5.</span> <span class="nav-text">声明文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">6.</span> <span class="nav-text">小结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模块"><span class="nav-number">2.</span> <span class="nav-text">模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导出"><span class="nav-number">2.1.</span> <span class="nav-text">导出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入"><span class="nav-number">2.2.</span> <span class="nav-text">导入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器加载"><span class="nav-number">2.3.</span> <span class="nav-text">浏览器加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6-模块和-CommonJS-模块的区别"><span class="nav-number">2.4.</span> <span class="nav-text">ES6 模块和 CommonJS 模块的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TS-中模块"><span class="nav-number">2.5.</span> <span class="nav-text">TS 中模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#命名空间"><span class="nav-number">3.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#声明合并"><span class="nav-number">4.</span> <span class="nav-text">声明合并</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#接口的声明合并"><span class="nav-number">4.1.</span> <span class="nav-text">接口的声明合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命名空间的声明合并"><span class="nav-number">4.2.</span> <span class="nav-text">命名空间的声明合并</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数与命名空间合并"><span class="nav-number">4.2.1.</span> <span class="nav-text">函数与命名空间合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类与命名空间合并"><span class="nav-number">4.2.2.</span> <span class="nav-text">类与命名空间合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举与命名空间合并"><span class="nav-number">4.2.3.</span> <span class="nav-text">枚举与命名空间合并</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#声明文件"><span class="nav-number">5.</span> <span class="nav-text">声明文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">6.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

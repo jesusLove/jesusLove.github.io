@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="繁华落尽Owenlee">
 <meta property="og:description" content="前言 本文作为学习笔记，文中内容大多来自官方文档和一些资料，摘抄的部分会在文中标注出原文地址，可以直接参考原文。  上一篇学习了 TS 的基本数据类型、接口、函数和类等基本用法。接下来继续深入学习一些相对 JS 来说 TS 中新增的内容。 泛型 泛型（Generics）是指在定义函数、接口或类的时候，不预先指定具体的类型，而在使用的时候再指定类型的一种特性。  下面通过一个例子来了解泛型，如何实现">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-12T06:26:25.084Z">
+<meta property="og:updated_time" content="2020-07-31T07:06:23.519Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TypeScript 从入门到放弃(二):泛型、高级类型">
 <meta name="twitter:description" content="前言 本文作为学习笔记，文中内容大多来自官方文档和一些资料，摘抄的部分会在文中标注出原文地址，可以直接参考原文。  上一篇学习了 TS 的基本数据类型、接口、函数和类等基本用法。接下来继续深入学习一些相对 JS 来说 TS 中新增的内容。 泛型 泛型（Generics）是指在定义函数、接口或类的时候，不预先指定具体的类型，而在使用的时候再指定类型的一种特性。  下面通过一个例子来了解泛型，如何实现">
@@ -436,7 +436,7 @@
 <blockquote>
 <p>通过接口 <code>Length</code> 约束泛型。创建一个包含 <code>.length</code> 属性的接口，使用这个接口和 <code>extends</code> 关键字来实现约束。</p>
 </blockquote>
-<h2 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h2><p>使用泛型有什么优点呢？</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>使用泛型有什么优点呢？</p>
 <ul>
 <li>可以动态支持类型，增强程序的扩展性。</li>
 <li>可以替代重载和联合类型声明，提高代码的简洁性。</li>
@@ -467,7 +467,12 @@
 <h2 id="映射类型"><a href="#映射类型" class="headerlink" title="映射类型"></a>映射类型</h2><p>有时需要将已知类型的每个属性变成可选的或者只读的。TS 提供类从旧类型中创建新类型的一种方式：<strong>映射类型</strong>。</p>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接口 Person</span></span><br><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line">  name: <span class="built_in">string</span>;</span><br><span class="line">  age: <span class="built_in">number</span>;</span><br><span class="line">  score: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 映射为只读类型</span></span><br><span class="line"><span class="keyword">type</span> ReadonlyPerson = Readonly&lt;Person&gt;</span><br><span class="line"><span class="comment">// 可选</span></span><br><span class="line"><span class="keyword">type</span> PartialPerson = Partial&lt;Person&gt;</span><br><span class="line"><span class="comment">// 选取部分类型</span></span><br><span class="line"><span class="keyword">type</span> PickPerson = Pick&lt;Person, <span class="string">'name'</span> | <span class="string">'age'</span>&gt;</span><br></pre></td></tr></table></figure>
 <p><code>Readonly&lt;T&gt;</code>、<code>Partial&lt;T&gt;</code>、<code>Partial&lt;T&gt;</code> 是 TS 库内置的映射类型。还有很多其他的映射类型，以上三种类型：属性列表中的 keyof T 且结果类型是 T[P] 的变体。这种转换称为同态，映射只作用于 T 的属性而没有其它的。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本小结学习了 TS 中提供几种高级类型，先熟悉概念和用法后期慢慢深入。</p>
+<h2 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h2><p>本小结学习了 TS 中提供几种高级类型，先熟悉概念和用法后期慢慢深入。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="">TypeScript 文档</a></li>
+<li><a href="">TypeScript 入门</a></li>
+<li><a href="">《极客时间 TypeScript 开发实践》</a></li>
+</ul>
 
       
     </div>
@@ -655,7 +660,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -666,7 +671,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -734,7 +739,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#泛型"><span class="nav-number">2.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型类和泛型约束"><span class="nav-number">2.1.</span> <span class="nav-text">泛型类和泛型约束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结一下"><span class="nav-number">2.2.</span> <span class="nav-text">小结一下</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级类型"><span class="nav-number">3.</span> <span class="nav-text">高级类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉类型"><span class="nav-number">3.1.</span> <span class="nav-text">交叉类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联合类型"><span class="nav-number">3.2.</span> <span class="nav-text">联合类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可区分的联合类型"><span class="nav-number">3.3.</span> <span class="nav-text">可区分的联合类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引类型"><span class="nav-number">3.4.</span> <span class="nav-text">索引类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#映射类型"><span class="nav-number">3.5.</span> <span class="nav-text">映射类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">3.6.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#泛型"><span class="nav-number">2.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型类和泛型约束"><span class="nav-number">2.1.</span> <span class="nav-text">泛型类和泛型约束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">2.2.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级类型"><span class="nav-number">3.</span> <span class="nav-text">高级类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉类型"><span class="nav-number">3.1.</span> <span class="nav-text">交叉类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联合类型"><span class="nav-number">3.2.</span> <span class="nav-text">联合类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可区分的联合类型"><span class="nav-number">3.3.</span> <span class="nav-text">可区分的联合类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引类型"><span class="nav-number">3.4.</span> <span class="nav-text">索引类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#映射类型"><span class="nav-number">3.5.</span> <span class="nav-text">映射类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结-1"><span class="nav-number">3.6.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
