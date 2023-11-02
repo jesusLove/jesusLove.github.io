@@ -1,0 +1,503 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>iOS逆向与安全:基础篇 | 繁华落尽</title><meta name="keywords" content="iOS,逆向"><meta name="author" content="繁华落尽丶千,jesus_lqq@163.com"><meta name="copyright" content="繁华落尽丶千"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="iOS逆向与安全:基础篇"><meta name="application-name" content="iOS逆向与安全:基础篇"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="iOS逆向与安全:基础篇"><meta property="og:url" content="https://juesuslove.github.io/2018/10/31/iOS%E9%80%86%E5%90%91%E4%B8%8E%E5%AE%89%E5%85%A8-%E5%9F%BA%E7%A1%80%E7%AF%87/index.html"><meta property="og:site_name" content="繁华落尽"><meta property="og:description" content="前言从本篇文章开始，笔者会整理iOS逆向相关的笔记。作为一位新人，希望通过整理笔记能够更好的理解和掌握知识。能力有限，在行文时难免出现错误欢迎批评和指正。 前期准备：  一台越狱的iOS设备，笔者使用iPad mini2系统iOS9.2.1（推荐使用iOS9.1或者可以完美越狱的系统） 一台电脑，"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta property="article:author" content="繁华落尽丶千"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta name="description" content="前言从本篇文章开始，笔者会整理iOS逆向相关的笔记。作为一位新人，希望通过整理笔记能够更好的理解和掌握知识。能力有限，在行文时难免出现错误欢迎批评和指正。 前期准备：  一台越狱的iOS设备，笔者使用iPad mini2系统iOS9.2.1（推荐使用iOS9.1或者可以完美越狱的系统） 一台电脑，"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://juesuslove.github.io/2018/10/31/iOS%E9%80%86%E5%90%91%E4%B8%8E%E5%AE%89%E5%85%A8-%E5%9F%BA%E7%A1%80%E7%AF%87/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bcdcd5cded4b5569656706ab1db4678e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多"]},
+  algolia: {"apiKey":null,"indexName":"繁华落尽","hits":{"per_page":6},"languages":{"input_placeholder":"输入关键词后按下回车查找","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 繁华落尽丶千","link":"链接: ","source":"来源: 繁华落尽","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '繁华落尽',
+  title: 'iOS逆向与安全:基础篇',
+  postAI: '',
+  pageFillDescription: '前言, 如何越狱, 配置远程登录, 使用密码登录, 公钥登录, 通过USB登录设备, 砸壳, 配置环境, 进行砸壳, Reveal配置, 越狱设备集成Reveal, 非越狱设备集成Reveal, Cycript配置, 在越狱设备上安装, Cycript分析应用, 查看应用信息, cycript高级用法, Class-dump, Mach-O文件, Class-dump使用, 参考文章前言从本篇文章开始笔者会整理逆向相关的笔记作为一位新人希望通过整理笔记能够更好的理解和掌握知识能力有限在行文时难免出现错误欢迎批评和指正前期准备一台越狱的设备笔者使用系统推荐使用或者可以完美越狱的系统一台电脑笔者使用的是一条数据线如何越狱网上有很多教程帮助你来越狱这里推荐两个网站助手爱思助手注意在购买设备时直接购买对应版本的系统由于苹果官方关闭降级通道所以无法刷固件降级越狱成功后桌面上会出现一个叫做的应用它是越狱后的可以安装各种第三方的软件比如插件补丁等该应用的作者一位骨灰级大神必装插件或补丁可以访问整个设备的文件系统作者是可以绕过系统验证随意安装运行破解的安装包助手一个应用商店可以自由安装海量用于远程登录设备必备管理文件系统助手一个应用商店一款优秀的命令行工具便捷搜索自定义工作流调高效率的工具配置远程登录的缩写安全外壳协议是一种可以为远程登录提供安全保障的协议使用可以把所有传输的数据进行加密防止中间人攻击欺骗和欺骗是协议的免费开源实现通过它让登录设备在中搜索安装使用密码登录如果设备上已经安装了此时就可以通过终端登录设备前提设备和需要处于相同环境下在设置中查看设备的地址打开终端输入设备地址回车会提示时候建立连接输入即可之后提示输入密码默认密码是设备上有两个默认账号最高权限账户是或者通过终端输入查看普通权限账户只能操作一些普通文件是登录方式服务器地址初始密码修改密码修改用户密码公钥登录上面的密码登录方式比较麻烦在每次登录时都需要输入密码提供了公钥登录以省去密码的步骤下面来看看公钥登录流程将电脑端的公钥保存在设备中登录时设备端会向电脑端发送一个随机字符串登录用户通过自己的私钥加密后发送给端端通过事先存储好的公钥解密如果解密成功证明用户是可信的查看目录是否有私钥和公钥如果没有使用生成上传公钥到远程设备通过命令地址该条命令的作用是将公钥追加到设备的文件中查看文件内容通过登录设备在不稳定的情况下通过登录会非常的卡顿可以通过接口转发的方法使用登录保证连接的稳定性方法很简单首先安装然后使用里面提供把本地端口例如映射到设备的端口就可以通过本地的端口建立连接了如果每次输入进行接口转换比较麻烦可以将其配置到电脑的开机启动项中创建填入一下运行命令使之生效每次输入也很麻烦可以通过指定一个名称进行连接打开文件没有创建一个写入一下内容通过以上配置在终端输入即可登录设备了砸壳在下载应用都会进行加密破解加密称为砸壳本节记录在学习砸壳中遇到的问题和解决方法三种砸壳方案这三种方案网上很多教程下面整理的是第三种方案简单高效配置环境设备和电脑都需安装设备安装打开添加软件源之后搜索安装电脑端通过命令安装接下来克隆库到本地仓库有两个分支分别对应和需要根据本地版本来判断终端笔者由于笔者配置的切换到分支安装依赖在仓库目录下运行下面命令安装结束后将越狱设备通过连上电脑进行端口映射到此配置结束如果一切顺利就可以进行砸壳了进行砸壳在目录下使用命令查看应用名称和通过命令程序名字即可砸壳当程序执行完在当前目录中会出现一个不过通往成功的道路永远不是一帆风顺的在运行命令是出现了错误在这个中给出了解决方案推荐文章一条命令完成砸壳配置是一款用于查看程序界面结构和调试界面的工具可以在开发中动态修改调试代码修改程序的样式也可以注入到第三方查看应用的界面结构本节将会学习如何在越狱设备和非越狱设备上查看应用的结构越狱设备集成笔者在越狱设备集成遇到了一个问题新版的是而旧版的是两者集成方式不同但是网上很多资料都是过时的所以这里给出新版的集成方式首先在下载插件插件安装后进入设置找到选择要查看的例如简书电脑端安装软件正常情况下打开手机上的简书会在中看到下图点击进入即可查看界面结构有时会出现版本问题电脑端点击将拷贝到手机目录下替换原来的非越狱设备集成如果在开发中集成直接使用即可在文件加入以下内容只在模式下开启之后运行即可集成如果想在非越狱设备查看其它的界面结构需要使用工具辅助完成首先安装安装在仓库有文档安装非越狱设备集成还需要目标的脱壳包具体步骤查看文章非越狱集成无须越狱自动集成只需要一个砸壳的应用配置是允许开发者使用和组合语法查看及修改运行时内存信息的工具官方文档在越狱设备上安装是提供的工具在中搜索并安装即可安装完成后用登录设备输入命令就可以进入交互界面在越狱设备上可以使用一些命令注入目标进程调试目标函数下面例子脚本注入到桌面中使其弹出一个提示框这是应用逆向与安全中给出的一个简单的例子分析应用上面例子中使用了一条命令通过该命令可以调试指定该命令有两种使用方式除了上面的程序名称还可以通过程序进程注意这里的程序的名称并不是的名称查看程序的名称和进程可以通过安装一个插件通过它使用命令查看当前运行程序的进程及可执行文件的路径安装完成后通过命令查看当前设备的进程和可执行文件的路径同时支持关键词搜索关键词例如查看简书的路径和进程由于程序的进程是会发生变换的推荐使用名称下面就以简书为例学习如何使用的使用查看应用信息沙盒路径查看的信息例如查看简书的对象为自定义的查看还可以使用地址查看信息例如查看的另外提供了函数选择某个类的实例数组例如学习简书中所有的类的所有实例数组以上是的基本用法高级用法每次要输入那么多的代码是在有点麻烦能不能将常用的代码封装起来呢答案是肯定的本身是支持加载自己的脚本的可以通过命令加载例如加载脚本关于如何将自己学的脚本添加到手机上查看越狱逆向基于实现的一些实用函数文档对如何添加如何使用写的比较详细这里就不再重复赘述本节学习如何使用工具导出第三方的头文件学习前需要补充点基础知识文件想让程序在设备上运行起来需要将写好的代码生成可执行文件这样才能被操作系统所理解比如在下可执行文件的格式是在中可执行文件是而在和中是格式的组成结构如下图可以看的出主要由部分组成头这里描述了的架构文件类型以及加载命令等信息加载命令描述了文件中数据的具体组织结构不同的数据类型使用不同的加载命令表示数据区中每一个段的数据都保存在此段的概念和文件中段的概念类似都拥有一个或多个用来存放数据和代码如何获取文件在中下载应用改成格式之后解压缩会在里面发现一个应用同名的文件下面是简书的文件使用的作用就是把文件的信息导出来生成头文件下载后将其中的拷贝到目录下就可以在终端使用命令终端输入安装成功可以解析头文件方法很简单常用指令路径头文件存储路径以简书为例使用之前砸壳的文件找到里面的文件在当前目录中会生成文件夹里面包含所有的头文件参考文章文件格式探索趣探文件格式分析应用逆向与安全作者刘培庆',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-02 15:17:45',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">繁华落尽</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/images/wechatpay.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/images/wechatpay.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/images/alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Alamofire/" style="font-size: 1.05rem;">Alamofire<sup>1</sup></a><a href="/tags/CoreAnimation/" style="font-size: 1.05rem;">CoreAnimation<sup>1</sup></a><a href="/tags/Electron/" style="font-size: 1.05rem;">Electron<sup>2</sup></a><a href="/tags/Flexbox/" style="font-size: 1.05rem;">Flexbox<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>3</sup></a><a href="/tags/Git%E9%97%AE%E9%A2%98/" style="font-size: 1.05rem;">Git问题<sup>1</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>8</sup></a><a href="/tags/Koa/" style="font-size: 1.05rem;">Koa<sup>2</sup></a><a href="/tags/Node-js/" style="font-size: 1.05rem;">Node.js<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" style="font-size: 1.05rem;">事件循环<sup>1</sup></a><a href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/" style="font-size: 1.05rem;">作用域链<sup>1</sup></a><a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/" style="font-size: 1.05rem;">原型链<sup>2</sup></a><a href="/tags/%E5%AF%B9%E8%B1%A1/" style="font-size: 1.05rem;">对象<sup>1</sup></a><a href="/tags/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" style="font-size: 1.05rem;">开机自启<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/" style="font-size: 1.05rem;">异步任务<sup>1</sup></a><a href="/tags/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" style="font-size: 1.05rem;">执行上下文<sup>1</sup></a><a href="/tags/%E6%89%A7%E8%A1%8C%E6%A0%88/" style="font-size: 1.05rem;">执行栈<sup>1</sup></a><a href="/tags/%E7%B3%BB%E7%BB%9F%E6%89%98%E7%9B%98/" style="font-size: 1.05rem;">系统托盘<sup>1</sup></a><a href="/tags/%E7%BB%A7%E6%89%BF/" style="font-size: 1.05rem;">继承<sup>1</sup></a><a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 1.05rem;">闭包<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">七月 2020</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/11/"><span class="card-archive-list-date">十一月 2019</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/10/"><span class="card-archive-list-date">十月 2019</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/03/"><span class="card-archive-list-date">三月 2019</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/02/"><span class="card-archive-list-date">二月 2019</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2018/10/"><span class="card-archive-list-date">十月 2018</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2018/09/"><span class="card-archive-list-date">九月 2018</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2018/03/"><span class="card-archive-list-date">三月 2018</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" itemprop="url">移动端</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/iOS/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>iOS</span></a><a class="article-meta__tags" href="/tags/%E9%80%86%E5%90%91/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>逆向</span></a></span></div></div><h1 class="post-title" itemprop="name headline">iOS逆向与安全:基础篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2018-10-31T02:34:23.000Z" title="发表于 2018-10-31 10:34:23">2018-10-31</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-11-02T07:17:45.615Z" title="更新于 2023-11-02 15:17:45">2023-11-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">3.5k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="iOS逆向与安全:基础篇"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为山东"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>山东</span></div></div></div><article class="post-content" id="article-container" itemscope itemtype="https://juesuslove.github.io/2018/10/31/iOS%E9%80%86%E5%90%91%E4%B8%8E%E5%AE%89%E5%85%A8-%E5%9F%BA%E7%A1%80%E7%AF%87/"><header><a class="post-meta-categories" href="/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" itemprop="url">移动端</a><a href="/tags/iOS/" tabindex="-1" itemprop="url">iOS</a><a href="/tags/%E9%80%86%E5%90%91/" tabindex="-1" itemprop="url">逆向</a><h1 id="CrawlerTitle" itemprop="name headline">iOS逆向与安全:基础篇</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">繁华落尽丶千</span><time itemprop="dateCreated datePublished" datetime="2018-10-31T02:34:23.000Z" title="发表于 2018-10-31 10:34:23">2018-10-31</time><time itemprop="dateCreated datePublished" datetime="2023-11-02T07:17:45.615Z" title="更新于 2023-11-02 15:17:45">2023-11-02</time></header><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://upload-images.jianshu.io/upload_images/1363078-a0a7899eba0c7a15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>从本篇文章开始，笔者会整理iOS逆向相关的笔记。作为一位新人，希望通过整理笔记能够更好的理解和掌握知识。能力有限，在行文时难免出现错误欢迎批评和指正。</p>
+<p>前期准备：</p>
+<ul>
+<li>一台越狱的iOS设备，笔者使用iPad mini2系统iOS9.2.1（推荐使用iOS9.1或者可以完美越狱的系统）</li>
+<li>一台电脑，笔者使用的是MacBook Pro</li>
+<li>一条数据线</li>
+</ul>
+<h1 id="如何越狱"><a href="#如何越狱" class="headerlink" title="如何越狱"></a>如何越狱</h1><p>网上有很多教程帮助你来越狱，这里推荐两个网站：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://jailbreak.25pp.com/">PP助手</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.i4.cn/">爱思助手</a></li>
+</ul>
+<blockquote>
+<p>注意：在购买iOS设备时直接购买对应版本的系统，由于苹果官方关闭降级通道所以无法刷固件降级。</p>
+</blockquote>
+<p>越狱成功后，桌面上会出现一个叫做<code>Cydia</code>的应用，它是越狱后的<code>App Store</code>可以安装各种第三方的软件，比如：插件、补丁、APP等。该应用的作者<code>Jay Freeman(saurik)</code>，一位骨灰级大神。</p>
+<p><strong>必装插件或补丁</strong></p>
+<ul>
+<li><code>Apple File Conduit 2</code>：可以访问整个iOS设备的文件系统。作者是<code>Jay Freeman</code>。</li>
+<li><code>AppSync unified</code>： 可以绕过系统验证，随意安装、运行破解的IPA安装包。</li>
+<li><code>PP助手</code>： 一个应用商店，可以自由安装海量APP。</li>
+<li><code>OpenSSH</code>: 用于远程登录iOS设备。</li>
+</ul>
+<p><strong>Mac 必备</strong></p>
+<ul>
+<li><code>iFunBox</code>: 管理文件系统。</li>
+<li><code>PP助手</code>：一个应用商店。</li>
+<li><code>iTerm2</code>: 一款优秀的命令行工具</li>
+<li><code>Alfred</code>: 便捷搜索，自定义工作流，调高效率的工具</li>
+</ul>
+<h2 id="配置远程登录"><a href="#配置远程登录" class="headerlink" title="配置远程登录"></a>配置远程登录</h2><p>SSH：Secure Shell的缩写，安全外壳协议，是一种可以为远程登录提供安全保障的协议。使用SSH可以把所有传输的数据进行加密，防止中间人攻击、DNS欺骗和IP欺骗。<br>OpenSSH: 是SSH协议的免费开源实现。通过它让Mac登录iOS设备，在<code>Cycript</code>中搜索安装。</p>
+<h3 id="使用密码登录"><a href="#使用密码登录" class="headerlink" title="使用密码登录"></a>使用密码登录</h3><p>如果iOS设备上已经安装了<code>OpenSSH</code>，此时就可以通过Mac终端登录iOS设备。前提，iOS设备和Mac需要处于相同WiFi环境下。在设置中查看iOS设备的IP地址。打开终端输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh root@iOS设备IP地址</span><br><span class="line">// 回车，会提示时候建立连接输入yes即可。之后提示输入密码，默认密码是`alpine`。</span><br></pre></td></tr></table></figure>
+<p>iOS设备上有两个默认账号：root，mobile。</p>
+<ul>
+<li>root：最高权限账户，$HOME是<code>/var/root</code>。或者通过终端输入<code>pwd</code>查看。</li>
+<li>mobile：普通权限账户，只能操作一些普通文件，$HOME是<code>/var/mobile</code>。</li>
+<li><code>mobile</code>登录方式：<code>ssh mobile@服务器地址</code>。初始密码<code>alpine</code>。</li>
+<li>修改root密码：<code>passwd</code>，修改<code>mobile</code>用户密码：<code>passwd mobile</code>。</li>
+</ul>
+<h3 id="公钥登录"><a href="#公钥登录" class="headerlink" title="公钥登录"></a>公钥登录</h3><p>上面的密码登录方式比较麻烦，在每次登录时都需要输入密码。SSH提供了公钥登录，以省去密码的步骤。下面来看看公钥登录流程：<br>将电脑端的SSH公钥保存在iOS设备中，登录时iOS设备端会向电脑端发送一个随机字符串，登录用户通过自己的私钥加密后发送给iOS端，iOS端通过事先存储好的公钥解密，如果解密成功，证明用户是可信的。</p>
+<p>查看<code>$HOME/.ssh/</code>目录，是否有<code>id_rsa</code>私钥和<code>id_rsa.pub</code>公钥，如果没有使用<code>ssh-keygen</code>生成。</p>
+<p>上传公钥到远程设备，通过<code>ssh-copy-id</code>命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i $HOME/.ssh/id_rsa.pub root@地址</span><br></pre></td></tr></table></figure>
+<p>该条命令的作用是将<code>id_rsa.pub</code>公钥追加到iOS设备的<code>$HOME/.ssh/authorized_keys</code>文件中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat $HOME/.ssh/authorized_keys //查看文件内容</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过USB登录设备"><a href="#通过USB登录设备" class="headerlink" title="通过USB登录设备"></a>通过USB登录设备</h3><p>在WiFi不稳定的情况下，通过WiFi登录会非常的卡顿。可以通过接口转发的方法，使用USB SSH登录，保证连接的稳定性。</p>
+<p>方法很简单，首先安装<code>libimobiledevice</code>，然后使用里面提供<code>iproxy</code>把本地端口(例如：2222)映射到设备的TCP端口22，就可以通过本地的2222端口建立连接了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install libimobiledevice</span><br><span class="line">iproxy 2222 22</span><br><span class="line">ssh root@localhost -p 2222</span><br></pre></td></tr></table></figure>
+<p>如果，每次输入<code>iproxy 2222 22</code>进行接口转换比较麻烦，可以将其配置到电脑的开机启动项中。创建<code>~/Library/LaunchAgents/com.usbmux.iproxy.plist</code>，填入一下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://upload-images.jianshu.io/upload_images/1363078-fd54d1638acce3b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>运行命令<code>launchctl load ~/Library/LaunchAgents/com.usbmux.iproxy.plist</code>使之生效。</p>
+<p>每次输入<code>ssh root@localhost -p 2222</code>也很麻烦，可以通过指定一个名称进行SSH连接，打开<code>$HOME/.ssh/config</code>文件，没有创建一个，写入一下内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host ipad </span><br><span class="line">Hostname localhost</span><br><span class="line">User root</span><br><span class="line">Port 2222 </span><br></pre></td></tr></table></figure>
+<p>通过以上配置，在终端输入<code>ssh ipad</code>即可登录iOS设备了。</p>
+<h1 id="砸壳"><a href="#砸壳" class="headerlink" title="砸壳"></a>砸壳</h1><p>在<code>App Store</code>下载应用都会进行加密，破解加密称为砸壳。本节记录在学习砸壳中遇到的问题和解决方法。</p>
+<p>三种砸壳方案：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/stefanesser/dumpdecrypted">dumpdecrypted</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/KJCracks/Clutch">Clutch</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/AloneMonkey/frida-ios-dump">frida-ios-dump</a></li>
+</ul>
+<p>这三种方案网上很多教程，下面整理的是第三种方案简单高效。</p>
+<h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><p>iOS设备和电脑都需安装<code>Frida</code>，</p>
+<p>iOS设备安装<code>Frida</code>，打开<code>Cydia</code>添加软件源<code> https://build.frida.re</code>，之后搜索<code>Frida</code>安装。电脑端通过<code>pip</code>命令<code>sudo pip install frida</code>安装。</p>
+<p>接下来，克隆**<a target="_blank" rel="noopener" href="https://github.com/AloneMonkey/frida-ios-dump">frida-ios-dump</a>**库到本地。仓库有两个分支分别对应<code>python2.x</code>和<code>python3.x</code>,需要根据本地<code>Python</code>版本来判断。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// Mac终端</span><br><span class="line">python -V</span><br><span class="line">// 笔者：Python 3.6.3 :: Anaconda custom (64-bit)</span><br></pre></td></tr></table></figure>
+<p>由于笔者配置的<code>Python 3.x</code>，切换到3.x分支安装<code>firda-ios-dump</code>依赖。在<code>frida-ios-dump</code>仓库目录下运行下面命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install -r requirements.txt --upgrade</span><br></pre></td></tr></table></figure>
+<p>安装结束后，将越狱设备通过USB连上电脑进行端口映射:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iproxy 2222 22</span><br></pre></td></tr></table></figure>
+<p>到此配置结束，如果一切顺利就可以进行砸壳了。</p>
+<h2 id="进行砸壳"><a href="#进行砸壳" class="headerlink" title="进行砸壳"></a>进行砸壳</h2><p>在<code>frida-ios-dump</code>目录下，使用命令<code>./dump.py -l</code>查看应用名称和<code>Bundle ID</code>，通过命令<code>./dump.py + 程序名字 or BundleID</code>即可砸壳。当程序执行完，在当前目录中会出现一个<code>xxx.ipa</code>。</p>
+<p>不过，通往成功的道路永远不是一帆风顺的，在运行<code>./dump.py</code>命令是出现了错误<a target="_blank" rel="noopener" href="https://github.com/AloneMonkey/frida-ios-dump/issues/37">Waiting for USB device…</a>。在这个<code>issue</code>中给出了解决方案。</p>
+<p>推荐文章<a target="_blank" rel="noopener" href="http://www.alonemonkey.com/2018/01/30/frida-ios-dump/">一条命令完成砸壳</a></p>
+<h1 id="Reveal配置"><a href="#Reveal配置" class="headerlink" title="Reveal配置"></a>Reveal配置</h1><p>Reveal是一款用于查看程序界面结构和调试界面的工具，可以在开发中动态修改调试代码修改程序的样式，也可以注入到第三方APP查看应用的界面结构。</p>
+<p>本节将会学习如何在越狱设备和非越狱设备上查看应用的结构。</p>
+<h2 id="越狱设备集成Reveal"><a href="#越狱设备集成Reveal" class="headerlink" title="越狱设备集成Reveal"></a>越狱设备集成Reveal</h2><p>笔者在越狱设备集成Reveal遇到了一个问题，新版的<code>RevealServer</code>是<code>Framework</code>而旧版的是<code>dylib</code>，两者集成方式不同，但是网上很多资料都是过时的，所以这里给出新版的集成方式。</p>
+<p>首先在<code>Cydia</code>下载<code>Reveal2Loader</code>插件。插件安装后进入设置找到<code>Reveal--&gt;Enabled Applications</code>选择要查看的App。例如：简书</p>
+<p>电脑端安装<code>Reveal</code>软件，正常情况下，打开手机上的简书APP会在<code>Reveal</code>中看到下图，点击进入即可查看界面结构。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://upload-images.jianshu.io/upload_images/1363078-577e14f4816e38e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>有时会出现<code>RevealServer.framework</code>版本问题，电脑端点击<code>Help-&gt;Show Reveal Library in Finder </code>将<code>Framework</code>拷贝到手机<code>Library/Frameworks</code>目录下替换原来的。</p>
+<h2 id="非越狱设备集成Reveal"><a href="#非越狱设备集成Reveal" class="headerlink" title="非越狱设备集成Reveal"></a>非越狱设备集成Reveal</h2><p>如果在开发中集成<code>Reveal</code>直接使用<code>CocoaPods</code>即可，在<code>Podfile</code>文件加入以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//只在Debug模式下开启</span><br><span class="line"> pod &#x27;Reveal-SDK&#x27;, :configurations =&gt; [&#x27;Debug&#x27;]</span><br></pre></td></tr></table></figure>
+<p>之后运行<code>pod install</code>即可集成。</p>
+<p>如果想在非越狱设备查看其它App的界面结构，需要使用**<a target="_blank" rel="noopener" href="https://github.com/AloneMonkey/MonkeyDev">MonkeyDev</a>**工具辅助完成。<br>首先安装MonkeyDev，安装在GitHub仓库有文档。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/AloneMonkey/MonkeyDev/wiki/%E5%AE%89%E8%A3%85">安装</a></li>
+</ul>
+<p>非越狱设备集成<code>Reveal</code>还需要目标App的脱壳<code>ipa</code>包。具体步骤查看文章：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/AloneMonkey/MonkeyDev/wiki/%E9%9D%9E%E8%B6%8A%E7%8B%B1App%E9%9B%86%E6%88%90">非越狱App集成</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.alonemonkey.com/2017/07/12/monkeydev-without-jailbreak/">无须越狱、自动集成、只需要一个砸壳的应用—MonkeyDev</a></li>
+</ul>
+<h1 id="Cycript配置"><a href="#Cycript配置" class="headerlink" title="Cycript配置"></a>Cycript配置</h1><p><a target="_blank" rel="noopener" href="http://www.cycript.org/">Cycript</a>是允许开发者使用<code>Objective-C++</code>和<code>Javascript</code>组合语法查看及修改运行时APP内存信息的工具。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.cycript.org/manual/">官方文档</a></li>
+</ul>
+<h2 id="在越狱设备上安装"><a href="#在越狱设备上安装" class="headerlink" title="在越狱设备上安装"></a>在越狱设备上安装</h2><p> <code>Cycript</code>是<code>saurik</code>提供的工具，在<code>Cydia</code>中搜索<code>Cycript</code>并安装即可。</p>
+<p>安装完成后，用SSH登录设备输入<code>cycript</code>命令，就可以进入交互界面。</p>
+<p>在越狱设备上，可以使用一些命令注入目标进程，调试目标函数。下面例子：脚本注入到SpringBoard（桌面）中，使其弹出一个提示框。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iPad:~ root# cycript -p SpringBoard</span><br><span class="line">cy# var alert = [[UIAlertView alloc] initWithTitle:@&quot;Hello&quot; message:@&quot;Hello, wold!&quot; delegate:nil cancelButtonTitle: @&quot;cancel&quot; otherButtonTitles: nil]</span><br><span class="line">#&quot;&lt;UIAlertView: 0x1348bd1f0; frame = (0 0; 0 0); layer = &lt;CALayer: 0x1321c89b0&gt;&gt;&quot;</span><br><span class="line">cy# [alert show]</span><br></pre></td></tr></table></figure>
+<p>这是《iOS应用逆向与安全》中给出的一个简单的例子。</p>
+<h2 id="Cycript分析应用"><a href="#Cycript分析应用" class="headerlink" title="Cycript分析应用"></a><code>Cycript</code>分析应用</h2><p>上面例子中使用了一条命令<code>cycript -p SpringBoard</code>，通过该命令可以调试指定APP。该命令有两种使用方式，除了上面的<code>cycript -p 程序名称</code>，还可以通过<code>cycript -p 程序进程ID</code>。注意这里的程序的名称并不是APP的名称。</p>
+<p>查看程序的名称和进程ID可以通过安装一个插件<code>adv-cmds</code>。通过它使用<code>ps</code>命令查看当前运行程序的进程ID及可执行文件的路径。</p>
+<p>安装完成后，通过<code>ps -A</code>命令查看当前设备的进程ID和可执行文件的路径。同时，支持关键词搜索<code>ps -A | grep 关键词</code>。</p>
+<p>例如，查看简书的路径和进程ID</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://upload-images.jianshu.io/upload_images/1363078-222a9702273c9d50.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="简书"></p>
+<blockquote>
+<p>由于程序的进程ID是会发生变换的推荐使用名称。</p>
+</blockquote>
+<p>下面就以简书为例，学习如何使用<code>cycript</code>的使用。</p>
+<h3 id="查看应用信息"><a href="#查看应用信息" class="headerlink" title="查看应用信息"></a>查看应用信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cy# NSHomeDirectory() // 沙盒路径</span><br><span class="line">cy# NSBundle.mainBundle().bundleIdentifier //BundleID</span><br><span class="line">cy# NSBundle.mainBundle().bundlePath //mainBundlePath</span><br><span class="line">cy# NSSearchPathForDirectoriesInDomains (NSDocumentDirectory , NSUserDomainMask , YES)[0] // Document Path</span><br><span class="line">cy# NSSearchPathForDirectoriesInDomains (NSCachesDirectory , NSUserDomainMask , YES)[0] // cache Path</span><br></pre></td></tr></table></figure>
+<p>查看<code>APP</code>的<code>Application</code>信息，例如：查看简书的<code>Application</code>对象，为自定义的<code>HGApplication</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cy# UIApp </span><br><span class="line"># &quot;&lt;HGApplication: 0x154d49910&gt;&quot; </span><br></pre></td></tr></table></figure>
+
+<p>查看<code>rootViewController</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cy# UIApp.keyWindow .rootViewController</span><br><span class="line">#&quot;&lt;HGTabBarController: 0x155006200&gt;&quot;</span><br></pre></td></tr></table></figure>
+<p>还可以使用地址查看信息。例如：查看<code>HGTabBarController</code>的<code>view</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cy# #0x155006200.view</span><br><span class="line">#&quot;&lt;UILayoutContainerView: 0x154fca480; frame = (0 0; 1024 768); autoresize = W+H; layer = &lt;CALayer: 0x154f65a20&gt;&gt;&quot;</span><br></pre></td></tr></table></figure>
+<p>另外Cycript提供了<code>choose()</code>函数选择某个类的实例数组。例如：学习简书中所有的Button类的所有实例数组。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cy# choose(UIButton)</span><br><span class="line">[#&quot;&lt;UIButton: 0x157210600; frame = (0 8.5; 685 16); opaque = NO; userInteractionEnabled = NO; layer = &lt;CALayer: 0x15705f020&gt;&gt;&quot;,</span><br><span class="line">#&quot;&lt;HGAvatarButton: 0x15724ead0; baseClass = UIButton; frame = (16 14.5; 45 45); clipsToBounds = YES; opaque = NO; userInteractionEnabled = NO; layer = &lt;CALayer: 0x1572088b0&gt;&gt;&quot;.....]</span><br></pre></td></tr></table></figure>
+<p>以上是<code>cycript</code>的基本用法。</p>
+<h2 id="cycript高级用法"><a href="#cycript高级用法" class="headerlink" title="cycript高级用法"></a><code>cycript</code>高级用法</h2><p>每次要输入那么多的代码是在有点麻烦，能不能将常用的代码封装起来呢？答案是肯定的。</p>
+<p>Cycript本身是支持加载自己的脚本的，可以通过<code>@import</code>命令加载。例如：加载<a target="_blank" rel="noopener" href="https://github.com/CoderMJLee/mjcript/blob/master/mjcript.cy">mjscript</a>脚本。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cy# @import mjcript</span><br></pre></td></tr></table></figure>
+
+<p>关于如何将自己学的脚本添加到手机上查看<a target="_blank" rel="noopener" href="https://github.com/CoderMJLee/mjcript">【越狱-逆向】基于Cycript实现的一些实用函数</a>文档，对如何添加，如何使用写的比较详细，这里就不再重复赘述。</p>
+<h1 id="Class-dump"><a href="#Class-dump" class="headerlink" title="Class-dump"></a>Class-dump</h1><p>本节学习如何使用工具导出第三方App的头文件，学习前需要补充点基础知识。</p>
+<h2 id="Mach-O文件"><a href="#Mach-O文件" class="headerlink" title="Mach-O文件"></a>Mach-O文件</h2><p>想让程序在设备上运行起来，需要将写好的代码生成可执行文件这样才能被操作系统所理解。比如，在<code>Linux</code>下可执行文件的格式是<code>ELF</code>，在<code>Window</code>中可执行文件是<code>PE32/PE32+</code>，而在<code>MAC</code>和<code>iOS</code>中是<code>Mach-O</code>格式。</p>
+<p>Mach-O的组成结构如下图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://upload-images.jianshu.io/upload_images/1363078-9fb657a1bbd733ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片来自《Mach-O 文件格式探索》"></p>
+<p>可以看的出 Mach-O 主要由 3 部分组成:</p>
+<ul>
+<li>Mach-O 头（Mach Header）：这里描述了 Mach-O 的 CPU 架构、文件类型以及加载命令等信息；</li>
+<li>加载命令（Load Command）：描述了文件中数据的具体组织结构，不同的数据类型使用不同的加载命令表示；</li>
+<li>数据区（Data）：Data 中每一个段（Segment）的数据都保存在此，段的概念和 ELF 文件中段的概念类似，都拥有一个或多个 Section ，用来存放数据和代码。</li>
+</ul>
+<p>如何获取Mach-O文件，在<code>App Store</code>中下载应用<code>.ipa</code>改成<code>.zip</code>格式，之后解压缩会在里面发现一个应用同名的文件。<br>下面是简书的Mach-O文件：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://upload-images.jianshu.io/upload_images/1363078-d2ab060158eb4397.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<h2 id="Class-dump使用"><a href="#Class-dump使用" class="headerlink" title="Class-dump使用"></a>Class-dump使用</h2><p><a target="_blank" rel="noopener" href="http://stevenygard.com/projects/class-dump/">class-dump</a>的作用就是把<code>Mach-O</code>文件的class信息导出来生成头文件。</p>
+<p>下载后将其中的<code>class-dump</code>拷贝到<code>/usr/local/bin</code>目录下，就可以在终端使用<code>class-dump</code>命令。</p>
+<p>终端输入<code>class-dump</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class-dump 3.5 (64 bit) (Debug version compiled Sep 17 2017 16:24:48)</span><br><span class="line">Usage: class-dump [options] &lt;mach-o-file&gt;</span><br><span class="line"></span><br><span class="line">  where options are:</span><br><span class="line">        -a             show instance variable offsets</span><br><span class="line">        -A             show implementation addresses</span><br><span class="line">        --arch &lt;arch&gt;  choose a specific architecture from a universal binary (ppc, ppc64, i386, x86_64, armv6, armv7, armv7s, arm64)</span><br><span class="line">        -C &lt;regex&gt;     only display classes matching regular expression</span><br><span class="line">        -f &lt;str&gt;       find string in method name</span><br><span class="line">        -H             generate header files in current directory, or directory specified with -o</span><br><span class="line">        -I             sort classes, categories, and protocols by inheritance (overrides -s)</span><br><span class="line">        -o &lt;dir&gt;       output directory used for -H</span><br><span class="line">        -r             recursively expand frameworks and fixed VM shared libraries</span><br><span class="line">        -s             sort classes and categories by name</span><br><span class="line">        -S             sort methods by name</span><br><span class="line">        -t             suppress header in output, for testing</span><br><span class="line">        --list-arches  list the arches in the file, then exit</span><br><span class="line">        --sdk-ios      specify iOS SDK version (will look for /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS&lt;version&gt;.sdk</span><br><span class="line">                       or /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS&lt;version&gt;.sdk)</span><br><span class="line">        --sdk-mac      specify Mac OS X version (will look for /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX&lt;version&gt;.sdk</span><br><span class="line">                       or /Developer/SDKs/MacOSX&lt;version&gt;.sdk)</span><br><span class="line">        --sdk-root     specify the full SDK root path (or use --sdk-ios/--sdk-mac for a shortcut)</span><br></pre></td></tr></table></figure>
+<p>安装成功，可以解析头文件方法很简单，常用指令。</p>
+<p><code>class-dump -H mach-o路径 -o 头文件存储路径</code></p>
+<p>以简书App为例，使用之前砸壳的<code>ipa</code>文件，找到里面的<code>Mach-O</code>文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class-dump -H Hugo -o ./Header</span><br></pre></td></tr></table></figure>
+<p>在当前目录中会生成Header文件夹，里面包含所有的头文件。</p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/Desgard/iOS-Source-Probe/blob/master/C/mach-o/Mach-O%20%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E6%8E%A2%E7%B4%A2.md">Mach-O 文件格式探索
+</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/54d842db3f69">趣探 Mach-O：文件格式分析</a></li>
+<li>《iOS应用逆向与安全》作者：刘培庆</li>
+</ul>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">繁华落尽丶千</div><div class="post-copyright__author_desc">面朝大海 春暖花开</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://juesuslove.github.io/2018/10/31/iOS%E9%80%86%E5%90%91%E4%B8%8E%E5%AE%89%E5%85%A8-%E5%9F%BA%E7%A1%80%E7%AF%87/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://juesuslove.github.io/2018/10/31/iOS%E9%80%86%E5%90%91%E4%B8%8E%E5%AE%89%E5%85%A8-%E5%9F%BA%E7%A1%80%E7%AF%87/')">iOS逆向与安全:基础篇</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/images/wechatpay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/images/wechatpay.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/images/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://juesuslove.github.io/2018/10/31/iOS%E9%80%86%E5%90%91%E4%B8%8E%E5%AE%89%E5%85%A8-%E5%9F%BA%E7%A1%80%E7%AF%87/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=undefined&amp;url=https://juesuslove.github.io/2018/10/31/iOS%E9%80%86%E5%90%91%E4%B8%8E%E5%AE%89%E5%85%A8-%E5%9F%BA%E7%A1%80%E7%AF%87/&amp;pic=undefined" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="rm.copyPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://juesusLove.github.io" target="_blank">繁华落尽</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/iOS/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>iOS<span class="tagsPageCount">18</span></a><a class="post-meta__box__tags" href="/tags/%E9%80%86%E5%90%91/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>逆向<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2018/10/23/iOS-RxSwift%E4%B9%8BSubjects/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">[iOS] RxSwift之Subjects</div></div></a></div><div class="next-post pull-right"><a href="/2019/02/25/Runtime%E5%9B%9E%E9%A1%BE%E7%AC%94%E8%AE%B0/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">iOS开发进阶：Runtime</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2019/02/25/Runtime%E5%9B%9E%E9%A1%BE%E7%AC%94%E8%AE%B0/" title="iOS开发进阶：Runtime"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-history fa-fw"></i> 2023-11-02</div><div class="title">iOS开发进阶：Runtime</div></div></a></div><div><a href="/2016/11/04/WebViewJavascriptBaridge%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" title="WebViewJavascriptBridge使用总结"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-history fa-fw"></i> 2023-11-02</div><div class="title">WebViewJavascriptBridge使用总结</div></div></a></div><div><a href="/2017/12/21/YYModel%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B8%80/" title="从YYModel源码中可以学到什么：前篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-history fa-fw"></i> 2023-11-02</div><div class="title">从YYModel源码中可以学到什么：前篇</div></div></a></div><div><a href="/2017/12/27/YYModel%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%BA%8C/" title="从YYModel源码中可以学到什么：后篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-history fa-fw"></i> 2023-11-02</div><div class="title">从YYModel源码中可以学到什么：后篇</div></div></a></div><div><a href="/2017/11/01/iOS%E5%80%BC%E5%BE%97%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%89%E6%96%B9%E5%BA%93/" title="iOS值得学习的三方库"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-history fa-fw"></i> 2023-11-02</div><div class="title">iOS值得学习的三方库</div></div></a></div><div><a href="/2017/07/25/iOS%E5%BC%80%E5%8F%91%E4%B9%8B%E9%9D%99%E6%80%81%E5%BA%93/" title="iOS开发之静态库"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-history fa-fw"></i> 2023-11-02</div><div class="title">iOS开发之静态库</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/06/20/df86832b6b15c.png" ait="status"/></div></div><div class="author-info__description">一名 90 后程序员大叔</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about"><h1 class="author-info__name">繁华落尽丶千</h1><div class="author-info__desc">面朝大海 春暖花开</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/jesusLove" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%B6%8A%E7%8B%B1"><span class="toc-number">2.</span> <span class="toc-text">如何越狱</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95"><span class="toc-number">2.1.</span> <span class="toc-text">配置远程登录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95"><span class="toc-number">2.1.1.</span> <span class="toc-text">使用密码登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E9%92%A5%E7%99%BB%E5%BD%95"><span class="toc-number">2.1.2.</span> <span class="toc-text">公钥登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87USB%E7%99%BB%E5%BD%95%E8%AE%BE%E5%A4%87"><span class="toc-number">2.1.3.</span> <span class="toc-text">通过USB登录设备</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A0%B8%E5%A3%B3"><span class="toc-number">3.</span> <span class="toc-text">砸壳</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="toc-number">3.1.</span> <span class="toc-text">配置环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E7%A0%B8%E5%A3%B3"><span class="toc-number">3.2.</span> <span class="toc-text">进行砸壳</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reveal%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">Reveal配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%8A%E7%8B%B1%E8%AE%BE%E5%A4%87%E9%9B%86%E6%88%90Reveal"><span class="toc-number">4.1.</span> <span class="toc-text">越狱设备集成Reveal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E8%B6%8A%E7%8B%B1%E8%AE%BE%E5%A4%87%E9%9B%86%E6%88%90Reveal"><span class="toc-number">4.2.</span> <span class="toc-text">非越狱设备集成Reveal</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cycript%E9%85%8D%E7%BD%AE"><span class="toc-number">5.</span> <span class="toc-text">Cycript配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E8%B6%8A%E7%8B%B1%E8%AE%BE%E5%A4%87%E4%B8%8A%E5%AE%89%E8%A3%85"><span class="toc-number">5.1.</span> <span class="toc-text">在越狱设备上安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cycript%E5%88%86%E6%9E%90%E5%BA%94%E7%94%A8"><span class="toc-number">5.2.</span> <span class="toc-text">Cycript分析应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%BA%94%E7%94%A8%E4%BF%A1%E6%81%AF"><span class="toc-number">5.2.1.</span> <span class="toc-text">查看应用信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cycript%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="toc-number">5.3.</span> <span class="toc-text">cycript高级用法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Class-dump"><span class="toc-number">6.</span> <span class="toc-text">Class-dump</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mach-O%E6%96%87%E4%BB%B6"><span class="toc-number">6.1.</span> <span class="toc-text">Mach-O文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class-dump%E4%BD%BF%E7%94%A8"><span class="toc-number">6.2.</span> <span class="toc-text">Class-dump使用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">7.</span> <span class="toc-text">参考文章</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/07/13/Koa%E4%BD%BF%E7%94%A8Sqlite3%E5%92%8CSequelize/" title="Koa使用Sqlite3和Sequelize">Koa使用Sqlite3和Sequelize</a><time datetime="2020-07-13T02:16:06.000Z" title="发表于 2020-07-13 10:16:06">2020-07-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/07/13/Electron%E5%AD%90%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%90%AFKoa%E5%BE%AE%E6%9C%8D%E5%8A%A1/" title="Electron子进程开启Koa微服务">Electron子进程开启Koa微服务</a><time datetime="2020-07-13T02:09:01.000Z" title="发表于 2020-07-13 10:09:01">2020-07-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/07/13/Electron%E6%89%98%E7%9B%98-%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/" title="Electron托盘&amp;开机自启动">Electron托盘&amp;开机自启动</a><time datetime="2020-07-13T01:19:10.000Z" title="发表于 2020-07-13 09:19:10">2020-07-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2019/11/25/TypeScript-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83-%E4%B8%89-%EF%BC%9A%E6%A8%A1%E5%9D%97%E3%80%81%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E3%80%81%E5%A3%B0%E6%98%8E%E5%90%88%E5%B9%B6%E3%80%81%E5%A3%B0%E6%98%8E%E6%96%87%E4%BB%B6/" title="TypeScript 从入门到放弃(三)：模块、命名空间、声明合并、声明文件">TypeScript 从入门到放弃(三)：模块、命名空间、声明合并、声明文件</a><time datetime="2019-11-25T07:32:01.000Z" title="发表于 2019-11-25 15:32:01">2019-11-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2019/11/12/TypeScript-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83-%E4%BA%8C-%E6%B3%9B%E5%9E%8B%E3%80%81%E9%AB%98%E7%BA%A7%E7%B1%BB%E5%9E%8B/" title="TypeScript 从入门到放弃(二):泛型、高级类型">TypeScript 从入门到放弃(二):泛型、高级类型</a><time datetime="2019-11-12T06:23:17.000Z" title="发表于 2019-11-12 14:23:17">2019-11-12</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2023 By <a class="footer-bar-link" href="/" title="繁华落尽丶千" target="_blank">繁华落尽丶千</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">62</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">7</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Alamofire/" style="font-size: 0.88rem;">Alamofire<sup>1</sup></a><a href="/tags/CoreAnimation/" style="font-size: 0.88rem;">CoreAnimation<sup>1</sup></a><a href="/tags/Electron/" style="font-size: 0.88rem;">Electron<sup>2</sup></a><a href="/tags/Flexbox/" style="font-size: 0.88rem;">Flexbox<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>3</sup></a><a href="/tags/Git%E9%97%AE%E9%A2%98/" style="font-size: 0.88rem;">Git问题<sup>1</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>8</sup></a><a href="/tags/Koa/" style="font-size: 0.88rem;">Koa<sup>2</sup></a><a href="/tags/Node-js/" style="font-size: 0.88rem;">Node.js<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" style="font-size: 0.88rem;">事件循环<sup>1</sup></a><a href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/" style="font-size: 0.88rem;">作用域链<sup>1</sup></a><a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/" style="font-size: 0.88rem;">原型链<sup>2</sup></a><a href="/tags/%E5%AF%B9%E8%B1%A1/" style="font-size: 0.88rem;">对象<sup>1</sup></a><a href="/tags/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" style="font-size: 0.88rem;">开机自启<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/" style="font-size: 0.88rem;">异步任务<sup>1</sup></a><a href="/tags/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" style="font-size: 0.88rem;">执行上下文<sup>1</sup></a><a href="/tags/%E6%89%A7%E8%A1%8C%E6%A0%88/" style="font-size: 0.88rem;">执行栈<sup>1</sup></a><a href="/tags/%E7%B3%BB%E7%BB%9F%E6%89%98%E7%9B%98/" style="font-size: 0.88rem;">系统托盘<sup>1</sup></a><a href="/tags/%E7%BB%A7%E6%89%BF/" style="font-size: 0.88rem;">继承<sup>1</sup></a><a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 0.88rem;">闭包<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("11/01/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.8",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 繁华落尽丶千 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="https://cdn.cbd.int/algoliasearch@4.18.0/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.cbd.int/instantsearch.js@4.56.5/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
