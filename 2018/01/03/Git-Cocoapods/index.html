@@ -1,0 +1,457 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Git &amp; Cocoapods &amp; 私有化，你不得不知的组件化基础！ | 繁华落尽</title><meta name="keywords" content="Git"><meta name="author" content="繁华落尽丶千,jesus_lqq@163.com"><meta name="copyright" content="繁华落尽丶千"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Git &amp; Cocoapods &amp; 私有化，你不得不知的组件化基础！"><meta name="application-name" content="Git &amp; Cocoapods &amp; 私有化，你不得不知的组件化基础！"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Git &amp; Cocoapods &amp; 私有化，你不得不知的组件化基础！"><meta property="og:url" content="https://juesuslove.github.io/2018/01/03/Git-Cocoapods/index.html"><meta property="og:site_name" content="繁华落尽"><meta property="og:description" content="Git理解Git的设计思想和基本的工作原理，对更好的使用Git至关重要。 Git思想直接记录快照，而非比较差异。和其他版本控制系统不同的是，Git存储数据时将数据看成小型的文件系统的一组快照，每次在修改文件提交更新后，它主要对当时的所有文件制作一个快照并保存到快照索引中。Git还对这一个保存过"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=f9b0205c-d3f2-9a92-0fce-6cb3382647cb"><meta property="article:author" content="繁华落尽丶千"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=f9b0205c-d3f2-9a92-0fce-6cb3382647cb"><meta name="description" content="Git理解Git的设计思想和基本的工作原理，对更好的使用Git至关重要。 Git思想直接记录快照，而非比较差异。和其他版本控制系统不同的是，Git存储数据时将数据看成小型的文件系统的一组快照，每次在修改文件提交更新后，它主要对当时的所有文件制作一个快照并保存到快照索引中。Git还对这一个保存过"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://juesuslove.github.io/2018/01/03/Git-Cocoapods/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bcdcd5cded4b5569656706ab1db4678e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: {"mode":"api","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多"]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 繁华落尽丶千","link":"链接: ","source":"来源: 繁华落尽","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true,
+  shortcutKey: {"enable":true,"delay":100,"shiftDelay":200},
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '繁华落尽',
+  title: 'Git & Cocoapods & 私有化，你不得不知的组件化基础！',
+  postAI: '',
+  pageFillDescription: 'Git, Git思想, Git工作原理, 验证, 远程仓库, Cocoapods, 工作原理, Cocoapods私有化, 索引库, 代码库, 配置Podspec, 总结, 参考理解的设计思想和基本的工作原理对更好的使用至关重要思想直接记录快照而非比较差异和其他版本控制系统不同的是存储数据时将数据看成小型的文件系统的一组快照每次在修改文件提交更新后它主要对当时的所有文件制作一个快照并保存到快照索引中还对这一个保存过程进行了优化也就是说当文件没有本修改时不会重新存储文件而是只保留一个链接指向之前存储的文件这是与其他版本控制系统的重要区别近乎所有的操作都是在本地执行的大多数操作都是在本地完成当我们在没有网络或者没有的情况下同样可以使用进行办公因为在本地磁盘上有项目的完整历史可以在任何时候浏览项目的历史保证数据的完整性为了保证数据的完整性在存储前都会计算校验和通过校验和来引用校验和机制叫做散列也叫哈希散列通过对校验和的检查可以保证数据的完整性校验和是个十六进制组成的字符串例如在中所以文件都是通过校验和进行查找的而不是文件名工作原理为了更好的理解需要理解其设计原理在中文件有三种状态已提交已修改和已暂存已提交数据已经安全的保存到本地数据库中已修改数据文件被修改还没保存到数据库中已暂存对已经修改的文件的当前版本做了标记包含下次提交的快照对应文件的三种状态还引入了三个工作区域的概念仓库工作目录和暂存区域仓库用来保存项目的数据的地方工作目录项目中某个版本独立提取出来的内容暂存区域保存文件下次提交的信息工作流程在工作目录中修改文件暂存文件将文件的快照放入暂存区域提交更新找到暂存区域的文件将快照永久存储工作区域和文件状态关系如下图验证首先在桌面创建一个文件夹初始化仓库查看仓库状态输出提示没有可以提交的内容因为现在工作区什么都没有下面添加文件创建文件查看状态输出此时工作目录中新添加了一个文件也就是说文件被修改在查看仓库状态会发现文件是未跟踪状态可以使用命令提交跟踪输出输出结果新的文件通过命令此时的文件已经被提交到暂存区文件的状态是已暂存状态可以将暂存的文件从暂存区移除输出输出结果显示了一些提交的基本信息分支当前校验和以及在本次提交中有多少文件修订过多少行添加和删改过通过此命令将文件提交到仓库中此时文件的状态是已提交状态远程仓库前面的提到的大部分操作都是在本地完成的但是为了多人协作就需要进行远程仓库管理一些基本操作查看远程仓库服务器添加远程仓库拉取仓库信息推送到远程仓库查看远程仓库远程仓库的移除和重命名标签操作查看所有标签添加标签显示标签信息提价标签到远程所有标签以上只是的基本原理其他内容请看官方文档作为开发者想必对都不会陌生那么有没有思考过这些问题它的是如何查找库如何集成库的它的工作原理是什么那么接下来我们学习一下的工作原理工作原理理解其工作原理需要知道几个概念代码库索引库本地索引库代码库上公开的代码仓库可以集成使用例如等索引库官方索引库能够通过安装的库都在这里面存放的是每个库的本地索引库在安装时会把官方索引库拉取到本地通过查看索引库信息库的描述文件里面记录着库的描述版本地址依赖库等信息工作流程安装后本地会来去官方的索引库生成本地索引表使用时默认情况下会去更新本地索引库可以在后面添加忽略更新会根据文件内容查找索引表找到库所对应的的文件获取库的真是地址下载三方库到本地关于设置请看后面在做讲解也可以查看私有化理解了和的工作原理我们需要学以致用本节我们学习创建私有索引库可以说这是组件化的基础索引库前面提到通过命令可以查看本地的索引库上面的地址就是公共索引库的地址浏览器打开其实就是一个仓库里面存放着所有支持的库的索引文件因为该库是公共的任何人都可访问所以为了使我们私有的库也支持就需要创建私有的索引库下面我们看如何创建私有索引库其实很简单你可以选用一些代码托管平台例如码云这里以码云为例在码云中创建一个私有索引库命名为私有库就创建好了接下来将私有索引库添加到本地通过命令添加完成后运行就可以看到私有索引库了至此私有索引库创建完成代码库提供了创建代码库的命令创建仓库拉取模板库设置编程语言是否生成是否生成单元测试是否生成测试文件前缀文件目录结构如下文件对应前面第二步在这里写测试代码或实例程序封装的库这是库的描述文件将它提交到索引库后面在解释这里需要注意是当封装库更新时需要使用更新才能正常使用修改过的库配置下面我们来看一下文件由于上面使用提供的模板库创建的项目所以默认生成了该文件如果为现有的库添加该文件需要使用命令创建文件创建成功那么文件里有什么内容如何设置由于涉及到的参数较多所以这里只找几个关键的其他请看下面以的文件为例名称版本简介项目主页作者仓库地址头文件源文件上面只是涉及最基础的设置其他的请查看官方文档封装好代码并且修改好文件我们可以将项目上传到私有仓库了上传完成后需要为项目打标签这个标签与文件中的版本号对应接下来将上传到私有索引库就可以在上传之前最好验证文件是否有错误本地验证远程验证上传到私有索引库索引库名文件至此私有索引库私有仓库添加到私有索引库都完成了检验成果的时候到了这是什么情况呢不要着急并不是上述没有成功是因为电脑有缓存资料库那么如何将个人开源库发送到共有索引库想必也回来唯一的区别是上传的位置不同总结本文学习了和工作原理以及通过创建私有库并集成功能参考官方文档中文版官方文档',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-02 15:20:57',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://bu.dusays.com/2021/01/15/419597cf3b2ff.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">繁华落尽</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/images/wechatpay.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/images/wechatpay.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/images/alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Alamofire/" style="font-size: 1.05rem;">Alamofire<sup>1</sup></a><a href="/tags/CoreAnimation/" style="font-size: 1.05rem;">CoreAnimation<sup>1</sup></a><a href="/tags/Electron/" style="font-size: 1.05rem;">Electron<sup>2</sup></a><a href="/tags/Flexbox/" style="font-size: 1.05rem;">Flexbox<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>3</sup></a><a href="/tags/Git%E9%97%AE%E9%A2%98/" style="font-size: 1.05rem;">Git问题<sup>1</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>8</sup></a><a href="/tags/Koa/" style="font-size: 1.05rem;">Koa<sup>2</sup></a><a href="/tags/Node-js/" style="font-size: 1.05rem;">Node.js<sup>1</sup></a><a href="/tags/Python3/" style="font-size: 1.05rem;">Python3<sup>8</sup></a><a href="/tags/Runtime/" style="font-size: 1.05rem;">Runtime<sup>2</sup></a><a href="/tags/Swift/" style="font-size: 1.05rem;">Swift<sup>5</sup></a><a href="/tags/TypeScript/" style="font-size: 1.05rem;">TypeScript<sup>4</sup></a><a href="/tags/Vue-js/" style="font-size: 1.05rem;">Vue.js<sup>2</sup></a><a href="/tags/iOS/" style="font-size: 1.05rem;">iOS<sup>18</sup></a><a href="/tags/this-%E7%BB%91%E5%AE%9A/" style="font-size: 1.05rem;">this 绑定<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" style="font-size: 1.05rem;">事件循环<sup>1</sup></a><a href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/" style="font-size: 1.05rem;">作用域链<sup>1</sup></a><a href="/tags/%E5%8E%9F%E5%9E%8B/" style="font-size: 1.05rem;">原型<sup>1</sup></a><a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/" style="font-size: 1.05rem;">原型链<sup>2</sup></a><a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">响应式原理<sup>2</sup></a><a href="/tags/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE/" style="font-size: 1.05rem;">基础数据<sup>1</sup></a><a href="/tags/%E5%AF%B9%E8%B1%A1/" style="font-size: 1.05rem;">对象<sup>1</sup></a><a href="/tags/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" style="font-size: 1.05rem;">开机自启<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/" style="font-size: 1.05rem;">异步任务<sup>1</sup></a><a href="/tags/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" style="font-size: 1.05rem;">执行上下文<sup>1</sup></a><a href="/tags/%E6%89%A7%E8%A1%8C%E6%A0%88/" style="font-size: 1.05rem;">执行栈<sup>1</sup></a><a href="/tags/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" style="font-size: 1.05rem;">构造函数<sup>1</sup></a><a href="/tags/%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 1.05rem;">标准库<sup>1</sup></a><a href="/tags/%E6%A8%A1%E5%9D%97/" style="font-size: 1.05rem;">模块<sup>2</sup></a><a href="/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 1.05rem;">泛型<sup>1</sup></a><a href="/tags/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/" style="font-size: 1.05rem;">深浅拷贝<sup>1</sup></a><a href="/tags/%E7%B3%BB%E7%BB%9F%E6%89%98%E7%9B%98/" style="font-size: 1.05rem;">系统托盘<sup>1</sup></a><a href="/tags/%E7%BB%A7%E6%89%BF/" style="font-size: 1.05rem;">继承<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%BA%93/" style="font-size: 1.05rem;">网络库<sup>1</sup></a><a href="/tags/%E8%A7%A3%E6%9E%90%E5%BA%93/" style="font-size: 1.05rem;">解析库<sup>1</sup></a><a href="/tags/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" style="font-size: 1.05rem;">输入输出<sup>1</sup></a><a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 1.05rem;">闭包<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" style="font-size: 1.05rem;">高级特性<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%BA%A7%E7%B1%BB%E5%9E%8B/" style="font-size: 1.05rem;">高级类型<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">七月 2020</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/11/"><span class="card-archive-list-date">十一月 2019</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/10/"><span class="card-archive-list-date">十月 2019</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/03/"><span class="card-archive-list-date">三月 2019</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/02/"><span class="card-archive-list-date">二月 2019</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2018/10/"><span class="card-archive-list-date">十月 2018</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2018/09/"><span class="card-archive-list-date">九月 2018</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div><div class="console-btn-item" id="consoleKeyboard" onclick="anzhiyu.keyboardToggle()" title="快捷键开关"><a class="keyboard-switch"><i class="anzhiyufont anzhiyu-icon-keyboard"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%BD%AF%E6%8A%80%E8%83%BD/" itemprop="url">软技能</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Git/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Git</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Git &amp; Cocoapods &amp; 私有化，你不得不知的组件化基础！</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2018-01-03T06:09:40.000Z" title="发表于 2018-01-03 14:09:40">2018-01-03</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-11-02T07:20:57.646Z" title="更新于 2023-11-02 15:20:57">2023-11-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">2.7k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="Git &amp; Cocoapods &amp; 私有化，你不得不知的组件化基础！"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为山东"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>山东</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=f9b0205c-d3f2-9a92-0fce-6cb3382647cb"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://juesuslove.github.io/2018/01/03/Git-Cocoapods/"><header><a class="post-meta-categories" href="/categories/%E8%BD%AF%E6%8A%80%E8%83%BD/" itemprop="url">软技能</a><a href="/tags/Git/" tabindex="-1" itemprop="url">Git</a><h1 id="CrawlerTitle" itemprop="name headline">Git &amp; Cocoapods &amp; 私有化，你不得不知的组件化基础！</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">繁华落尽丶千</span><time itemprop="dateCreated datePublished" datetime="2018-01-03T06:09:40.000Z" title="发表于 2018-01-03 14:09:40">2018-01-03</time><time itemprop="dateCreated datePublished" datetime="2023-11-02T07:20:57.646Z" title="更新于 2023-11-02 15:20:57">2023-11-02</time></header><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/BGImages/watch.jpg"></p>
+<span id="more"></span>
+
+<h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><p>理解Git的设计思想和基本的工作原理，对更好的使用Git至关重要。</p>
+<h2 id="Git思想"><a href="#Git思想" class="headerlink" title="Git思想"></a>Git思想</h2><p>直接记录快照，而非比较差异。和其他版本控制系统不同的是，Git存储数据时将数据看成小型的文件系统的一组快照，每次在修改文件提交更新后，它主要对当时的所有文件制作一个快照并保存到快照索引中。Git还对这一个保存过程进行了优化，也就是说当文件没有本修改时，Git不会重新存储文件而是只保留一个链接指向之前存储的文件。这是Git与其他版本控制系统的重要区别。</p>
+<p>近乎所有的操作都是在本地执行。Git的大多数操作都是在本地完成，当我们在没有网络或者没有VPN的情况下，同样可以使用Git进行办公。因为在本地磁盘上有项目的完整历史，可以在任何时候浏览项目的历史。</p>
+<p>保证数据的完整性。Git为了保证数据的完整性在存储前都会计算校验和，通过校验和来引用。校验和机制叫做SHA-1散列，也叫哈希散列。Git通过对校验和的检查可以保证数据的完整性。</p>
+<p>校验和是40个十六进制组成的字符串。例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">24b9da6552252987aa493b52f8696cd6d3b00373</span><br></pre></td></tr></table></figure>
+<p>在Git中，所以文件都是通过校验和进行查找的，而不是文件名。</p>
+<h2 id="Git工作原理"><a href="#Git工作原理" class="headerlink" title="Git工作原理"></a>Git工作原理</h2><p>为了更好的理解Git，需要理解其设计原理。在Git中，文件有三种状态： 已提交（committed）,已修改（modified）和已暂存（staged）。</p>
+<ul>
+<li>已提交： 数据已经安全的保存到本地数据库中。</li>
+<li>已修改： 数据文件被修改，还没保存到数据库中。</li>
+<li>已暂存： 对已经修改的文件的当前版本做了标记，包含下次提交的快照。</li>
+</ul>
+<p>对应文件的三种状态，还引入了三个工作区域的概念： Git仓库，工作目录和暂存区域。</p>
+<ul>
+<li>Git仓库： 用来保存项目的数据的地方。</li>
+<li>工作目录：项目中某个版本独立提取出来的内容。</li>
+<li>暂存区域：保存文件下次提交的信息。</li>
+</ul>
+<p>工作流程：</p>
+<ul>
+<li>在工作目录中修改文件。</li>
+<li>暂存文件，将文件的快照放入暂存区域。</li>
+<li>提交更新，找到暂存区域的文件，将快照永久存储。</li>
+</ul>
+<p>工作区域和文件状态关系，如下图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/Git%26CocoaPods/Git%E5%8E%9F%E7%90%86.png" alt="Git原理"></p>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>首先在桌面创建一个文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd Desktop &amp; mkdir GitDemo &amp; cd GitDemo</span><br></pre></td></tr></table></figure>
+<p>初始化Git仓库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<p>查看Git仓库状态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">// 输出：</span><br><span class="line">		On branch master</span><br><span class="line">		</span><br><span class="line">		No commits yet</span><br><span class="line">		</span><br><span class="line">		nothing to commit (create/copy files and use &quot;git add&quot; to track)</span><br></pre></td></tr></table></figure>
+
+<p>提示没有可以提交的内容，因为现在工作区什么都没有，下面添加A.md文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 创建A.md文件</span><br><span class="line">touch A.md</span><br><span class="line">// 查看Git状态</span><br><span class="line">git status</span><br><span class="line">// 输出：</span><br><span class="line">	On branch master</span><br><span class="line">	</span><br><span class="line">	No commits yet</span><br><span class="line">	</span><br><span class="line">	Untracked files:</span><br><span class="line">	  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span><br><span class="line">	</span><br><span class="line">		A.md</span><br><span class="line">	</span><br><span class="line">	nothing added to commit but untracked files present (use &quot;git add&quot; to track)</span><br></pre></td></tr></table></figure>
+<p>此时工作目录中新添加了一个文件，也就是说A.md文件被修改。在查看仓库状态会发现<code>Untracked files A.md</code>， 文件是未跟踪状态。可以使用<code>git add &lt;file&gt;</code>命令提交跟踪。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git add A.md</span><br><span class="line">git status</span><br><span class="line">// 输出：</span><br><span class="line">	On branch master</span><br><span class="line">	</span><br><span class="line">	No commits yet</span><br><span class="line">	</span><br><span class="line">	Changes to be committed:</span><br><span class="line">	  (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)</span><br><span class="line">	</span><br><span class="line">		new file:   A.md</span><br></pre></td></tr></table></figure>
+<p>输出结果新的文件<code>A.md</code>，通过<code>git add &lt;file&gt;</code>命令，此时的A文件已经被提交到暂存区，文件的状态是已暂存状态。<code>git rm --cached &lt;file&gt;...</code>可以将暂存的文件从暂存区移除。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &#x27;add A.md&#x27;</span><br><span class="line">// 输出；</span><br><span class="line">	[master (root-commit) af93fed] add A.md</span><br><span class="line">	 1 file changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line">	 create mode 100644 A.md</span><br></pre></td></tr></table></figure>
+<p>输出结果显示了一些提交的基本信息，master分支，当前校验和[af93fed]以及在本次提交中，有多少文件修订过，多少行添加和删改过。通过此命令将文件提交到仓库中，此时文件的状态是已提交状态。</p>
+<h1 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h1><p>前面的提到，Git的大部分操作都是在本地完成的，但是为了多人协作就需要进行远程仓库管理。一些基本操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 查看远程仓库服务器</span><br><span class="line">git remote -v </span><br><span class="line"></span><br><span class="line">// 添加远程仓库</span><br><span class="line">git remote add &lt;name&gt; &lt;url&gt; </span><br><span class="line"></span><br><span class="line">// 拉取仓库信息</span><br><span class="line">git fetch &lt;name&gt; </span><br><span class="line"></span><br><span class="line">// 推送到远程仓库</span><br><span class="line">git push origin master</span><br><span class="line"></span><br><span class="line">// 查看远程仓库</span><br><span class="line">git remote show origin</span><br><span class="line"></span><br><span class="line">// 远程仓库的移除和重命名</span><br><span class="line">git remote rename &lt;oldName&gt; &lt;newName&gt;</span><br><span class="line">git remote rm &lt;name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>标签操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 查看所有标签</span><br><span class="line">git tag</span><br><span class="line"></span><br><span class="line">// 添加标签</span><br><span class="line">git tag -a 0.1.1 -m &#x27;message&#x27;</span><br><span class="line"></span><br><span class="line">// 显示标签信息</span><br><span class="line">git show 0.1.1</span><br><span class="line"></span><br><span class="line">// 提价标签到远程(--tags所有标签)</span><br><span class="line">git push origin --tags </span><br></pre></td></tr></table></figure>
+
+<p>以上，只是Git的基本原理，其他内容请看官方文档。<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">Git</a></p>
+<h1 id="Cocoapods"><a href="#Cocoapods" class="headerlink" title="Cocoapods"></a>Cocoapods</h1><p>作为iOS开发者，想必对Cocoapods都不会陌生，那么有没有思考过这些问题？它的是如何查找库，如何集成库的，它的工作原理是什么。那么接下来我们学习一下Cocoapods的工作原理。</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>理解其工作原理需要知道几个概念：代码库，索引库，本地索引库，podspec。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://github.com/jesusLove/Owenli_Blog/raw/master/Content/images/Git%26CocoaPods/Cocoapods.png"></p>
+<ul>
+<li>代码库：Github上公开的代码仓库，可以集成使用。例如： Alamofire、AFNworking等。</li>
+<li>索引库：<a target="_blank" rel="noopener" href="https://github.com/CocoaPods/Specs.git">官方索引库</a>，能够通过Pod安装的库都在这里面，存放的是每个库的Podspec。</li>
+<li>本地索引库：在安装Pod时，会把官方索引库拉取到本地。通过<code>pod repo</code>查看索引库信息。</li>
+<li>Podspec：库的描述文件，里面记录着库的描述，版本，地址，依赖库等信息。</li>
+</ul>
+<p>工作流程：</p>
+<ul>
+<li>安装Cocoapods后，本地会来去官方的索引库，生成本地索引表。</li>
+<li>使用<code>Pod install</code>时，默认情况下，会去更新本地索引库，可以在后面添加<code>--no-repo-update</code>忽略更新。</li>
+<li>pod会根据<code>Podfile</code>文件内容查找索引表，找到库所对应的的<code>Podspec</code>文件，获取库的真是地址。</li>
+<li>下载三方库到本地。</li>
+</ul>
+<blockquote>
+<p>关于 <code>Podfile</code> 设置请看<a target="_blank" rel="noopener" href="https://guides.cocoapods.org/using/the-podfile.html">The Podfile</a>。</p>
+</blockquote>
+<p><code>Podspec</code>后面在做讲解，也可以查看<a target="_blank" rel="noopener" href="https://guides.cocoapods.org/syntax/podspec.html">Podspec Syntax Reference</a></p>
+<h1 id="Cocoapods私有化"><a href="#Cocoapods私有化" class="headerlink" title="Cocoapods私有化"></a>Cocoapods私有化</h1><p>理解了<code>Git</code>和<code>Cocoapods</code>的工作原理，我们需要学以致用。本节我们学习创建私有索引库，可以说这是组件化的基础。</p>
+<h2 id="索引库"><a href="#索引库" class="headerlink" title="索引库"></a>索引库</h2><p>前面提到通过命令<code>pod repo</code>可以查看本地的索引库。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">master</span><br><span class="line">- Type: git (master)</span><br><span class="line">- URL:  https://github.com/CocoaPods/Specs.git</span><br><span class="line">- Path: /Users/lqq/.cocoapods/repos/master</span><br></pre></td></tr></table></figure>
+<p>上面的<code>URL</code>地址就是公共索引库的地址，浏览器打开其实就是一个仓库。里面存放着所有支持<code>cocoapods</code>的库的索引文件<code>podspec</code>。因为该库是公共的，任何人都可访问，所以为了使我们私有的库也支持<code>cocoapods</code>就需要创建私有的索引库。</p>
+<p>下面我们看如何创建私有索引库，其实很简单。你可以选用一些代码托管平台，例如：<a target="_blank" rel="noopener" href="https://gitee.com/">码云</a>, <a target="_blank" rel="noopener" href="https://coding.net/">Coding</a>。这里以码云为例。</p>
+<p>在码云中创建一个私有索引库，命名为<code>LQQSpecs</code>。</p>
+<p>OK私有库就创建好了。接下来将私有索引库添加到本地。通过命令<code>pod repo add &lt;Name&gt; &lt;URL&gt;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo add LQQSpecs &lt;URL&gt;</span><br></pre></td></tr></table></figure>
+
+<p>添加完成后运行<code>pod repo</code>就可以看到私有索引库了。</p>
+<p>至此，私有索引库创建完成。</p>
+<h2 id="代码库"><a href="#代码库" class="headerlink" title="代码库"></a>代码库</h2><p><code>Cocoapods</code>提供了创建代码库的命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pod lib create &lt;Name&gt; // 创建仓库</span><br><span class="line">// 拉取模板库</span><br><span class="line">// 1. 设置：编程语言 OC 、Swift</span><br><span class="line">// 2. 是否生成Demo？</span><br><span class="line">// 3. 是否生成单元测试</span><br><span class="line">// 4. 是否生成UI测试</span><br><span class="line">// 5. 文件前缀</span><br></pre></td></tr></table></figure>
+
+<p>文件目录结构如下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">├── Example</span><br><span class="line">│   ├── LQQSegmentBar</span><br><span class="line">│   ├── LQQSegmentBar.xcodeproj</span><br><span class="line">│   ├── LQQSegmentBar.xcworkspace</span><br><span class="line">│   ├── Podfile</span><br><span class="line">│   ├── Podfile.lock</span><br><span class="line">│   ├── Pods</span><br><span class="line">│   └── Tests</span><br><span class="line">├── LICENSE</span><br><span class="line">├── LQQSegmentBar</span><br><span class="line">│   ├── Assets</span><br><span class="line">│   └── Classes</span><br><span class="line">├── LQQSegmentBar.podspec</span><br><span class="line">├── README.md</span><br><span class="line">└── _Pods.xcodeproj -&gt; Example/Pods/Pods.xcodeproj</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Example: Demo文件对应前面第二步，在这里写测试代码，或实例程序</li>
+<li>LQQSegmentBar: 封装的库。</li>
+<li>LQQSegementBar.podspec: 这是库的描述文件，将它提交到索引库，后面在解释。</li>
+</ul>
+<blockquote>
+<p>这里需要注意是，当封装库更新时，<code>Example</code>需要使用<code>pod install</code>更新，才能正常使用修改过的库。</p>
+</blockquote>
+<h2 id="配置Podspec"><a href="#配置Podspec" class="headerlink" title="配置Podspec"></a>配置Podspec</h2><p>下面我们来看一下<code>Podspec</code>文件。 由于上面使用<code>pod</code>提供的模板库创建的项目，所以默认生成了该文件。如果为现有的库添加该文件，需要使用命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pod spec create &lt;name&gt; //创建Podspec</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Podspec文件创建成功。那么文件里有什么内容，如何设置。由于涉及到的参数较多，所以这里只找几个关键的。其他请看<a target="_blank" rel="noopener" href="https://guides.cocoapods.org/syntax/podspec.html">Podspec Syntax Reference</a></p>
+<p>下面以<code>AFNworking</code>的<code>Podspec</code>文件为例。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Pod::Spec.new do |s|</span><br><span class="line">  s.name     = &#x27;AFNetworking&#x27; // 名称</span><br><span class="line">  s.version  = &#x27;3.2.0&#x27; // 版本</span><br><span class="line">  s.license  = &#x27;MIT&#x27; // License</span><br><span class="line">  s.summary  = &#x27;A delightful iOS and OS X networking framework.&#x27; // 简介</span><br><span class="line">  s.homepage = &#x27;https://github.com/AFNetworking/AFNetworking&#x27; // 项目主页</span><br><span class="line">  s.authors  = &#123; &#x27;Mattt Thompson&#x27; =&gt; &#x27;m@mattt.me&#x27; &#125; // 作者</span><br><span class="line">  s.source   = &#123; :git =&gt; &#x27;https://github.com/AFNetworking/AFNetworking.git&#x27;, :tag =&gt; s.version, :submodules =&gt; true &#125; // 仓库地址</span><br><span class="line">  s.public_header_files = &#x27;AFNetworking/AFNetworking.h&#x27; // 头文件</span><br><span class="line">  s.source_files = &#x27;AFNetworking/AFNetworking.h&#x27; // 源文件</span><br><span class="line">  </span><br><span class="line">  #......</span><br><span class="line">end </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上面只是涉及最基础的设置，其他的请查看官方文档。</p>
+</blockquote>
+<p>封装好代码并且修改好<code>Podspec</code>文件，我们可以将项目上传到私有仓库了。</p>
+<p>上传完成后需要为项目打标签，这个标签与<code>Podspec</code>文件中的版本号对应。</p>
+<p>接下来将<code>Podspec </code>上传到私有索引库就可以，在上传之前最好验证<code>Podspec</code>文件是否有错误。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pod lib lint // 本地验证</span><br><span class="line"></span><br><span class="line">pod spec lint // 远程验证</span><br></pre></td></tr></table></figure>
+
+<p>上传到私有索引库<code>pod repo push &lt;索引库名&gt; &lt;Podspec文件&gt;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo push LQQSpecs xxx.podspec</span><br></pre></td></tr></table></figure>
+
+<p>OK！至此，私有索引库，私有仓库，添加到私有索引库都完成了。</p>
+<p>检验成果的时候到了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pod search &#x27;xxx&#x27;</span><br><span class="line"></span><br><span class="line">// [!] Unable to find a pod with name, author, summary, or description matching `xxx`</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>WTF! 这是什么情况呢, 不要着急，并不是上述没有成功，是因为电脑有缓存。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">资料库-&gt;Caches-&gt;Cocoapods</span><br></pre></td></tr></table></figure>
+
+<p>那么，如何将个人开源库发送到共有索引库，想必也回来。唯一的区别是<code>Podspec</code>上传的位置不同。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文学习了Git和Cocoapods工作原理。以及通过Cocoapods创建私有库，并集成<code>Cocoapods</code>功能。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">Git官方文档-中文版</a></li>
+<li><a target="_blank" rel="noopener" href="https://guides.cocoapods.org/">Cocoapods官方文档</a></li>
+</ul>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/01/15/419597cf3b2ff.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/01/15/419597cf3b2ff.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">繁华落尽丶千</div><div class="post-copyright__author_desc">面朝大海 春暖花开</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://juesuslove.github.io/2018/01/03/Git-Cocoapods/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://juesuslove.github.io/2018/01/03/Git-Cocoapods/')">Git &amp; Cocoapods &amp; 私有化，你不得不知的组件化基础！</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/images/wechatpay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/images/wechatpay.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/images/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://juesuslove.github.io/2018/01/03/Git-Cocoapods/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Git &amp; Cocoapods &amp; 私有化，你不得不知的组件化基础！&amp;url=https://juesuslove.github.io/2018/01/03/Git-Cocoapods/&amp;pic=https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=f9b0205c-d3f2-9a92-0fce-6cb3382647cb" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="rm.copyPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://juesusLove.github.io" target="_blank">繁华落尽</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Git/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Git<span class="tagsPageCount">3</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/11/04/654606ec99646.webp" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2017/12/27/YYModel%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%BA%8C/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=b974eb7f-47a1-b5dd-4362-3cc232ad5205" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">从YYModel源码中可以学到什么：后篇</div></div></a></div><div class="next-post pull-right"><a href="/2018/03/07/Git-Missing-blob%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=31a82cf4-ca97-5d1d-91e4-b5a9590f6c54" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Git Missing blob问题解决办法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2018/03/07/Git-Missing-blob%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="Git Missing blob问题解决办法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=31a82cf4-ca97-5d1d-91e4-b5a9590f6c54" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2018-03-07</div><div class="title">Git Missing blob问题解决办法</div></div></a></div><div><a href="/2017/03/18/%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3Git%E5%92%8CGithub%E5%90%97%EF%BC%9F/" title="你真的了解Git和Github吗？"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=eacca207-98ed-5c2e-1f8a-19fd530b3a61" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2017-03-18</div><div class="title">你真的了解Git和Github吗？</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/01/15/419597cf3b2ff.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/03/03/317b790a902ec.png" ait="status"/></div></div><div class="author-info__description">一名 90 后程序员大叔</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">繁华落尽丶千</h1><div class="author-info__desc">面朝大海 春暖花开</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/jesusLove" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/11/03/65446bda8f5e5.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git"><span class="toc-number">1.</span> <span class="toc-text">Git</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E6%80%9D%E6%83%B3"><span class="toc-number">1.1.</span> <span class="toc-text">Git思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">Git工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81"><span class="toc-number">1.3.</span> <span class="toc-text">验证</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">2.</span> <span class="toc-text">远程仓库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cocoapods"><span class="toc-number">3.</span> <span class="toc-text">Cocoapods</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.1.</span> <span class="toc-text">工作原理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cocoapods%E7%A7%81%E6%9C%89%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text">Cocoapods私有化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%BA%93"><span class="toc-number">4.1.</span> <span class="toc-text">索引库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%BA%93"><span class="toc-number">4.2.</span> <span class="toc-text">代码库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEPodspec"><span class="toc-number">4.3.</span> <span class="toc-text">配置Podspec</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/11/08/Vue-js%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0-%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B04-2-md/" title="Vue.js设计与实现：响应式系统的作用与实现 4-2"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/04/654606ec99646.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue.js设计与实现：响应式系统的作用与实现 4-2"/></a><div class="content"><a class="title" href="/2023/11/08/Vue-js%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0-%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B04-2-md/" title="Vue.js设计与实现：响应式系统的作用与实现 4-2">Vue.js设计与实现：响应式系统的作用与实现 4-2</a><time datetime="2023-11-08T06:38:46.000Z" title="发表于 2023-11-08 14:38:46">2023-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/03/Vuejs%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B04-1/" title="Vue.js设计与实现：响应式系统的作用与实现 4-1"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/04/654606ec99646.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue.js设计与实现：响应式系统的作用与实现 4-1"/></a><div class="content"><a class="title" href="/2023/11/03/Vuejs%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B04-1/" title="Vue.js设计与实现：响应式系统的作用与实现 4-1">Vue.js设计与实现：响应式系统的作用与实现 4-1</a><time datetime="2023-11-03T10:49:44.000Z" title="发表于 2023-11-03 18:49:44">2023-11-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/13/Koa%E4%BD%BF%E7%94%A8Sqlite3%E5%92%8CSequelize/" title="Koa使用Sqlite3和Sequelize"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=106100d7-c486-3d38-5129-002801b6156a" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Koa使用Sqlite3和Sequelize"/></a><div class="content"><a class="title" href="/2020/07/13/Koa%E4%BD%BF%E7%94%A8Sqlite3%E5%92%8CSequelize/" title="Koa使用Sqlite3和Sequelize">Koa使用Sqlite3和Sequelize</a><time datetime="2020-07-13T02:16:06.000Z" title="发表于 2020-07-13 10:16:06">2020-07-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/13/Electron%E5%AD%90%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%90%AFKoa%E5%BE%AE%E6%9C%8D%E5%8A%A1/" title="Electron子进程开启Koa微服务"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=0410c189-3743-23cf-508c-8840124c65bd" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Electron子进程开启Koa微服务"/></a><div class="content"><a class="title" href="/2020/07/13/Electron%E5%AD%90%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%90%AFKoa%E5%BE%AE%E6%9C%8D%E5%8A%A1/" title="Electron子进程开启Koa微服务">Electron子进程开启Koa微服务</a><time datetime="2020-07-13T02:09:01.000Z" title="发表于 2020-07-13 10:09:01">2020-07-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/13/Electron%E6%89%98%E7%9B%98-%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/" title="Electron托盘&amp;开机自启动"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=7b7213ac-75bc-572c-b09b-ced03ab78ac5" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Electron托盘&amp;开机自启动"/></a><div class="content"><a class="title" href="/2020/07/13/Electron%E6%89%98%E7%9B%98-%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/" title="Electron托盘&amp;开机自启动">Electron托盘&amp;开机自启动</a><time datetime="2020-07-13T01:19:10.000Z" title="发表于 2020-07-13 09:19:10">2020-07-13</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2023 By <a class="footer-bar-link" href="/" title="繁华落尽丶千" target="_blank">繁华落尽丶千</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="鲁ICP备19057856号-1">鲁ICP备19057856号-1</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">69</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">64</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">8</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Alamofire/" style="font-size: 0.88rem;">Alamofire<sup>1</sup></a><a href="/tags/CoreAnimation/" style="font-size: 0.88rem;">CoreAnimation<sup>1</sup></a><a href="/tags/Electron/" style="font-size: 0.88rem;">Electron<sup>2</sup></a><a href="/tags/Flexbox/" style="font-size: 0.88rem;">Flexbox<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>3</sup></a><a href="/tags/Git%E9%97%AE%E9%A2%98/" style="font-size: 0.88rem;">Git问题<sup>1</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>8</sup></a><a href="/tags/Koa/" style="font-size: 0.88rem;">Koa<sup>2</sup></a><a href="/tags/Node-js/" style="font-size: 0.88rem;">Node.js<sup>1</sup></a><a href="/tags/Python3/" style="font-size: 0.88rem;">Python3<sup>8</sup></a><a href="/tags/Runtime/" style="font-size: 0.88rem;">Runtime<sup>2</sup></a><a href="/tags/Swift/" style="font-size: 0.88rem;">Swift<sup>5</sup></a><a href="/tags/TypeScript/" style="font-size: 0.88rem;">TypeScript<sup>4</sup></a><a href="/tags/Vue-js/" style="font-size: 0.88rem;">Vue.js<sup>2</sup></a><a href="/tags/iOS/" style="font-size: 0.88rem;">iOS<sup>18</sup></a><a href="/tags/this-%E7%BB%91%E5%AE%9A/" style="font-size: 0.88rem;">this 绑定<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" style="font-size: 0.88rem;">事件循环<sup>1</sup></a><a href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/" style="font-size: 0.88rem;">作用域链<sup>1</sup></a><a href="/tags/%E5%8E%9F%E5%9E%8B/" style="font-size: 0.88rem;">原型<sup>1</sup></a><a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/" style="font-size: 0.88rem;">原型链<sup>2</sup></a><a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">响应式原理<sup>2</sup></a><a href="/tags/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE/" style="font-size: 0.88rem;">基础数据<sup>1</sup></a><a href="/tags/%E5%AF%B9%E8%B1%A1/" style="font-size: 0.88rem;">对象<sup>1</sup></a><a href="/tags/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" style="font-size: 0.88rem;">开机自启<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/" style="font-size: 0.88rem;">异步任务<sup>1</sup></a><a href="/tags/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" style="font-size: 0.88rem;">执行上下文<sup>1</sup></a><a href="/tags/%E6%89%A7%E8%A1%8C%E6%A0%88/" style="font-size: 0.88rem;">执行栈<sup>1</sup></a><a href="/tags/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" style="font-size: 0.88rem;">构造函数<sup>1</sup></a><a href="/tags/%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 0.88rem;">标准库<sup>1</sup></a><a href="/tags/%E6%A8%A1%E5%9D%97/" style="font-size: 0.88rem;">模块<sup>2</sup></a><a href="/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 0.88rem;">泛型<sup>1</sup></a><a href="/tags/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/" style="font-size: 0.88rem;">深浅拷贝<sup>1</sup></a><a href="/tags/%E7%B3%BB%E7%BB%9F%E6%89%98%E7%9B%98/" style="font-size: 0.88rem;">系统托盘<sup>1</sup></a><a href="/tags/%E7%BB%A7%E6%89%BF/" style="font-size: 0.88rem;">继承<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%BA%93/" style="font-size: 0.88rem;">网络库<sup>1</sup></a><a href="/tags/%E8%A7%A3%E6%9E%90%E5%BA%93/" style="font-size: 0.88rem;">解析库<sup>1</sup></a><a href="/tags/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" style="font-size: 0.88rem;">输入输出<sup>1</sup></a><a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 0.88rem;">闭包<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" style="font-size: 0.88rem;">高级特性<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%BA%A7%E7%B1%BB%E5%9E%8B/" style="font-size: 0.88rem;">高级类型<sup>1</sup></a></div></div><hr/></div></div><div id="keyboard-tips"><div class="keyboardTitle">博客快捷键</div><div class="keybordList"><div class="keybordItem"><div class="keyGroup"><div class="key">shift K</div></div><div class="keyContent"><div class="content">关闭快捷键功能</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift A</div></div><div class="keyContent"><div class="content">打开/关闭中控台</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift M</div></div><div class="keyContent"><div class="content">播放/暂停音乐</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift D</div></div><div class="keyContent"><div class="content">深色/浅色显示模式</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift S</div></div><div class="keyContent"><div class="content">站内搜索</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift R</div></div><div class="keyContent"><div class="content">随机访问</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift H</div></div><div class="keyContent"><div class="content">返回首页</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift F</div></div><div class="keyContent"><div class="content">友链鱼塘</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift L</div></div><div class="keyContent"><div class="content">友链页面</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift P</div></div><div class="keyContent"><div class="content">关于本站</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift I</div></div><div class="keyContent"><div class="content">原版/本站右键菜单</div></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.cbd.int/mermaid@10.2.4/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
