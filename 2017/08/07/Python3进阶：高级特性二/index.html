@@ -1,0 +1,400 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Python3进阶：高级特性二 | 猿镇</title><meta name="keywords" content="Python3,高级特性"><meta name="author" content="镇长,jesus_lqq@163.com"><meta name="copyright" content="镇长"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Python3进阶：高级特性二"><meta name="application-name" content="Python3进阶：高级特性二"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Python3进阶：高级特性二"><meta property="og:url" content="https://juesuslove.github.io/2017/08/07/Python3%E8%BF%9B%E9%98%B6%EF%BC%9A%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%E4%BA%8C/index.html"><meta property="og:site_name" content="猿镇"><meta property="og:description" content="本文上上一篇文章的补充内容。   __slots__魔法Python中，每个类的实力属性。默认情况下Python用一个字典来保存一个对象。这非常有用，允许我们在运行时去设置任意的新属性。 但是，有时存在一个问题，比如已知的属性的类来说，字典会浪费很多内存，当类很多时将大量消耗内存。 🌰： 123"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=21bf5f32-8ccd-77ac-f143-0451e224b1f6"><meta property="article:author" content="镇长"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=21bf5f32-8ccd-77ac-f143-0451e224b1f6"><meta name="description" content="本文上上一篇文章的补充内容。   __slots__魔法Python中，每个类的实力属性。默认情况下Python用一个字典来保存一个对象。这非常有用，允许我们在运行时去设置任意的新属性。 但是，有时存在一个问题，比如已知的属性的类来说，字典会浪费很多内存，当类很多时将大量消耗内存。 🌰： 123"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://juesuslove.github.io/2017/08/07/Python3%E8%BF%9B%E9%98%B6%EF%BC%9A%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%E4%BA%8C/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bcdcd5cded4b5569656706ab1db4678e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: {"mode":"api","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多"]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 镇长","link":"链接: ","source":"来源: 猿镇","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true,
+  shortcutKey: {"enable":true,"delay":100,"shiftDelay":200},
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '猿镇',
+  title: 'Python3进阶：高级特性二',
+  postAI: '',
+  pageFillDescription: '__slots__魔法, 容器（collections）, defaultdict, counter, deque, namedtuple, enum.Enum(Python3.4+), 枚举, 对象自省, 推导式, 列表推导式, 参考本文上上一篇文章的补充内容魔法中每个类的实力属性默认情况下用一个字典来保存一个对象这非常有用允许我们在运行时去设置任意的新属性但是有时存在一个问题比如已知的属性的类来说字典会浪费很多内存当类很多时将大量消耗内存使用减少内存消耗容器附带一个模块它包含许多容器数据类型例如以上与类型不同你不需要检查是否存在另一个问题可以绕过键值不存在的异常这里不会发生异常是计数器可以针对某一项数据进行技术另外还可以使用它统计文件提供了一个双端队列可以从头尾两端添加或删除元素它的用法就像提供了类似的方法定义添加数据输出左侧输出右侧输出限制大小超出后另一端会被挤出扩展数据命名元组是把元组编程一个针对简单任务的容器你不必使用整数索引来访问一个的数据可以像字典样访问但是它是不可变的将命名元组转为字典在模块枚举对象基本上是一种组织各种东西的额方式枚举枚举是的内置函数它允许我们遍历数据并自动技术设置从哪个索引开始枚举对象自省返回一个列表包含对象所拥有的属性和方法和函数返回对象的类型函数返回任意不同种类对象的提供了很多有用的函数获取活跃对象的信息推导式推导式又称解析式是的一种独有的特性列表推导式字典推导式集合推导式列表推导式直接看例子其他另种和列表推导式类似参考进阶',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-02 15:33:56',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://bu.dusays.com/2021/01/15/419597cf3b2ff.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">猿镇</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/images/wechatpay.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="/images/wechatpay.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/images/alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div><div class="console-btn-item" id="consoleKeyboard" onclick="anzhiyu.keyboardToggle()" title="快捷键开关"><a class="keyboard-switch"><i class="anzhiyufont anzhiyu-icon-keyboard"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url">编程语言</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Python3/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Python3</span></a><a class="article-meta__tags" href="/tags/%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>高级特性</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Python3进阶：高级特性二</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2017-08-07T06:28:35.000Z" title="发表于 2017-08-07 14:28:35">2017-08-07</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-11-02T07:33:56.409Z" title="更新于 2023-11-02 15:33:56">2023-11-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">905</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="Python3进阶：高级特性二"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为山东"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>山东</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=21bf5f32-8ccd-77ac-f143-0451e224b1f6"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://juesuslove.github.io/2017/08/07/Python3%E8%BF%9B%E9%98%B6%EF%BC%9A%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%E4%BA%8C/"><header><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url">编程语言</a><a href="/tags/Python3/" tabindex="-1" itemprop="url">Python3</a><a href="/tags/%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" tabindex="-1" itemprop="url">高级特性</a><h1 id="CrawlerTitle" itemprop="name headline">Python3进阶：高级特性二</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">镇长</span><time itemprop="dateCreated datePublished" datetime="2017-08-07T06:28:35.000Z" title="发表于 2017-08-07 14:28:35">2017-08-07</time><time itemprop="dateCreated datePublished" datetime="2023-11-02T07:33:56.409Z" title="更新于 2023-11-02 15:33:56">2023-11-02</time></header><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="http://blog.techbridge.cc/img/kdchang/python-logo.png" alt="Python"></p>
+<p>本文上上一篇文章的补充内容。</p>
+<span id="more"></span>
+
+<h1 id="slots-魔法"><a href="#slots-魔法" class="headerlink" title="__slots__魔法"></a><code>__slots__</code>魔法</h1><p>Python中，每个类的实力属性。默认情况下Python用一个字典来保存一个对象。这非常有用，允许我们在运行时去设置任意的新属性。</p>
+<p>但是，有时存在一个问题，比如已知的属性的类来说，字典会浪费很多内存，当类很多时将大量消耗内存。</p>
+<p>🌰：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Myclass(object):</span><br><span class="line">	__slots__ = [&#x27;name&#x27;, &#x27;identifier&#x27;]</span><br><span class="line">	def __init__(self, name, identifier):</span><br><span class="line">		self.name = name</span><br><span class="line">		self.identifier = identifier</span><br><span class="line">		self.set_up()</span><br><span class="line">		#...</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>使用<code>__slots__</code>减少内存消耗。</p>
+</blockquote>
+<h1 id="容器（collections）"><a href="#容器（collections）" class="headerlink" title="容器（collections）"></a>容器（collections）</h1><p>Python附带一个模块，它包含许多容器数据类型。</p>
+<p>例如：</p>
+<ul>
+<li>defaultdict</li>
+<li>counter</li>
+<li>deque</li>
+<li>namedtuple</li>
+<li>enum.Enum(Python3.4以上)</li>
+</ul>
+<h2 id="defaultdict"><a href="#defaultdict" class="headerlink" title="defaultdict"></a>defaultdict</h2><p><code>defaultdict</code>与<code>dict</code>类型不同，你不需要检查key是否存在。另一个问题，可以绕过键值不存在的<code>keyError</code>异常。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import collections</span><br><span class="line">import json</span><br><span class="line">tree = lambda: collections.defaultdict(tree)</span><br><span class="line">some_dict = tree()</span><br><span class="line">some_dict[&#x27;colours&#x27;][&#x27;favourite&#x27;] = &#x27;yellow&#x27; # 这里不会发生异常</span><br><span class="line"></span><br><span class="line">print(json.dumps(some_dict))</span><br><span class="line"></span><br><span class="line"># Output: &#123;&quot;colours&quot;: &#123;&quot;favourite&quot;: &quot;yellow&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="counter"><a href="#counter" class="headerlink" title="counter"></a>counter</h2><p>counter是计数器，可以针对某一项数据进行技术。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from collections import Counter</span><br><span class="line">colours = (</span><br><span class="line"></span><br><span class="line">    (&#x27;1&#x27;, &#x27;sadafa&#x27;),</span><br><span class="line">    (&#x27;2&#x27;, &#x27;aaaa&#x27;),</span><br><span class="line">    (&#x27;3&#x27;, &#x27;aaaa&#x27;),</span><br><span class="line">    (&#x27;4&#x27;, &#x27;aaaa&#x27;),</span><br><span class="line">    (&#x27;2&#x27;, &#x27;bbbbb&#x27;),</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">favs = Counter(name for name, colour in colours)</span><br><span class="line">print(favs)</span><br><span class="line"></span><br><span class="line"># Output: Counter(&#123;&#x27;2&#x27;: 2, &#x27;1&#x27;: 1, &#x27;3&#x27;: 1, &#x27;4&#x27;: 1&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>另外，还可以使用它统计文件。</p>
+<h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h2><p>deque提供了一个双端队列，可以从头&#x2F;尾两端添加或删除元素。它的用法就像<code>list</code>，提供了类似的方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">from collections import deque</span><br><span class="line">d = deque() # 定义</span><br><span class="line"></span><br><span class="line">d.append(1) # 添加数据</span><br><span class="line">d.append(2)</span><br><span class="line">d.append(3)</span><br><span class="line"></span><br><span class="line">print(len(d))</span><br><span class="line"></span><br><span class="line"># 输出</span><br><span class="line">d.popleft() # 左侧输出</span><br><span class="line"></span><br><span class="line">d.pop() # 右侧输出</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 限制大小，超出后另一端会被挤出。</span><br><span class="line"></span><br><span class="line">d = deque(maxlen = 5)</span><br><span class="line"></span><br><span class="line"># 扩展数据</span><br><span class="line"></span><br><span class="line">d.extendleft([0])</span><br><span class="line"></span><br><span class="line">d.extend([5,6,7])</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="namedtuple"><a href="#namedtuple" class="headerlink" title="namedtuple"></a>namedtuple</h2><p>命名元组是把元组编程一个针对简单任务的容器。你不必使用整数索引来访问一个<code>namedtuples</code>的数据。可以像字典样访问，但是它是不可变的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">from collections import namedtuple</span><br><span class="line">Animal = namedtuple(&#x27;Animal&#x27;, &#x27;name age type&#x27;)</span><br><span class="line">perry = Animal(name = &#x27;perry&#x27;, age = 31, type = &#x27;cat&#x27;)</span><br><span class="line"></span><br><span class="line">print(perry)</span><br><span class="line">print(perry.name)</span><br><span class="line"></span><br><span class="line"># Output:</span><br><span class="line"># Animal(name=&#x27;perry&#x27;, age=31, type=&#x27;cat&#x27;)</span><br><span class="line"># perry</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 将命名元组转为字典</span><br><span class="line">print(perry._asdict())</span><br><span class="line"></span><br><span class="line"># OrderedDict([(&#x27;name&#x27;, &#x27;perry&#x27;), (&#x27;age&#x27;, 31), (&#x27;type&#x27;, &#x27;cat&#x27;)])</span><br></pre></td></tr></table></figure>
+
+<h2 id="enum-Enum-Python3-4"><a href="#enum-Enum-Python3-4" class="headerlink" title="enum.Enum(Python3.4+)"></a>enum.Enum(Python3.4+)</h2><p>在enum模块枚举对象。 Enums基本上是一种组织各种东西的额方式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">from collections import namedtuple</span><br><span class="line">from enum import Enum </span><br><span class="line"></span><br><span class="line">class Species(Enum):</span><br><span class="line">    cat = 1</span><br><span class="line">    dog = 2</span><br><span class="line">    horse = 3</span><br><span class="line">    aardvark = 4</span><br><span class="line">    butterfly = 5</span><br><span class="line"></span><br><span class="line">    kitten = 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Animal = namedtuple(&#x27;Animal&#x27;, &#x27;name age type&#x27;)</span><br><span class="line">perry = Animal(name = &#x27;perry&#x27;, age = 32, type = Species.cat)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h1><p>枚举（enumerate）是Python的内置函数。它允许我们遍历数据并自动技术。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for counter, value in enumerate(range(10)):</span><br><span class="line">    print(counter, value)</span><br><span class="line"></span><br><span class="line"># 设置从哪个索引开始枚举</span><br><span class="line">my_list = [&#x27;apple&#x27;, &#x27;banana&#x27;, &#x27;graps&#x27;, &#x27;pear&#x27;]</span><br><span class="line">for c, value in enumerate(my_list, 1):</span><br><span class="line">    print(c, value)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="对象自省"><a href="#对象自省" class="headerlink" title="对象自省"></a>对象自省</h1><p><strong>dir</strong></p>
+<p>返回一个列表，包含对象所拥有的属性和方法。</p>
+<p><strong>type</strong> 和 <strong>id</strong></p>
+<p><code>type</code>函数返回对象的类型。</p>
+<p><code>id</code>函数返回任意不同种类对象的ID</p>
+<p><strong>inspect</strong> </p>
+<p>提供了很多有用的函数，获取活跃对象的信息。</p>
+<h1 id="推导式"><a href="#推导式" class="headerlink" title="推导式"></a>推导式</h1><p>推导式（又称解析式）是Python的一种独有的特性。</p>
+<ul>
+<li>列表（list）推导式</li>
+<li>字典（dict) 推导式</li>
+<li>集合（set）推导式</li>
+</ul>
+<h2 id="列表推导式"><a href="#列表推导式" class="headerlink" title="列表推导式"></a>列表推导式</h2><p>直接看例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">multiples = [i for i in range(30) if i % 3 is 0]</span><br><span class="line">print(multiples)</span><br><span class="line"></span><br><span class="line"># Output: [0, 3, 6, 9, 12, 15, 18, 21, 24, 27]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">squared = [x ** 2 for x in range(10)]</span><br><span class="line">print(squared)</span><br><span class="line"># Output: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>其他另种和列表推导式类似。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="">Python进阶</a></li>
+</ul>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/01/15/419597cf3b2ff.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/01/15/419597cf3b2ff.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">镇长</div><div class="post-copyright__author_desc">面朝大海 春暖花开</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://juesuslove.github.io/2017/08/07/Python3%E8%BF%9B%E9%98%B6%EF%BC%9A%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%E4%BA%8C/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://juesuslove.github.io/2017/08/07/Python3%E8%BF%9B%E9%98%B6%EF%BC%9A%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%E4%BA%8C/')">Python3进阶：高级特性二</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/images/wechatpay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/images/wechatpay.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/images/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://juesuslove.github.io/2017/08/07/Python3%E8%BF%9B%E9%98%B6%EF%BC%9A%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%E4%BA%8C/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Python3进阶：高级特性二&amp;url=https://juesuslove.github.io/2017/08/07/Python3%E8%BF%9B%E9%98%B6%EF%BC%9A%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%E4%BA%8C/&amp;pic=https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=21bf5f32-8ccd-77ac-f143-0451e224b1f6" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://juesusLove.github.io" target="_blank">猿镇</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Python3/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Python3<span class="tagsPageCount">8</span></a><a class="post-meta__box__tags" href="/tags/%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>高级特性<span class="tagsPageCount">2</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2024/08/31/66d2dbbd3cef9.jpg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2017/08/07/Python3%E8%BF%9B%E9%98%B6%EF%BC%9A%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%E4%B8%80/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=810e9b9f-3396-711b-e0ea-3b0eeafe6f69" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Python3进阶：高级特性一</div></div></a></div><div class="next-post pull-right"><a href="/2017/09/01/iOS%E7%BD%91%E7%BB%9C%E6%9B%B4%E6%96%B0WWDC/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=99893846-ae43-7095-dd4d-f1798b97798f" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">iOS网络更新WWDC</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2017/08/07/Python3%E8%BF%9B%E9%98%B6%EF%BC%9A%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%E4%B8%80/" title="Python3进阶：高级特性一"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=810e9b9f-3396-711b-e0ea-3b0eeafe6f69" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2017-08-07</div><div class="title">Python3进阶：高级特性一</div></div></a></div><div><a href="/2017/08/02/Python3-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="Python3基础知识: 基本数据"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=18e8a421-e36e-9afc-4b23-e67a2dc8aa77" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2017-08-02</div><div class="title">Python3基础知识: 基本数据</div></div></a></div><div><a href="/2017/08/04/Python3-%E9%94%99%E8%AF%AF%E5%92%8C%E5%BC%82%E5%B8%B8%E3%80%81%E7%B1%BB/" title="Python3:错误和异常、类"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=63bc7dc3-8da0-9214-d9eb-ae5903fea954" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2017-08-04</div><div class="title">Python3:错误和异常、类</div></div></a></div><div><a href="/2017/08/02/Python3%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%EF%BC%9A%E6%A8%A1%E5%9D%97%E5%92%8C%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" title="Python3基础知识：模块和输入输出"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=7b95e939-389f-0767-8d15-8c096edefe90" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2017-08-02</div><div class="title">Python3基础知识：模块和输入输出</div></div></a></div><div><a href="/2017/08/04/Python3%E6%A0%87%E5%87%86%E5%BA%93%E7%AE%80%E4%BB%8B/" title="Python3标准库简介"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=f6908bc9-57f7-d306-fe18-0ac6400388e3" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2017-08-04</div><div class="title">Python3标准库简介</div></div></a></div><div><a href="/2017/07/24/Python3%E8%A7%A3%E6%9E%90%E5%BA%93BeautifulSoup/" title="Python3解析库BeautifulSoup"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=7d7c1a25-449a-aeef-6a0e-423e1329bfdb" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2017-07-24</div><div class="title">Python3解析库BeautifulSoup</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/01/15/419597cf3b2ff.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/03/03/317b790a902ec.png" alt="status"/></div></div><div class="author-info__description">一名 90 后程序员大叔</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">镇长</h1><div class="author-info__desc">面朝大海 春暖花开</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/jesusLove" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/11/03/65446bda8f5e5.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#slots-%E9%AD%94%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">__slots__魔法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%EF%BC%88collections%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">容器（collections）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#defaultdict"><span class="toc-number">2.1.</span> <span class="toc-text">defaultdict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#counter"><span class="toc-number">2.2.</span> <span class="toc-text">counter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deque"><span class="toc-number">2.3.</span> <span class="toc-text">deque</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#namedtuple"><span class="toc-number">2.4.</span> <span class="toc-text">namedtuple</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#enum-Enum-Python3-4"><span class="toc-number">2.5.</span> <span class="toc-text">enum.Enum(Python3.4+)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE"><span class="toc-number">3.</span> <span class="toc-text">枚举</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E8%87%AA%E7%9C%81"><span class="toc-number">4.</span> <span class="toc-text">对象自省</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="toc-number">5.</span> <span class="toc-text">推导式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="toc-number">5.1.</span> <span class="toc-text">列表推导式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/08/31/%E4%B8%80%E4%B8%AA%E7%A5%9E%E5%A5%87%E7%9A%84%E7%BA%AFCSS%E6%95%B0%E5%AD%97%E3%80%81%E6%8C%87%E9%92%88%E6%97%B6%E9%92%9F%EF%BC%9F/" title="一个神奇的纯CSS数字、指针时钟？"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/08/31/66d2dbbd3cef9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一个神奇的纯CSS数字、指针时钟？"/></a><div class="content"><a class="title" href="/2024/08/31/%E4%B8%80%E4%B8%AA%E7%A5%9E%E5%A5%87%E7%9A%84%E7%BA%AFCSS%E6%95%B0%E5%AD%97%E3%80%81%E6%8C%87%E9%92%88%E6%97%B6%E9%92%9F%EF%BC%9F/" title="一个神奇的纯CSS数字、指针时钟？">一个神奇的纯CSS数字、指针时钟？</a><time datetime="2024-08-31T08:58:40.000Z" title="发表于 2024-08-31 16:58:40">2024-08-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/08/Vue-js%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0-%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B04-2-md/" title="Vue.js设计与实现：响应式系统的作用与实现 4-2"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/04/654606ec99646.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue.js设计与实现：响应式系统的作用与实现 4-2"/></a><div class="content"><a class="title" href="/2023/11/08/Vue-js%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0-%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B04-2-md/" title="Vue.js设计与实现：响应式系统的作用与实现 4-2">Vue.js设计与实现：响应式系统的作用与实现 4-2</a><time datetime="2023-11-08T06:38:46.000Z" title="发表于 2023-11-08 14:38:46">2023-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/03/Vuejs%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B04-1/" title="Vue.js设计与实现：响应式系统的作用与实现 4-1"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/04/654606ec99646.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue.js设计与实现：响应式系统的作用与实现 4-1"/></a><div class="content"><a class="title" href="/2023/11/03/Vuejs%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B04-1/" title="Vue.js设计与实现：响应式系统的作用与实现 4-1">Vue.js设计与实现：响应式系统的作用与实现 4-1</a><time datetime="2023-11-03T10:49:44.000Z" title="发表于 2023-11-03 18:49:44">2023-11-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/13/Koa%E4%BD%BF%E7%94%A8Sqlite3%E5%92%8CSequelize/" title="Koa使用Sqlite3和Sequelize"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=106100d7-c486-3d38-5129-002801b6156a" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Koa使用Sqlite3和Sequelize"/></a><div class="content"><a class="title" href="/2020/07/13/Koa%E4%BD%BF%E7%94%A8Sqlite3%E5%92%8CSequelize/" title="Koa使用Sqlite3和Sequelize">Koa使用Sqlite3和Sequelize</a><time datetime="2020-07-13T02:16:06.000Z" title="发表于 2020-07-13 10:16:06">2020-07-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/13/Electron%E5%AD%90%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%90%AFKoa%E5%BE%AE%E6%9C%8D%E5%8A%A1/" title="Electron子进程开启Koa微服务"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=0410c189-3743-23cf-508c-8840124c65bd" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Electron子进程开启Koa微服务"/></a><div class="content"><a class="title" href="/2020/07/13/Electron%E5%AD%90%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%90%AFKoa%E5%BE%AE%E6%9C%8D%E5%8A%A1/" title="Electron子进程开启Koa微服务">Electron子进程开启Koa微服务</a><time datetime="2020-07-13T02:09:01.000Z" title="发表于 2020-07-13 10:09:01">2020-07-13</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2024 By <a class="footer-bar-link" href="/" title="镇长" target="_blank">镇长</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="鲁ICP备19057856号-1">鲁ICP备19057856号-1</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">70</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">64</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">8</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Alamofire/" style="font-size: 0.88rem;">Alamofire<sup>1</sup></a><a href="/tags/CoreAnimation/" style="font-size: 0.88rem;">CoreAnimation<sup>1</sup></a><a href="/tags/Electron/" style="font-size: 0.88rem;">Electron<sup>2</sup></a><a href="/tags/Flexbox/" style="font-size: 0.88rem;">Flexbox<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>3</sup></a><a href="/tags/Git%E9%97%AE%E9%A2%98/" style="font-size: 0.88rem;">Git问题<sup>1</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>8</sup></a><a href="/tags/Koa/" style="font-size: 0.88rem;">Koa<sup>2</sup></a><a href="/tags/Node-js/" style="font-size: 0.88rem;">Node.js<sup>1</sup></a><a href="/tags/Python3/" style="font-size: 0.88rem;">Python3<sup>8</sup></a><a href="/tags/Runtime/" style="font-size: 0.88rem;">Runtime<sup>2</sup></a><a href="/tags/Swift/" style="font-size: 0.88rem;">Swift<sup>5</sup></a><a href="/tags/TypeScript/" style="font-size: 0.88rem;">TypeScript<sup>4</sup></a><a href="/tags/Vue-js/" style="font-size: 0.88rem;">Vue.js<sup>2</sup></a><a href="/tags/iOS/" style="font-size: 0.88rem;">iOS<sup>18</sup></a><a href="/tags/this-%E7%BB%91%E5%AE%9A/" style="font-size: 0.88rem;">this 绑定<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" style="font-size: 0.88rem;">事件循环<sup>1</sup></a><a href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/" style="font-size: 0.88rem;">作用域链<sup>1</sup></a><a href="/tags/%E5%8E%9F%E5%9E%8B/" style="font-size: 0.88rem;">原型<sup>1</sup></a><a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/" style="font-size: 0.88rem;">原型链<sup>2</sup></a><a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">响应式原理<sup>2</sup></a><a href="/tags/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE/" style="font-size: 0.88rem;">基础数据<sup>1</sup></a><a href="/tags/%E5%AF%B9%E8%B1%A1/" style="font-size: 0.88rem;">对象<sup>1</sup></a><a href="/tags/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" style="font-size: 0.88rem;">开机自启<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/" style="font-size: 0.88rem;">异步任务<sup>1</sup></a><a href="/tags/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" style="font-size: 0.88rem;">执行上下文<sup>1</sup></a><a href="/tags/%E6%89%A7%E8%A1%8C%E6%A0%88/" style="font-size: 0.88rem;">执行栈<sup>1</sup></a><a href="/tags/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" style="font-size: 0.88rem;">构造函数<sup>1</sup></a><a href="/tags/%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 0.88rem;">标准库<sup>1</sup></a><a href="/tags/%E6%A8%A1%E5%9D%97/" style="font-size: 0.88rem;">模块<sup>2</sup></a><a href="/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 0.88rem;">泛型<sup>1</sup></a><a href="/tags/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/" style="font-size: 0.88rem;">深浅拷贝<sup>1</sup></a><a href="/tags/%E7%B3%BB%E7%BB%9F%E6%89%98%E7%9B%98/" style="font-size: 0.88rem;">系统托盘<sup>1</sup></a><a href="/tags/%E7%BB%A7%E6%89%BF/" style="font-size: 0.88rem;">继承<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%BA%93/" style="font-size: 0.88rem;">网络库<sup>1</sup></a><a href="/tags/%E8%A7%A3%E6%9E%90%E5%BA%93/" style="font-size: 0.88rem;">解析库<sup>1</sup></a><a href="/tags/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" style="font-size: 0.88rem;">输入输出<sup>1</sup></a><a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 0.88rem;">闭包<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" style="font-size: 0.88rem;">高级特性<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%BA%A7%E7%B1%BB%E5%9E%8B/" style="font-size: 0.88rem;">高级类型<sup>1</sup></a></div></div><hr/></div></div><div id="keyboard-tips"><div class="keyboardTitle">博客快捷键</div><div class="keybordList"><div class="keybordItem"><div class="keyGroup"><div class="key">shift K</div></div><div class="keyContent"><div class="content">关闭快捷键功能</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift A</div></div><div class="keyContent"><div class="content">打开/关闭中控台</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift M</div></div><div class="keyContent"><div class="content">播放/暂停音乐</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift D</div></div><div class="keyContent"><div class="content">深色/浅色显示模式</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift S</div></div><div class="keyContent"><div class="content">站内搜索</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift R</div></div><div class="keyContent"><div class="content">随机访问</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift H</div></div><div class="keyContent"><div class="content">返回首页</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift F</div></div><div class="keyContent"><div class="content">友链鱼塘</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift L</div></div><div class="keyContent"><div class="content">友链页面</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift P</div></div><div class="keyContent"><div class="content">关于本站</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift I</div></div><div class="keyContent"><div class="content">原版/本站右键菜单</div></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.cbd.int/mermaid@10.2.4/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

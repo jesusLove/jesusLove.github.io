@@ -1,0 +1,375 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>CALayer的那些坑! | 猿镇</title><meta name="keywords" content="CoreAnimation"><meta name="author" content="镇长,jesus_lqq@163.com"><meta name="copyright" content="镇长"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="CALayer的那些坑!"><meta name="application-name" content="CALayer的那些坑!"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="CALayer的那些坑!"><meta property="og:url" content="https://juesuslove.github.io/2016/07/28/CALayer%E7%9A%84%E9%82%A3%E4%BA%9B%E5%9D%91%EF%BC%81/index.html"><meta property="og:site_name" content="猿镇"><meta property="og:description" content="CALayercontents属性CALayer有一个属性叫做contents,这个属性是id类型，可以接收任意类型的对象。 1234567&amp;#x2F;* An object providing the contents of the layer, typically a CGImageRef, * bu"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=440c0c90-53ae-ab79-0196-34ff6336989e"><meta property="article:author" content="镇长"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=440c0c90-53ae-ab79-0196-34ff6336989e"><meta name="description" content="CALayercontents属性CALayer有一个属性叫做contents,这个属性是id类型，可以接收任意类型的对象。 1234567&amp;#x2F;* An object providing the contents of the layer, typically a CGImageRef, * bu"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://juesuslove.github.io/2016/07/28/CALayer%E7%9A%84%E9%82%A3%E4%BA%9B%E5%9D%91%EF%BC%81/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bcdcd5cded4b5569656706ab1db4678e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: {"mode":"api","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多"]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 镇长","link":"链接: ","source":"来源: 猿镇","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true,
+  shortcutKey: {"enable":true,"delay":100,"shiftDelay":200},
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '猿镇',
+  title: 'CALayer的那些坑!',
+  postAI: '',
+  pageFillDescription: 'CALayer, contents属性, contentsGravity, contentsScale, masksToBounds, contentsRect, contentsCenter, cornerRadius, borderWidth和boarderColor, shadow, 小结, 参考资料属性有一个属性叫做这个属性是类型可以接收任意类型的对象但是我们在实际应用中只能赋否则图层将是空白的这是因为的历史遗留下来的问题在系统中可以接收和类型的值但是在系统中则不支持类型的值实际上接收的是值是它是指向结构的指针有一个属性返回值为这么来说我们可以将的直接赋值给但是这样会报错因为并不是一个对象而是一个类型我们需要使用在状态下转换为类型类似的属性但是它是类型的作用和相似都是为了决定内容在图层中的对齐方式有很多可选常量值例如属性定义了缩放比例默认为实际使用的时候会发现改变大小没有明显变化其实这个属行与分辨率有关如果值为将会以每个点个像素绘制图片当设置为将会每个点个像素绘制图片屏幕中需要设置这个属性属性用来决定是否显示超出边界的内容与中作用相同属性允许图层边框里显示一个子域涉及到图片是如何显示和拉伸的比灵活和不同不是按点计算的它是使用的单位坐标是一个相对值它是相对以寄宿图的尺寸的点在和中最常见的坐标体系点就像是虚拟的像素也被称作逻辑像素在标准设备上一个点就是一个像素但是在设备上一个点等于个像素用点作为屏幕的坐标测算体系就是为了在设备和普通设备上能有一致的视觉效果像素物理像素坐标并不会用来屏幕布局但是仍然与图片有相对关系是一个屏幕分辨率解决方案所以指定点来度量大小但是一些底层的图片表示如就会使用像素所以你要清楚在设备和普通设备上它们表现出来了不同的大小单位对于与图片大小或是图层边界相关的显示单位坐标是一个方便的度量方式当大小改变的时候也不需要再次调整单位坐标在这种纹理坐标系统中用得很多中也用到了单位坐标默认是使用可以实现图片拼合功能如果你认为这个跟图片的位置有关那你应该是被名字误导了其实是一个它定义了一个固定的边框和一个在图层上可以拉伸的区域属性默认如果大小改变改变改变那么图片就会被均匀的拉伸如果我们更改值则会是图片拉伸区域改变例如设置为如果图片拉伸则只会拉伸绿色区域其他区域不会改变默认为用来控制图层角的曲率默认值为默认情况下只影响背景色而不影响北背景图片或者子图层如果把设置成图层中所有的内容都会被裁切和默认为默认为黑色和共同定义了图层边框的绘制样式需要注意为类型声明类型属性是使用关键字声明阴影可以达到图层深度暗示效果也可以强调正在显示的图层的优先级属性给定一个值之间就可以在任意图层下显示阴影另外还有三个属性和小结整理常用的一些属性以及使用这些属性应该注意的问题参考资料',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-02 15:20:59',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://bu.dusays.com/2021/01/15/419597cf3b2ff.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">猿镇</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/images/wechatpay.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="/images/wechatpay.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/images/alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div><div class="console-btn-item" id="consoleKeyboard" onclick="anzhiyu.keyboardToggle()" title="快捷键开关"><a class="keyboard-switch"><i class="anzhiyufont anzhiyu-icon-keyboard"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" itemprop="url">移动端</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/CoreAnimation/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>CoreAnimation</span></a></span></div></div><h1 class="post-title" itemprop="name headline">CALayer的那些坑!</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2016-07-28T06:50:16.000Z" title="发表于 2016-07-28 14:50:16">2016-07-28</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-11-02T07:20:59.386Z" title="更新于 2023-11-02 15:20:59">2023-11-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">1.3k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="CALayer的那些坑!"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为山东"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>山东</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=440c0c90-53ae-ab79-0196-34ff6336989e"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://juesuslove.github.io/2016/07/28/CALayer%E7%9A%84%E9%82%A3%E4%BA%9B%E5%9D%91%EF%BC%81/"><header><a class="post-meta-categories" href="/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" itemprop="url">移动端</a><a href="/tags/CoreAnimation/" tabindex="-1" itemprop="url">CoreAnimation</a><h1 id="CrawlerTitle" itemprop="name headline">CALayer的那些坑!</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">镇长</span><time itemprop="dateCreated datePublished" datetime="2016-07-28T06:50:16.000Z" title="发表于 2016-07-28 14:50:16">2016-07-28</time><time itemprop="dateCreated datePublished" datetime="2023-11-02T07:20:59.386Z" title="更新于 2023-11-02 15:20:59">2023-11-02</time></header><span id="more"></span>
+
+<h2 id="CALayer"><a href="#CALayer" class="headerlink" title="CALayer"></a>CALayer</h2><h3 id="contents属性"><a href="#contents属性" class="headerlink" title="contents属性"></a>contents属性</h3><p>CALayer有一个属性叫做contents,这个属性是id类型，可以接收任意类型的对象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/* An object providing the contents of the layer, typically a CGImageRef,</span><br><span class="line"> * but may be something else. (For example, NSImage objects are</span><br><span class="line"> * supported on Mac OS X 10.6 and later.) Default value is nil.</span><br><span class="line"> * Animatable. */</span><br><span class="line"></span><br><span class="line">@property(nullable, strong) id contents;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>但是我们在实际应用中只能赋CGImage，否则图层将是空白的。这是因为Mac OS的历史遗留下来的问题，在Mac OS系统中，contents可以接收CGImage和NSImage类型的值，但是在iOS系统中，则不支持UIImage类型的值。</p>
+<p>contents实际上接收的是值是CGImageRef,它是指向CGImage结构的指针。UIImage有一个CGImage属性，返回值为CGImageRef。这么来说我们可以将UIImage的CGImage直接赋值给contents？但是这样会报错，因为CGImageRef并不是一个Cocoa对象，而是一个Core Foundation类型。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">layer = (__bridge id)image.CGImage;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我们需要使用(__bridge id) 在ARC状态下，转换为id类型。</p>
+<h3 id="contentsGravity"><a href="#contentsGravity" class="headerlink" title="contentsGravity"></a>contentsGravity</h3><p>contentsGravity类似UIImageView的contentMode属性，但是它是NSString类型的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/* A string defining how the contents of the layer is mapped into its</span><br><span class="line"> * bounds rect. Options are `center&#x27;, `top&#x27;, `bottom&#x27;, `left&#x27;,</span><br><span class="line"> * `right&#x27;, `topLeft&#x27;, `topRight&#x27;, `bottomLeft&#x27;, `bottomRight&#x27;,</span><br><span class="line"> * `resize&#x27;, `resizeAspect&#x27;, `resizeAspectFill&#x27;. The default value is</span><br><span class="line"> * `resize&#x27;. Note that &quot;bottom&quot; always means &quot;Minimum Y&quot; and &quot;top&quot;</span><br><span class="line"> * always means &quot;Maximum Y&quot;. */</span><br><span class="line"></span><br><span class="line"> @property(copy) NSString *contentsGravity;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>contentsGravity作用和contentMode相似，都是为了决定内容在图层中的对齐方式。contentsGravity有很多可选常量值，例如： kCAGravityCenter。</p>
+<h3 id="contentsScale"><a href="#contentsScale" class="headerlink" title="contentsScale"></a>contentsScale</h3><p>contentsScale属性定义了缩放比例。默认为 1.0。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/* Defines the scale factor applied to the contents of the layer. If</span><br><span class="line"> * the physical size of the contents is &#x27;(w, h)&#x27; then the logical size</span><br><span class="line"> * (i.e. for contentsGravity calculations) is defined as &#x27;(w /</span><br><span class="line"> * contentsScale, h / contentsScale)&#x27;. Applies to both images provided</span><br><span class="line"> * explicitly and content provided via -drawInContext: (i.e. if</span><br><span class="line"> * contentsScale is two -drawInContext: will draw into a buffer twice</span><br><span class="line"> * as large as the layer bounds). Defaults to one. Animatable. */</span><br><span class="line"></span><br><span class="line">@property CGFloat contentsScale</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>实际使用的时候，会发现改变contentsScale大小没有明显变化。其实这个属行与分辨率有关，如果值为1.0，将会以每个点1个像素绘制图片，当设置为2.0,将会每个点2个像素绘制图片。Retina屏幕中，需要设置这个属性。</p>
+<h3 id="masksToBounds"><a href="#masksToBounds" class="headerlink" title="masksToBounds"></a>masksToBounds</h3><p>masksToBounds属性用来决定是否显示超出边界的内容，与UIView中clipsToBounds作用相同。</p>
+<h3 id="contentsRect"><a href="#contentsRect" class="headerlink" title="contentsRect"></a>contentsRect</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/* Defaults to the unit rectangle [0 0 1 1]. Animatable. */</span><br><span class="line">@property CGRect contentsRect;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>contentsRect属性允许图层边框里显示一个子域。涉及到图片是如何显示和拉伸的，比contentsGravity灵活。<br>和bounds, frame不同，contentsRect不是按点计算的，它是使用的单位坐标（[0 ，1]），是一个相对值。它是相对以寄宿图的尺寸的。</p>
+<ul>
+<li>点 —— 在iOS和Mac OS中最常见的坐标体系。点就像是虚拟的像素，也被称作逻辑像素。在标准设备上，一个点就是一个像素，但是在Retina设备上，一个点等于2*2个像素。iOS用点作为屏幕的坐标测算体系就是为了在Retina设备和普通设备上能有一致的视觉效果。</li>
+<li>像素 —— 物理像素坐标并不会用来屏幕布局，但是仍然与图片有相对关系。UIImage是一个屏幕分辨率解决方案，所以指定点来度量大小。但是一些底层的图片表示如CGImage就会使用像素，所以你要清楚在Retina设备和普通设备上，它们表现出来了不同的大小。</li>
+<li>单位 —— 对于与图片大小或是图层边界相关的显示，单位坐标是一个方便的度量方式， 当大小改变的时候，也不需要再次调整。单位坐标在OpenGL这种纹理坐标系统中用得很多，Core Animation中也用到了单位坐标。</li>
+</ul>
+<p>contentsRect默认是{0，0，1，1}。使用contentsRect可以实现图片拼合功能。</p>
+<h3 id="contentsCenter"><a href="#contentsCenter" class="headerlink" title="contentsCenter"></a>contentsCenter</h3><p>如果你认为这个跟图片的位置有关，那你应该是被名字误导了。contentsCenter其实是一个CGRect,它定义了一个固定的边框和一个在图层上可以拉伸的区域。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@property CGRect contentsCenter;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>contentsCenter属性默认{0，0，1，1}，如果大小改变（contentsGravity改变）改变，那么图片就会被均匀的拉伸。如果我们更改cententsCenter值，则会是图片拉伸区域改变，例如：设置为{0.25，0.25，0.5，0.5}<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="http://upload-images.jianshu.io/upload_images/1363078-82e58d26972e7a8e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="contentsCenter.png"></p>
+<p>如果图片拉伸，则只会拉伸绿色区域，其他区域不会改变。</p>
+<h3 id="cornerRadius"><a href="#cornerRadius" class="headerlink" title="cornerRadius"></a>cornerRadius</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//默认为0</span><br><span class="line">@property CGFloat cornerRadius;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>cornerRadius用来控制图层角的曲率，默认值为0。默认情况下，cornerRadius只影响背景色而不影响北背景图片或者子图层。如果把masksToBounds设置成YES，图层中所有的内容都会被裁切。</p>
+<h3 id="borderWidth和boarderColor"><a href="#borderWidth和boarderColor" class="headerlink" title="borderWidth和boarderColor"></a>borderWidth和boarderColor</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//默认为 0</span><br><span class="line">@property CGFloat borderWidth;</span><br><span class="line">//默认为黑色</span><br><span class="line">@property(nullable) CGColorRef borderColor;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>borderWidth和borderColor，共同定义了图层边框的绘制样式。需要注意，borderColor为CGColorRef类型，声明CGColorRef类型属性是使用assign关键字声明。</p>
+<h3 id="shadow"><a href="#shadow" class="headerlink" title="shadow"></a>shadow</h3><p>阴影可以达到图层深度暗示效果，也可以强调正在显示的图层的优先级。shadowOpacity属性，给定一个值（0-1之间）就可以在任意图层下显示阴影。另外还有三个属性：shadowColor, shadowOffset和shadowRadius。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>整理CALayer常用的一些属性，以及使用这些属性应该注意的问题。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://developer.apple.com/reference/quartzcore/calayer?language=objc">CALayer - Apple</a><br><a target="_blank" rel="noopener" href="https://github.com/AttackOnDobby/iOS-Core-Animation-Advanced-Techniques">iOS-Core-Animation-Advanced-Techniques</a></p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/01/15/419597cf3b2ff.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/01/15/419597cf3b2ff.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">镇长</div><div class="post-copyright__author_desc">面朝大海 春暖花开</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://juesuslove.github.io/2016/07/28/CALayer%E7%9A%84%E9%82%A3%E4%BA%9B%E5%9D%91%EF%BC%81/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://juesuslove.github.io/2016/07/28/CALayer%E7%9A%84%E9%82%A3%E4%BA%9B%E5%9D%91%EF%BC%81/')">CALayer的那些坑!</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/images/wechatpay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/images/wechatpay.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/images/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://juesuslove.github.io/2016/07/28/CALayer%E7%9A%84%E9%82%A3%E4%BA%9B%E5%9D%91%EF%BC%81/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=CALayer的那些坑!&amp;url=https://juesuslove.github.io/2016/07/28/CALayer%E7%9A%84%E9%82%A3%E4%BA%9B%E5%9D%91%EF%BC%81/&amp;pic=https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=440c0c90-53ae-ab79-0196-34ff6336989e" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://juesusLove.github.io" target="_blank">猿镇</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/CoreAnimation/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>CoreAnimation<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2024/08/31/66d2dbbd3cef9.jpg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2016/07/26/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0-%E4%BD%BF%E7%94%A8Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=7da90541-e791-d1b7-5d2e-f8d779e7ed68" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Objective-C Runtime:类和对象</div></div></a></div><div class="next-post pull-right"><a href="/2016/07/29/Swift%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=f767bd28-1a98-009e-78ef-e970fd70b2e1" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Swift基本语法(一)</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/01/15/419597cf3b2ff.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/03/03/317b790a902ec.png" alt="status"/></div></div><div class="author-info__description">一名 90 后程序员大叔</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">镇长</h1><div class="author-info__desc">面朝大海 春暖花开</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/jesusLove" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/11/03/65446bda8f5e5.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CALayer"><span class="toc-number">1.</span> <span class="toc-text">CALayer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#contents%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.</span> <span class="toc-text">contents属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#contentsGravity"><span class="toc-number">1.2.</span> <span class="toc-text">contentsGravity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#contentsScale"><span class="toc-number">1.3.</span> <span class="toc-text">contentsScale</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#masksToBounds"><span class="toc-number">1.4.</span> <span class="toc-text">masksToBounds</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#contentsRect"><span class="toc-number">1.5.</span> <span class="toc-text">contentsRect</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#contentsCenter"><span class="toc-number">1.6.</span> <span class="toc-text">contentsCenter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cornerRadius"><span class="toc-number">1.7.</span> <span class="toc-text">cornerRadius</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#borderWidth%E5%92%8CboarderColor"><span class="toc-number">1.8.</span> <span class="toc-text">borderWidth和boarderColor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shadow"><span class="toc-number">1.9.</span> <span class="toc-text">shadow</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/08/31/%E4%B8%80%E4%B8%AA%E7%A5%9E%E5%A5%87%E7%9A%84%E7%BA%AFCSS%E6%95%B0%E5%AD%97%E3%80%81%E6%8C%87%E9%92%88%E6%97%B6%E9%92%9F%EF%BC%9F/" title="一个神奇的纯CSS数字、指针时钟？"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/08/31/66d2dbbd3cef9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一个神奇的纯CSS数字、指针时钟？"/></a><div class="content"><a class="title" href="/2024/08/31/%E4%B8%80%E4%B8%AA%E7%A5%9E%E5%A5%87%E7%9A%84%E7%BA%AFCSS%E6%95%B0%E5%AD%97%E3%80%81%E6%8C%87%E9%92%88%E6%97%B6%E9%92%9F%EF%BC%9F/" title="一个神奇的纯CSS数字、指针时钟？">一个神奇的纯CSS数字、指针时钟？</a><time datetime="2024-08-31T08:58:40.000Z" title="发表于 2024-08-31 16:58:40">2024-08-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/08/Vue-js%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0-%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B04-2-md/" title="Vue.js设计与实现：响应式系统的作用与实现 4-2"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/04/654606ec99646.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue.js设计与实现：响应式系统的作用与实现 4-2"/></a><div class="content"><a class="title" href="/2023/11/08/Vue-js%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0-%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B04-2-md/" title="Vue.js设计与实现：响应式系统的作用与实现 4-2">Vue.js设计与实现：响应式系统的作用与实现 4-2</a><time datetime="2023-11-08T06:38:46.000Z" title="发表于 2023-11-08 14:38:46">2023-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/03/Vuejs%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B04-1/" title="Vue.js设计与实现：响应式系统的作用与实现 4-1"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/04/654606ec99646.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue.js设计与实现：响应式系统的作用与实现 4-1"/></a><div class="content"><a class="title" href="/2023/11/03/Vuejs%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B04-1/" title="Vue.js设计与实现：响应式系统的作用与实现 4-1">Vue.js设计与实现：响应式系统的作用与实现 4-1</a><time datetime="2023-11-03T10:49:44.000Z" title="发表于 2023-11-03 18:49:44">2023-11-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/13/Koa%E4%BD%BF%E7%94%A8Sqlite3%E5%92%8CSequelize/" title="Koa使用Sqlite3和Sequelize"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=106100d7-c486-3d38-5129-002801b6156a" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Koa使用Sqlite3和Sequelize"/></a><div class="content"><a class="title" href="/2020/07/13/Koa%E4%BD%BF%E7%94%A8Sqlite3%E5%92%8CSequelize/" title="Koa使用Sqlite3和Sequelize">Koa使用Sqlite3和Sequelize</a><time datetime="2020-07-13T02:16:06.000Z" title="发表于 2020-07-13 10:16:06">2020-07-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/13/Electron%E5%AD%90%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%90%AFKoa%E5%BE%AE%E6%9C%8D%E5%8A%A1/" title="Electron子进程开启Koa微服务"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/11/03/6544702016eb3.png?_r_=0410c189-3743-23cf-508c-8840124c65bd" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Electron子进程开启Koa微服务"/></a><div class="content"><a class="title" href="/2020/07/13/Electron%E5%AD%90%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%90%AFKoa%E5%BE%AE%E6%9C%8D%E5%8A%A1/" title="Electron子进程开启Koa微服务">Electron子进程开启Koa微服务</a><time datetime="2020-07-13T02:09:01.000Z" title="发表于 2020-07-13 10:09:01">2020-07-13</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2024 By <a class="footer-bar-link" href="/" title="镇长" target="_blank">镇长</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="鲁ICP备19057856号-1">鲁ICP备19057856号-1</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">70</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">64</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">8</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Alamofire/" style="font-size: 0.88rem;">Alamofire<sup>1</sup></a><a href="/tags/CoreAnimation/" style="font-size: 0.88rem;">CoreAnimation<sup>1</sup></a><a href="/tags/Electron/" style="font-size: 0.88rem;">Electron<sup>2</sup></a><a href="/tags/Flexbox/" style="font-size: 0.88rem;">Flexbox<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>3</sup></a><a href="/tags/Git%E9%97%AE%E9%A2%98/" style="font-size: 0.88rem;">Git问题<sup>1</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>8</sup></a><a href="/tags/Koa/" style="font-size: 0.88rem;">Koa<sup>2</sup></a><a href="/tags/Node-js/" style="font-size: 0.88rem;">Node.js<sup>1</sup></a><a href="/tags/Python3/" style="font-size: 0.88rem;">Python3<sup>8</sup></a><a href="/tags/Runtime/" style="font-size: 0.88rem;">Runtime<sup>2</sup></a><a href="/tags/Swift/" style="font-size: 0.88rem;">Swift<sup>5</sup></a><a href="/tags/TypeScript/" style="font-size: 0.88rem;">TypeScript<sup>4</sup></a><a href="/tags/Vue-js/" style="font-size: 0.88rem;">Vue.js<sup>2</sup></a><a href="/tags/iOS/" style="font-size: 0.88rem;">iOS<sup>18</sup></a><a href="/tags/this-%E7%BB%91%E5%AE%9A/" style="font-size: 0.88rem;">this 绑定<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" style="font-size: 0.88rem;">事件循环<sup>1</sup></a><a href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/" style="font-size: 0.88rem;">作用域链<sup>1</sup></a><a href="/tags/%E5%8E%9F%E5%9E%8B/" style="font-size: 0.88rem;">原型<sup>1</sup></a><a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/" style="font-size: 0.88rem;">原型链<sup>2</sup></a><a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">响应式原理<sup>2</sup></a><a href="/tags/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE/" style="font-size: 0.88rem;">基础数据<sup>1</sup></a><a href="/tags/%E5%AF%B9%E8%B1%A1/" style="font-size: 0.88rem;">对象<sup>1</sup></a><a href="/tags/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" style="font-size: 0.88rem;">开机自启<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/" style="font-size: 0.88rem;">异步任务<sup>1</sup></a><a href="/tags/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" style="font-size: 0.88rem;">执行上下文<sup>1</sup></a><a href="/tags/%E6%89%A7%E8%A1%8C%E6%A0%88/" style="font-size: 0.88rem;">执行栈<sup>1</sup></a><a href="/tags/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" style="font-size: 0.88rem;">构造函数<sup>1</sup></a><a href="/tags/%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 0.88rem;">标准库<sup>1</sup></a><a href="/tags/%E6%A8%A1%E5%9D%97/" style="font-size: 0.88rem;">模块<sup>2</sup></a><a href="/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 0.88rem;">泛型<sup>1</sup></a><a href="/tags/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/" style="font-size: 0.88rem;">深浅拷贝<sup>1</sup></a><a href="/tags/%E7%B3%BB%E7%BB%9F%E6%89%98%E7%9B%98/" style="font-size: 0.88rem;">系统托盘<sup>1</sup></a><a href="/tags/%E7%BB%A7%E6%89%BF/" style="font-size: 0.88rem;">继承<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%BA%93/" style="font-size: 0.88rem;">网络库<sup>1</sup></a><a href="/tags/%E8%A7%A3%E6%9E%90%E5%BA%93/" style="font-size: 0.88rem;">解析库<sup>1</sup></a><a href="/tags/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" style="font-size: 0.88rem;">输入输出<sup>1</sup></a><a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 0.88rem;">闭包<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" style="font-size: 0.88rem;">高级特性<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%BA%A7%E7%B1%BB%E5%9E%8B/" style="font-size: 0.88rem;">高级类型<sup>1</sup></a></div></div><hr/></div></div><div id="keyboard-tips"><div class="keyboardTitle">博客快捷键</div><div class="keybordList"><div class="keybordItem"><div class="keyGroup"><div class="key">shift K</div></div><div class="keyContent"><div class="content">关闭快捷键功能</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift A</div></div><div class="keyContent"><div class="content">打开/关闭中控台</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift M</div></div><div class="keyContent"><div class="content">播放/暂停音乐</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift D</div></div><div class="keyContent"><div class="content">深色/浅色显示模式</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift S</div></div><div class="keyContent"><div class="content">站内搜索</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift R</div></div><div class="keyContent"><div class="content">随机访问</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift H</div></div><div class="keyContent"><div class="content">返回首页</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift F</div></div><div class="keyContent"><div class="content">友链鱼塘</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift L</div></div><div class="keyContent"><div class="content">友链页面</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift P</div></div><div class="keyContent"><div class="content">关于本站</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift I</div></div><div class="keyContent"><div class="content">原版/本站右键菜单</div></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.cbd.int/mermaid@10.2.4/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
